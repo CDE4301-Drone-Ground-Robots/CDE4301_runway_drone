@@ -1,0 +1,7 @@
+node_modules/
+website/docs/.vitepress/cache/
+website/docs/.vitepress/dist/
+*.local
+.npm-cache/
+.browser-cache/
+.visual-check/

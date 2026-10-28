@@ -1,0 +1,79 @@
+.team-page{max-width:1440px;margin:0 auto;padding:65px 24px 50px;overflow:hidden;--team-radius:470px;--team-depth:210px;--team-card-width:410px;--team-card-height:850px}
+.team-intro{max-width:1100px;margin:0 auto 40px;padding:0 24px}.team-intro .eyebrow{color:var(--vp-c-text-3)}.team-intro h1{font-family:Manrope,var(--vp-font-family-base);font-size:clamp(38px,5vw,64px);font-weight:600;line-height:1.15;letter-spacing:-2.5px;color:var(--vp-c-text-1);margin:22px 0 16px}.team-intro h1>span{color:#d2a190}.team-intro>p:last-child{color:var(--vp-c-text-2);font-size:15px}
+.team-carousel{outline:none}.team-carousel:focus-visible .team-controls{outline:2px solid var(--vp-c-brand-1);outline-offset:8px;border-radius:28px}
+.team-stage{position:relative;height:calc(var(--team-card-height) + 18px);perspective:1600px;perspective-origin:50% 35%;isolation:isolate;touch-action:pan-y}
+.team-card{position:absolute;left:calc(50% - var(--team-card-width)/2);top:8px;width:var(--team-card-width);height:var(--team-card-height);padding:25px 26px;border:1px solid var(--vp-c-divider);border-radius:28px;background:linear-gradient(145deg,#fff,#f1f3f6);box-shadow:0 20px 60px #182b4012;color:var(--vp-c-text-1);backface-visibility:hidden;will-change:transform;cursor:pointer;overflow:hidden}
+.dark .team-card{background:linear-gradient(145deg,#292a2d,#1c1e22);border-color:#45474d;box-shadow:0 24px 70px #0006}.team-card.is-active{border-color:var(--member-color);cursor:default}.team-card-topline{display:flex;justify-content:space-between;align-items:center;margin-bottom:18px}.team-accent{width:72px;height:4px;background:var(--member-color);border-radius:2px}.team-card-number{font-size:9px;letter-spacing:1.8px;color:var(--vp-c-text-3)}.team-card h2{font-family:Manrope,var(--vp-font-family-base);font-size:23px;font-weight:700;line-height:1.25;letter-spacing:-.7px;margin:0 0 10px;min-height:58px}.team-role{font-size:14px;font-weight:600;line-height:1.5;color:var(--vp-c-text-1);margin:0}.team-role-detail{font-size:11px;line-height:1.5;color:var(--vp-c-text-2);margin:3px 0 0;min-height:17px}
+.team-portrait{height:145px;max-width:205px;margin:22px auto 24px;border-radius:19px;overflow:hidden;background:transparent}.team-portrait>img{width:100%;height:100%;object-fit:cover;object-position:center top;display:block}.team-sheet-photo{width:100%;height:100%;background-repeat:no-repeat}.team-portrait-placeholder{height:100%;display:flex;align-items:center;justify-content:center;flex-direction:column;background:linear-gradient(135deg,color-mix(in srgb,var(--member-color) 14%,var(--vp-c-bg-soft)),var(--vp-c-bg-soft))}.team-portrait-placeholder>span{font-family:Manrope,sans-serif;font-size:40px;letter-spacing:-2px;font-weight:600;color:var(--member-color)}.team-portrait-placeholder>small{font-size:6px;letter-spacing:1px;margin-top:10px;color:var(--vp-c-text-3)}
+.team-contributions{border-top:1px solid var(--vp-c-divider);padding-top:19px}.team-contributions h3{font-size:12px;font-weight:650;letter-spacing:.2px;margin:0 0 13px}.team-contributions ul{list-style:disc;padding:0 0 0 15px;margin:0}.team-contributions li{font-size:11.5px;line-height:1.6;margin-bottom:5px;color:var(--vp-c-text-1);padding-left:3px}.team-contributions li::marker{color:var(--member-color);font-size:9px}
+.team-controls{display:flex;align-items:center;justify-content:center;gap:26px;max-width:430px;margin:28px auto 0}.team-controls>button{display:flex;align-items:center;justify-content:center;width:48px;height:48px;flex-shrink:0;border:1px solid var(--vp-c-divider);border-radius:50%;background:var(--vp-c-bg-soft);color:var(--vp-c-text-1);transition:background .2s,transform .2s;cursor:pointer}.team-controls>button:hover{background:var(--vp-c-brand-soft);transform:scale(1.05)}.team-controls>button:focus-visible{outline:2px solid var(--vp-c-brand-1);outline-offset:4px}.team-controls svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}.team-current{min-width:185px;text-align:center}.team-current>span{display:block;font-size:11px;font-family:var(--vp-font-family-mono);letter-spacing:2px;color:var(--vp-c-text-2)}.team-counter-divider{color:var(--vp-c-text-3);margin:0 6px}.team-current strong{display:block;font-size:11px;font-weight:500;color:var(--vp-c-text-1);margin-top:9px}.team-orbit{text-align:center;margin:18px auto 0;color:var(--vp-c-text-3)}.team-orbit>svg{display:block;width:112px;height:80px;margin:auto;overflow:visible}.orbit-ring,.orbit-inner{fill:none;stroke:var(--vp-c-divider);stroke-width:1}.orbit-inner{stroke-dasharray:2 5}.orbit-direction{fill:none;stroke:currentColor;stroke-width:1;opacity:.7}.orbit-front{fill:none;stroke:var(--vp-c-text-2);stroke-width:1.2}.team-orbit text{font-size:7px;letter-spacing:2px;fill:currentColor;font-family:var(--vp-font-family-base)}.team-orbit>p{font-size:10px;color:var(--vp-c-text-3);margin:9px 0 0}
+@media(max-width:1100px){.team-page{--team-radius:390px;--team-card-width:390px}.team-intro{padding:0 12px}.team-card{padding:24px}.team-card h2{font-size:22px}}
+@media(max-width:767px){.team-page{padding:45px 0 35px;--team-card-width:min(330px,calc(100vw - 42px));--team-card-height:970px;--team-radius:370px;--team-depth:190px}.team-intro{padding:0 24px;margin-bottom:30px}.team-intro h1{font-size:39px;letter-spacing:-1.8px}.team-intro>p:last-child{font-size:13px}.team-card{padding:22px;border-radius:23px}.team-card h2{font-size:22px;min-height:56px}.team-role{font-size:12px}.team-role-detail{font-size:10px}.team-portrait{height:135px;margin:19px auto 22px}.team-contributions li{font-size:11.5px;line-height:1.65;margin-bottom:6px}.team-controls{gap:16px;margin-top:20px;max-width:340px}.team-controls>button{width:44px;height:44px}.team-current{min-width:180px}.team-current strong{font-size:10px}}
+@media(prefers-reduced-motion:reduce){.team-card{will-change:auto}.team-controls>button{transition:none}}
+@media print{.team-page{overflow:visible}.team-stage{height:auto;perspective:none;display:block}.team-card{position:static;width:100%;height:auto;transform:none!important;opacity:1!important;break-inside:avoid;margin:24px 0;box-shadow:none}.team-controls,.team-orbit{display:none}}
+.dark .team-contributions h3,.dark .team-contributions li{color:#fff}
+/* Side arrows and a top-right orbit indicator keep controls close to the cards. */
+.team-carousel{position:relative;--team-controls-offset:0px}
+.team-controls{display:block;max-width:none;margin:25px auto 0}
+.team-controls>button{position:absolute;top:calc(var(--team-controls-offset) + 280px);z-index:40;transform:translateY(-50%)}
+.team-controls>button:first-child{left:4px}
+.team-controls>button:last-child{right:4px}
+.team-controls>button:hover{transform:translateY(-50%) scale(1.05)}
+.team-orbit{position:absolute;top:8px;right:14px;z-index:40;width:112px;margin:0}
+@media(max-width:1100px){
+ .team-carousel{padding-top:105px;--team-controls-offset:105px}
+ .team-orbit{top:0;right:12px}
+}
+@media(max-width:767px){
+ .team-controls{margin-top:22px}
+ .team-controls>button{top:calc(var(--team-controls-offset) + 250px)}
+ .team-controls>button:first-child{left:0}
+ .team-controls>button:last-child{right:0}
+ .team-orbit{right:20px}
+}
+/* Compact profiles open on demand over a near-black, runway-lights backdrop. */
+.team-page{position:relative;isolation:isolate;min-height:calc(100svh - var(--vp-nav-height));--team-compact-height:470px;--team-expanded-height:920px;--team-card-height:var(--team-compact-height)}
+.team-page.contributions-open{--team-card-height:var(--team-expanded-height)}
+.team-runway-backdrop{position:fixed;inset:0;z-index:-2;background-size:cover;background-position:65% center;filter:brightness(.6) contrast(1.8) saturate(.75);pointer-events:none}
+.team-page::before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;background:linear-gradient(180deg,rgba(0,2,5,.82),rgba(0,2,5,.48) 40%,rgba(0,2,5,.75)),linear-gradient(90deg,rgba(0,2,5,.55),transparent 55%,rgba(0,2,5,.3))}
+.team-intro h1{color:#f5f5f7}.team-intro .eyebrow{color:#9aaaba}.team-intro>p:last-child{color:#b0bcc9}
+.team-current>span,.team-current strong{color:#e7edf4}.team-counter-divider,.team-orbit,.team-orbit>p{color:#a1b0c0}.team-orbit .orbit-ring,.team-orbit .orbit-inner{stroke:#788b9e55}.team-orbit .orbit-front{stroke:#b2c3d4}
+.team-stage{transition:height .4s ease}.team-card{height:var(--team-compact-height);transition:height .4s ease}.team-card.is-expanded{height:var(--team-expanded-height)}
+.dark .team-card{background:linear-gradient(145deg,rgba(25,29,35,.97),rgba(10,14,20,.98));border-color:#3b4652}.dark .team-card.is-active{border-color:var(--member-color)}
+.team-expand{display:flex;align-items:center;gap:12px;width:100%;min-height:46px;padding:12px 15px;border:1px solid color-mix(in srgb,var(--member-color) 50%,transparent);border-radius:13px;background:color-mix(in srgb,var(--member-color) 9%,var(--vp-c-bg-soft));color:var(--vp-c-text-1);font-family:var(--vp-font-family-base);font-size:12px;font-weight:600;text-align:left;cursor:pointer;transform-origin:center}
+.team-expand:hover{background:color-mix(in srgb,var(--member-color) 16%,var(--vp-c-bg-soft))}.team-expand:focus-visible{outline:2px solid var(--member-color);outline-offset:4px}
+.team-expand svg{margin-left:auto;width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round;transition:transform .25s}
+.team-expand[aria-expanded="true"] svg{transform:rotate(180deg)}
+.team-card.is-active .team-expand[aria-expanded="false"]{animation:team-contribution-pulse 2.8s ease-in-out infinite}
+.team-contribution-panel{padding-top:22px}
+@keyframes team-contribution-pulse{0%,100%{box-shadow:0 0 0 0 transparent}50%{box-shadow:0 0 20px 2px color-mix(in srgb,var(--member-color) 22%,transparent)}}
+@media(max-width:767px){.team-page{--team-compact-height:480px;--team-expanded-height:1040px;--team-card-height:var(--team-compact-height)}.team-runway-backdrop{background-position:78% center}.team-expand{font-size:11px;padding:11px 12px;gap:8px}}
+@media(prefers-reduced-motion:reduce){.team-stage,.team-card,.team-expand svg{transition:none}.team-card.is-active .team-expand[aria-expanded="false"]{animation:none}}
+@media print{.team-page::before,.team-runway-backdrop,.team-expand{display:none!important}.team-contribution-panel{display:block!important}.team-card,.team-card.is-expanded{height:auto}.team-stage{height:auto}.team-intro h1,.team-intro>p:last-child{color:#000}}
+/* Slim page chrome and tighter spacing above and below the team carousel. */
+.Layout:has(.team-page){--vp-nav-height:56px}
+.Layout:has(.team-page) .VPFooter{padding:12px 24px}
+.Layout:has(.team-page) .VPFooter .message,.Layout:has(.team-page) .VPFooter .copyright{font-size:11px;line-height:18px}
+.team-page{padding:32px 24px 20px;min-height:0}
+.team-intro{margin-bottom:24px}
+.team-intro h1{margin:16px 0 12px}
+.team-controls{margin-top:16px}
+@media(max-width:767px){.team-page{padding:28px 0 18px}.team-intro{margin-bottom:22px}.team-controls{margin-top:14px}}
+
+/* Direct subsystem links sit above each member's contribution control. */
+.team-subsystems{display:grid;gap:8px;margin-bottom:16px}
+.team-subsystems-label{font-size:9px;letter-spacing:1px;text-transform:uppercase;color:var(--vp-c-text-2);margin-bottom:2px}
+.team-subsystems a{display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:42px;padding:10px 12px;border:1px solid color-mix(in srgb,var(--member-color) 35%,var(--vp-c-divider));border-radius:11px;background:color-mix(in srgb,var(--member-color) 5%,var(--vp-c-bg-soft));color:var(--vp-c-text-1);font-size:11px;line-height:1.5;font-weight:500;transition:background .2s,border-color .2s}
+.team-subsystems a:hover{border-color:var(--member-color);background:color-mix(in srgb,var(--member-color) 12%,var(--vp-c-bg-soft))}
+.team-subsystems a:focus-visible{outline:2px solid var(--member-color);outline-offset:3px}
+.team-subsystems svg{width:15px;height:15px;flex-shrink:0;fill:none;stroke:var(--member-color);stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+.team-page{--team-compact-height:620px;--team-expanded-height:1070px}
+@media(max-width:767px){.team-page{--team-compact-height:640px;--team-expanded-height:1210px}}
+@media(prefers-reduced-motion:reduce){.team-subsystems a{transition:none}}
+
+/* Keep the role flush beneath the name, followed directly by subsystem links. */
+.team-card h2{min-height:0;margin-bottom:6px}
+.team-role{margin:0}
+.team-role-detail{min-height:0;margin:3px 0 0}
+.team-subsystems{margin:14px 0 0}
+.team-portrait{margin-top:22px}

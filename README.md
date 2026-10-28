@@ -1,164 +1,187 @@
-<div align="center">
+# FOD ARGUS - Team Editing Guide
 
-<!-- NUS LOGO DISPLAY -->
-<img src="https://nus.edu.sg/images/default-source/identity-images/NUS_logo_full-horizontal.jpg" alt="NUS Logo" width="600" />
+Autonomous Runway Inspection UAV | NUS CDE4301 | AIS-407
 
-#  Drone-Vision Foreign Object Debris (FOD) Detection on Airport Runways
+## Repository layout
 
-### Draft Report for CDE4301
-
-_In Collaboration with the Republic of Singapore Air Force (RSAF) and Robotics & Autonomous Systems Innovation and Development (RAiD)_  
-_Innovation & Design Programme | College of Design and Engineering | National University of Singapore_
-
-</div>
-
----
-
-### Project Details
-
-_Table 0.1: Project Team and Faculty Supervision Details_
-| Project Team (UGV Focus) | Student ID | Faculty/Specilisation | Supervision |
-| :--- | :--- | :--- | :--- |
-| **Charansagar Ramanujam** | `A0301658E` | Robotics Specilisation |**Dr Tang Kok Zuea**|
-| **Arun** | `--------` | College of Design and Engineering |**Dr Tang Kok Zuea** |
-| **Talitha** | `------------` | College of Design and Engineering |**Dr Tang Kok Zuea** |
-
-
-
-## 1. Overview
-
-Foreign Object Debris (FOD) — anything from loose bolts and tools to wildlife and tyre debris — left on an active runway is a serious aviation safety hazard, with consequences ranging from engine/airframe damage to catastrophic accidents. Airports today rely on a mix of manual visual inspection, fixed radar installations (e.g. mmW radar, SAR), and static optical sensor networks. These are effective but come with real trade-offs: manual inspection doesn't scale, and fixed sensor infrastructure is expensive to install and maintain across an entire runway.
-
-This project investigates **drone (UAV)-based visual FOD detection** as a lower-cost, more flexible alternative to fixed infrastructure, and asks a practical question for stakeholders: **is this feasible, and what would it cost to actually deploy?**
-
-## 2. Current Project Scope
-
-This FYP is **not** building a deployment-ready FOD detection system. The current phase is a **feasibility study**, and the primary deliverable is a **budget allocation prediction** for stakeholders, derived from:
-
-- A **scaled-down physical prototype** (drone + onboard/companion vision pipeline), and
-- **Simulation under scaled-down conditions** (reduced runway area, controlled test objects, controlled flight parameters).
-
-Findings from this scaled-down testing will later be **extrapolated to full-scale runway conditions** in a subsequent phase. Nothing in this repo at this stage should be read as a production-ready or airport-certified system.
-
-**In scope right now:**
-- Literature review of existing FOD detection approaches (traditional, radar, AI/vision, sensor fusion)
-- Small-scale prototype build and flight testing
-- Detection accuracy testing on a scaled-down "runway" with representative FOD items
-- Cost modeling of the prototype, and a scaling model to project full-scale budget
-- Feasibility report + budget allocation prediction for stakeholders
-
-**Out of scope right now:**
-- Full-scale runway trials
-- Regulatory/certification pathway
-- Production-grade reliability, redundancy, or weatherproofing
-- Final hardware/vendor selection
-
-## 3. Why Drone-Vision? (Background Research)
-
-Our approach is grounded in current literature on FOD detection technology:
-
-| Sensor type | Resolution | Weather resilience | Relative cost | Detection range |
-|---|---|---|---|---|
-| Optical camera | High (short range) | Poor | Low | Short |
-| LiDAR | High | Moderate | High | Medium |
-| mmW radar | Depends on bandwidth/antenna | High | Moderate | Long |
-| SAR | Depends on bandwidth | High | Moderate | Long |
-
-*(Adapted from the sensor comparison in Shan et al., "A Review of Foreign Object Debris Detection on Airport Runways: Sensors and Algorithms," Remote Sensing, 2025.)*
-
-Key takeaways that motivate this project's direction:
-
-- Commercial fixed sensor-fusion systems (e.g. Tarsier, FODetect) combine radar with optical sensors, but require permanent, expensive infrastructure — a barrier for smaller or lower-budget airports.
-- Static camera/radar networks are costly and complex to install and maintain across a full runway.
-- The literature explicitly identifies **drone-based systems equipped with optical, thermal, or radar sensors** as a flexible, scalable alternative that reduces reliance on fixed infrastructure — while also noting that such systems are still early-stage and currently face real-time detection and safety-certification constraints. This is precisely the gap our feasibility study is probing.
-- On the AI side, YOLO-family detectors (and derivatives tuned for small-object detection) have shown strong results for FOD-type objects, which informs the vision model choice for our prototype.
-
-A second, complementary reference — Krestenitis et al., "Digitalization and Automation of Runway Inspection Using Unmanned Aerial Vehicles" (Sensors, 2026) — demonstrates an end-to-end **UAV-based runway inspection pipeline** (data capture → deep-learning segmentation → GIS-based condition mapping), validated on a real runway. While their focus is pavement *defect* inspection rather than FOD detection, it's a useful methodological blueprint and a real-world benchmark for our own flight/imaging parameters:
-
-| Parameter | Reference value (from literature) |
-|---|---|
-| UAV platform | DJI Matrice 300 RTK w/ Zenmuse P1 camera |
-| Camera | Full-frame RGB, 4000 × 3000 px, 63.5° FOV |
-| Flight altitude (tested) | 20 m and 32 m |
-| Image overlap | 70% front / 70% side |
-| Ground sampling distance (GSD) | ≈ 4.3 mm/pixel at reference altitude |
-
-We use these as **rough benchmarks**, not as a spec to replicate — our scaled-down prototype will use more modest, budget-appropriate hardware, and we'll document the actual specs we test with as we go.
-
-## 4. Planned Methodology
-
-1. **Literature review** — consolidate sensor trade-offs, detection algorithm options, and prior cost/feasibility discussions (in progress; see `/docs`).
-2. **Scaled-down prototype build** — a consumer/prosumer drone with an RGB camera, running a lightweight on-device or ground-station object detection model.
-3. **Simulated test environment** — a scaled-down mock runway area with planted test objects standing in for FOD (metal, plastic, rubber, etc.), under varied lighting/altitude conditions.
-4. **Data collection & evaluation** — detection accuracy, false alarm rate, coverage speed, and flight endurance at small scale.
-5. **Cost modeling** — itemized cost of the prototype (hardware, compute, flight time, personnel), then a scaling model to project costs for full-length runway coverage.
-6. **Feasibility & budget report** — deliverable summarizing whether the approach is viable and what budget stakeholders should plan for, with assumptions clearly flagged for the later scale-up phase.
-
-## 5. Deliverables (this phase)
-
-- [ ] Feasibility report
-- [ ] Budget allocation prediction (prototype-derived, scaled-up projection)
-- [ ] Prototype test log & simulation results
-- [ ] Literature review write-up
-
-## 6. Individual Scopes 
-
-### Charan — UAV Vision, FOD Detection & UAV–UGV Integration
-
-### Objectives
-- Develop a vision-based system for FOD and anomaly detection.
-- Determine FOD coordinates using vision.
-- Send detected FOD coordinates to the UGV.
-- Integrate LED illumination for low-light inspection.
-
-### Key Responsibilities
-- Prepare and annotate FOD datasets.
-- Train and evaluate FOD/anomaly detection models.
-- Select and integrate RGB and thermal cameras.
-- Develop the image acquisition and detection pipeline.
-- Develop vision-based FOD localisation and coordinate estimation.
-- Develop UAV–UGV communication for transmitting FOD coordinates.
-- Integrate LED illumination for low-light/night inspection.
-- Evaluate detection and localisation accuracy.
-
-### Hardware / Software
-- RGB and thermal cameras
-- LED illumination
-- Jetson Orin NX
-- Python & OpenCV
-- YOLO / PyTorch
-- ROS 2 / UAV–UGV communication
-
-### Expected Deliverables
-- FOD/anomaly detection model and dataset
-- Image acquisition and detection pipeline
-- Vision-based FOD localisation system
-- LED-assisted low-light inspection
-- UAV–UGV communication interface
-- Detection and localisation accuracy evaluation
-- Integrated Detect → Localise → Send Coordinates to UGV workflow
-  
-## 7. Repository Structure
-
-> Placeholder — update once the repo layout is finalized.
-
-```
-├── docs/            # literature review, feasibility report, budget report
-├── hardware/         # prototype BOM, drone/camera specs, wiring notes
-├── software/         # detection pipeline, model training/inference code
-├── simulation/        # scaled-down test setup, test object configs, results
-├── data/            # test flight imagery/logs (raw + annotated)
-└── README.md
+```text
+CDE4301_runway_drone/
+|-- index.html                  Website launcher
+|-- README.md                   This team guide
+|-- website modifying instructions.md   Website maintenance guide
+|-- .github/workflows/          GitHub Actions deployment
+|-- interim/                    Working documents and research
+|   |-- mechanical-design/
+|   |-- electrical-design/
+|   |-- navigation-obstacle-avoidance/
+|   |-- computer-vision/
+|   |-- communication-system/
+|   |-- research/
+|   |-- notes/
+|-- website/                    Complete VitePress website project
+    |-- package.json
+    |-- package-lock.json
+    |-- docs/
+        |-- index.md            Cinematic homepage
+        |-- subsystems/         Individual report chapters
+        |-- public/             Images, drone model, and static assets
+        |-- .vitepress/          Theme, configuration, and components
 ```
 
-## 8. References
+Use **interim/** for working documents, research, meeting notes, and draft material. These folders are tracked in Git but are not automatically published as website chapters.
 
-- Shan, J.; Miccinesi, L.; Beni, A.; Pagnini, L.; Cioncolini, A.; Pieraccini, M. *A Review of Foreign Object Debris Detection on Airport Runways: Sensors and Algorithms.* Remote Sensing 2025, 17, 225.
-- Krestenitis, M.; Petropoulos, A.; Koulalis, I.; Stipanovic, I.; Skaric Palic, S.; Ioannidis, K.; Vrochidis, S. *Digitalization and Automation of Runway Inspection Using Unmanned Aerial Vehicles.* Sensors 2026, 26, 1100.
+Use **website/docs/** to edit the visible website. All website source code, assets, dependencies, and build configuration are inside **website/**. GitHub requires the deployment workflow to stay under the root **.github/workflows/** folder.
 
-## 9. Team & Contact
+## Does the website run from GitHub?
 
-> Placeholder — add team member names, roles, supervisor, and contact details.
+Yes, once the repository is pushed and GitHub Pages is enabled. GitHub Actions builds the VitePress project in **website/** and publishes its generated pages. Your laptop does not need to remain switched on.
 
----
-*This README covers only the current feasibility/budget-prediction phase of the project. It will be revised as the prototype and simulation results come in, and again once the project moves to full-scale evaluation.*
+- Expected live website: https://cde4301-drone-ground-robots.github.io/CDE4301_runway_drone/
+- Local preview: http://127.0.0.1:4173/CDE4301_runway_drone/
+- Confirm publication under GitHub **Actions** and **Settings > Pages**. Local files alone are not published.
+
+The root **index.html** is a launcher with links to the published website and local preview. The full production homepage is generated from **website/docs/index.md** during the VitePress build. Do not replace the root launcher with individual report chapters.
+
+## Individual editing folders
+
+| Member | Working documents | Website chapters |
+| --- | --- | --- |
+| Muruganantham Arun | [interim/mechanical-design/](interim/mechanical-design/) | [website/docs/subsystems/mechanical-design/](website/docs/subsystems/mechanical-design/) |
+| Kummarikunta Talitha | [interim/electrical-design/](interim/electrical-design/) | [website/docs/subsystems/electrical-design/](website/docs/subsystems/electrical-design/) |
+| Kummarikunta Talitha | [interim/navigation-obstacle-avoidance/](interim/navigation-obstacle-avoidance/) | [website/docs/subsystems/navigation-obstacle-avoidance/](website/docs/subsystems/navigation-obstacle-avoidance/) |
+| Charansagar Ramanujam | [interim/computer-vision/](interim/computer-vision/) | [website/docs/subsystems/computer-vision/](website/docs/subsystems/computer-vision/) |
+| Charansagar Ramanujam | [interim/communication-system/](interim/communication-system/) | [website/docs/subsystems/communication-system/](website/docs/subsystems/communication-system/) |
+
+Shared draft folders: [Research](interim/research/) and [Notes](interim/notes/). The corresponding visible website pages are under **website/docs/research/** and **website/docs/notes.md**.
+
+## Nine report chapters per subsystem
+
+1. **executive-summary.md** - Short purpose, main engineering problem, selected approach.
+2. **subsystem-overview.md** - Operation and interfaces.
+3. **requirements-considerations.md** - Requirements, acceptance criteria, constraints.
+4. **design-iterations-selection.md** - Alternatives, comparison, selection.
+5. **detailed-design-implementation.md** - Development and implementation.
+6. **testing-methodology-results.md** - What was tested, why, methods, results.
+7. **evaluation-discussion.md** - Results against requirements, limitations, uncertainties, trade-offs.
+8. **improvements-lessons-learned.md** - Challenges, improvements, lessons.
+9. **semester-2-development-plan.md** - Next objectives, tasks, milestones, validation.
+
+The matching file directly inside **website/docs/subsystems/**, such as **mechanical-design.md**, is the subsystem report landing page. Keep chapter filenames so navigation continues to work.
+
+## Edit individually using GitHub
+
+1. Open the repository on GitHub and select **main**.
+2. Open your website chapter folder from the table above. Select a Markdown chapter, then click the **pencil / Edit this file** button.
+3. Replace **To be added** placeholders with your report content. Keep the initial metadata block between the first pair of **---** lines, the title, lead name, and matriculation number.
+4. Remove the **Documentation pending** block when the chapter is ready. It begins with **::: info Documentation pending** and ends with **:::**.
+5. Use **Preview** to check basic Markdown. VitePress applies the final website styling.
+6. Select **Commit changes** and create a new branch with a clear name, such as **arun/mechanical-report**. Start a pull request targeting **main**.
+7. Ask a teammate to review. Wait for the build check to pass, then merge the pull request.
+8. Check **Actions > Build and deploy report**. After deployment succeeds, refresh the published site.
+
+Continue related edits on the same branch before merging. Members can work simultaneously on separate branches and their own chapter folders. Coordinate changes to shared references, navigation, and theme files. If editing is unavailable, ask an administrator for **Write** access under **Settings > Collaborators & teams**.
+
+Edits to draft files in **interim/** do not change the published report. Transfer approved content into the appropriate Markdown chapters under **website/docs/**.
+
+## Add images, equations, and references
+
+Upload subsystem images to **website/docs/public/report-assets/<subsystem>/** on the same working branch as your chapter. For example:
+
+```text
+website/docs/public/report-assets/mechanical-design/arm-design.png
+```
+
+In the Markdown chapter:
+
+```md
+## Selected Design
+
+Explain the chosen design here.
+
+![Selected arm design](/report-assets/mechanical-design/arm-design.png)
+
+*Figure 1. Selected arm design. Add the relevant explanation or source.*
+
+| Requirement | Target | Verification |
+| --- | --- | --- |
+| Add requirement | Add measurable target | Add test method |
+```
+
+Use **##** for main sections and **###** for subsections. LaTeX is supported with dollar signs for inline equations and double dollar signs for displayed equations. Add source links near claims and maintain the shared bibliography in **website/docs/references.md**.
+
+Match image filenames and capitalisation exactly. Use short, lowercase names with hyphens. Do not put **website/docs/public/** into the image URL; VitePress handles the site base path.
+
+## Preview locally
+
+Install Node.js 22 or later and Git. From the repository root:
+
+```sh
+cd website
+npm ci
+npm run docs:dev
+```
+
+Open http://127.0.0.1:4173/CDE4301_runway_drone/ and keep the terminal running. Changes refresh automatically. Press **Ctrl+C** to stop.
+
+To check a production build, run this inside **website/**:
+
+```sh
+npm run docs:build
+```
+
+## Local Git contribution workflow
+
+From the repository root, with no uncommitted changes:
+
+```sh
+git switch main
+git pull --ff-only origin main
+git switch -c arun/mechanical-report
+```
+
+Edit your files, then build and commit. Example for Arun:
+
+```sh
+npm --prefix website run docs:build
+git add website/docs/subsystems/mechanical-design.md website/docs/subsystems/mechanical-design/ interim/mechanical-design/
+git commit -m "Add mechanical subsystem report content"
+git push -u origin arun/mechanical-report
+```
+
+Replace branch names and paths with your own. Stage any new image files as well. Open a pull request into **main**. Resolve conflicts with the team; do not force-push **main**.
+
+## First upload and GitHub Pages setup
+
+From the repository root:
+
+```sh
+git add README.md "website modifying instructions.md" index.html .gitignore .github interim website
+git commit -m "Organise interim documents and FOD ARGUS website"
+git pull --rebase origin main
+git push origin main
+```
+
+If a command reports a conflict, resolve it before continuing.
+
+On GitHub, set **Settings > Pages > Build and deployment > Source** to **GitHub Actions**. Check the **Build and deploy report** workflow; run it manually on **main** if necessary after enabling Pages. The workflow builds from **website/** and publishes **website/docs/.vitepress/dist/**. Pull requests get a build check but no separate hosted preview.
+
+Official guidance: [repository access](https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/managing-repository-settings/managing-teams-and-people-with-access-to-your-repository) and [GitHub Pages workflows](https://docs.github.com/en/pages/getting-started-with-github-pages/using-custom-workflows-with-github-pages).
+
+## Shared website files
+
+All paths below are relative to **website/**:
+
+| Area | File |
+| --- | --- |
+| Homepage | **docs/index.md** and **docs/.vitepress/theme/components/RunwayHome.vue** |
+| Team profiles | **docs/team.data.ts** |
+| Scope | **docs/scopes.md** |
+| Report cover | **docs/report/index.md** |
+| Report architecture | **docs/report/system-architecture.md** |
+| Timeline | **docs/timeline.md** |
+| Future works | **docs/report/future-works.md** |
+| References | **docs/references.md** |
+| Navigation and report sidebar | **docs/.vitepress/config.mts** |
+| Chapter order | **docs/.vitepress/subsystem-sections.ts** |
+
+See [website modifying instructions.md](<website modifying instructions.md>) for implementation details. Generated builds, dependencies, and local caches remain excluded by **.gitignore**.
