@@ -5,3 +5,4 @@ website/docs/.vitepress/dist/
 .npm-cache/
 .browser-cache/
 .visual-check/
+website/docs/.vitepress/.temp/
