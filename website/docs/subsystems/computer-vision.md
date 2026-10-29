@@ -77,13 +77,32 @@ The RGB camera captures images continuously, which then pass through the system.
 
 Computational workload was estimated across the AI models. Based on the GFLOPS calculated, FOD detection and Crack segmentation are the most computationally demanding tasks. In Architecture prototype 1 above, these models are running simultaneously. This is addressed in the next section.
 
-The table reports computational workload in GFLOPs, rather than measured inference time in milliseconds. Runtime latency will be measured during the model and integrated-system tests listed in the future work.
+GFLOPs describe the amount of computation. Measured laptop inference times are reported in [Section 8](#integration-evaluation).
 
 ### Computer Vision System Architecture (Fallback)
 
 There would be cases when Jetson NX resources are scarce due to multiple subsystems running, such as navigation and communication systems. They would all be competing for GPU resources, memory bandwidth and power. Hence, we designed a fallback architecture for low-resource scenarios. This pipeline runs Crack and YOLO sequentially instead of simultaneously, reducing resource consumption.
 
 <CvFigure n="6" />
+
+### Architecture Comparison and Memory Use
+
+Both approaches were tested on the same laptop. The setup and full timing results are in [Section 8](#integration-evaluation).
+
+| Architecture | Average processing time (ms/frame) | Processing rate (frames/s) | Peak GPU memory during processing (MiB) |
+| --- | ---: | ---: | ---: |
+| Sequential fallback | 89.45 | 11.18 | 391.66 |
+| Parallel benchmark | 82.48 | 12.12 | 532.44 |
+
+<div class="cv-latency-result">
+ <div class="cv-latency-label"><span>Mean latency improvement</span><strong>7.8%</strong></div>
+ <div class="cv-latency-track" role="meter" aria-label="Mean latency improvement with parallel execution" aria-valuemin="0" aria-valuemax="100" aria-valuenow="7.8"><span></span></div>
+ <p>Parallel execution reduced average processing time by approximately 6.97 ms per frame.</p>
+</div>
+
+Running YOLO and U-Net sequentially used about 26% less GPU memory, while running them in parallel reduced processing time by about 7.8%. This gives us a reason to keep the sequential fallback when less memory is available. We still need to test it on the Jetson alongside navigation and communication.
+
+GPU memory reached about 6.55 GiB during startup and warm-up. The table shows memory use during processing only; it does not show that the fallback solves this startup peak. These figures cover memory allocated by PyTorch, rather than total GPU memory use.
 
 ### Why Are Both YOLO and U-Net Used?
 
@@ -320,7 +339,7 @@ This thermal camera provides the wide field of view needed for forward safety mo
 
 ### Overall Integrated System
 
-The first integration demonstrated a collaborative system where all models run together using a fallback architecture in which the models run sequentially. The first prototype architecture was not implemented due to hardware limitations in running two models at the same time. Testing was done on the laptop, but it slowed the laptop, resulting in visual latency. Hence, I will conduct more thorough testing and evaluation once I receive the Jetson NX.
+The first integrated system used the sequential fallback architecture. It ran on the laptop but showed visible lag, as seen in the video below. The parallel version was later tested in a separate benchmark; the main application still runs YOLO and U-Net sequentially. Further testing will be done on the Jetson NX.
 
 These were preliminary functional checks using sample objects, including a battery. Formal testing against the subsystem requirements has not yet been conducted.
 
@@ -333,6 +352,39 @@ These were preliminary functional checks using sample objects, including a batte
  <div v-else class="cv-video-pending" role="status"><span>INTEGRATION DEMO</span><p>Video will be added here.</p></div>
  <figcaption><strong>Video CV-01</strong><span>Laptop demonstration of the integrated system running the sequential fallback architecture, showing visible processing lag.</span></figcaption>
 </figure>
+
+### Laptop Setup and Test Conditions
+
+| Item | Test condition |
+| --- | --- |
+| Processor | AMD Ryzen 9 7845HX |
+| GPU | NVIDIA GeForce RTX 4060 Laptop GPU; 8.00 GiB VRAM |
+| System memory | 15.21 GiB RAM |
+| Software | Python environment `fod_synthetic`; PyTorch 2.11.0+cu128; CUDA build 12.8 |
+| RGB inputs | 30 images: 10 each at 300 x 300, 512 x 512 and 3024 x 4032 |
+| Thermal inputs | 30 images: 15 each at 1280 x 1024 and 640 x 480 |
+| Inference settings | Batch size 1; float32; models warmed up before measured processing |
+| Repetitions | Three passes over the same inputs: 90 frame observations per configuration; 84 crop observations for each downstream detector |
+| Timing boundary | Already-loaded images; excludes model loading, live capture, GUI display and result-file writing |
+
+The laptop was low on available RAM, dropping to about 297 MiB during testing. Other background activity was not controlled, so timings may vary between runs.
+
+### Measured Processing and Inference Results
+
+| Configuration | Mean processing time (ms) | P95 processing time (ms) | Mean forward inference time (ms) | Processing throughput | Unit |
+| --- | ---: | ---: | ---: | ---: | --- |
+| PatchCore | 33.03 | 48.95 | 21.52 | 30.28 frames/s | Full frame |
+| YOLO FOD | 27.62 | 51.01 | 19.82 | 36.20 crops/s | Anomaly crop |
+| Crack U-Net | 27.81 | 30.97 | 14.56 | 35.96 crops/s | Anomaly crop |
+| Thermal YOLO11s | 36.39 | 48.35 | 30.96 | 27.48 frames/s | Full frame |
+| Sequential RGB pipeline | 89.45 | 200.90 | Not measured separately | 11.18 frames/s | Full frame |
+| Parallel RGB benchmark | 82.48 | 177.00 | Not measured separately | 12.12 frames/s | Full frame |
+
+Processing time includes preparing the input, running the model and processing its output. Forward inference time covers the model alone. Each complete pipeline was timed directly. P95 means 95% of the measured processing times were at or below that value.
+
+PatchCore produced 28 crops from 16 RGB images. The other 14 images had no valid crops, so YOLO and U-Net were skipped. Frames with more crops take longer to process. Thermal was tested separately and is not included in the RGB pipeline timings. All runs completed without processing failures.
+
+These are laptop processing rates, not camera capture rates. Live capture, display and thermal integration may add delays. Detection accuracy, night operation and performance on the Jetson still need to be tested.
 
 ### Overall Onboard Architecture
 
