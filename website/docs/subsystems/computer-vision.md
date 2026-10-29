@@ -327,8 +327,6 @@ For the current prototype, we used a standard USB webcam for full vision system 
 
 The first integration demonstrated a collaborative system where all models run together using a fallback architecture in which the models run sequentially. The first prototype architecture was not implemented due to hardware limitations in running two models at the same time. Testing was done on the laptop, but it slowed the laptop, resulting in visual latency. Hence, I will conduct more thorough testing and evaluation once I receive the Jetson NX.
 
-<CvFigure n="41" />
-
 ### Sequential Integration Demonstration
 
 <figure class="cv-video-panel">
@@ -338,6 +336,10 @@ The first integration demonstrated a collaborative system where all models run t
  <div v-else class="cv-video-pending" role="status"><span>INTEGRATION DEMO</span><p>Video will be added here.</p></div>
  <figcaption><strong>Video CV-01</strong><span>Laptop demonstration of the integrated system running the sequential fallback architecture, showing visible processing lag.</span></figcaption>
 </figure>
+
+### Overall Onboard Architecture
+
+<CvFigure n="41" />
 
 ## Semester 2 Development Plan {#semester-2-development-plan}
 
