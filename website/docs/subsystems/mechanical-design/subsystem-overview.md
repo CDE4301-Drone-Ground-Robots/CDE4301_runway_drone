@@ -1,24 +1,12 @@
 ---
-title: "Subsystem Overview | Mechanical Design"
+title: Subsystem Report
+search: false
+prev: false
+next: false
+head:
+  - - meta
+    - http-equiv: refresh
+      content: "0; url=/CDE4301_runway_drone/subsystems/mechanical-design"
 ---
 
-<p class="chapter-kicker">Mechanical Design</p>
-
-# Subsystem Overview
-
-**Subsystem lead:** Muruganantham Arun  
-**Matriculation number:** A0308280J
-
-::: info Documentation pending
-This section is ready for the subsystem report content.
-:::
-
-<!-- Explain operation and interfaces. Include a block diagram and identify inputs, outputs, and dependencies. -->
-
-## How the Subsystem Operates
-
-_To be added._
-
-## Interfaces with Other Subsystems
-
-_To be added._
+[Open subsystem report](/subsystems/mechanical-design).

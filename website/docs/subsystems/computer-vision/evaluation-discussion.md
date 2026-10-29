@@ -1,28 +1,12 @@
 ---
-title: "Evaluation & Discussion | Computer Vision Based Inspection and Safety System"
+title: Subsystem Report
+search: false
+prev: false
+next: false
+head:
+  - - meta
+    - http-equiv: refresh
+      content: "0; url=/CDE4301_runway_drone/subsystems/computer-vision#yolo-fod-detection"
 ---
 
-<p class="chapter-kicker">Computer Vision Based Inspection and Safety System</p>
-
-# Evaluation & Discussion
-
-**Subsystem lead:** Charansagar Ramanujam  
-**Matriculation number:** A0301658E
-
-::: info Documentation pending
-This section is ready for the subsystem report content.
-:::
-
-<!-- Compare results against the original requirements. Discuss expected performance, limitations, uncertainties, and trade-offs. -->
-
-## Comparison Against Requirements
-
-_To be added._
-
-## Performance Discussion
-
-_To be added._
-
-## Limitations, Uncertainties and Trade-offs
-
-_To be added._
+[Open subsystem report](/subsystems/computer-vision#yolo-fod-detection).

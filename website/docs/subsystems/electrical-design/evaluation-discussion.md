@@ -1,28 +1,12 @@
 ---
-title: "Evaluation & Discussion | Electrical Design"
+title: Subsystem Report
+search: false
+prev: false
+next: false
+head:
+  - - meta
+    - http-equiv: refresh
+      content: "0; url=/CDE4301_runway_drone/subsystems/electrical-design"
 ---
 
-<p class="chapter-kicker">Electrical Design</p>
-
-# Evaluation & Discussion
-
-**Subsystem lead:** Kummarikunta Talitha  
-**Matriculation number:** A0286653R
-
-::: info Documentation pending
-This section is ready for the subsystem report content.
-:::
-
-<!-- Compare results against the original requirements. Discuss expected performance, limitations, uncertainties, and trade-offs. -->
-
-## Comparison Against Requirements
-
-_To be added._
-
-## Performance Discussion
-
-_To be added._
-
-## Limitations, Uncertainties and Trade-offs
-
-_To be added._
+[Open subsystem report](/subsystems/electrical-design).

@@ -226,3 +226,45 @@ html:not(.dark) .hero h1 .hero-wordmark{--argus-rose-glow:rgba(226,160,140,.32);
 .dark .VPSidebar .VPSidebarItem.is-active>.item>.link>.text{color:#f0c5ad}
 .report-sidebar-identity>small{font-size:9px;letter-spacing:1px}
 .dark .report-sidebar-identity>small{color:#c4cdd8}
+/* Computer Vision report: readable evidence panels and responsive tables. */
+.cv-report-byline{display:flex;flex-wrap:wrap;gap:8px 18px;margin:24px 0 32px;padding:14px 0;border-top:1px solid var(--vp-c-divider);border-bottom:1px solid var(--vp-c-divider);color:var(--vp-c-text-2);font-size:11px;line-height:1.7}
+.cv-report-byline>span:first-child{font-weight:600;color:var(--vp-c-text-1)}
+.cv-report .cv-figure-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;align-items:start;margin:28px 0}
+.cv-report .cv-figure-grid .cv-figure{min-width:0;margin:0}
+.cv-report table{display:block;width:max-content;min-width:100%;max-width:100%;overflow-x:auto;font-size:12px;line-height:1.65;border-radius:12px;margin:24px 0;overscroll-behavior-x:contain}
+.cv-report table th,.cv-report table td{padding:12px 14px;min-width:100px;vertical-align:top}
+.cv-report table th:first-child,.cv-report table td:first-child{min-width:140px}
+.cv-report table th{background:var(--vp-c-bg-soft);white-space:normal}
+.dark .cv-report table th{background:#1b2532;color:#f2e4db}
+.dark .cv-report table td{color:#e1e6ef}
+.cv-supporting-evidence{margin:28px 0;padding:16px 18px;border:1px solid var(--vp-c-divider);border-radius:12px;background:var(--vp-c-bg-soft)}
+.cv-supporting-evidence>summary{cursor:pointer;font-weight:600;font-size:13px}
+@media(max-width:600px){.cv-report .cv-figure-grid{grid-template-columns:1fr}.cv-report table{font-size:11px}.cv-report table th,.cv-report table td{padding:10px}.cv-report-byline{gap:5px 14px}}
+
+/* Keep the report contents aligned with the section being read. */
+.VPSidebar[data-cv-scrollspy] .VPSidebarItem.level-2.is-active:not(.cv-section-current)>.item{background:transparent}
+.VPSidebar[data-cv-scrollspy] .VPSidebarItem.level-2.is-active:not(.cv-section-current)>.item>.indicator{background:transparent}
+.VPSidebar[data-cv-scrollspy] .VPSidebarItem.level-2.is-active:not(.cv-section-current)>.item>.link>.text{color:var(--vp-c-text-1)}
+.VPSidebar .VPSidebarItem.cv-section-current>.item{background:rgba(189,146,124,.14);border-radius:7px}
+.VPSidebar .VPSidebarItem.cv-section-current>.item>.indicator{background:#d7aa94}
+.VPSidebar .VPSidebarItem.cv-section-current>.item>.link>.text{color:#976349;font-weight:600}
+.dark .VPSidebar .VPSidebarItem.cv-section-current>.item>.link>.text{color:#f1c5ac}
+
+/* Large section openings make the continuous CV report easy to scan. */
+.cv-report{counter-reset:cv-report-section}
+.vp-doc .cv-report>h2{counter-increment:cv-report-section;position:relative;font-family:Manrope,var(--vp-font-family-base);font-size:clamp(38px,4.4vw,62px);font-weight:750;line-height:1.12;letter-spacing:-1.8px;color:var(--vp-c-text-1);margin:112px 0 36px;padding:40px 0 0;border-top:2px solid rgba(189,146,124,.5);overflow-wrap:break-word;scroll-margin-top:0}
+.vp-doc .cv-report>h2::before{content:"SECTION " counter(cv-report-section,decimal-leading-zero);display:block;font-family:var(--vp-font-family-base);font-size:11px;font-weight:600;line-height:1.5;letter-spacing:2.4px;color:#a77154;margin-bottom:18px}
+.dark .vp-doc .cv-report>h2::before{color:#e6b9a2}
+.vp-doc .cv-report>h3{font-size:25px;line-height:1.35;margin-top:42px;letter-spacing:-.5px}
+@media(max-width:767px){.vp-doc .cv-report>h2{font-size:38px;letter-spacing:-1.2px;margin-top:80px;padding-top:30px;margin-bottom:28px}.vp-doc .cv-report>h2::before{font-size:10px;margin-bottom:14px}.vp-doc .cv-report>h3{font-size:22px}}
+@media print{.vp-doc .cv-report>h2{font-size:26pt;margin-top:40px;break-after:avoid}}
+/* Larger report copy keeps long technical sections readable. */
+.vp-doc .cv-report{font-size:18px;line-height:1.85}
+.vp-doc .cv-report p,.vp-doc .cv-report li{font-size:18px;line-height:1.85}
+.vp-doc .cv-report .chapter-kicker{font-size:12px}
+.vp-doc .cv-report .cv-report-byline{font-size:13px}
+.vp-doc .cv-report table{font-size:15px;line-height:1.7}
+.vp-doc .cv-report table th,.vp-doc .cv-report table td{font-size:15px}
+.vp-doc .cv-report .cv-figure figcaption{font-size:14px;line-height:1.75}
+.vp-doc .cv-report .cv-figure figcaption strong{font-size:12px}
+@media(max-width:767px){.vp-doc .cv-report,.vp-doc .cv-report p,.vp-doc .cv-report li{font-size:17px;line-height:1.8}.vp-doc .cv-report table,.vp-doc .cv-report table th,.vp-doc .cv-report table td{font-size:14px}.vp-doc .cv-report .cv-figure figcaption{font-size:13px}}

@@ -6,7 +6,7 @@ title: System Architecture
 
 # System Architecture
 
-The project is organised into five subsystem reports. Each report documents its operation, requirements, design development, implementation, testing, evaluation, lessons learned, and Semester 2 plan.
+The project is organised into five subsystem reports. Each subsystem has its own scrolling report page. The Computer Vision report is populated; the other subsystem pages are ready for their authors to add content.
 
 ## Subsystem Responsibilities
 

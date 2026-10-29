@@ -1,24 +1,12 @@
 ---
-title: "Subsystem Overview | Navigation & Obstacle Avoidance"
+title: Subsystem Report
+search: false
+prev: false
+next: false
+head:
+  - - meta
+    - http-equiv: refresh
+      content: "0; url=/CDE4301_runway_drone/subsystems/navigation-obstacle-avoidance"
 ---
 
-<p class="chapter-kicker">Navigation &amp; Obstacle Avoidance</p>
-
-# Subsystem Overview
-
-**Subsystem lead:** Kummarikunta Talitha  
-**Matriculation number:** A0286653R
-
-::: info Documentation pending
-This section is ready for the subsystem report content.
-:::
-
-<!-- Explain operation and interfaces. Include a block diagram and identify inputs, outputs, and dependencies. -->
-
-## How the Subsystem Operates
-
-_To be added._
-
-## Interfaces with Other Subsystems
-
-_To be added._
+[Open subsystem report](/subsystems/navigation-obstacle-avoidance).

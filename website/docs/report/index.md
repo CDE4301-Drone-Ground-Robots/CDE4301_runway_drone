@@ -12,7 +12,7 @@ outline: false
 
 ## About This Report
 
-This report brings together the project scope, system architecture, and the five subsystem reports. Use the contents panel to navigate between chapters and expand a subsystem to explore its nine report sections.
+This report brings together the project scope, system architecture, and the five subsystem reports. Use the contents panel to open a subsystem report. The Computer Vision report is one continuous page, with sidebar links that jump to its sections.
 
 ::: info Report in development
 The chapter structure is ready. Engineering content, test evidence, and results will be integrated when available.

@@ -44,34 +44,36 @@ The root **index.html** is a launcher with links to the published website and lo
 
 ## Individual editing folders
 
-| Member | Working documents | Website chapters |
+| Member | Working documents | Website report |
 | --- | --- | --- |
-| Muruganantham Arun | [interim/mechanical-design/](interim/mechanical-design/) | [website/docs/subsystems/mechanical-design/](website/docs/subsystems/mechanical-design/) |
-| Kummarikunta Talitha | [interim/electrical-design/](interim/electrical-design/) | [website/docs/subsystems/electrical-design/](website/docs/subsystems/electrical-design/) |
-| Kummarikunta Talitha | [interim/navigation-obstacle-avoidance/](interim/navigation-obstacle-avoidance/) | [website/docs/subsystems/navigation-obstacle-avoidance/](website/docs/subsystems/navigation-obstacle-avoidance/) |
-| Charansagar Ramanujam | [interim/computer-vision/](interim/computer-vision/) | [website/docs/subsystems/computer-vision/](website/docs/subsystems/computer-vision/) |
-| Charansagar Ramanujam | [interim/communication-system/](interim/communication-system/) | [website/docs/subsystems/communication-system/](website/docs/subsystems/communication-system/) |
+| Muruganantham Arun | [interim/mechanical-design/](interim/mechanical-design/) | [website/docs/subsystems/mechanical-design.md](website/docs/subsystems/mechanical-design.md) |
+| Kummarikunta Talitha | [interim/electrical-design/](interim/electrical-design/) | [website/docs/subsystems/electrical-design.md](website/docs/subsystems/electrical-design.md) |
+| Kummarikunta Talitha | [interim/navigation-obstacle-avoidance/](interim/navigation-obstacle-avoidance/) | [website/docs/subsystems/navigation-obstacle-avoidance.md](website/docs/subsystems/navigation-obstacle-avoidance.md) |
+| Charansagar Ramanujam | [interim/computer-vision/](interim/computer-vision/) | [website/docs/subsystems/computer-vision.md](website/docs/subsystems/computer-vision.md) |
+| Charansagar Ramanujam | [interim/communication-system/](interim/communication-system/) | [website/docs/subsystems/communication-system.md](website/docs/subsystems/communication-system.md) |
 
 Shared draft folders: [Research](interim/research/) and [Notes](interim/notes/). The corresponding visible website pages are under **website/docs/research/** and **website/docs/notes.md**.
 
-## Nine report chapters per subsystem
+## Subsystem report editing
 
-1. **executive-summary.md** - Short purpose, main engineering problem, selected approach.
-2. **subsystem-overview.md** - Operation and interfaces.
-3. **requirements-considerations.md** - Requirements, acceptance criteria, constraints.
-4. **design-iterations-selection.md** - Alternatives, comparison, selection.
-5. **detailed-design-implementation.md** - Development and implementation.
-6. **testing-methodology-results.md** - What was tested, why, methods, results.
-7. **evaluation-discussion.md** - Results against requirements, limitations, uncertainties, trade-offs.
-8. **improvements-lessons-learned.md** - Challenges, improvements, lessons.
-9. **semester-2-development-plan.md** - Next objectives, tasks, milestones, validation.
+Each subsystem now uses one scrolling Markdown report:
 
-The matching file directly inside **website/docs/subsystems/**, such as **mechanical-design.md**, is the subsystem report landing page. Keep chapter filenames so navigation continues to work.
+- `website/docs/subsystems/mechanical-design.md`
+- `website/docs/subsystems/electrical-design.md`
+- `website/docs/subsystems/navigation-obstacle-avoidance.md`
+- `website/docs/subsystems/computer-vision.md`
+- `website/docs/subsystems/communication-system.md`
+
+The Computer Vision report contains all nine pipeline-specific sections in the same file. Its sidebar entries jump to section anchors on that page. Edit this file to change the CV report; keep its explicit heading anchors so links continue to work.
+
+The other four reports currently contain only their title, lead name, and matriculation number. Add each member's report beneath those details, using headings appropriate to the subsystem. The previous chapter lists and empty templates have been removed from the visible website.
+
+Old files in the matching subfolders are compatibility redirects, not content to edit. Previous/next page buttons have been disabled.
 
 ## Edit individually using GitHub
 
 1. Open the repository on GitHub and select **main**.
-2. Open your website chapter folder from the table above. Select a Markdown chapter, then click the **pencil / Edit this file** button.
+2. Open your subsystem Markdown report from the table above, then click the **pencil / Edit this file** button.
 3. Replace **To be added** placeholders with your report content. Keep the initial metadata block between the first pair of **---** lines, the title, lead name, and matriculation number.
 4. Remove the **Documentation pending** block when the chapter is ready. It begins with **::: info Documentation pending** and ends with **:::**.
 5. Use **Preview** to check basic Markdown. VitePress applies the final website styling.
@@ -143,7 +145,7 @@ Edit your files, then build and commit. Example for Arun:
 
 ```sh
 npm --prefix website run docs:build
-git add website/docs/subsystems/mechanical-design.md website/docs/subsystems/mechanical-design/ interim/mechanical-design/
+git add website/docs/subsystems/mechanical-design.md interim/mechanical-design/
 git commit -m "Add mechanical subsystem report content"
 git push -u origin arun/mechanical-report
 ```
@@ -182,6 +184,6 @@ All paths below are relative to **website/**:
 | Future works | **docs/report/future-works.md** |
 | References | **docs/references.md** |
 | Navigation and report sidebar | **docs/.vitepress/config.mts** |
-| Chapter order | **docs/.vitepress/subsystem-sections.ts** |
+| Chapter order | **docs/.vitepress/cv-subsystem-sections.ts** |
 
 See [website modifying instructions.md](<website modifying instructions.md>) for implementation details. Generated builds, dependencies, and local caches remain excluded by **.gitignore**.

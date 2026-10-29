@@ -1,0 +1,250 @@
+{
+  "1": {
+    "src": "/report-assets/computer-vision/cv-01.webp",
+    "width": 814,
+    "height": 397,
+    "caption": "Software tools used for training, dataset preparation, and development."
+  },
+  "2": {
+    "src": "/report-assets/computer-vision/cv-02.webp",
+    "width": 2048,
+    "height": 1637,
+    "caption": "Downward-facing and oblique RGB camera viewing geometry.",
+    "cropHeight": 820
+  },
+  "3": {
+    "src": "/report-assets/computer-vision/cv-03.webp",
+    "width": 2048,
+    "height": 1395,
+    "caption": "Candidate e-con camera and interim UGREEN webcam comparison from the source report."
+  },
+  "4": {
+    "src": "/report-assets/computer-vision/cv-04.webp",
+    "width": 1312,
+    "height": 1199,
+    "caption": "Initial inspection architecture with parallel YOLO and U-Net processing."
+  },
+  "5": {
+    "src": "/report-assets/computer-vision/cv-05.webp",
+    "width": 812,
+    "height": 261,
+    "caption": "Model arithmetic-complexity comparison; GFLOPs are workload estimates, not measured latency."
+  },
+  "6": {
+    "src": "/report-assets/computer-vision/cv-06.webp",
+    "width": 1853,
+    "height": 1235,
+    "caption": "Fallback architecture with sequential FOD and crack processing."
+  },
+  "7": {
+    "src": "/report-assets/computer-vision/cv-07.webp",
+    "width": 2048,
+    "height": 749,
+    "caption": "Illustrative overlapping hazards: an object or puddle can coexist with a crack."
+  },
+  "8": {
+    "src": "/report-assets/computer-vision/cv-08.webp",
+    "width": 2048,
+    "height": 2043,
+    "caption": "PatchCore training and inference overview supplied in the source report.",
+    "cropHeight": 1024
+  },
+  "9": {
+    "src": "/report-assets/computer-vision/cv-09.jpg",
+    "width": 2048,
+    "height": 713,
+    "caption": "PatchCore example: original image, anomaly heatmap, and overlay."
+  },
+  "10": {
+    "src": "/report-assets/computer-vision/cv-10.jpg",
+    "width": 2048,
+    "height": 713,
+    "caption": "PatchCore example on a cracked surface."
+  },
+  "11": {
+    "src": "/report-assets/computer-vision/cv-11.jpg",
+    "width": 2048,
+    "height": 713,
+    "caption": "PatchCore example with an unfamiliar object."
+  },
+  "12": {
+    "src": "/report-assets/computer-vision/cv-12.webp",
+    "width": 968,
+    "height": 1134,
+    "caption": "Sample surface images collected for anomaly-model development."
+  },
+  "13": {
+    "src": "/report-assets/computer-vision/cv-13.webp",
+    "width": 2048,
+    "height": 1280,
+    "caption": "PatchCore bounding-box output on the project test surface."
+  },
+  "14": {
+    "src": "/report-assets/computer-vision/cv-14.webp",
+    "width": 226,
+    "height": 496,
+    "caption": "The 32 object labels used by the FOD detector, including the water-puddle class."
+  },
+  "15": {
+    "src": "/report-assets/computer-vision/cv-15.webp",
+    "width": 615,
+    "height": 616,
+    "caption": "Example object on the original light-coloured dataset background."
+  },
+  "16": {
+    "src": "/report-assets/computer-vision/cv-16.jpg",
+    "width": 300,
+    "height": 300,
+    "caption": "Synthetic-compositing source example."
+  },
+  "17": {
+    "src": "/report-assets/computer-vision/cv-17.jpg",
+    "width": 300,
+    "height": 300,
+    "caption": "Synthetic example on a dark road background."
+  },
+  "18": {
+    "src": "/report-assets/computer-vision/cv-18.jpg",
+    "width": 300,
+    "height": 300,
+    "caption": "Synthetic example using a different road texture."
+  },
+  "19": {
+    "src": "/report-assets/computer-vision/cv-19.jpg",
+    "width": 300,
+    "height": 300,
+    "caption": "Synthetic rain augmentation example."
+  },
+  "20": {
+    "src": "/report-assets/computer-vision/cv-20.jpg",
+    "width": 300,
+    "height": 300,
+    "caption": "Synthetic reduced-visibility augmentation example."
+  },
+  "21": {
+    "src": "/report-assets/computer-vision/cv-21.jpg",
+    "width": 547,
+    "height": 365,
+    "caption": "Synthetic low-visibility example on a dark road surface."
+  },
+  "22": {
+    "src": "/report-assets/computer-vision/cv-22.webp",
+    "width": 829,
+    "height": 350,
+    "caption": "Synthetic-compositing challenges and intended benefits."
+  },
+  "23": {
+    "src": "/report-assets/computer-vision/cv-23.jpg",
+    "width": 300,
+    "height": 300,
+    "caption": "Example YOLO detection output: battery."
+  },
+  "24": {
+    "src": "/report-assets/computer-vision/cv-24.jpg",
+    "width": 300,
+    "height": 300,
+    "caption": "Example YOLO detection output: adjustable wrench."
+  },
+  "25": {
+    "src": "/report-assets/computer-vision/cv-25.webp",
+    "width": 1448,
+    "height": 1086,
+    "caption": "Original RGB FOD model comparison supplied in CV.docx."
+  },
+  "26": {
+    "src": "/report-assets/computer-vision/cv-26.webp",
+    "width": 845,
+    "height": 335,
+    "caption": "Initial real-world testing exposed inconsistent detections despite strong benchmark scores."
+  },
+  "27": {
+    "src": "/report-assets/computer-vision/cv-27.webp",
+    "width": 787,
+    "height": 287,
+    "caption": "Target-surface compositing improved some detections but remained inconsistent."
+  },
+  "28": {
+    "src": "/report-assets/computer-vision/cv-28.webp",
+    "width": 466,
+    "height": 211,
+    "caption": "Perceptual-hash and DINOv2 similarity criteria shown in the source report."
+  },
+  "29": {
+    "src": "/report-assets/computer-vision/cv-29.webp",
+    "width": 2048,
+    "height": 1152,
+    "caption": "Random versus similarity-aware split audit; counts refer to pairs and groups where indicated."
+  },
+  "30": {
+    "src": "/report-assets/computer-vision/cv-30.webp",
+    "width": 2048,
+    "height": 597,
+    "caption": "Dataset variants used for the split comparison."
+  },
+  "31": {
+    "src": "/report-assets/computer-vision/cv-31.webp",
+    "width": 1051,
+    "height": 788,
+    "caption": "Reported mAP@50-95 comparison for random, strict, and strict-reduced datasets."
+  },
+  "32": {
+    "src": "/report-assets/computer-vision/cv-32.jpg",
+    "width": 512,
+    "height": 512,
+    "caption": "Crack segmentation example on a source-dataset surface: sample 1."
+  },
+  "33": {
+    "src": "/report-assets/computer-vision/cv-33.jpg",
+    "width": 512,
+    "height": 512,
+    "caption": "Crack segmentation example on a source-dataset surface: sample 2."
+  },
+  "34": {
+    "src": "/report-assets/computer-vision/cv-34.jpg",
+    "width": 512,
+    "height": 512,
+    "caption": "Crack segmentation example on a source-dataset surface: sample 3."
+  },
+  "35": {
+    "src": "/report-assets/computer-vision/cv-35.webp",
+    "width": 811,
+    "height": 405,
+    "caption": "Crack-model comparison between other surfaces and the actual test-ground surface."
+  },
+  "36": {
+    "src": "/report-assets/computer-vision/cv-36.webp",
+    "width": 1536,
+    "height": 1024,
+    "caption": "Worked coordinate-retrieval example using crop scaling and image-to-ground offsets."
+  },
+  "37": {
+    "src": "/report-assets/computer-vision/cv-37.webp",
+    "width": 826,
+    "height": 406,
+    "caption": "Background safety illustration from the source report; underlying statistical citations remain to be supplied."
+  },
+  "38": {
+    "src": "/report-assets/computer-vision/cv-38.webp",
+    "width": 970,
+    "height": 813,
+    "caption": "Thermal object-detection examples supplied in the source report."
+  },
+  "39": {
+    "src": "/report-assets/computer-vision/cv-39.webp",
+    "width": 1448,
+    "height": 1086,
+    "caption": "Original thermal model comparison supplied in CV.docx."
+  },
+  "40": {
+    "src": "/report-assets/computer-vision/cv-40.webp",
+    "width": 642,
+    "height": 297,
+    "caption": "Thermal camera illustration supplied with the candidate hardware description."
+  },
+  "41": {
+    "src": "/report-assets/computer-vision/cv-41.webp",
+    "width": 1536,
+    "height": 1024,
+    "caption": "Proposed integrated onboard system, including RGB inspection, thermal safety, navigation, and communication."
+  }
+}

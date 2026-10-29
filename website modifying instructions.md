@@ -55,42 +55,29 @@ The front page contains the breathing rose-gold FOD ARGUS wordmark, runway backg
 | Timeline | `website/docs/timeline.md` |
 | Future works | `website/docs/report/future-works.md` |
 | References | `website/docs/references.md` |
-| Chapter names and ordering | `website/docs/.vitepress/subsystem-sections.ts` |
+| Chapter names and ordering | `website/docs/.vitepress/cv-subsystem-sections.ts` |
 
 Dark mode is the default. The theme switch supports light mode. Check both themes after changing colours. Preserve touch controls and reduced-motion support when editing animations.
 
 ## 3. Edit individual subsystem reports
 
-Each subsystem has one landing page and nine separate report chapters:
+Each subsystem report is a single scrolling Markdown page. Paths are relative to the repository root:
 
-```text
-website/docs/subsystems/<subsystem>.md
-website/docs/subsystems/<subsystem>/executive-summary.md
-website/docs/subsystems/<subsystem>/subsystem-overview.md
-website/docs/subsystems/<subsystem>/requirements-considerations.md
-website/docs/subsystems/<subsystem>/design-iterations-selection.md
-website/docs/subsystems/<subsystem>/detailed-design-implementation.md
-website/docs/subsystems/<subsystem>/testing-methodology-results.md
-website/docs/subsystems/<subsystem>/evaluation-discussion.md
-website/docs/subsystems/<subsystem>/improvements-lessons-learned.md
-website/docs/subsystems/<subsystem>/semester-2-development-plan.md
-```
-
-Replace `<subsystem>` with:
-
-| Member | Subsystem folder name |
+| Member | Report file |
 | --- | --- |
-| Muruganantham Arun | `mechanical-design` |
-| Kummarikunta Talitha | `electrical-design` |
-| Kummarikunta Talitha | `navigation-obstacle-avoidance` |
-| Charansagar Ramanujam | `computer-vision` |
-| Charansagar Ramanujam | `communication-system` |
+| Muruganantham Arun | `website/docs/subsystems/mechanical-design.md` |
+| Kummarikunta Talitha | `website/docs/subsystems/electrical-design.md` |
+| Kummarikunta Talitha | `website/docs/subsystems/navigation-obstacle-avoidance.md` |
+| Charansagar Ramanujam | `website/docs/subsystems/computer-vision.md` |
+| Charansagar Ramanujam | `website/docs/subsystems/communication-system.md` |
 
-Edit Markdown, not generated HTML. Preserve the frontmatter, lead details, and filenames. Replace placeholders with approved content and remove the pending notice when a chapter is ready. Add calculations, diagrams, citations, and actual test results where appropriate.
+The CV report contains nine pipeline-specific sections on one page. Its sidebar links scroll to the explicit heading IDs such as `{#patchcore-anomaly-detection}`. Keep those IDs when editing headings. Section names and anchor slugs are configured in `website/docs/.vitepress/cv-subsystem-sections.ts`; sidebar links are generated in `website/docs/.vitepress/config.mts`.
 
-The shared report sidebar is generated in `website/docs/.vitepress/config.mts` from the subsystem list and chapter list. If you rename a chapter or add another chapter, update the configuration and the relevant landing-page links as well.
+The other four reports are intentionally empty beneath the subsystem title and lead details. Add original report content directly to the corresponding file. No generic chapter template is imposed. Introduce appropriate headings and add sidebar anchors when the content is ready.
 
-The full names and matriculation numbers are already included in the report pages. Do not reuse the earlier discarded engineering report without checking the approved project material.
+Files in the old chapter subfolders are compatibility redirects. Do not edit those redirect files as if they were report chapters. The website no longer requires previous/next page buttons to read a subsystem report.
+
+Preserve the frontmatter, lead name, matriculation number, and existing CV wording unless the author requests a change. Add calculations, diagrams, citations, and measured results where appropriate.
 
 ## 4. Add images and other assets
 

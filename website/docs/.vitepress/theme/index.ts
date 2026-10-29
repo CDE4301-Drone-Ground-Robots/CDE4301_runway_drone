@@ -1,3 +1,5 @@
+import ReportScrollSync from './components/ReportScrollSync.vue'
+import CvFigure from './components/CvFigure.vue'
 import CursorSpotlight from './components/CursorSpotlight.vue'
 import SubsystemNav from './components/SubsystemNav.vue'
 import SubsystemOverview from './components/SubsystemOverview.vue'
@@ -13,7 +15,7 @@ import TeamCarousel from './components/TeamCarousel.vue'
 export default {
  extends: DefaultTheme,
  Layout: () => h(DefaultTheme.Layout, null, {
-  'layout-bottom': () => h(CursorSpotlight),
+  'layout-bottom': () => [h(CursorSpotlight), h(ReportScrollSync)],
   'sidebar-nav-before': () => h('div', { class: 'report-sidebar-identity' }, [
    h('span', 'FOD ARGUS'), h('small', 'ENGINEERING REPORT / AIS-407')
   ]),
@@ -21,6 +23,7 @@ export default {
   'nav-bar-title-before': () => h(HeaderIdentity)
  }),
  enhanceApp({ app }) {
+  app.component('CvFigure', CvFigure)
   app.component('SubsystemNav', SubsystemNav)
   app.component('SubsystemOverview', SubsystemOverview)
   app.component('RunwayHome', RunwayHome)

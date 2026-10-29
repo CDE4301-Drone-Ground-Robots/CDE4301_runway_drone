@@ -1,24 +1,12 @@
 ---
-title: "Subsystem Overview | Communication System"
+title: Subsystem Report
+search: false
+prev: false
+next: false
+head:
+  - - meta
+    - http-equiv: refresh
+      content: "0; url=/CDE4301_runway_drone/subsystems/communication-system"
 ---
 
-<p class="chapter-kicker">Communication System</p>
-
-# Subsystem Overview
-
-**Subsystem lead:** Charansagar Ramanujam  
-**Matriculation number:** A0301658E
-
-::: info Documentation pending
-This section is ready for the subsystem report content.
-:::
-
-<!-- Explain operation and interfaces. Include a block diagram and identify inputs, outputs, and dependencies. -->
-
-## How the Subsystem Operates
-
-_To be added._
-
-## Interfaces with Other Subsystems
-
-_To be added._
+[Open subsystem report](/subsystems/communication-system).

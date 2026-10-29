@@ -1,5 +1,5 @@
+import { cvSubsystemSections } from './cv-subsystem-sections'
 import { subsystems } from './theme/components/subsystems'
-import { subsystemSections } from './subsystem-sections'
 import { defineConfig } from 'vitepress'
 const reportSidebar = [
  { text: 'PROJECT REPORT', items: [
@@ -10,11 +10,13 @@ const reportSidebar = [
  { text: 'SUBSYSTEM REPORTS', items: subsystems.map(subsystem => ({
   text: subsystem.title,
   link: '/subsystems/' + subsystem.slug,
-  collapsed: true,
-  items: subsystemSections.map((section, index) => ({
-   text: (index + 1) + '. ' + section.title,
-   link: '/subsystems/' + subsystem.slug + '/' + section.slug
-  }))
+  ...(subsystem.slug === 'computer-vision' ? {
+   collapsed: false,
+   items: cvSubsystemSections.map((section, index) => ({
+    text: (index + 1) + '. ' + section.title,
+    link: '/subsystems/computer-vision#' + section.slug
+   }))
+  } : {})
  })) },
  { text: 'DEVELOPMENT & SOURCES', items: [
   { text: 'Timeline', link: '/timeline' },
@@ -48,6 +50,7 @@ export default defineConfig({
    { text: 'Report', link: '/report/', activeMatch: '/(report/|scopes)' }
   ],
   sidebar: Object.fromEntries(['/report/', '/subsystems/', '/scopes', '/timeline', '/references'].map(path => [path, reportSidebar])),
+  docFooter: { prev: false, next: false },
   search: { provider: 'local' },
   outline: { level: [2, 3], label: 'On this page' },
   footer: { message: 'NUS | College of Design and Engineering', copyright: 'FOD ARGUS / CDE4301' }
