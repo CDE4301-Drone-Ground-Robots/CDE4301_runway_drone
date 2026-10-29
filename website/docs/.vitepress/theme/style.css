@@ -268,3 +268,15 @@ html:not(.dark) .hero h1 .hero-wordmark{--argus-rose-glow:rgba(226,160,140,.32);
 .vp-doc .cv-report .cv-figure figcaption{font-size:14px;line-height:1.75}
 .vp-doc .cv-report .cv-figure figcaption strong{font-size:12px}
 @media(max-width:767px){.vp-doc .cv-report,.vp-doc .cv-report p,.vp-doc .cv-report li{font-size:17px;line-height:1.8}.vp-doc .cv-report table,.vp-doc .cv-report table th,.vp-doc .cv-report table td{font-size:14px}.vp-doc .cv-report .cv-figure figcaption{font-size:13px}}
+.cv-video-panel{margin:28px 0;border:1px solid var(--vp-c-divider);border-radius:16px;overflow:hidden;background:var(--vp-c-bg-soft)}
+.cv-integration-video{display:block;width:100%;aspect-ratio:16/9;background:#080b10;object-fit:contain}
+.cv-video-pending{display:flex;align-items:center;justify-content:center;flex-direction:column;min-height:180px;background:radial-gradient(ellipse,#25334444,transparent 70%),#080b10;color:#eef1f6;padding:28px;text-align:center}
+.cv-video-pending>span{font-size:10px;letter-spacing:2px;color:#d7aa94}
+.cv-report .cv-video-pending p{font-size:16px;margin:12px 0 0}
+.cv-video-panel figcaption{display:flex;flex-direction:column;gap:6px;padding:18px;font-size:14px;line-height:1.75;color:var(--vp-c-text-2)}
+.cv-video-panel figcaption strong{font-size:12px;letter-spacing:1px;color:var(--vp-c-text-1)}
+.dark .cv-video-panel figcaption strong{color:#e6b9a2}
+@media(max-width:767px){.cv-video-panel figcaption{font-size:13px}}
+
+/* Start the first section directly beneath the report lead details. */
+.vp-doc .cv-report>.cv-report-byline+h2{margin-top:28px;padding-top:24px}

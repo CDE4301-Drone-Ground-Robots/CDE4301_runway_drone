@@ -21,12 +21,14 @@ The chapter structure is ready. Engineering content, test evidence, and results 
 ## Report Contents
 
 1. [Project scope](../scopes)
-2. [System architecture](./system-architecture)
-3. [Mechanical Design](../subsystems/mechanical-design) - Muruganantham Arun
-4. [Electrical Design](../subsystems/electrical-design) - Kummarikunta Talitha
-5. [Navigation & Obstacle Avoidance](../subsystems/navigation-obstacle-avoidance) - Kummarikunta Talitha
-6. [Computer Vision Based Inspection and Safety System](../subsystems/computer-vision) - Charansagar Ramanujam
-7. [Communication System](../subsystems/communication-system) - Charansagar Ramanujam
-8. [Timeline](../timeline)
-9. [Future works](./future-works)
-10. [References](../references)
+2. [Primary Research](../research/primary)
+3. [Secondary Research](../research/secondary)
+4. [System architecture](./system-architecture)
+5. [Mechanical Design](../subsystems/mechanical-design) - Muruganantham Arun
+6. [Electrical Design](../subsystems/electrical-design) - Kummarikunta Talitha
+7. [Navigation & Obstacle Avoidance](../subsystems/navigation-obstacle-avoidance) - Kummarikunta Talitha
+8. [Computer Vision Based Inspection and Safety System](../subsystems/computer-vision) - Charansagar Ramanujam
+9. [Communication System](../subsystems/communication-system) - Charansagar Ramanujam
+10. [Timeline](../timeline)
+11. [Future works](./future-works)
+12. [References](../references)

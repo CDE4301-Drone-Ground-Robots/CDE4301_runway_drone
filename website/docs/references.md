@@ -31,3 +31,11 @@ Lyu, Zefeng; Yu, Andrew; Starr, Christopher (2026). **CrackAirport: A Dataset fo
 **Thermal Images for Human Detection**. Kaggle, dataset page under `sikdermdsaiful`.
 
 [Open dataset page supplied by the author](https://www.kaggle.com/datasets/sikdermdsaiful/thermal-images-for-human-detection/data?select=dataset). Used for thermal human detection.
+
+## Computer Vision Hardware Sources
+
+### CV-H01 - RGB Camera: e-CAM56_CUONX {#cv-h01}
+
+e-con Systems. **5MP Sony Pregius S IMX568 Global Shutter Camera for NVIDIA Jetson Orin NX / Nano (e-CAM56_CUONX)**. Manufacturer product page.
+
+[Open manufacturer specifications](https://www.e-consystems.com/nvidia-cameras/jetson-orin-nx-cameras/5mp-imx568-global-shutter-camera.asp). Referenced for the proposed RGB camera; final procurement remains subject to the project's hardware and budget decisions.

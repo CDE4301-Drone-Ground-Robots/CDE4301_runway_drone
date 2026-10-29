@@ -7,5 +7,4 @@ next: false
 
 # Electrical Design
 
-**Subsystem lead:** Kummarikunta Talitha  
-**Matriculation number:** A0286653R
+<SubsystemLead name="Kummarikunta Talitha" matric="A0286653R" portrait="/team/Talitha.jpg" />

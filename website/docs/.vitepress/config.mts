@@ -5,6 +5,8 @@ const reportSidebar = [
  { text: 'PROJECT REPORT', items: [
   { text: 'Report overview', link: '/report/' },
   { text: 'Project scope', link: '/scopes' },
+  { text: 'Primary Research', link: '/research/primary' },
+  { text: 'Secondary Research', link: '/research/secondary' },
   { text: 'System architecture', link: '/report/system-architecture' }
  ] },
  { text: 'SUBSYSTEM REPORTS', items: subsystems.map(subsystem => ({
@@ -42,14 +44,13 @@ export default defineConfig({
     { text: 'Primary Research', link: '/research/primary' },
     { text: 'Secondary Research', link: '/research/secondary' }
    ] },
-   { text: 'Notes', link: '/notes' },
    { text: 'Drone Specification', link: '/engineering/drone-specification' },
    { component: 'SubsystemNav' },
    { text: 'Timeline', link: '/timeline' },
    { text: 'References', link: '/references' },
    { text: 'Report', link: '/report/', activeMatch: '/(report/|scopes)' }
   ],
-  sidebar: Object.fromEntries(['/report/', '/subsystems/', '/scopes', '/timeline', '/references'].map(path => [path, reportSidebar])),
+  sidebar: Object.fromEntries(['/report/', '/subsystems/', '/research/', '/scopes', '/timeline', '/references'].map(path => [path, reportSidebar])),
   docFooter: { prev: false, next: false },
   search: { provider: 'local' },
   outline: { level: [2, 3], label: 'On this page' },

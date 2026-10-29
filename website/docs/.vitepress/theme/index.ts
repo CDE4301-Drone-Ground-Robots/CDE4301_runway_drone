@@ -1,3 +1,4 @@
+import SubsystemLead from './components/SubsystemLead.vue'
 import ReportScrollSync from './components/ReportScrollSync.vue'
 import CvFigure from './components/CvFigure.vue'
 import CursorSpotlight from './components/CursorSpotlight.vue'
@@ -23,6 +24,7 @@ export default {
   'nav-bar-title-before': () => h(HeaderIdentity)
  }),
  enhanceApp({ app }) {
+  app.component('SubsystemLead', SubsystemLead)
   app.component('CvFigure', CvFigure)
   app.component('SubsystemNav', SubsystemNav)
   app.component('SubsystemOverview', SubsystemOverview)

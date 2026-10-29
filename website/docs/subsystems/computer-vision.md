@@ -5,13 +5,18 @@ prev: false
 next: false
 ---
 
+<script setup>
+import { withBase } from 'vitepress'
+import { data as integrationDemo } from '../cv-integration-demo.data'
+</script>
+
 <div class="cv-report">
 
 <p class="chapter-kicker">FOD ARGUS / COMPUTER VISION &amp; SAFETY</p>
 
 # Computer Vision Based Inspection and Safety System
 
-<div class="cv-report-byline"><span>Charansagar Ramanujam</span><span>A0301658E</span></div>
+<SubsystemLead class="cv-report-byline" name="Charansagar Ramanujam" matric="A0301658E" portrait="/team/Charan.png" />
 
 ## Executive Summary {#executive-summary}
 
@@ -48,6 +53,8 @@ The ARGUS drone has the RGB camera facing down and centred on the drone, rather 
 <CvFigure n="3" />
 
 The RGB camera selected for the final drone is the e-con e-CAM56_CUONX as shown in the figure above. The camera is a global-shutter camera that runs at 79 fps. This is not the final camera and may change once the RSAF budget is approved. In the interim, we used the UGREEN-CM831 webcam for model testing and evaluation.
+
+Manufacturer product page: [e-con Systems e-CAM56_CUONX - Sony IMX568 global-shutter camera](https://www.e-consystems.com/nvidia-cameras/jetson-orin-nx-cameras/5mp-imx568-global-shutter-camera.asp). See [CV-H01 in References](../references#cv-h01).
 
 ### Night Operation Lighting
 
@@ -187,8 +194,6 @@ We tested different YOLO versions, as shown in the table below. All achieved ver
 | YOLO11m | 99.70% | 99.35% | 99.23% | 92.88% |
 | YOLO11L | 99.68% | 99.39% | 99.26% | 93.25% |
 
-<CvFigure n="25" />
-
 ### Ground Testing and Second Iteration
 
 <CvFigure n="26" />
@@ -241,8 +246,6 @@ I ran the similarity test on the original Kaggle dataset, where more than 51,000
 | Random baseline | Approximately 95% | Approximate reference result; potentially inflated by leakage |
 | Strict | 88.10% | All images retained with similarity-aware grouping |
 | Strict-reduced | 88.93% | Similarity-aware grouping with redundant images removed |
-
-<CvFigure n="31" />
 
 ## Crack Detection Using U-Net {#crack-detection}
 
@@ -310,8 +313,6 @@ Different YOLO versions were tested as shown below in the table.  The thermal mo
 | YOLO11m | 96.22% | 89.45% | 96.05% | 71.27% |
 | YOLO11L | 88.00% | 95.38% | 95.46% | 69.36% |
 
-<CvFigure n="39" />
-
 ### Cameras Selected for RGB and Thermal
 
 This thermal camera provides the wide field of view needed for forward safety monitoring while remaining compact and lightweight. The camera uses a 256 x 196 thermal sensor with a 4mm F/1.1 lens and a 45.5 degrees x 33.5 degrees field of view. This ensures a large area is monitored for people, birds and possibly other potential obstacles. The module operates at 25Hz and supports interfaces such as MIPI and USB 2.0. It has a low power consumption, making it suitable for drone use.
@@ -327,6 +328,16 @@ For the current prototype, we used a standard USB webcam for full vision system 
 The first integration demonstrated a collaborative system where all models run together using a fallback architecture in which the models run sequentially. The first prototype architecture was not implemented due to hardware limitations in running two models at the same time. Testing was done on the laptop, but it slowed the laptop, resulting in visual latency. Hence, I will conduct more thorough testing and evaluation once I receive the Jetson NX.
 
 <CvFigure n="41" />
+
+### Sequential Integration Demonstration
+
+<figure class="cv-video-panel">
+ <video v-if="integrationDemo.available" class="cv-integration-video" controls playsinline preload="none" :src="withBase(integrationDemo.src)" aria-label="Laptop demonstration of the sequential CV fallback architecture">
+  Your browser does not support embedded video. <a :href="withBase(integrationDemo.src)">Open the demonstration video</a>.
+ </video>
+ <div v-else class="cv-video-pending" role="status"><span>INTEGRATION DEMO</span><p>Video will be added here.</p></div>
+ <figcaption><strong>Video CV-01</strong><span>Laptop demonstration of the integrated system running the sequential fallback architecture, showing visible processing lag.</span></figcaption>
+</figure>
 
 ## Semester 2 Development Plan {#semester-2-development-plan}
 

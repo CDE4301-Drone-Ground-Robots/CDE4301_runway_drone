@@ -7,5 +7,4 @@ next: false
 
 # Communication System
 
-**Subsystem lead:** Charansagar Ramanujam  
-**Matriculation number:** A0301658E
+<SubsystemLead name="Charansagar Ramanujam" matric="A0301658E" portrait="/team/Charan.png" />

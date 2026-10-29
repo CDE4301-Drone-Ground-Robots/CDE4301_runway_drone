@@ -7,5 +7,4 @@ next: false
 
 # Mechanical Design
 
-**Subsystem lead:** Muruganantham Arun  
-**Matriculation number:** A0308280J
+<SubsystemLead name="Muruganantham Arun" matric="A0308280J" portrait="/team/Arun.png" />
