@@ -217,9 +217,9 @@ html:not(.dark) .hero h1 .hero-wordmark{--argus-rose-glow:rgba(226,160,140,.32);
  .VPNavBar.has-sidebar .content{padding-left:var(--vp-sidebar-width)!important;padding-right:24px!important}
  .VPNavBar.has-sidebar .divider,.VPLocalNav.has-sidebar{padding-left:var(--vp-sidebar-width)!important}
 }
-.VPSidebar .VPSidebarItem.level-0>.item>.text{font-size:10.5px;letter-spacing:1px}
-.VPSidebar .VPSidebarItem.level-1 .text{font-size:14px;line-height:1.6;font-weight:500}
-.VPSidebar .VPSidebarItem.level-2 .text{font-size:13px;line-height:1.65;font-weight:450}
+.VPSidebar .VPSidebarItem.level-0>.item>.text{font-size:12px;letter-spacing:1px}
+.VPSidebar .VPSidebarItem.level-1 .text{font-size:17px;line-height:1.55;font-weight:500}
+.VPSidebar .VPSidebarItem.level-2 .text{font-size:16px;line-height:1.6;font-weight:500}
 .dark .VPSidebar .VPSidebarItem.level-0>.item>.text{color:#c4cdd8}
 .dark .VPSidebar .VPSidebarItem.level-1 .text{color:#f0f3f7}
 .dark .VPSidebar .VPSidebarItem.level-2 .text{color:#e0e6ee}
@@ -280,3 +280,11 @@ html:not(.dark) .hero h1 .hero-wordmark{--argus-rose-glow:rgba(226,160,140,.32);
 
 /* Start the first section directly beneath the report lead details. */
 .vp-doc .cv-report>.cv-report-byline+h2{margin-top:28px;padding-top:24px}
+/* Larger, fully readable chapter navigation on both sides of the report. */
+.VPSidebar .VPSidebarItem.level-1>.item>.link>.text,.VPSidebar .VPSidebarItem.level-2>.item>.link>.text{padding-top:6px;padding-bottom:6px}
+.VPDocAsideOutline .outline-title{font-size:18px;line-height:1.5;margin-bottom:12px}
+.VPDocAsideOutline .content{font-size:16px}
+.VPDocAsideOutline .outline-link{font-size:16px;line-height:1.55;font-weight:450;white-space:normal;overflow:visible;text-overflow:clip;padding:7px 0;overflow-wrap:break-word}
+.dark .VPDocAsideOutline .outline-link{color:#d9e1eb}
+.dark .VPDocAsideOutline .outline-link.active,.dark .VPDocAsideOutline .outline-link:hover{color:#f1c5ac}
+@media(max-width:767px){.VPSidebar .VPSidebarItem.level-1 .text{font-size:16px}.VPSidebar .VPSidebarItem.level-2 .text{font-size:15px}}

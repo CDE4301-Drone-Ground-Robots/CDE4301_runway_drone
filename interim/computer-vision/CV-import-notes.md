@@ -42,3 +42,7 @@ All nine CV sections now live together in website/docs/subsystems/computer-visio
 - Retained the distinction between GFLOPs and elapsed inference latency. The existing workload table does not provide measured milliseconds per frame.
 
 These are targeted additions and source links; the author's original paragraphs remain otherwise unchanged.
+
+## Flow and repetition review
+
+At the author's request, repeated architecture opening sentences, repeated thermal training numbers, redundant split-count prose, the duplicate audit-table image, and a repeated thermal future-work sentence were removed. The original dataset-variant sentence was moved beside its figure. The crack dataset citation now precedes the approach/results. The model-rationale heading distinguishes using both models from concurrent scheduling; a small grammar error was corrected. RGB camera wording now consistently describes a provisional selection. The integration section explicitly records the author's clarification that object trials were functional checks, not formal requirement validation. HPC training location was added from the author's statement. Original wording is otherwise retained; no results or timing measurements were invented.

@@ -20,7 +20,7 @@ import { data as integrationDemo } from '../cv-integration-demo.data'
 
 ## Executive Summary {#executive-summary}
 
-The computer vision system was developed to enable the UAV to autonomously inspect runway surfaces for FOD (Foreign Object Debris), water puddles, surface cracks, and other common objects. A key challenge in this system is the impracticality of obtaining every possible object that can appear on the runway for the training dataset. Hence, it can identify classes within the training set, but it would not recognise unseen objects. The next section addresses the solution.
+The computer vision system was developed to enable the UAV to autonomously inspect runway surfaces for FOD (Foreign Object Debris), water puddles, surface cracks, and other common objects. A key challenge in this system is the impracticality of obtaining every possible object that can appear on the runway for the training dataset. Hence, it can identify classes within the training set, but it would not recognise unseen objects.
 
 To address the limitations of an unseen training dataset, we adopted a multi-stage computer vision architecture. The RGB camera is used as the primary runway inspection system.
 
@@ -29,12 +29,12 @@ To address the limitations of an unseen training dataset, we adopted a multi-sta
 ### Requirements of This Subsystem
 
 - Detect FOD as small as 5mm.
-- Detect Huge cracks.
+- Detect huge cracks.
 - Detect huge water puddles.
 - Coordinate extraction.
 - Design an integrated system.
 - Suitable camera selection.
-- Day and Night operations.
+- Day and night operations.
 
 ### Software
 
@@ -52,7 +52,7 @@ The ARGUS drone has the RGB camera facing down and centred on the drone, rather 
 
 <CvFigure n="3" />
 
-The RGB camera selected for the final drone is the e-con e-CAM56_CUONX as shown in the figure above. The camera is a global-shutter camera that runs at 79 fps. This is not the final camera and may change once the RSAF budget is approved. In the interim, we used the UGREEN-CM831 webcam for model testing and evaluation.
+The RGB camera proposed for the final drone is the e-con e-CAM56_CUONX as shown in the figure above. The camera is a global-shutter camera that runs at 79 fps. The selection is not final and may change once the RSAF budget is approved. In the interim, we used the UGREEN-CM831 webcam for model testing and evaluation.
 
 Manufacturer product page: [e-con Systems e-CAM56_CUONX - Sony IMX568 global-shutter camera](https://www.e-consystems.com/nvidia-cameras/jetson-orin-nx-cameras/5mp-imx568-global-shutter-camera.asp). See [CV-H01 in References](../references#cv-h01).
 
@@ -62,7 +62,7 @@ A light will be attached below the drone, near the RGB camera, and switched on d
 
 ### Computer Vision System Architecture
 
-To address the limitations of an unseen training dataset, we adopted a multi-stage computer vision architecture. The RGB camera is used as the primary runway inspection system. The RGB camera captures images continuously, which then pass through the system. The captured images first enter a PatchCore anomaly detection model. The system then crops regions identified as anomalous and sends them to the second layer. The crop is done to make the unknown anomaly occupy a larger proportion, avoiding the loss of important feature details. It also stores them separately as heatmap images for visual inspection, if needed. The second layer consists of 2 models. YOLO object detector and a U-Net segmentation model for runway cracks run simultaneously. The cropped image is then resized to the model's input size and fed into the model. If any cracks are detected, the system sends them to the base. On the YOLO side, if it detects a FOD object, it sends the coordinates to the UGV for extraction. If neither the crack detection model nor YOLO identifies it, the system sends it to the base station for inspection.
+The RGB camera captures images continuously, which then pass through the system. The captured images first enter a PatchCore anomaly detection model. The system then crops regions identified as anomalous and sends them to the second layer. The second layer consists of 2 models. YOLO object detector and a U-Net segmentation model for runway cracks run simultaneously. The cropped image is then resized to the model's input size and fed into the model. If any cracks are detected, the system sends them to the base. On the YOLO side, if it detects a FOD object, it sends the coordinates to the UGV for extraction. If neither the crack detection model nor YOLO identifies it, the system sends it to the base station for inspection.
 
 <CvFigure n="4" />
 
@@ -81,13 +81,13 @@ The table reports computational workload in GFLOPs, rather than measured inferen
 
 ### Computer Vision System Architecture (Fallback)
 
-There would be cases when Jetson Nx resources are scarce due to multiple subsystems running, such as navigation and communication systems. They would all be competing for GPU resources, memory bandwidth and power. Hence, we designed a fallback architecture for low-resource scenarios. This pipeline runs Crack and YOLO sequentially instead of simultaneously, reducing resource consumption.
+There would be cases when Jetson NX resources are scarce due to multiple subsystems running, such as navigation and communication systems. They would all be competing for GPU resources, memory bandwidth and power. Hence, we designed a fallback architecture for low-resource scenarios. This pipeline runs Crack and YOLO sequentially instead of simultaneously, reducing resource consumption.
 
 <CvFigure n="6" />
 
-### Why Do Crack U-Net and YOLO Run Together?
+### Why Are Both YOLO and U-Net Used?
 
-Based on the architecture, I run both models independently, not conditionally, to ensure I don't miss one type of anomaly for the other. As illustrated below, if a system, for example, detected a water puddle using YOLO and the skip crack model, we would miss the underlying large crack. Although this approach adds computational requirements, it prioritises detection requirements over computational efficiency, which is important for runway safety applications.
+Based on the architecture, I run both models independently, not conditionally, to ensure I don't miss one type of anomaly for the other. As illustrated below, if a system, for example, detected a water puddle using YOLO and skipped the crack model, we would miss the underlying large crack. Although this approach adds computational requirements, it prioritises detection requirements over computational efficiency, which is important for runway safety applications.
 
 <CvFigure n="7" />
 
@@ -103,7 +103,7 @@ PatchCore learns visual characteristics of a normal runway or road surface. It d
 
 ### PatchCore in the Project
 
-Patchcore produces an image-level anomaly score and a heatmap showing the unusual areas. Heatmap images are produced and stored in every run for visual inspection if necessary. A bounding box is then generated to identify the anomaly. The image is then cropped and resized to the normal model input size before passing it to YOLO and U-Net.
+PatchCore produces an image-level anomaly score and a heatmap showing the unusual areas. Heatmap images are produced and stored in every run for visual inspection if necessary. A bounding box is then generated to identify the anomaly. The image is then cropped and resized to the normal model input size before passing it to YOLO and U-Net.
 
 <div class="cv-figure-grid">
 <CvFigure n="9" />
@@ -129,7 +129,7 @@ PatchCore worked very well in the examples tested, detecting anomalies of differ
 
 ### FOD Classes and Dataset
 
-The anomaly region processed by Patchcore is then cropped and passed to the YOLO FOD detector. The YOLO object detector is trained on 32 classes: 31 objects and a water puddle, as shown in the figure below. Data preparation is one of the most challenging parts of this system. We sourced the FOD dataset from Kaggle online.  It included more than 31 classes, and we added the water puddle class to meet our requirements. The dataset has 33793 images but lacks weather variations such as cloudy, rainy, or hazy conditions. The FOD background also appears to be a very light surface that doesn't resemble the dark road surface we require.
+The YOLO object detector is trained on 32 classes: 31 objects and a water puddle, as shown in the figure below. Data preparation is one of the most challenging parts of this system. We sourced the FOD dataset from Kaggle online.  It included more than 31 classes, and we added the water puddle class to meet our requirements. The dataset has 33793 images but lacks weather variations such as cloudy, rainy, or hazy conditions. The FOD background also appears to be a very light surface that doesn't resemble the dark road surface we require.
 
 Dataset source: [Foreign Object Debris in Airports (FOD-A), Kaggle](https://www.kaggle.com/datasets/kilogrand/foreign-object-debris-in-airports-fod-a-dataset/code). See [CV-D02 in References](../references#cv-d02).
 
@@ -171,7 +171,7 @@ YOLO is responsible for identifying known FOD categories from the classes above.
 
 ### YOLO Training Settings
 
-The YOLO FOD models were trained using the following settings. The same settings were used for the thermal detection models.
+Training was performed on HPC. The YOLO FOD models were trained using the following settings. The same settings were used for the thermal detection models.
 
 | Setting | Value |
 | --- | ---: |
@@ -206,12 +206,9 @@ The model was performing very poorly, and the test object was detected inconsist
 
 The dataset was then investigated, and it was hypothesised that there was data leakage happening. Based on visual inspection, moving image by image, each FOD in the dataset was recorded as a video and sliced to generate the images. Hence, when a random split was performed above, the near-identical consecutive frames were placed across all the splits (training, testing and validation). This resulted in abnormally high results from YOLO but underperformed on the actual ground.
 
-I applied two similarity detection techniques to check for data leaks and reduce them. Perceptual hash identifies near-duplicate images by comparing their visual structure, while DINOv2 uses pretrained deep learning to identify similar features. Both techniques are combined to group strongly similar images and assign them to a single split. A constraint was added where, if either one is true, the images are flagged as similar.
+I applied two similarity detection techniques to check for data leaks and reduce them. Perceptual hash identifies near-duplicate images by comparing their visual structure, while DINOv2 uses pretrained deep learning to identify similar features. Both techniques are combined to group strongly similar images and assign them to a single split.
 
 As shown in Figure CV-28, images are flagged as similar when either of the following conditions is met:
-
-- DINOv2 similarity is at least 0.99.
-- Perceptual-hash distance is at most 6 **and** DINOv2 similarity is at least 0.97.
 
 $$
 (s_{\mathrm{DINOv2}} \geq 0.99)\quad\lor\quad
@@ -231,15 +228,15 @@ $$
 | Strong pair constraints identified | 110,605 | 110,605 |
 | Related images kept in the same split | No | Yes |
 
-<CvFigure n="29" />
-
 ### Dataset Variants
+
+Three datasets were created: one was the random split, the second was the similarity split, and the third was the similarity split plus removal of redundant images.
 
 <CvFigure n="30" />
 
 ### Results and Discussion
 
-I ran the similarity test on the original Kaggle dataset, where more than 51,000 similar image pairs crossed the random split. After applying these techniques, we re-ran the split, which minimised similarity leakage, as shown in the figure. Three datasets were created: one was the random split, the second was the similarity split, and the third was the similarity split plus removal of redundant images. The results below confirm the hypothesis that data leakage occurs, as mAP decreases. This shows that if further fine-tuning were done, better accuracy of the model could be obtained. Nevertheless, this dataset has many limitations. The images in the dataset were all taken at a low height, while we require images at 5m. Too many classes also reduce the model's accuracy. During synthetic compositing, precision and recall get affected, as realistic lighting, scale, shadow and blur are hard to tune.
+The results below support the hypothesis that data leakage occurs, as mAP decreases. This shows that if further fine-tuning were done, better accuracy of the model could be obtained. Nevertheless, this dataset has many limitations. The images in the dataset were all taken at a low height, while we require images at 5m. Too many classes also reduce the model's accuracy. During synthetic compositing, precision and recall get affected, as realistic lighting, scale, shadow and blur are hard to tune.
 
 | Dataset | Reported mAP@50-95 | Interpretation |
 | --- | ---: | --- |
@@ -250,6 +247,8 @@ I ran the similarity test on the original Kaggle dataset, where more than 51,000
 ## Crack Detection Using U-Net {#crack-detection}
 
 ### Crack Segmentation Approach
+
+The crack dataset is obtained from [Mendeley Data: CrackAirport, version 1](https://data.mendeley.com/datasets/3v5r2fxf89/1). See [CV-D01 in References](../references#cv-d01) for the crack dataset citation.
 
 Runway and road cracks are essentially different from the normal FOD objects. Cracks are usually thin, long and irregular, so a normal object detector is not feasible.
 
@@ -267,9 +266,7 @@ Therefore, we use a U-Net segmentation model. The cropped anomaly region is resi
 
 <CvFigure n="35" />
 
-The crack dataset is obtained from [Mendeley Data: CrackAirport, version 1](https://data.mendeley.com/datasets/3v5r2fxf89/1), where the model worked well for surfaces like concrete but doesn't perform well on the test ground surface due to its roughness. Hence, either cracks from the original test ground or an artificial method is required to obtain the dataset.
-
-See [CV-D01 in References](../references#cv-d01) for the crack dataset citation.
+The model worked well for surfaces like concrete but doesn't perform well on the test ground surface due to its roughness. Hence, either cracks from the original test ground or an artificial method is required to obtain the dataset.
 
 ## FOD & Crack Coordinate Retrieval {#coordinate-retrieval}
 
@@ -287,7 +284,7 @@ The thermal detection layer was implemented as a safety layer in addition to obs
 
 <CvFigure n="37" />
 
-Hence, the thermal camera is mounted along with the RGB camera below, pointed at an approximate angle of 45 degrees. This camera is positioned such that it will detect the area ahead on the road for potential obstacles such as people, birds and other heat emitters. If a thermal object is detected, the system is intended to stop and hold till the obstacle is cleared or gone, which reduces the risk of collision. This thermal sub-system operates independently from the RGB FOD detection pipeline. In the current prototype, it's simulated in software for testing, and some results are shown below. Future work includes integrating the thermal detector directly to the flight controller for an automatic safety response.
+Hence, the thermal camera is mounted along with the RGB camera below, pointed at an approximate angle of 45 degrees. This camera is positioned such that it will detect the area ahead on the road for potential obstacles such as people, birds and other heat emitters. If a thermal object is detected, the system is intended to stop and hold till the obstacle is cleared or gone, which reduces the risk of collision. This thermal sub-system operates independently from the RGB FOD detection pipeline. In the current prototype, it's simulated in software for testing, and some results are shown below.
 
 <CvFigure n="38" />
 
@@ -298,7 +295,7 @@ The thermal detection models used the following datasets:
 - [Thermal Bird, version 6, Roboflow Universe](https://universe.roboflow.com/arc-ejbpg/thermal-bird/dataset/6) - [CV-D03 in References](../references#cv-d03).
 - [Thermal Images for Human Detection, Kaggle](https://www.kaggle.com/datasets/sikdermdsaiful/thermal-images-for-human-detection/data?select=dataset) - [CV-D04 in References](../references#cv-d04).
 
-The thermal models were trained for **100 epochs** with a **batch size of 16** and an **80% training / 10% validation / 10% testing split**, matching the [YOLO training settings](#yolo-training-settings).
+The thermal models used the [same training settings as the YOLO FOD models](#yolo-training-settings).
 
 ### Thermal Model Comparison
 
@@ -313,19 +310,19 @@ Different YOLO versions were tested as shown below in the table.  The thermal mo
 | YOLO11m | 96.22% | 89.45% | 96.05% | 71.27% |
 | YOLO11L | 88.00% | 95.38% | 95.46% | 69.36% |
 
-### Cameras Selected for RGB and Thermal
+### Thermal Camera Selection
 
 This thermal camera provides the wide field of view needed for forward safety monitoring while remaining compact and lightweight. The camera uses a 256 x 196 thermal sensor with a 4mm F/1.1 lens and a 45.5 degrees x 33.5 degrees field of view. This ensures a large area is monitored for people, birds and possibly other potential obstacles. The module operates at 25Hz and supports interfaces such as MIPI and USB 2.0. It has a low power consumption, making it suitable for drone use.
 
 <CvFigure n="40" />
-
-For the current prototype, we used a standard USB webcam for full vision system testing. The intended final RGB camera is the Sony IMX568 global-shutter camera; however, it has not been purchased and is not used in the interim till the specifications are confirmed and meet the system and project requirements.
 
 ## System Integration & Evaluation {#integration-evaluation}
 
 ### Overall Integrated System
 
 The first integration demonstrated a collaborative system where all models run together using a fallback architecture in which the models run sequentially. The first prototype architecture was not implemented due to hardware limitations in running two models at the same time. Testing was done on the laptop, but it slowed the laptop, resulting in visual latency. Hence, I will conduct more thorough testing and evaluation once I receive the Jetson NX.
+
+These were preliminary functional checks using sample objects, including a battery. Formal testing against the subsystem requirements has not yet been conducted.
 
 ### Sequential Integration Demonstration
 
