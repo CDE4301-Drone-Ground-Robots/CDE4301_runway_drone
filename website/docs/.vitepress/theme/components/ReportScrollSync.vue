@@ -2,6 +2,7 @@
 import { nextTick, onMounted, onUnmounted, watch } from 'vue'
 import { useRoute, withBase } from 'vitepress'
 import { cvSubsystemSections } from '../../cv-subsystem-sections'
+import { flattenMechanicalSections } from '../../mechanical-subsystem-sections'
 const route = useRoute()
 let entries: { heading: HTMLElement; link: HTMLAnchorElement; item: HTMLElement | null }[] = []
 let sidebar: HTMLElement | null = null
@@ -13,6 +14,7 @@ let disposed = false
 let stopWatching: (() => void) | undefined
 let sidebarObserver: MutationObserver | undefined
 let contentObserver: ResizeObserver | undefined
+function isMechanicalReport() { return route.path.replace(/\.html$/, '').endsWith('/subsystems/mechanical-design') }
 function clear() {
  for (const entry of entries) {
   entry.link.classList.remove('cv-section-current')
@@ -41,7 +43,8 @@ function update() {
  frame = 0
  if (!entries.length) return
  const navBottom = document.querySelector('.VPNav')?.getBoundingClientRect().bottom ?? 72
- const threshold = Math.max(120, navBottom + 36)
+ // Mechanical subsection anchors settle below the navigation at about 134px.
+ const threshold = Math.max(isMechanicalReport() ? 144 : 120, navBottom + 36)
  let current = entries[0]
  for (const entry of entries) {
   if (entry.heading.getBoundingClientRect().top <= threshold) current = entry
@@ -71,9 +74,12 @@ async function refresh() {
  const report = document.querySelector<HTMLElement>('.cv-report')
  sidebar = document.querySelector<HTMLElement>('.VPSidebar')
  if (!report || !sidebar) return
- for (const section of cvSubsystemSections) {
+ const mechanical = isMechanicalReport()
+ const sections = mechanical ? flattenMechanicalSections() : cvSubsystemSections
+ const reportPath = mechanical ? '/subsystems/mechanical-design' : '/subsystems/computer-vision'
+ for (const section of sections) {
   const heading = report.querySelector<HTMLElement>('[id="' + section.slug + '"]')
-  const href = withBase('/subsystems/computer-vision#' + section.slug)
+  const href = withBase(reportPath + '#' + section.slug)
   const link = sidebar.querySelector<HTMLAnchorElement>('a[href="' + href + '"]')
   if (heading && link) entries.push({ heading, link, item: link.closest<HTMLElement>('.VPSidebarItem') })
  }

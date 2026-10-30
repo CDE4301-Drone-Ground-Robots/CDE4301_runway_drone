@@ -1,4 +1,5 @@
 import { cvSubsystemSections } from './cv-subsystem-sections'
+import { numberedMechanicalSections } from './mechanical-subsystem-sections'
 import { subsystems } from './theme/components/subsystems'
 import { defineConfig } from 'vitepress'
 const reportSidebar = [
@@ -18,6 +19,9 @@ const reportSidebar = [
     text: (index + 1) + '. ' + section.title,
     link: '/subsystems/computer-vision#' + section.slug
    }))
+  } : subsystem.slug === 'mechanical-design' ? {
+   collapsed: false,
+   items: numberedMechanicalSections()
   } : {})
  })) },
  { text: 'DEVELOPMENT & SOURCES', items: [

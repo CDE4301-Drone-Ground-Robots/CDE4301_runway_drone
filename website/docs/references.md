@@ -39,3 +39,39 @@ Lyu, Zefeng; Yu, Andrew; Starr, Christopher (2026). **CrackAirport: A Dataset fo
 e-con Systems. **5MP Sony Pregius S IMX568 Global Shutter Camera for NVIDIA Jetson Orin NX / Nano (e-CAM56_CUONX)**. Manufacturer product page.
 
 [Open manufacturer specifications](https://www.e-consystems.com/nvidia-cameras/jetson-orin-nx-cameras/5mp-imx568-global-shutter-camera.asp). Referenced for the proposed RGB camera; final procurement remains subject to the project's hardware and budget decisions.
+
+## Mechanical Design Sources
+
+The numbers below preserve the citations in Section 10 of the supplied *Interim Report.docx*. The supplied document contains no bibliography. Full bibliographic details must be completed manually; these entries do not identify verified sources.
+
+### [1] - CAAS UA Pilot Licence requirement {#md-ref-1}
+
+**Bibliographic details missing; manual completion required.** Referenced in the Mechanical Design report.
+
+### [2] - Plus and cross quadcopter configuration comparison {#md-ref-2}
+
+**Bibliographic details missing; manual completion required.** Referenced in the Mechanical Design report.
+
+### [3] - Pusher and puller configuration CFD comparison {#md-ref-3}
+
+**Bibliographic details missing; manual completion required.** Referenced in the Mechanical Design report.
+
+### [4] - CFRP structural properties {#md-ref-4}
+
+**Bibliographic details missing; manual completion required.** Referenced in the Mechanical Design report.
+
+### [5] - CFRP structural properties {#md-ref-5}
+
+**Bibliographic details missing; manual completion required.** Referenced in the Mechanical Design report.
+
+### [7] - CFRP and aluminium-alloy motor-frame vibration experiment {#md-ref-7}
+
+**Bibliographic details missing; manual completion required.** Referenced in the Mechanical Design report.
+
+### [8] - CFRP structural properties {#md-ref-8}
+
+**Bibliographic details missing; manual completion required.** Referenced in the Mechanical Design report.
+
+### [9] - PETG CF compared with PETG and PLA {#md-ref-9}
+
+**Bibliographic details missing; manual completion required.** Referenced in the Mechanical Design report.
