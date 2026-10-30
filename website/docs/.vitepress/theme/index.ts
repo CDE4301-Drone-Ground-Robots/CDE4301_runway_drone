@@ -1,3 +1,4 @@
+import PipelineDemo from './components/PipelineDemo.vue'
 import SubsystemLead from './components/SubsystemLead.vue'
 import ReportScrollSync from './components/ReportScrollSync.vue'
 import CvFigure from './components/CvFigure.vue'
@@ -26,6 +27,7 @@ export default {
  enhanceApp({ app }) {
   app.component('SubsystemLead', SubsystemLead)
   app.component('CvFigure', CvFigure)
+  app.component('PipelineDemo', PipelineDemo)
   app.component('SubsystemNav', SubsystemNav)
   app.component('SubsystemOverview', SubsystemOverview)
   app.component('RunwayHome', RunwayHome)

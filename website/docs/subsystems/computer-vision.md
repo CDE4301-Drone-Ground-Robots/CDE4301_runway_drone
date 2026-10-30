@@ -100,7 +100,13 @@ Both approaches were tested on the same laptop. The setup and full timing result
  <p>Parallel execution reduced average processing time by approximately 6.97 ms per frame.</p>
 </div>
 
-Running YOLO and U-Net sequentially used about 26% less GPU memory, while running them in parallel reduced processing time by about 7.8%. This gives us a reason to keep the sequential fallback when less memory is available. We still need to test it on the Jetson alongside navigation and communication.
+<div class="cv-latency-result cv-memory-result">
+ <div class="cv-latency-label"><span>Peak GPU memory reduction with sequential fallback</span><strong>26.4%</strong></div>
+ <div class="cv-latency-track" role="meter" aria-label="Peak allocated GPU memory reduction compared with the parallel benchmark" aria-valuemin="0" aria-valuemax="100" aria-valuenow="26.4"><span></span></div>
+ <p>Sequential execution used 140.78 MiB less peak allocated GPU memory during processing than the parallel benchmark.</p>
+</div>
+
+Running YOLO and U-Net sequentially used about 26.4% less GPU memory, while running them in parallel reduced processing time by about 7.8%. This gives us a reason to keep the sequential fallback when less memory is available. We still need to test it on the Jetson alongside navigation and communication.
 
 GPU memory reached about 6.55 GiB during startup and warm-up. The table shows memory use during processing only; it does not show that the fallback solves this startup peak. These figures cover memory allocated by PyTorch, rather than total GPU memory use.
 
@@ -109,6 +115,10 @@ GPU memory reached about 6.55 GiB during startup and warm-up. The table shows me
 Based on the architecture, I run both models independently, not conditionally, to ensure I don't miss one type of anomaly for the other. As illustrated below, if a system, for example, detected a water puddle using YOLO and skipped the crack model, we would miss the underlying large crack. Although this approach adds computational requirements, it prioritises detection requirements over computational efficiency, which is important for runway safety applications.
 
 <CvFigure n="7" />
+
+### Explore the Inspection Pipeline
+
+<PipelineDemo />
 
 ## PatchCore Anomaly Detection {#patchcore-anomaly-detection}
 
