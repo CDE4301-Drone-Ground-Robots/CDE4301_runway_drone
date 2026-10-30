@@ -62,7 +62,7 @@ A light will be attached below the drone, near the RGB camera, and switched on d
 
 ### Computer Vision System Architecture
 
-The RGB camera captures images continuously, which then pass through the system. The captured images first enter a PatchCore anomaly detection model. The system then crops regions identified as anomalous and sends them to the second layer. The second layer consists of 2 models. YOLO object detector and a U-Net segmentation model for runway cracks run simultaneously. The cropped image is then resized to the model's input size and fed into the model. If any cracks are detected, the system sends them to the base. On the YOLO side, if it detects a FOD object, it sends the coordinates to the UGV for extraction. If neither the crack detection model nor YOLO identifies it, the system sends it to the base station for inspection.
+The RGB camera captures images continuously, which then pass through the system. The captured images first enter a PatchCore anomaly detection model. The system then crops regions identified as anomalous and sends them to the second layer. The second layer consists of 2 models. YOLO object detector and a U-Net segmentation model for runway cracks run in parallel. The cropped image is then resized to the model's input size and fed into the model. If any cracks are detected, the system sends them to the base. On the YOLO side, if it detects a FOD object, it sends the coordinates to the UGV for extraction. If neither the crack detection model nor YOLO identifies it, the system sends it to the base station for inspection.
 
 <CvFigure n="4" />
 
@@ -75,13 +75,13 @@ The RGB camera captures images continuously, which then pass through the system.
 | Surface anomaly detection | PatchCore CNN | 23.998 GFLOPs | 38.4% |
 | Thermal object detection | Thermal YOLO11s | 21.422 GFLOPs | 34.3% |
 
-Computational workload was estimated across the AI models. Based on the GFLOPS calculated, FOD detection and Crack segmentation are the most computationally demanding tasks. In Architecture prototype 1 above, these models are running simultaneously. This is addressed in the next section.
+Computational workload was estimated across the AI models. Based on the GFLOPS calculated, FOD detection and Crack segmentation are the most computationally demanding tasks. In Architecture prototype 1 above, these models are running in parallel. This is addressed in the next section.
 
 GFLOPs describe the amount of computation. Measured laptop inference times are reported in [Section 8](#integration-evaluation).
 
 ### Computer Vision System Architecture (Fallback)
 
-There would be cases when Jetson NX resources are scarce due to multiple subsystems running, such as navigation and communication systems. They would all be competing for GPU resources, memory bandwidth and power. Hence, we designed a fallback architecture for low-resource scenarios. This pipeline runs Crack and YOLO sequentially instead of simultaneously, reducing resource consumption.
+There would be cases when Jetson NX resources are scarce due to multiple subsystems running, such as navigation and communication systems. They would all be competing for GPU resources, memory bandwidth and power. Hence, we designed a fallback architecture for low-resource scenarios. This pipeline runs Crack and YOLO sequentially instead of in parallel, reducing resource consumption.
 
 <CvFigure n="6" />
 
