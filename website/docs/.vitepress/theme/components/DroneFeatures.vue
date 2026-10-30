@@ -90,6 +90,7 @@ const features: Feature[] = [
 
 <template>
  <section class="drone-features" aria-labelledby="drone-specification-title">
+  <div class="features-runway" :style="{ backgroundImage: 'url(' + withBase('/runway-night-photo.png') + ')' }" aria-hidden="true"></div>
   <div class="features-shell">
    <header class="features-header">
     <p class="features-kicker">FOD ARGUS / ENGINEERING / 01</p>
@@ -158,8 +159,34 @@ const features: Feature[] = [
  font-family: var(--vp-font-family-base);
  font-weight: 400;
  color: var(--feature-text);
- background: radial-gradient(ellipse at 85% 5%, #16344255, transparent 42%), #080c11;
+ position: relative;
+ isolation: isolate;
+ overflow: hidden;
+ background: #080c11;
  min-height: calc(100svh - var(--vp-nav-height));
+}
+.features-runway {
+ position: absolute;
+ inset: 0;
+ z-index: -2;
+ background-size: cover;
+ background-position: 65% center;
+ filter: brightness(.6) contrast(1.8) saturate(.75);
+ pointer-events: none;
+}
+.drone-features::before {
+ content: '';
+ position: absolute;
+ inset: 0;
+ z-index: -1;
+ pointer-events: none;
+ background: linear-gradient(180deg, #000205b8, #00020573 40%, #000205bf), linear-gradient(90deg, #00020580, transparent 55%, #00020540);
+}
+@media (max-width: 600px) {
+ .features-runway { background-position: 78% center; }
+}
+@media print {
+ .features-runway, .drone-features::before { display: none; }
 }
 /* Match report typography while keeping the existing dark showcase in both themes. */
 :global(html:not(.dark)) .drone-features { --feature-text: #eeeef0; --feature-muted: #a6aeb9; }

@@ -56,7 +56,21 @@ export default defineConfig({
   ],
   sidebar: Object.fromEntries(['/report/', '/subsystems/', '/research/', '/scopes', '/timeline', '/references'].map(path => [path, reportSidebar])),
   docFooter: { prev: false, next: false },
-  search: { provider: 'local' },
+  search: {
+   provider: 'local',
+   options: {
+    detailedView: true,
+    // Index the report chapters; each result uses its rendered heading anchor.
+    _render(src, env, md) {
+     const page = env.relativePath.replace(/\\/g, '/')
+     const isReport = /^(report|subsystems|research)\//.test(page)
+      || /^(scopes|timeline|references)\.md$/.test(page)
+     if (!isReport) return ''
+     const html = md.render(src, env)
+     return env.frontmatter?.search === false ? '' : html
+    }
+   }
+  },
   outline: { level: [2, 3], label: 'On this page' },
   footer: { message: 'NUS | College of Design and Engineering', copyright: 'FOD ARGUS / CDE4301' }
  }
