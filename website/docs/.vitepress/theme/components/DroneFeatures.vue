@@ -75,15 +75,15 @@ const features: Feature[] = [
   links: [{ label: 'Navigation report', href: '/subsystems/navigation-obstacle-avoidance' }, { label: 'CV integration plan', href: '/subsystems/computer-vision#semester-2-development-plan' }]
  },
  {
-  id: 'battery', title: 'Rechargeable Battery', metric: 'Recharge', status: 'Power-system objective',
-  description: 'A rechargeable onboard power system intended for repeated operations.',
-  icon: 'M54 26h4v12h-4 M9 20h43v24H9V20Z M32 23l-7 10h8l-3 8 10-13h-9l1-5Z',
+  id: 'communication', title: 'Communication System', metric: 'Connect', status: 'Proposed capability',
+  description: 'UAV-to-UGV communication for sharing detected runway hazards and their coordinates.',
+  icon: 'M12 14h14v14H12Z M38 36h14v14H38Z M26 21h19v15 M38 43H19V28 M39 15l6 6-6 6 M25 37l-6 6 6 6',
   details: [
-   'Rechargeable onboard power is intended to support repeated inspection operations between charging sessions.',
-   'The mechanical layout allocates a 12 Ah battery to the bottom layer, alongside power distribution boards, a fuse and ESCs. Secure mounting, wiring access and balanced mass distribution are part of the mechanical requirements.',
-   'The electrical report is not yet populated. Charging method, turnaround time and cycle performance remain to be documented; an automated charging dock is not established in the current reports.'
+   'FOD ARGUS is intended to transmit detection information and estimated hazard coordinates to FOD Hunter, connecting aerial inspection with ground-based debris removal.',
+   'The proposed ROS 2 interface will share timestamped coordinates from the vision and localisation pipeline so that the ground robot can act on reported detections.',
+   'Communication hardware, operating range, latency and delivery reliability remain to be documented and validated through UAV-to-UGV integration testing.'
   ],
-  links: [{ label: 'Battery allocation', href: '/subsystems/mechanical-design#final-prototype-design' }, { label: 'Electrical report', href: '/subsystems/electrical-design' }]
+  links: [{ label: 'Communication system', href: '/subsystems/communication-system' }, { label: 'Vision and localisation', href: '/subsystems/computer-vision#subsystem-overview' }]
  }
 ]
 </script>
