@@ -50,8 +50,8 @@ export default defineConfig({
    ] },
    { text: 'Drone Specification', link: '/engineering/drone-specification' },
    { component: 'SubsystemNav' },
-   { text: 'Timeline', link: '/timeline' },
    { text: 'Report', link: '/report/', activeMatch: '/(report/|scopes)' },
+   { text: 'Timeline', link: '/timeline' },
    { text: 'References', link: '/references' }
   ],
   sidebar: Object.fromEntries(['/report/', '/subsystems/', '/research/', '/scopes', '/timeline', '/references'].map(path => [path, reportSidebar])),
