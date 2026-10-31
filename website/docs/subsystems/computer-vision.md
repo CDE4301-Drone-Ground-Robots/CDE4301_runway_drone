@@ -195,9 +195,15 @@ Therefore, we implemented synthetic compositing to address the issues above. Thi
 <CvFigure n="21" />
 </div>
 
-These are some of the challenges this method can help to solve. Specifically, for this dataset, it helped to solve the 2 issues highlighted above. The background surface issue and automatic labelling after creating new artificial data to reduce time consumption.
+For this dataset, synthetic compositing helped with the background surface and automatic labelling after creating new artificial data to reduce time consumption.
 
-<CvFigure n="22" />
+| Challenge | Solution |
+| --- | --- |
+| Limited real FOD examples | Generate additional training samples |
+| Small FOD objects (5 mm) | Adjust object scaling for different sizes |
+| Dataset | Apply rotations |
+| Model struggles on the actual test ground | Collect and use the target background |
+| Manual labelling is time-consuming | Generate labels automatically from object placement |
 
 ### YOLO Detection Outputs
 
@@ -248,14 +254,12 @@ The dataset was then investigated, and it was hypothesised that there was data l
 
 I applied two similarity detection techniques to check for data leaks and reduce them. Perceptual hash identifies near-duplicate images by comparing their visual structure, while DINOv2 uses pretrained deep learning to identify similar features. Both techniques are combined to group strongly similar images and assign them to a single split.
 
-As shown in Figure CV-28, images are flagged as similar when either of the following conditions is met:
+Images are flagged as similar when either of the following conditions is met:
 
 $$
 (s_{\mathrm{DINOv2}} \geq 0.99)\quad\lor\quad
 \left[(d_{\mathrm{pHash}} \leq 6)\land(s_{\mathrm{DINOv2}} \geq 0.97)\right]
 $$
-
-<CvFigure n="28" />
 
 ### Similarity-Aware Splitting
 
@@ -272,7 +276,11 @@ $$
 
 Three datasets were created: one was the random split, the second was the similarity split, and the third was the similarity split plus removal of redundant images.
 
-<CvFigure n="30" />
+| Dataset | Images | Main purpose |
+| --- | ---: | --- |
+| Random baseline | 33,793 | Baseline split; may contain similarity leakage and inflated performance |
+| Strict | 33,793 | Keep all images while grouping strongly similar frames into the same split |
+| Strict-reduced | 29,663 | Group similar frames and remove 4,130 redundant images |
 
 ### Results and Discussion
 
