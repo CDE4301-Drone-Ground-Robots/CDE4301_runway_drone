@@ -75,3 +75,11 @@ The numbers below preserve the citations in Section 10 of the supplied *Interim 
 ### [9] - PETG CF compared with PETG and PLA {#md-ref-9}
 
 **Bibliographic details missing; manual completion required.** Referenced in the Mechanical Design report.
+
+## Computer Vision Safety Sources
+
+### CV-S01 - Pavement Cracking and FOD Risk {#cv-s01}
+
+Federal Aviation Administration. **Reflective Cracking Program**. Airport Technology Research and Development. Accessed 31 October 2026.
+
+[Open FAA research overview](https://www.airporttech.tc.faa.gov/Airport-Pavement/Pavement-Design/Reflective-Cracking-Program). Explains that reflective cracks can lead to spalling and loose pavement pieces that become FOD. Used to support retaining crack inspection alongside FOD detection.

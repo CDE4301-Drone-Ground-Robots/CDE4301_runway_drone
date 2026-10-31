@@ -60,7 +60,7 @@ Manufacturer product page: [e-con Systems e-CAM56_CUONX - Sony IMX568 global-shu
 
 A light will be attached below the drone, near the RGB camera, and switched on during night operation to illuminate the inspection surface.
 
-### Computer Vision System Architecture
+### Computer Vision System Architecture - Parallel
 
 The RGB camera captures images continuously, which then pass through the system. The captured images first enter a PatchCore anomaly detection model. The system then crops regions identified as anomalous and sends them to the second layer. The second layer consists of 2 models. YOLO object detector and a U-Net segmentation model for runway cracks run in parallel. The cropped image is then resized to the model's input size and fed into the model. If any cracks are detected, the system sends them to the base. On the YOLO side, if it detects a FOD object, it sends the coordinates to the UGV for extraction. If neither the crack detection model nor YOLO identifies it, the system sends it to the base station for inspection.
 
@@ -79,40 +79,51 @@ Computational workload was estimated across the AI models. Based on the GFLOPS c
 
 GFLOPs describe the amount of computation. Measured laptop inference times are reported in [Section 8](#integration-evaluation).
 
-### Computer Vision System Architecture (Fallback)
+### Computer Vision System Architecture - Sequential 1 (Fallback)
 
-There would be cases when Jetson NX resources are scarce due to multiple subsystems running, such as navigation and communication systems. They would all be competing for GPU resources, memory bandwidth and power. Hence, we designed a fallback architecture for low-resource scenarios. This pipeline runs Crack and YOLO sequentially instead of in parallel, reducing resource consumption.
+There would be cases when Jetson NX resources are scarce due to multiple subsystems running, such as navigation and communication systems. They would all be competing for GPU resources, memory bandwidth and power. Hence, we designed a fallback architecture for low-resource scenarios. This pipeline runs YOLO and Crack sequentially instead of in parallel, reducing resource consumption. Both models check every crop.
 
 <CvFigure n="6" />
 
+### Additional Tested Architecture - Sequential 2
+
+Sequential 2 is an extra architecture that was tested. YOLO runs first. If FOD is detected, the coordinates are sent to the UGV. Otherwise, the crop goes to U-Net for crack detection.
+
+<CvFigure n="42" />
+
 ### Architecture Comparison and Memory Use
 
-Both approaches were tested on the same laptop. The setup and full timing results are in [Section 8](#integration-evaluation).
+All three architectures were tested on the same laptop. The setup and full timing results are in [Section 8](#integration-evaluation).
 
-| Architecture | Average processing time (ms/frame) | Processing rate (frames/s) | Peak GPU memory during processing (MiB) |
+| Architecture | Average processing time (ms/frame) | Processing rate (frames/s) | Peak allocated GPU memory (MiB) |
 | --- | ---: | ---: | ---: |
-| Sequential fallback | 89.45 | 11.18 | 391.66 |
-| Parallel benchmark | 82.48 | 12.12 | 532.44 |
+| Parallel | 87.34 | 11.45 | 532.44 |
+| Sequential 1 | 99.19 | 10.08 | 391.66 |
+| Sequential 2 | 72.87 | 13.72 | 391.66 |
 
 <div class="cv-latency-result">
- <div class="cv-latency-label"><span>Mean latency improvement</span><strong>7.8%</strong></div>
- <div class="cv-latency-track" role="meter" aria-label="Mean latency improvement with parallel execution" aria-valuemin="0" aria-valuemax="100" aria-valuenow="7.8"><span></span></div>
- <p>Parallel execution reduced average processing time by approximately 6.97 ms per frame.</p>
+ <div class="cv-latency-label"><span>Mean latency reduction: Parallel vs Sequential 1</span><strong>11.9%</strong></div>
+ <div class="cv-latency-track" role="meter" aria-label="Mean latency reduction with Parallel compared with Sequential 1" aria-valuemin="0" aria-valuemax="100" aria-valuenow="11.9"><span></span></div>
+ <p>Parallel reduced mean processing time by 11.84 ms per frame compared with Sequential 1.</p>
 </div>
 
 <div class="cv-latency-result cv-memory-result">
- <div class="cv-latency-label"><span>Peak GPU memory reduction with sequential fallback</span><strong>26.4%</strong></div>
- <div class="cv-latency-track" role="meter" aria-label="Peak allocated GPU memory reduction compared with the parallel benchmark" aria-valuemin="0" aria-valuemax="100" aria-valuenow="26.4"><span></span></div>
- <p>Sequential execution used 140.78 MiB less peak allocated GPU memory during processing than the parallel benchmark.</p>
+ <div class="cv-latency-label"><span>Peak GPU memory reduction: Sequential 1 vs Parallel</span><strong>26.4%</strong></div>
+ <div class="cv-latency-track" role="meter" aria-label="Peak allocated GPU memory reduction with Sequential 1 compared with Parallel" aria-valuemin="0" aria-valuemax="100" aria-valuenow="26.4"><span></span></div>
+ <p>Sequential 1 used 140.78 MiB less peak allocated GPU memory than Parallel.</p>
 </div>
 
-Running YOLO and U-Net sequentially used about 26.4% less GPU memory, while running them in parallel reduced processing time by about 7.8%. This gives us a reason to keep the sequential fallback when less memory is available. We still need to test it on the Jetson alongside navigation and communication.
+Running YOLO and U-Net in Sequential 1 used about 26.4% less GPU memory, while running them in parallel reduced processing time by about 11.9%. This gives us a reason to keep the sequential fallback when less memory is available. We still need to test it on the Jetson alongside navigation and communication.
 
-GPU memory reached about 6.55 GiB during startup and warm-up. The table shows memory use during processing only; it does not show that the fallback solves this startup peak. These figures cover memory allocated by PyTorch, rather than total GPU memory use.
+Memory figures show peak PyTorch allocation, not total GPU memory. Coordinates were simulated and messages were local JSON; camera, GPS, network and Jetson performance were not measured.
 
-### Why Are Both YOLO and U-Net Used?
+Source data: [CSV](/report-assets/computer-vision/architecture_comparison.csv) and <a :href="withBase('/report-assets/computer-vision/architecture_comparison.md')" download>benchmark notes</a>.
 
-Based on the architecture, I run both models independently, not conditionally, to ensure I don't miss one type of anomaly for the other. As illustrated below, if a system, for example, detected a water puddle using YOLO and skipped the crack model, we would miss the underlying large crack. Although this approach adds computational requirements, it prioritises detection requirements over computational efficiency, which is important for runway safety applications.
+### Why Sequential 2 Is Not Selected
+
+In Parallel and Sequential 1, I run both models independently, not conditionally, to ensure I don't miss one type of anomaly for the other. As illustrated below, if a system, for example, detected a water puddle using YOLO and skipped the crack model, we would miss the underlying large crack. Although this approach adds computational requirements, it prioritises detection requirements over computational efficiency, which is important for runway safety applications.
+
+We are not choosing Sequential 2 even though it is faster than both. Even a small crack can pose a threat, so detecting FOD should not mean skipping the crack check. Crack size alone does not tell us whether it is safe. See [CV-S01 in References](../references#cv-s01).
 
 <CvFigure n="7" />
 
@@ -349,7 +360,7 @@ This thermal camera provides the wide field of view needed for forward safety mo
 
 ### Overall Integrated System
 
-The first integrated system used the sequential fallback architecture. It ran on the laptop but showed visible lag, as seen in the video below. The parallel version was later tested in a separate benchmark; the main application still runs YOLO and U-Net sequentially. Further testing will be done on the Jetson NX.
+The first integrated system used the sequential fallback architecture. It ran on the laptop but showed visible lag, as seen in the video below. All three architectures were later benchmarked. Further testing will be done on the Jetson NX.
 
 These were preliminary functional checks using sample objects, including a battery. Formal testing against the subsystem requirements has not yet been conducted.
 
@@ -374,10 +385,10 @@ These were preliminary functional checks using sample objects, including a batte
 | RGB inputs | 30 images: 10 each at 300 x 300, 512 x 512 and 3024 x 4032 |
 | Thermal inputs | 30 images: 15 each at 1280 x 1024 and 640 x 480 |
 | Inference settings | Batch size 1; float32; models warmed up before measured processing |
-| Repetitions | Three passes over the same inputs: 90 frame observations per configuration; 84 crop observations for each downstream detector |
+| Repetitions | Three passes over the same RGB inputs: 90 frame observations per architecture; 84 YOLO calls; 84 U-Net calls for Parallel and Sequential 1, and 30 for Sequential 2 |
 | Timing boundary | Already-loaded images; excludes model loading, live capture, GUI display and result-file writing |
 
-The laptop was low on available RAM, dropping to about 297 MiB during testing. Other background activity was not controlled, so timings may vary between runs.
+All three used the same inputs, weights and settings. Sequential 1 was tested later; background activity and different message routing may affect the comparison.
 
 ### Measured Processing and Inference Results
 
@@ -387,18 +398,43 @@ The laptop was low on available RAM, dropping to about 297 MiB during testing. O
 | YOLO FOD | 27.62 | 51.01 | 19.82 | 36.20 crops/s | Anomaly crop |
 | Crack U-Net | 27.81 | 30.97 | 14.56 | 35.96 crops/s | Anomaly crop |
 | Thermal YOLO11s | 36.39 | 48.35 | 30.96 | 27.48 frames/s | Full frame |
-| Sequential RGB pipeline | 89.45 | 200.90 | Not measured separately | 11.18 frames/s | Full frame |
-| Parallel RGB benchmark | 82.48 | 177.00 | Not measured separately | 12.12 frames/s | Full frame |
+| Parallel RGB pipeline | 87.34 | 189.06 | Not measured separately | 11.45 frames/s | Full frame |
+| Sequential 1 RGB pipeline | 99.19 | 234.20 | Not measured separately | 10.08 frames/s | Full frame |
+| Sequential 2 RGB pipeline | 72.87 | 174.76 | Not measured separately | 13.72 frames/s | Full frame |
+
+Individual-model timings are from the earlier tests. Pipeline timings use the new comparison.
 
 Processing time includes preparing the input, running the model and processing its output. Forward inference time covers the model alone. Each complete pipeline was timed directly. P95 means 95% of the measured processing times were at or below that value.
 
 PatchCore produced 28 crops from 16 RGB images. The other 14 images had no valid crops, so YOLO and U-Net were skipped. Frames with more crops take longer to process. Thermal was tested separately and is not included in the RGB pipeline timings. All runs completed without processing failures.
+
+### Architecture Workload and Result Routing
+
+| Architecture | YOLO calls | U-Net calls | Coordinate calls / UGV messages | Base messages | Median (ms/frame) | Max (ms/frame) |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| Parallel | 84 | 84 | 54 / 54 | 72 | 72.36 | 236.97 |
+| Sequential 1 | 84 | 84 | 54 / 54 | 84 | 80.43 | 306.70 |
+| Sequential 2 | 84 | 30 | 54 / 54 | 30 | 59.34 | 222.85 |
+
+Sequential 2 made 30 crack-model calls, compared with 84 for each of the other architectures. It is faster partly because it skips these checks.
 
 These are laptop processing rates, not camera capture rates. Live capture, display and thermal integration may add delays. Detection accuracy, night operation and performance on the Jetson still need to be tested.
 
 ### Overall Onboard Architecture
 
 <CvFigure n="41" />
+
+### Requirements and Test Status
+
+| Requirement | Evidence so far | Still to test |
+| --- | --- | --- |
+| Detect FOD as small as 5 mm | Example detections and model comparison | Verify 5 mm FOD detection at 5 m height |
+| Detect cracks | Example crack masks; weaker results on rough test-ground surfaces | Define the crack size target and measure detection accuracy |
+| Detect water puddles | Water puddle class added to the FOD dataset | Define the puddle size target and test real puddles |
+| Extract coordinates | Worked example and simulated coordinate calculations | Measure real position error using camera and navigation data |
+| Run the integrated system | Laptop demonstration and three-architecture benchmarks | Test the full pipeline on Jetson NX |
+| Select a suitable camera | RGB camera proposed; webcam used for interim testing | Confirm camera selection and test at the intended height |
+| Day and night operation | Ground tests and proposed lighting | Test detection in daylight and at night with the light fitted |
 
 ## Semester 2 Development Plan {#semester-2-development-plan}
 

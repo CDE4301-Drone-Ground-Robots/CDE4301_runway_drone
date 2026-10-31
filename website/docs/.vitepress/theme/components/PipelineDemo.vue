@@ -1,19 +1,52 @@
 <script setup lang="ts">
-import { computed, onUnmounted, ref } from 'vue'
+import { computed, onUnmounted, ref, watch } from 'vue'
 const progress = ref(0)
 const mode = ref('parallel')
 const scenario = ref('fod')
 const playing = ref(false)
 let timer: ReturnType<typeof setInterval> | undefined
-const scenarios = [ { id: 'fod', label: 'FOD object' }, { id: 'crack', label: 'Surface crack' }, { id: 'unknown', label: 'Unknown anomaly' } ]
-const branchesDone = computed(() => progress.value >= 80)
-const branchState = (branch: string) => {
- const start = mode.value === 'parallel' || branch === 'yolo' ? 45 : 63
- const end = mode.value === 'parallel' || branch === 'unet' ? 80 : 63
+const modes = [ { id: 'parallel', label: 'Parallel' }, { id: 'sequential1', label: 'Sequential 1' }, { id: 'sequential2', label: 'Sequential 2' } ]
+const scenarios = [ { id: 'fod', label: 'FOD object' }, { id: 'crack', label: 'Surface crack' }, { id: 'both', label: 'FOD + crack' }, { id: 'unknown', label: 'Unknown anomaly' }, { id: 'clear', label: 'No anomaly' } ]
+const hasFod = computed(() => ['fod', 'both'].includes(scenario.value))
+const hasCrack = computed(() => ['crack', 'both'].includes(scenario.value))
+const clear = computed(() => scenario.value === 'clear')
+const skipCrack = computed(() => mode.value === 'sequential2' && hasFod.value)
+const yoloEnd = computed(() => mode.value === 'parallel' ? 70 : 60)
+const crackEnd = computed(() => mode.value === 'parallel' ? 70 : 82)
+const coordinateEnd = computed(() => yoloEnd.value + 12)
+const ugvEnd = computed(() => coordinateEnd.value + 8)
+const sendBase = computed(() => !clear.value && !skipCrack.value && (mode.value !== 'parallel' || hasCrack.value || !hasFod.value))
+function state(start: number, end: number) {
  return progress.value >= end ? 'done' : progress.value >= start ? 'active' : 'waiting'
 }
-const stage = computed(() => progress.value < 20 ? 'Inspect the runway' : progress.value < 45 ? 'PatchCore finds an unusual region' : progress.value < 80 ? mode.value === 'parallel' ? 'YOLO and U-Net inspect the crop in parallel' : progress.value < 63 ? 'YOLO inspects the crop first' : 'U-Net checks the same crop next' : 'Send the result to the next system')
-const outcome = computed(() => scenario.value === 'fod' ? 'FOD identified \u2192 coordinates to UGV' : scenario.value === 'crack' ? 'Crack mask \u2192 report to base station' : 'Unknown anomaly \u2192 base station review')
+function branchState(branch: string) {
+ if (clear.value && progress.value >= 45) return 'skipped'
+ if (branch === 'unet' && skipCrack.value && progress.value >= yoloEnd.value) return 'skipped'
+ return branch === 'yolo' ? state(45, yoloEnd.value) : state(mode.value === 'parallel' ? 45 : yoloEnd.value, crackEnd.value)
+}
+const coordinateState = computed(() => !hasFod.value ? progress.value >= (clear.value ? 45 : yoloEnd.value) ? 'skipped' : 'waiting' : state(yoloEnd.value, coordinateEnd.value))
+const ugvState = computed(() => !hasFod.value ? progress.value >= (clear.value ? 45 : yoloEnd.value) ? 'skipped' : 'waiting' : state(coordinateEnd.value, ugvEnd.value))
+const baseState = computed(() => !sendBase.value ? progress.value >= (clear.value ? 45 : 90) ? 'skipped' : 'waiting' : state(90, 96))
+const stage = computed(() => {
+ const p = progress.value
+ if (p < 20) return 'Capture runway'
+ if (p < 45) return clear.value ? 'Check for anomalies' : 'Find anomaly and crop'
+ if (clear.value) return 'Clear runway: continue'
+ if (p < yoloEnd.value) return mode.value === 'parallel' ? 'YOLO + U-Net' : 'YOLO first'
+ if (hasFod.value && p < coordinateEnd.value) return mode.value === 'sequential1' ? 'Extract coordinates + run U-Net' : 'Extract FOD coordinates'
+ if (hasFod.value && p < ugvEnd.value) return 'Send coordinates to UGV'
+ if (!skipCrack.value && p < crackEnd.value) return 'Check for cracks'
+ if (skipCrack.value && p < 96) return 'Crack check skipped'
+ if (sendBase.value && p < 96) return 'Report to base'
+ return 'Continue inspection'
+})
+const outcome = computed(() => {
+ if (clear.value) return 'Clear runway'
+ if (skipCrack.value) return hasCrack.value ? 'FOD sent; crack missed' : 'FOD sent; crack check skipped'
+ if (hasFod.value && hasCrack.value) return 'FOD to UGV; crack to base'
+ if (hasFod.value) return mode.value === 'sequential1' ? 'FOD to UGV; no-crack report to base' : 'FOD to UGV; no crack'
+ return hasCrack.value ? 'Crack reported' : 'Unknown anomaly reported'
+})
 const droneX = computed(() => 105 + Math.min(progress.value / 45, 1) * 305)
 function stop() { if (timer) clearInterval(timer); timer = undefined; playing.value = false }
 function play() {
@@ -23,16 +56,16 @@ function play() {
  timer = setInterval(() => { progress.value = Math.min(100, progress.value + .5); if (progress.value >= 100) stop() }, 50)
 }
 function reset() { stop(); progress.value = 0 }
+watch([mode, scenario], reset)
 onUnmounted(stop)
 </script>
 
 <template>
  <section class="pipeline-demo" aria-label="Interactive computer vision pipeline illustration">
-  <div class="pipeline-heading"><div><span class="pipeline-eyebrow">FOD ARGUS / PIPELINE EXPLORER</span><h4>Follow an anomaly.</h4></div><span class="pipeline-demo-tag">Illustrative demo</span></div>
-  <p class="pipeline-intro">Move the slider to follow a runway inspection, from image capture to the final result.</p>
+  <div class="pipeline-heading"><h4>Pipeline demo</h4><span class="pipeline-demo-tag">Illustrative</span></div>
   <div class="pipeline-controls">
-   <div class="pipeline-modes" role="group" aria-label="Execution architecture"><button v-for="item in ['parallel', 'sequential']" :key="item" type="button" :aria-pressed="mode === item" @click="mode = item">{{ item === 'parallel' ? 'Parallel' : 'Sequential fallback' }}</button></div>
-   <label class="pipeline-scenario"><span>Change here</span> <select v-model="scenario"><option v-for="item in scenarios" :key="item.id" :value="item.id">{{ item.label }}</option></select></label>
+   <div class="pipeline-modes" role="group" aria-label="Execution architecture"><button v-for="item in modes" :key="item.id" type="button" :aria-pressed="mode === item.id" @click="mode = item.id">{{ item.label }}</button></div>
+   <label class="pipeline-scenario"><span>Scenario</span> <select v-model="scenario"><option v-for="item in scenarios" :key="item.id" :value="item.id">{{ item.label }}</option></select></label>
   </div>
   <div class="pipeline-runway">
    <svg viewBox="0 0 760 230" role="img" :aria-label="`Drone inspecting a runway: ${stage}`">
@@ -43,50 +76,74 @@ onUnmounted(stop)
     <path d="M50 117H710" stroke="#c4d1dd" stroke-opacity=".35" stroke-width="4" stroke-dasharray="32 22"/>
     <g v-for="x in [65, 135, 205, 275, 345, 415, 485, 555, 625, 695]" :key="x"><circle :cx="x" cy="42" r="3" fill="#92caff"/><circle :cx="x" cy="191" r="3" fill="#92caff"/></g>
     <g :transform="`translate(${droneX} 103)`"><ellipse cy="25" rx="90" ry="72" fill="url(#pipeline-light)"/><path d="M-23-16L23 16M23-16L-23 16" stroke="#bd927c" stroke-width="6"/><rect x="-12" y="-9" width="24" height="18" rx="6" fill="#d9b8a5"/><g v-for="(pos, i) in [[-25,-18],[25,-18],[-25,18],[25,18]]" :key="i"><ellipse :cx="pos[0]" :cy="pos[1]" rx="15" ry="8" fill="#101a25" stroke="#cee4f2" stroke-width="2"/></g><circle r="3" fill="#8cd9ff"/></g>
-    <g transform="translate(452 139)"><path v-if="scenario === 'crack'" d="M-15-7L-3-2L-7 5L7 8L17 18" fill="none" stroke="#d7b9a7" stroke-width="4"/><path v-else-if="scenario === 'unknown'" d="M-11-8L9-12L17 8L-2 14L-15 5Z" fill="#bfa7d7"/><rect v-else x="-12" y="-6" width="24" height="12" rx="3" transform="rotate(-20)" fill="#d6ac6a"/>
+    <g v-if="!clear" transform="translate(452 139)"><path v-if="hasCrack" d="M-15-7L-3-2L-7 5L7 8L17 18" fill="none" stroke="#d7b9a7" stroke-width="4"/><path v-else-if="scenario === 'unknown'" d="M-11-8L9-12L17 8L-2 14L-15 5Z" fill="#bfa7d7"/><rect v-if="hasFod" x="-12" y="-6" width="24" height="12" rx="3" transform="rotate(-20)" fill="#d6ac6a"/>
      <rect v-if="progress >= 20" x="-27" y="-25" width="56" height="55" rx="5" fill="none" :stroke="progress >= 45 ? '#4cdb9b' : '#8bd6ff'" stroke-width="2" stroke-dasharray="5 4"/>
     </g>
-    <text x="28" y="220" fill="#b0c4d6" font-size="11" letter-spacing="2">SCHEMATIC RUNWAY VIEW</text><text v-if="progress >= 20" x="490" y="160" fill="#9de5cb" font-size="12">{{ progress >= 45 ? 'ANOMALY CROP' : 'CAPTURED REGION' }}</text>
+    <text x="28" y="220" fill="#b0c4d6" font-size="11" letter-spacing="2">SCHEMATIC RUNWAY VIEW</text><text v-if="progress >= 20 && !clear" x="490" y="160" fill="#9de5cb" font-size="12">{{ progress >= 45 ? 'ANOMALY CROP' : 'CAPTURED REGION' }}</text>
    </svg>
   </div>
-  <div class="pipeline-scrubber"><button type="button" class="pipeline-play" :aria-label="playing ? 'Pause pipeline demo' : 'Play pipeline demo'" @click="play">{{ playing ? 'Pause' : 'Play' }}</button><label class="pipeline-range"><span>Inspection progress <strong>{{ Math.round(progress) }}%</strong></span><input v-model.number="progress" type="range" min="0" max="100" step="0.5" aria-label="Inspection progress" :aria-valuetext="`${Math.round(progress)} percent: ${stage}`" @input="stop" /></label><button type="button" class="pipeline-reset" @click="reset">Reset</button></div>
+  <div class="pipeline-scrubber"><button type="button" class="pipeline-play" :aria-label="playing ? 'Pause pipeline demo' : 'Play pipeline demo'" @click="play">{{ playing ? 'Pause' : 'Play' }}</button><label class="pipeline-range"><span>Progress <strong>{{ Math.round(progress) }}%</strong></span><input v-model.number="progress" type="range" min="0" max="100" step="0.5" aria-label="Inspection progress" :aria-valuetext="`${Math.round(progress)} percent: ${stage}`" @input="stop" /></label><button type="button" class="pipeline-reset" @click="reset">Reset</button></div>
   <p class="pipeline-stage" aria-live="off">{{ stage }}</p>
-  <div class="pipeline-flow">
-   <div class="pipeline-node" :class="progress >= 45 ? 'done' : progress >= 20 ? 'active' : 'waiting'"><small>01 / ANOMALY DETECTION</small><strong>PatchCore</strong><span>{{ progress >= 45 ? 'Unusual region cropped' : progress >= 20 ? 'Compare with normal surface' : 'Waiting for an image' }}</span></div>
-   <div class="pipeline-branches" :class="{ sequential: mode === 'sequential' }">
-    <div class="pipeline-node" :class="branchState('yolo')"><small>02 / OBJECT DETECTION</small><strong>YOLO</strong><span>{{ branchState('yolo') === 'done' ? scenario === 'fod' ? 'FOD identified' : 'No known FOD identified' : branchState('yolo') === 'active' ? 'Inspect the anomaly crop' : 'Waiting for crop' }}</span></div>
-    <div class="pipeline-node" :class="branchState('unet')"><small>{{ mode === 'sequential' ? '03' : '02' }} / CRACK SEGMENTATION</small><strong>U-Net</strong><span>{{ branchState('unet') === 'done' ? scenario === 'crack' ? 'Crack mask produced' : 'No crack identified' : branchState('unet') === 'active' ? 'Check the crop for cracks' : 'Waiting for crop' }}</span></div>
-   </div>
-   <div class="pipeline-node pipeline-output" :class="branchesDone ? 'done' : 'waiting'"><small>OUTPUT / NEXT ACTION</small><strong>{{ branchesDone ? scenario === 'fod' ? 'Send to UGV' : 'Send to base' : 'Await both models' }}</strong><span>{{ branchesDone ? outcome : 'Both detectors check every anomaly crop' }}</span></div>
+  <div class="pipeline-map" :aria-label="mode === 'parallel' ? 'Parallel model checks, then coordinate extraction and reporting' : 'YOLO first, then crack checks, coordinate extraction and reporting'">
+   <svg class="pipeline-arrows" viewBox="0 0 600 306" preserveAspectRatio="none" aria-hidden="true">
+    <defs><marker id="pipeline-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10Z" fill="context-stroke" /></marker></defs>
+    <path v-if="!clear" d="M300 54V68H92V83" :class="branchState('yolo')" />
+    <path v-if="!clear && mode === 'parallel'" d="M300 68H508V83" :class="branchState('unet')" />
+    <path v-if="!clear && mode !== 'parallel'" d="M184 111H415" :class="branchState('unet')" />
+    <path v-if="!clear" d="M92 138V167" :class="coordinateState" />
+    <path v-if="!clear" d="M92 222V251" :class="ugvState" />
+    <path v-if="!clear" d="M184 279H207" :class="ugvState" />
+    <path v-if="!clear" d="M508 138V167" :class="baseState" />
+    <path v-if="!clear" d="M508 222V279H393" :class="baseState" />
+    <path v-if="clear" d="M300 54V251" :class="progress >= 45 ? 'done' : 'waiting'" />
+   </svg>
+   <span v-if="!clear && mode !== 'parallel'" class="pipeline-route-label pipeline-model-route">{{ mode === 'sequential2' ? 'No FOD' : 'then' }}</span>
+   <span v-if="!clear" class="pipeline-route-label pipeline-fod-route">FOD</span>
+   <span v-if="clear" class="pipeline-route-label pipeline-clear-route">No anomaly</span>
+   <div class="pipeline-node pipeline-patchcore" :class="progress >= 45 ? 'done' : progress >= 20 ? 'active' : 'waiting'"><strong>PatchCore</strong><span>{{ progress >= 45 ? clear ? 'Clear' : 'Crop ready' : progress >= 20 ? 'Checking' : 'Waiting' }}</span></div>
+   <div class="pipeline-node pipeline-yolo" :class="branchState('yolo')"><strong>YOLO</strong><span>{{ branchState('yolo') === 'skipped' ? 'Skipped' : branchState('yolo') === 'done' ? hasFod ? 'FOD found' : 'No FOD' : branchState('yolo') === 'active' ? 'Checking' : 'Waiting' }}</span></div>
+   <div class="pipeline-node pipeline-unet" :class="branchState('unet')"><strong>U-Net</strong><span>{{ branchState('unet') === 'skipped' ? 'Skipped' : branchState('unet') === 'done' ? hasCrack ? 'Crack found' : 'No crack' : branchState('unet') === 'active' ? 'Checking' : 'Waiting' }}</span></div>
+   <div class="pipeline-node pipeline-coordinates" :class="coordinateState"><strong>Coordinates</strong><span>{{ coordinateState === 'done' ? 'Extracted' : coordinateState === 'active' ? 'Extracting' : coordinateState === 'skipped' ? 'Not needed' : 'Waiting' }}</span></div>
+   <div class="pipeline-node pipeline-base" :class="baseState"><strong>Base</strong><span>{{ baseState === 'done' ? hasCrack ? 'Crack sent' : hasFod ? 'No-crack sent' : 'Review sent' : baseState === 'active' ? 'Sending' : baseState === 'skipped' ? 'Not needed' : 'Waiting' }}</span></div>
+   <div class="pipeline-node pipeline-ugv" :class="ugvState"><strong>UGV</strong><span>{{ ugvState === 'done' ? 'Coords sent' : ugvState === 'active' ? 'Sending' : ugvState === 'skipped' ? 'Not needed' : 'Waiting' }}</span></div>
+   <div class="pipeline-node pipeline-output" :class="progress >= (clear ? 45 : 96) ? 'done' : 'waiting'"><strong>Continue</strong><span>{{ progress >= (clear ? 45 : 96) ? 'Next frame' : 'Waiting' }}</span></div>
   </div>
-  <p class="pipeline-note">This demo illustrates the RGB pipeline. Slider speed and example detections are illustrative; no AI models run here. Thermal safety operates separately.</p>
+  <p class="pipeline-summary" aria-live="off">{{ progress >= (clear ? 45 : 96) ? outcome : mode === 'sequential2' ? 'Sequential 2 skips U-Net when FOD is found.' : 'Both models check each crop.' }}</p>
+  <p class="pipeline-note">Illustration only; no live models or coordinates.</p>
  </section>
 </template>
 
 <style scoped>
-.pipeline-demo{margin:32px 0;padding:26px;border:1px solid var(--vp-c-divider);border-radius:22px;background:var(--vp-c-bg-soft);overflow:hidden}
-.pipeline-heading{display:flex;align-items:flex-start;justify-content:space-between;gap:15px}.pipeline-eyebrow{font-size:10px;letter-spacing:1.7px;color:var(--vp-c-text-2)}.pipeline-heading h4{margin:9px 0;font-size:32px;line-height:1.2;letter-spacing:-1px}.pipeline-demo-tag{font-size:10px;border:1px solid var(--vp-c-divider);padding:5px 10px;border-radius:30px;white-space:nowrap;color:var(--vp-c-text-2)}
-.vp-doc .pipeline-demo .pipeline-intro{font-size:15px;line-height:1.65;margin:8px 0 20px}.pipeline-controls{display:flex;flex-wrap:wrap;justify-content:space-between;gap:15px;align-items:center;margin-bottom:20px}.pipeline-modes{display:flex;gap:4px;padding:4px;border:1px solid var(--vp-c-divider);border-radius:12px}.pipeline-modes button,.pipeline-play,.pipeline-reset{font:inherit;font-size:12px;line-height:1.5;padding:8px 12px;border-radius:8px;cursor:pointer}.pipeline-modes button[aria-pressed=true]{background:rgba(189,146,124,.19);color:var(--vp-c-text-1)}.pipeline-scenario{display:flex;align-items:center;gap:10px;font-size:12px;color:var(--vp-c-text-2)}.pipeline-scenario select{background:var(--vp-c-bg);color:var(--vp-c-text-1);padding:8px;border:1px solid var(--vp-c-divider);border-radius:8px;font:inherit}.pipeline-runway{border:1px solid #34404d;border-radius:14px;overflow:hidden}.pipeline-runway svg{display:block;width:100%;height:auto}.pipeline-scrubber{display:flex;align-items:center;gap:16px;margin-top:20px}.pipeline-play{background:#bd927c;color:#141014;min-width:62px;font-weight:650}.pipeline-reset{border:1px solid var(--vp-c-divider);color:var(--vp-c-text-2)}.pipeline-range{flex:1;min-width:0}.pipeline-range>span{display:flex;justify-content:space-between;font-size:12px;gap:8px;color:var(--vp-c-text-2)}.pipeline-range input{display:block;width:100%;margin:10px 0 0;accent-color:#bd927c;cursor:ew-resize}.vp-doc .pipeline-demo .pipeline-stage{font-size:16px;font-weight:600;line-height:1.5;min-height:48px;margin:20px 0}.pipeline-flow{display:grid;grid-template-columns:1fr 1.2fr 1fr;gap:12px;align-items:stretch}.pipeline-branches{display:flex;flex-direction:column;gap:10px}.pipeline-node{border:1px solid var(--vp-c-divider);border-radius:12px;padding:16px;display:flex;flex-direction:column;gap:8px;justify-content:center;min-width:0;transition:border-color .2s,background .2s}.pipeline-node small{font-size:9px;letter-spacing:1px;line-height:1.5;color:var(--vp-c-text-2)}.pipeline-node strong{font-size:18px;line-height:1.3}.pipeline-node span{font-size:12px;line-height:1.6;color:var(--vp-c-text-2)}.pipeline-node.active{border-color:#bd927c;background:rgba(189,146,124,.12)}.pipeline-node.done{border-color:#328565;background:rgba(55,165,113,.08)}.pipeline-node.done small{color:#168250}.dark .pipeline-node.done small{color:#77d8ad}.pipeline-node.waiting{opacity:.65}.pipeline-branches.sequential{position:relative}.pipeline-branches.sequential:after{content:'\2193';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);color:#bd927c;background:var(--vp-c-bg-soft);line-height:1;padding:0 6px}.vp-doc .pipeline-demo .pipeline-note{font-size:12px;line-height:1.7;margin:20px 0 0;color:var(--vp-c-text-2)}.pipeline-demo button:focus-visible,.pipeline-demo select:focus-visible,.pipeline-demo input:focus-visible{outline:2px solid #bd927c;outline-offset:4px}
-@media(max-width:650px){.pipeline-demo{padding:17px}.pipeline-heading{flex-wrap:wrap}.pipeline-heading h4{font-size:28px}.pipeline-flow{grid-template-columns:1fr}.pipeline-branches{display:grid;grid-template-columns:1fr 1fr}.pipeline-branches.sequential{display:flex}.pipeline-scrubber{gap:10px}.pipeline-node{padding:13px}.pipeline-stage{min-height:48px}}
-/* Larger controls and copy keep the demo readable in the report. */
-.pipeline-demo{--pipeline-copy:var(--vp-c-text-1)}
-.dark .pipeline-demo{--pipeline-copy:#f5f7fa}
-.pipeline-eyebrow{font-size:12px;color:var(--pipeline-copy)}
-.pipeline-demo-tag{font-size:12px;color:var(--pipeline-copy)}
-.vp-doc .pipeline-demo .pipeline-intro{font-size:18px;color:var(--pipeline-copy)}
-.pipeline-modes button,.pipeline-play,.pipeline-reset{font-size:15px;color:var(--pipeline-copy)}
-.pipeline-play{color:#141014}
-.pipeline-scenario{font-size:16px;font-weight:600;color:var(--pipeline-copy)}
-.pipeline-scenario select{appearance:auto;min-width:175px;font-size:16px;font-weight:500;color:var(--pipeline-copy);padding:10px 13px;border-color:#bd927c;animation:pipeline-select-pulse 2.6s ease-in-out infinite}
-.pipeline-range>span{font-size:15px;color:var(--pipeline-copy)}
-.vp-doc .pipeline-demo .pipeline-stage{font-size:19px;color:var(--pipeline-copy)}
-.pipeline-node small{font-size:11px;color:var(--pipeline-copy)}
-.pipeline-node strong{font-size:21px;color:var(--pipeline-copy)}
-.pipeline-node span{font-size:15px;color:var(--pipeline-copy)}
-.pipeline-node.waiting{opacity:1}
-.vp-doc .pipeline-demo .pipeline-note{font-size:14px;color:var(--pipeline-copy)}
-@keyframes pipeline-select-pulse{0%,100%{box-shadow:0 0 0 0 rgba(189,146,124,.08)}50%{box-shadow:0 0 0 5px rgba(189,146,124,.22)}}
-@media(max-width:650px){.pipeline-modes button{font-size:14px;padding:8px 10px}.pipeline-range>span{font-size:13px}.pipeline-node strong{font-size:20px}.pipeline-play,.pipeline-reset{font-size:14px;padding:8px 10px}.pipeline-controls{gap:20px}.pipeline-scenario{flex-wrap:wrap}.vp-doc .pipeline-demo .pipeline-intro{font-size:17px}}
-@media(prefers-reduced-motion:reduce){.pipeline-node{transition:none}.pipeline-scenario select{animation:none}}
-
+.pipeline-demo{margin:24px 0;padding:16px;border:1px solid var(--vp-c-divider);border-radius:16px;background:var(--vp-c-bg-soft);color:var(--vp-c-text-1);overflow:hidden}
+.pipeline-heading{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:10px}
+.pipeline-heading h4{font-size:23px;line-height:1.2;margin:0;letter-spacing:-.5px}
+.pipeline-demo-tag{font-size:11px;color:var(--vp-c-text-2)}
+.pipeline-controls{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:8px;margin-bottom:10px}
+.pipeline-modes{display:flex;flex-wrap:wrap;gap:2px;padding:3px;border:1px solid var(--vp-c-divider);border-radius:9px}
+.pipeline-modes button,.pipeline-play,.pipeline-reset{font:inherit;font-size:13px;line-height:1.4;padding:7px 9px;border-radius:6px;cursor:pointer;color:inherit}
+.pipeline-modes button[aria-pressed=true]{background:rgba(189,146,124,.2)}
+.pipeline-scenario{display:flex;align-items:center;gap:7px;font-size:13px}
+.pipeline-scenario select{font:inherit;appearance:auto;padding:6px 8px;border:1px solid var(--vp-c-divider);border-radius:7px;background:var(--vp-c-bg);color:inherit}
+.pipeline-runway{border:1px solid #34404d;border-radius:9px;overflow:hidden;background:#060a10}
+.pipeline-runway svg{display:block;width:100%;height:120px;object-fit:contain}
+.pipeline-scrubber{display:flex;gap:10px;align-items:center;margin-top:10px}
+.pipeline-play{background:#bd927c;color:#141014;min-width:52px;font-weight:600}
+.pipeline-reset{border:1px solid var(--vp-c-divider)}
+.pipeline-range{flex:1;min-width:0}.pipeline-range>span{display:flex;justify-content:space-between;gap:8px;font-size:12px}
+.pipeline-range input{display:block;width:100%;margin:5px 0 0;accent-color:#bd927c}
+.vp-doc .pipeline-demo .pipeline-stage{margin:8px 0;font-size:14px;line-height:1.4;min-height:20px;font-weight:600}
+.pipeline-map{position:relative;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));column-gap:4%;grid-template-rows:repeat(4,54px);row-gap:30px;height:306px}
+.pipeline-arrows{position:absolute;inset:0;width:100%;height:100%;overflow:visible;pointer-events:none}
+.pipeline-arrows>path{fill:none;stroke:#82909e;stroke-width:2;vector-effect:non-scaling-stroke;marker-end:url(#pipeline-arrow)}
+.pipeline-arrows>path.active{stroke:#bd927c}.pipeline-arrows>path.done{stroke:#259369}.pipeline-arrows>path.skipped{stroke-dasharray:4 4;opacity:.5}
+.pipeline-node{position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;padding:5px;border:1px solid var(--vp-c-divider);border-radius:8px;background:var(--vp-c-bg);min-width:0;text-align:center;z-index:1}
+.pipeline-node strong{font-size:15px;line-height:1.2}.pipeline-node span{font-size:12px;line-height:1.2;color:var(--vp-c-text-2)}
+.pipeline-node.active{border-color:#bd927c;background:var(--vp-c-brand-soft)}.pipeline-node.done{border-color:#328565}.pipeline-node.skipped{border-style:dashed;opacity:.55}
+.pipeline-patchcore{grid-area:1/2}.pipeline-yolo{grid-area:2/1}.pipeline-unet{grid-area:2/3}.pipeline-coordinates{grid-area:3/1}.pipeline-base{grid-area:3/3}.pipeline-ugv{grid-area:4/1}.pipeline-output{grid-area:4/2}
+.pipeline-route-label{position:absolute;z-index:1;background:var(--vp-c-bg-soft);padding:0 4px;font-size:10px;line-height:14px;color:var(--vp-c-text-2);transform:translateX(-50%)}
+.pipeline-model-route{left:50%;top:91px}.pipeline-fod-route{left:15.333%;top:145px}.pipeline-clear-route{left:50%;top:145px}
+.vp-doc .pipeline-demo .pipeline-summary{font-size:13px;line-height:1.4;margin:8px 0 0;min-height:19px}
+.vp-doc .pipeline-demo .pipeline-note{font-size:11px;line-height:1.4;color:var(--vp-c-text-2);margin:5px 0 0}
+.pipeline-demo button:focus-visible,.pipeline-demo select:focus-visible,.pipeline-demo input:focus-visible{outline:2px solid #bd927c;outline-offset:3px}
+@media(max-width:650px){.pipeline-demo{padding:12px}.pipeline-heading h4{font-size:21px}.pipeline-controls{gap:7px}.pipeline-modes button{font-size:12px;padding:6px 8px}.pipeline-scenario{font-size:12px}.pipeline-runway svg{height:82px}.pipeline-node strong{font-size:13px}.pipeline-node span{font-size:11px}.pipeline-scrubber{gap:7px}.pipeline-play,.pipeline-reset{font-size:12px;padding:6px 8px}.pipeline-map{grid-template-rows:repeat(4,46.588px);row-gap:25.882px;height:264px}.pipeline-model-route{top:80px}.pipeline-fod-route,.pipeline-clear-route{top:125px}}
 </style>

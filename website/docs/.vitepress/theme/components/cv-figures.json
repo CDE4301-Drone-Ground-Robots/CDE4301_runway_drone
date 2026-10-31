@@ -19,10 +19,11 @@
     "caption": "Candidate e-con camera and interim UGREEN webcam comparison from the source report."
   },
   "4": {
-    "src": "/report-assets/computer-vision/cv-04.webp",
-    "width": 1312,
-    "height": 1199,
-    "caption": "Initial inspection architecture with parallel YOLO and U-Net processing."
+    "src": "/report-assets/computer-vision/architecture-parallel.svg",
+    "width": 2000,
+    "height": 1440,
+    "caption": "System Prototype 1 - Parallel.",
+    "architecture": true
   },
   "5": {
     "src": "/report-assets/computer-vision/cv-05.webp",
@@ -31,10 +32,11 @@
     "caption": "Model arithmetic-complexity comparison; GFLOPs are workload estimates, not measured latency."
   },
   "6": {
-    "src": "/report-assets/computer-vision/cv-06.webp",
-    "width": 1853,
-    "height": 1235,
-    "caption": "Fallback architecture with sequential FOD and crack processing."
+    "src": "/report-assets/computer-vision/architecture-sequential-1.svg",
+    "width": 2000,
+    "height": 1440,
+    "caption": "System Prototype 1 - Sequential 1.",
+    "architecture": true
   },
   "7": {
     "src": "/report-assets/computer-vision/cv-07.webp",
@@ -246,5 +248,12 @@
     "width": 1536,
     "height": 1024,
     "caption": "Proposed integrated onboard system, including RGB inspection, thermal safety, navigation, and communication."
+  },
+  "42": {
+    "src": "/report-assets/computer-vision/architecture-sequential-2.svg",
+    "width": 2000,
+    "height": 1440,
+    "caption": "System Prototype 1 - Sequential 2 (additional tested architecture).",
+    "architecture": true
   }
 }

@@ -1,0 +1,67 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2000 1440" width="2000" height="1440" role="img" preserveAspectRatio="xMidYMid meet">
+<title>System Prototype 1 - Parallel</title>
+<defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="23" markerHeight="23" orient="auto-start-reverse" markerUnits="userSpaceOnUse"><path d="M0 0 L10 5 L0 10 Z" fill="white" /></marker></defs><rect width="2000" height="1440" fill="black" />
+<rect x="560" y="20" width="880" height="85" rx="15" fill="#b5dcf7" stroke="white" stroke-width="6" /><rect x="565" y="25" width="870" height="75" rx="11" fill="none" stroke="#222" stroke-width="3" />
+<text text-anchor="middle" fill="black" font-family="Georgia, Times New Roman, serif" font-size="38" font-weight="bold"><tspan x="1000.0" y="62.5" dominant-baseline="middle">System Prototype 1</tspan></text>
+<rect x="800" y="145" width="400" height="80" rx="15" fill="#b5dcf7" stroke="white" stroke-width="6" /><rect x="805" y="150" width="390" height="70" rx="11" fill="none" stroke="#222" stroke-width="3" />
+<text text-anchor="middle" fill="black" font-family="Georgia, Times New Roman, serif" font-size="38" font-weight="bold"><tspan x="1000.0" y="185.0" dominant-baseline="middle">RGB Camera</tspan></text>
+<rect x="660" y="265" width="680" height="85" rx="15" fill="#d3edbb" stroke="white" stroke-width="6" /><rect x="665" y="270" width="670" height="75" rx="11" fill="none" stroke="#222" stroke-width="3" />
+<text text-anchor="middle" fill="black" font-family="Georgia, Times New Roman, serif" font-size="38" font-weight="bold"><tspan x="1000.0" y="307.5" dominant-baseline="middle">PatchCore Anomaly Detection</tspan></text>
+<rect x="70" y="250" width="470" height="115" rx="15" fill="#f5b2b2" stroke="white" stroke-width="6" /><rect x="75" y="255" width="460" height="105" rx="11" fill="none" stroke="#222" stroke-width="3" />
+<text text-anchor="middle" fill="black" font-family="Georgia, Times New Roman, serif" font-size="34" font-weight="bold"><tspan x="305.0" y="286.5" dominant-baseline="middle">Drone Coordinates</tspan><tspan x="305.0" y="328.5" dominant-baseline="middle">from Navigation System</tspan></text>
+<rect x="1500" y="265" width="430" height="85" rx="15" fill="#f5b2b2" stroke="white" stroke-width="6" /><rect x="1505" y="270" width="420" height="75" rx="11" fill="none" stroke="#222" stroke-width="3" />
+<text text-anchor="middle" fill="black" font-family="Georgia, Times New Roman, serif" font-size="38" font-weight="bold"><tspan x="1715.0" y="307.5" dominant-baseline="middle">No Anomaly</tspan></text>
+<rect x="1500" y="405" width="430" height="85" rx="15" fill="#b5dcf7" stroke="white" stroke-width="6" /><rect x="1505" y="410" width="420" height="75" rx="11" fill="none" stroke="#222" stroke-width="3" />
+<text text-anchor="middle" fill="black" font-family="Georgia, Times New Roman, serif" font-size="38" font-weight="bold"><tspan x="1715.0" y="447.5" dominant-baseline="middle">Continue Inspection</tspan></text>
+<rect x="760" y="390" width="480" height="85" rx="15" fill="#d3edbb" stroke="white" stroke-width="6" /><rect x="765" y="395" width="470" height="75" rx="11" fill="none" stroke="#222" stroke-width="3" />
+<text text-anchor="middle" fill="black" font-family="Georgia, Times New Roman, serif" font-size="38" font-weight="bold"><tspan x="1000.0" y="432.5" dominant-baseline="middle">Anomaly Region</tspan></text>
+<rect x="730" y="515" width="540" height="85" rx="15" fill="#d3edbb" stroke="white" stroke-width="6" /><rect x="735" y="520" width="530" height="75" rx="11" fill="none" stroke="#222" stroke-width="3" />
+<text text-anchor="middle" fill="black" font-family="Georgia, Times New Roman, serif" font-size="38" font-weight="bold"><tspan x="1000.0" y="557.5" dominant-baseline="middle">Crop Region of Interest</tspan></text>
+<polyline points="1000,105 1000,145" fill="none" stroke="white" stroke-width="4" stroke-linejoin="round" marker-end="url(#arrow)" />
+<polyline points="1000,225 1000,265" fill="none" stroke="white" stroke-width="4" stroke-linejoin="round" marker-end="url(#arrow)" />
+<polyline points="540,307 660,307" fill="none" stroke="white" stroke-width="4" stroke-linejoin="round" marker-end="url(#arrow)" />
+<polyline points="1340,307 1500,307" fill="none" stroke="white" stroke-width="4" stroke-linejoin="round" marker-end="url(#arrow)" />
+<polyline points="1715,350 1715,405" fill="none" stroke="white" stroke-width="4" stroke-linejoin="round" marker-end="url(#arrow)" />
+<polyline points="1000,350 1000,390" fill="none" stroke="white" stroke-width="4" stroke-linejoin="round" marker-end="url(#arrow)" />
+<polyline points="1000,475 1000,515" fill="none" stroke="white" stroke-width="4" stroke-linejoin="round" marker-end="url(#arrow)" />
+<rect x="400" y="665" width="440" height="85" rx="15" fill="#b5dcf7" stroke="white" stroke-width="6" /><rect x="405" y="670" width="430" height="75" rx="11" fill="none" stroke="#222" stroke-width="3" />
+<text text-anchor="middle" fill="black" font-family="Georgia, Times New Roman, serif" font-size="38" font-weight="bold"><tspan x="620.0" y="707.5" dominant-baseline="middle">FOD YOLO</tspan></text>
+<rect x="1220" y="665" width="440" height="85" rx="15" fill="#b5dcf7" stroke="white" stroke-width="6" /><rect x="1225" y="670" width="430" height="75" rx="11" fill="none" stroke="#222" stroke-width="3" />
+<text text-anchor="middle" fill="black" font-family="Georgia, Times New Roman, serif" font-size="38" font-weight="bold"><tspan x="1440.0" y="707.5" dominant-baseline="middle">Crack U-Net</tspan></text>
+<polyline points="1000,600 1000,630 620,630 620,665" fill="none" stroke="white" stroke-width="4" stroke-linejoin="round" marker-end="url(#arrow)" />
+<polyline points="1000,630 1440,630 1440,665" fill="none" stroke="white" stroke-width="4" stroke-linejoin="round" marker-end="url(#arrow)" />
+<rect x="170" y="820" width="360" height="90" rx="15" fill="#dedede" stroke="white" stroke-width="6" /><rect x="175" y="825" width="350" height="80" rx="11" fill="none" stroke="#222" stroke-width="3" />
+<text text-anchor="middle" fill="black" font-family="Georgia, Times New Roman, serif" font-size="38" font-weight="bold"><tspan x="350.0" y="865.0" dominant-baseline="middle">FOD Detected</tspan></text>
+<rect x="660" y="820" width="300" height="105" rx="15" fill="#f5b2b2" stroke="white" stroke-width="6" /><rect x="665" y="825" width="290" height="95" rx="11" fill="none" stroke="#222" stroke-width="3" />
+<text text-anchor="middle" fill="black" font-family="Georgia, Times New Roman, serif" font-size="38" font-weight="bold"><tspan x="810.0" y="851.5" dominant-baseline="middle">No FOD</tspan><tspan x="810.0" y="893.5" dominant-baseline="middle">Detected</tspan></text>
+<rect x="1100" y="820" width="300" height="105" rx="15" fill="#f5b2b2" stroke="white" stroke-width="6" /><rect x="1105" y="825" width="290" height="95" rx="11" fill="none" stroke="#222" stroke-width="3" />
+<text text-anchor="middle" fill="black" font-family="Georgia, Times New Roman, serif" font-size="38" font-weight="bold"><tspan x="1250.0" y="851.5" dominant-baseline="middle">No Crack</tspan><tspan x="1250.0" y="893.5" dominant-baseline="middle">Detected</tspan></text>
+<rect x="1550" y="820" width="300" height="105" rx="15" fill="#d3edbb" stroke="white" stroke-width="6" /><rect x="1555" y="825" width="290" height="95" rx="11" fill="none" stroke="#222" stroke-width="3" />
+<text text-anchor="middle" fill="black" font-family="Georgia, Times New Roman, serif" font-size="38" font-weight="bold"><tspan x="1700.0" y="851.5" dominant-baseline="middle">Crack</tspan><tspan x="1700.0" y="893.5" dominant-baseline="middle">Detected</tspan></text>
+<polyline points="620,750 620,785 350,785 350,820" fill="none" stroke="white" stroke-width="4" stroke-linejoin="round" marker-end="url(#arrow)" />
+<polyline points="620,750 620,785 810,785 810,820" fill="none" stroke="white" stroke-width="4" stroke-linejoin="round" marker-end="url(#arrow)" />
+<polyline points="1440,750 1440,785 1250,785 1250,820" fill="none" stroke="white" stroke-width="4" stroke-linejoin="round" marker-end="url(#arrow)" />
+<polyline points="1440,750 1440,785 1700,785 1700,820" fill="none" stroke="white" stroke-width="4" stroke-linejoin="round" marker-end="url(#arrow)" />
+<rect x="140" y="965" width="420" height="115" rx="15" fill="#d3edbb" stroke="white" stroke-width="6" /><rect x="145" y="970" width="410" height="105" rx="11" fill="none" stroke="#222" stroke-width="3" />
+<text text-anchor="middle" fill="black" font-family="Georgia, Times New Roman, serif" font-size="38" font-weight="bold"><tspan x="350.0" y="1001.5" dominant-baseline="middle">FOD Coordinate</tspan><tspan x="350.0" y="1043.5" dominant-baseline="middle">Extraction</tspan></text>
+<rect x="130" y="1120" width="440" height="115" rx="15" fill="#f5b2b2" stroke="white" stroke-width="6" /><rect x="135" y="1125" width="430" height="105" rx="11" fill="none" stroke="#222" stroke-width="3" />
+<text text-anchor="middle" fill="black" font-family="Georgia, Times New Roman, serif" font-size="38" font-weight="bold"><tspan x="350.0" y="1156.5" dominant-baseline="middle">Send Coordinates</tspan><tspan x="350.0" y="1198.5" dominant-baseline="middle">to UGV</tspan></text>
+<rect x="115" y="1280" width="470" height="85" rx="15" fill="#b5dcf7" stroke="white" stroke-width="6" /><rect x="120" y="1285" width="460" height="75" rx="11" fill="none" stroke="#222" stroke-width="3" />
+<text text-anchor="middle" fill="black" font-family="Georgia, Times New Roman, serif" font-size="38" font-weight="bold"><tspan x="350.0" y="1322.5" dominant-baseline="middle">Continue Inspection</tspan></text>
+<polyline points="350,910 350,965" fill="none" stroke="white" stroke-width="4" stroke-linejoin="round" marker-end="url(#arrow)" />
+<polyline points="350,1080 350,1120" fill="none" stroke="white" stroke-width="4" stroke-linejoin="round" marker-end="url(#arrow)" />
+<polyline points="350,1235 350,1280" fill="none" stroke="white" stroke-width="4" stroke-linejoin="round" marker-end="url(#arrow)" />
+<rect x="830" y="1060" width="400" height="85" rx="15" fill="#dedede" stroke="white" stroke-width="6" /><rect x="835" y="1065" width="390" height="75" rx="11" fill="none" stroke="#222" stroke-width="3" />
+<text text-anchor="middle" fill="black" font-family="Georgia, Times New Roman, serif" font-size="38" font-weight="bold"><tspan x="1030.0" y="1102.5" dominant-baseline="middle">If Both True</tspan></text>
+<rect x="820" y="1220" width="420" height="95" rx="15" fill="#dab0f1" stroke="white" stroke-width="6" /><rect x="825" y="1225" width="410" height="85" rx="11" fill="none" stroke="#222" stroke-width="3" />
+<text text-anchor="middle" fill="black" font-family="Georgia, Times New Roman, serif" font-size="38" font-weight="bold"><tspan x="1030.0" y="1267.5" dominant-baseline="middle">Send to Base</tspan></text>
+<polyline points="810,925 810,995 1030,995 1030,1060" fill="none" stroke="white" stroke-width="4" stroke-linejoin="round" marker-end="url(#arrow)" />
+<polyline points="1250,925 1250,995 1030,995" fill="none" stroke="white" stroke-width="4" stroke-linejoin="round" />
+<polyline points="1030,1145 1030,1220" fill="none" stroke="white" stroke-width="4" stroke-linejoin="round" marker-end="url(#arrow)" />
+<rect x="1500" y="1025" width="400" height="95" rx="15" fill="#dab0f1" stroke="white" stroke-width="6" /><rect x="1505" y="1030" width="390" height="85" rx="11" fill="none" stroke="#222" stroke-width="3" />
+<text text-anchor="middle" fill="black" font-family="Georgia, Times New Roman, serif" font-size="38" font-weight="bold"><tspan x="1700.0" y="1072.5" dominant-baseline="middle">Send to Base</tspan></text>
+<rect x="1465" y="1200" width="470" height="85" rx="15" fill="#b5dcf7" stroke="white" stroke-width="6" /><rect x="1470" y="1205" width="460" height="75" rx="11" fill="none" stroke="#222" stroke-width="3" />
+<text text-anchor="middle" fill="black" font-family="Georgia, Times New Roman, serif" font-size="38" font-weight="bold"><tspan x="1700.0" y="1242.5" dominant-baseline="middle">Continue Inspection</tspan></text>
+<polyline points="1700,925 1700,1025" fill="none" stroke="white" stroke-width="4" stroke-linejoin="round" marker-end="url(#arrow)" />
+<polyline points="1700,1120 1700,1200" fill="none" stroke="white" stroke-width="4" stroke-linejoin="round" marker-end="url(#arrow)" />
+</svg>
