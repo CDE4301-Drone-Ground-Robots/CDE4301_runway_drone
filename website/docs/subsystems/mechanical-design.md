@@ -119,6 +119,112 @@ A key limitation of the second iteration was the geometry of the top and bottom 
 
 To address the fabrication limitations of the second iteration, the final FOD ARGUS prototype design combines CFRP structural components with 3D-printed parts. CFRP was selected for the main structural components, including the base plates that mount the electrical and key onboard components, motor mounting plates and propeller arms. Its material properties, discussed earlier, and suitability for components with relatively simple geometry address the design requirement for manufacturability. For parts requiring greater geometric complexity and flexibility in customisation, such as enclosures and tube clamps, 3D-printed PETG CF would be used, as it demonstrates better mechanical properties than conventional PETG and PLA filaments [\[9\]](../references#md-ref-9).
 
+## Centre of Gravity (CG) of UAV
+
+The centre of gravity (CG) of the completed UAV prototype assembly was determined in SolidWorks from the mass distribution of its individual components. The coordinates below are relative to the assembly coordinate origin; the vertical coordinate is distinct from the distance below the propeller plane.
+
+| Axis | CG coordinate (mm) |
+| --- | ---: |
+| X | −5.85 |
+| Y | 0.61 |
+| Z | 36.49 |
+
+<div class="cv-figure-grid">
+
+<MechanicalFigure n="14" src="/report-assets/mechanical-design/cg-top-view.png" :width="600" :height="572" caption="CG point in the top view of the SolidWorks assembly (project CAD)." />
+
+<MechanicalFigure n="15" src="/report-assets/mechanical-design/cg-front-view.png" :width="1101" :height="502" caption="CG point in the front view of the SolidWorks assembly (project CAD)." />
+
+</div>
+
+### 3.1 Horizontal CG Positioning {#horizontal-cg-positioning}
+
+The SolidWorks mass properties give the horizontal displacement of the CG from the geometric centre of the four motors in the X configuration:
+
+$$
+d_{CG}=\sqrt{(-5.85)^2+(0.61)^2}=5.88\ \mathrm{mm} \tag{1}
+$$
+
+The calculated horizontal offset is approximately 5.88 mm. This relatively small offset limits the additional pitch and roll moments associated with uneven mass distribution, reducing the differential thrust required to maintain level hover. This can preserve more motor control authority for manoeuvres and responses to external disturbances, such as wind gusts.
+
+### 3.2 Vertical CG Positioning {#vertical-cg-positioning}
+
+The SolidWorks assembly places the UAV's CG approximately 40 mm below the propeller plane.
+
+The thesis cited in the source report [\[10\]](../references#md-ref-10) describes how positioning the CG below the propellers can contribute to stability during forward flight and wind disturbances. Aerodynamic drag acting above the CG can generate a stabilising moment opposing an attitude disturbance, as illustrated below.
+
+<MechanicalFigure n="16" src="/report-assets/mechanical-design/vertical-cg-stability-reference.png" :width="1040" :height="378" caption="Influence of vertical CG positioning on multicopter stability. External thesis illustration reproduced in the supplied report [10]; bibliographic details were not supplied." />
+
+FOD ARGUS incorporates a lower CG through the arrangement of its onboard components, particularly the battery. This configuration may contribute to a stabilising aerodynamic response if the resultant aerodynamic forces act above the CG. Overall stability remains dependent on the flight control system, and flight testing is required to evaluate the effectiveness of this arrangement.
+
+## Placement of Key Onboard Components
+
+The placement of key onboard components supports flight stability and operational requirements. The flight controller, cameras and other electronics were positioned with consideration of mass distribution, accessibility, vibration isolation and electrical connectivity.
+
+### 4.1 Central Alignment of GNSS Antenna and RGB Camera {#central-alignment-of-gnss-antenna-and-rgb-camera}
+
+The RGB camera detects foreign object debris (FOD) and identifies its location within captured images, while the GNSS system provides the UAV's geographical position. To simplify geolocation, the GNSS antenna and RGB camera were placed centrally in the X–Y plane along the same vertical axis, separated in height.
+
+<MechanicalFigure n="17" src="/report-assets/mechanical-design/gnss-rgb-vertical-alignment.png" :width="702" :height="306" caption="Side view showing the vertical separation of the GNSS antenna and RGB camera (project CAD)." />
+
+This arrangement simplifies the sensor-to-sensor coordinate transformation because the relative displacement is primarily vertical. A simplified position transformation, derived from the direct georeferencing principles cited in the source report [\[11\]](../references#md-ref-11), is:
+
+$$
+\mathbf{p}_C^N=\mathbf{p}_G^N+\mathbf{R}_B^N\mathbf{t}_{GC} \tag{2}
+$$
+
+Here, $\mathbf{p}_C^N$ is the RGB camera position in the navigation frame, $\mathbf{p}_G^N$ is the GNSS antenna position in that frame, $\mathbf{R}_B^N$ is the rotation matrix from the UAV body frame to the navigation frame, accounting for attitude, and $\mathbf{t}_{GC}$ is the translation vector from the GNSS antenna to the RGB camera, expressed in the body frame.
+
+For the approximately vertically aligned configuration:
+
+$$
+\mathbf{p}_C^N\approx\mathbf{p}_G^N+\mathbf{R}_B^N
+\begin{bmatrix}0\\0\\\Delta z\end{bmatrix} \tag{3}
+$$
+
+The signed separation $\Delta z$ is measured from the GNSS antenna to the RGB camera along the UAV body Z-axis. Central alignment simplifies the lever-arm offset used for FOD geolocation, but UAV attitude must still be considered when transforming the camera position into the navigation frame.
+
+### 4.2 Placement of the Pixhawk Flight Controller near Centre of Gravity {#placement-of-the-pixhawk-flight-controller-near-centre-of-gravity}
+
+The placement of the Pixhawk flight controller in the FOD ARGUS UAV was determined based on recommendations from PX4 and ArduPilot documentation, which recommend placing the flight controller as close as possible to the CG [\[12\]](../references#md-ref-12) [\[13\]](../references#md-ref-13).
+
+<MechanicalFigure n="18" src="/report-assets/mechanical-design/px4-flight-controller-mounting.png" :width="1040" :height="611" caption="Ideal flight controller placement. External PX4 documentation illustration reproduced in the supplied report [12]; the original source URL was not supplied." />
+
+Subsequently, we positioned the flight controller as close to the CG as practically possible in our UAV assembly while also considering spatial constraints, as shown in the images below.
+
+<MechanicalFigure n="19" src="/report-assets/mechanical-design/pixhawk-isometric-view.png" :width="872" :height="617" caption="Isometric view of the Pixhawk placement (project CAD)." />
+
+<div class="cv-figure-grid">
+
+<MechanicalFigure n="20" src="/report-assets/mechanical-design/pixhawk-top-view.png" :width="656" :height="619" caption="Top view of the Pixhawk placement (project CAD)." />
+
+<MechanicalFigure n="21" src="/report-assets/mechanical-design/pixhawk-side-view.png" :width="807" :height="391" caption="Side view of the Pixhawk placement (project CAD)." />
+
+</div>
+
+After completing the overall UAV assembly, we calculated the approximate position of the Pixhawk relative to the UAV's overall CG point.
+
+| Axis | Approximate distance from CG (mm) |
+| --- | ---: |
+| X | 20 |
+| Y | 0 |
+| Z | 40 |
+
+The resultant displacement is:
+
+$$
+\begin{aligned}
+d&=\sqrt{(\Delta x)^2+(\Delta y)^2+(\Delta z)^2}\\
+&=\sqrt{20^2+0^2+40^2}\\
+&\approx44.72\ \mathrm{mm}
+\end{aligned} \tag{4}
+$$
+
+The resultant displacement obtained is approximately 45 mm from the CG, which is still within ArduPilot's recommendation of placing the flight controller within a few centimetres of the CG. Although both PX4 and ArduPilot provide software parameters to compensate for positional offsets when the flight controller cannot be mounted directly at the CG, positioning it as close as practically possible remains desirable. This is because a greater displacement from the CG increases the additional accelerations experienced by the IMU during rotational motion, potentially affecting sensor measurements and flight control performance [\[13\]](../references#md-ref-13).
+
+## Motor & Propellers Selection
+
+
 ### Interactive UAV Attitude & Thrust Simulator
 
 <UAVTiltThrustSimulator />
@@ -126,3 +232,17 @@ To address the fabrication limitations of the second iteration, the final FOD AR
 This interactive visualisation supports preliminary thrust sizing for an X-configuration quadcopter. It assumes constant altitude with no vertical acceleration, thrust aligned with the body thrust axis, and no aerodynamic disturbances or additional forces. The per-motor value is the average obtained by sharing the total thrust equally across four motors; actual individual thrust can differ as the flight controller generates pitch, roll and yaw moments. This is an idealised steady-altitude calculation, not a full six-degree-of-freedom flight dynamics simulation.
 
 </div>
+
+<style>
+.mechanical-equation{position:relative;display:flex;align-items:center;justify-content:center;gap:12px;margin:24px 0;padding:8px 36px;color:var(--vp-c-text-1)}
+.mechanical-equation-math{min-width:0;max-width:100%;overflow-x:auto;padding:4px 0;user-select:text}
+.mechanical-equation math{font-size:1.15em;white-space:nowrap}
+/* Native MathML needs explicit cell alignment for the three-line derivation. */
+#equation-md-4{margin:16px 0;padding-top:0;padding-bottom:0}
+#equation-md-4 mtable{border-spacing:0}
+#equation-md-4 mtd{padding:.2em 0;text-align:left}
+#equation-md-4 mtd:first-child{text-align:right;padding-right:.25em}
+#equation-md-4 mtr:last-child mtd{padding-top:.65em}
+.mechanical-equation-number{position:absolute;right:0;top:50%;transform:translateY(-50%);font-size:14px}
+@media(max-width:600px){.mechanical-equation{padding:8px 27px;gap:6px}.mechanical-equation math{font-size:.88em}}
+</style>

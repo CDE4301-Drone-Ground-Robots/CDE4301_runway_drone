@@ -26,10 +26,20 @@ export const mechanicalSubsystemSections: MechanicalSection[] = [
    { slug: 'second-iteration', title: 'Second Iteration', sections: [
     { slug: 'limitations-1', title: 'Limitations' }
    ] },
-   { slug: 'final-prototype-design', title: 'Final Prototype Design' },
-   { slug: 'interactive-uav-attitude-thrust-simulator', title: 'Interactive UAV Attitude & Thrust Simulator' }
+   { slug: 'final-prototype-design', title: 'Final Prototype Design' }
   ]
- }
+ },
+ { slug: 'centre-of-gravity-cg-of-uav', title: 'Centre of Gravity (CG) of UAV', sections: [
+  { slug: 'horizontal-cg-positioning', title: 'Horizontal CG Positioning' },
+  { slug: 'vertical-cg-positioning', title: 'Vertical CG Positioning' }
+ ] },
+ { slug: 'placement-of-key-onboard-components', title: 'Placement of Key Onboard Components', sections: [
+  { slug: 'central-alignment-of-gnss-antenna-and-rgb-camera', title: 'Central Alignment of GNSS Antenna and RGB Camera' },
+  { slug: 'placement-of-the-pixhawk-flight-controller-near-centre-of-gravity', title: 'Placement of the Pixhawk Flight Controller near Centre of Gravity' }
+ ] },
+ { slug: 'motor-propellers-selection', title: 'Motor & Propellers Selection', sections: [
+  { slug: 'interactive-uav-attitude-thrust-simulator', title: 'Interactive UAV Attitude & Thrust Simulator' }
+ ] }
 ]
 
 type MechanicalSidebarItem = { text: string; link: string }

@@ -76,6 +76,22 @@ The numbers below preserve the citations in Section 10 of the supplied *Interim 
 
 **Bibliographic details missing; manual completion required.** Referenced in the Mechanical Design report.
 
+### [10] - Vertical CG positioning and multicopter stability thesis {#md-ref-10}
+
+**Bibliographic details missing; manual completion required.** Citation preserved from Sections 10.3?10.4 of the supplied *Interim Report.docx*.
+
+### [11] - Direct georeferencing and sensor lever-arm transformation {#md-ref-11}
+
+**Bibliographic details missing; manual completion required.** Citation preserved from Sections 10.3?10.4 of the supplied *Interim Report.docx*.
+
+### [12] - PX4 flight controller mounting documentation {#md-ref-12}
+
+**Bibliographic details missing; manual completion required.** Citation preserved from Sections 10.3?10.4 of the supplied *Interim Report.docx*.
+
+### [13] - ArduPilot flight controller placement and IMU offsets {#md-ref-13}
+
+**Bibliographic details missing; manual completion required.** Citation preserved from Sections 10.3?10.4 of the supplied *Interim Report.docx*.
+
 ## Computer Vision Safety Sources
 
 ### CV-S01 - Pavement Cracking and FOD Risk {#cv-s01}
