@@ -35,7 +35,10 @@ export const mechanicalSubsystemSections: MechanicalSection[] = [
  ] },
  { slug: 'placement-of-key-onboard-components', title: 'Placement of Key Onboard Components', sections: [
   { slug: 'central-alignment-of-gnss-antenna-and-rgb-camera', title: 'Central Alignment of GNSS Antenna and RGB Camera' },
-  { slug: 'placement-of-the-pixhawk-flight-controller-near-centre-of-gravity', title: 'Placement of the Pixhawk Flight Controller near Centre of Gravity' }
+  { slug: 'placement-of-the-pixhawk-flight-controller-near-centre-of-gravity', title: 'Placement of the Pixhawk Flight Controller near Centre of Gravity' },
+  { slug: 'placement-of-the-360-lidar', title: 'Placement of the 360° LiDAR' },
+  { slug: '45-degree-placement-of-the-thermal-camera', title: '45° Placement of the Thermal Camera' },
+  { slug: 'placement-of-batteries-and-other-electrical-components-in-the-bottom-layer', title: 'Placement of Batteries and Other Electrical Components in the Bottom Layer' }
  ] },
  { slug: 'motor-propellers-selection', title: 'Motor & Propellers Selection', sections: [
   { slug: 'interactive-uav-attitude-thrust-simulator', title: 'Interactive UAV Attitude & Thrust Simulator' }
