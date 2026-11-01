@@ -222,6 +222,26 @@ $$
 
 The resultant displacement obtained is approximately 45 mm from the CG, which is still within ArduPilot's recommendation of placing the flight controller within a few centimetres of the CG. Although both PX4 and ArduPilot provide software parameters to compensate for positional offsets when the flight controller cannot be mounted directly at the CG, positioning it as close as practically possible remains desirable. This is because a greater displacement from the CG increases the additional accelerations experienced by the IMU during rotational motion, potentially affecting sensor measurements and flight control performance [\[13\]](../references#md-ref-13).
 
+### 4.3 Placement of the 360° LiDAR {#placement-of-the-360-lidar}
+
+The 360° LiDAR was initially intended to be mounted centrally on the top plate. However, this position was prioritised for the GNSS antenna to maintain its central alignment with the RGB camera, so the LiDAR was relocated towards the front. It is intended to support obstacle detection and avoidance, as discussed in the [Computer Vision section](./computer-vision#thermal-safety). This placement aims to minimise obstruction of the LiDAR's scanning field by surrounding onboard components while maintaining sufficient clearance from the propellers and structural elements.
+
+<MechanicalFigure n="22" src="/report-assets/mechanical-design/lidar-front-isometric-view.png" :width="916" :height="586" caption="Front placement of the 360° LiDAR in the isometric view (project CAD)." />
+
+### 4.4 45° Placement of the Thermal Camera {#45-degree-placement-of-the-thermal-camera}
+
+The thermal camera is mounted at approximately 45° using a rigid, custom-designed mount that will be 3D-printed. This arrangement allows the thermal camera to complement the 360° LiDAR for obstacle detection. Further details of the planned sensor integration for obstacle detection and avoidance are discussed in the [Computer Vision section](./computer-vision#thermal-safety).
+
+<MechanicalFigure n="23" src="/report-assets/mechanical-design/thermal-camera-side-view.png" :width="928" :height="392" caption="Placement of the thermal camera in the side view (project CAD)." />
+
+### 4.5 Placement of Batteries and Other Electrical Components in the Bottom Layer {#placement-of-batteries-and-other-electrical-components-in-the-bottom-layer}
+
+The batteries and other electrical components, particularly the Electronic Speed Controllers (ESCs), were positioned on the bottom layer of the UAV. As the batteries contribute significantly to the overall mass of the UAV as it is the heaviest component, weighing approximately 1.5kg, their placement in the lower section helps lower the CG, as discussed in [Section 3](#centre-of-gravity-cg-of-uav).
+
+For the ESCs, although some multirotor designs mount them externally along the propeller arms, the FOD Argus prototype adopts an internal mounting configuration within the bottom layer. This arrangement provides additional protection against direct exposure to water and environmental conditions, particularly since the selected AMPX 40A ESCs do not have a specified waterproof rating.
+
+However, with the planned integration of the Raspberry Pi into the bottom layer, spatial constraints may require the ESCs to be relocated externally. If necessary, 3D printed protective enclosures will be designed to provide water resistance.
+
 ## Motor & Propellers Selection
 
 
