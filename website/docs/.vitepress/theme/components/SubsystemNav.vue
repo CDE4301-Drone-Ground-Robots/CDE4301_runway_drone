@@ -35,7 +35,8 @@ onUnmounted(()=>document.removeEventListener('click',outside))
 .subsystem-nav-toggle:hover{color:var(--vp-c-brand-1)}
 @media(prefers-reduced-motion:reduce){.subsystem-nav-toggle svg{transition:none}}
 .subsystem-nav-menu{position:absolute;top:calc(100% - 6px);right:0;width:360px;max-width:calc(100vw - 32px);padding:8px;border:1px solid var(--vp-c-divider);border-radius:16px;background:var(--vp-c-bg-elv);box-shadow:var(--vp-shadow-3)}
-.subsystem-nav-menu a{display:flex;flex-direction:column;gap:4px;padding:12px;border-radius:8px;line-height:1.5}
+.subsystem-nav-menu a{display:flex;flex-direction:column;gap:4px;padding:12px;border-radius:8px;line-height:1.5;min-width:0;white-space:normal}
+.subsystem-nav-menu a>span,.subsystem-nav-menu small{display:block;max-width:100%;white-space:normal;overflow-wrap:break-word}
 .subsystem-nav-menu a:hover{background:var(--vp-c-default-soft)}
 .subsystem-nav-menu small{font-size:10px;color:var(--vp-c-text-2)}
 .subsystem-nav-label:focus-visible,.subsystem-nav-toggle:focus-visible,.subsystem-nav-menu a:focus-visible{outline:2px solid var(--vp-c-brand-1);outline-offset:2px}
