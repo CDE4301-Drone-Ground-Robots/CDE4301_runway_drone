@@ -99,3 +99,23 @@ The numbers below preserve the citations in Section 10 of the supplied *Interim 
 Federal Aviation Administration. **Reflective Cracking Program**. Airport Technology Research and Development. Accessed 31 October 2026.
 
 [Open FAA research overview](https://www.airporttech.tc.faa.gov/Airport-Pavement/Pavement-Design/Reflective-Cracking-Program). Explains that reflective cracks can lead to spalling and loose pavement pieces that become FOD. Used to support retaining crack inspection alongside FOD detection.
+
+## Communication System Sources
+
+### COM-H01 - Microhard pMDDL2450 {#com-h01}
+
+Microhard. **pMDDL2450 - Wireless MIMO (2X2) OEM Digital Data Link**. Manufacturer product page; accessed 1 November 2026.
+
+[Manufacturer specifications](https://www.microhardcorp.com/pMDDL2450.php). Identifies the candidate radio as a 2.4 GHz data link.
+
+### COM-R01 - IMDA Short Range Devices Specification {#com-r01}
+
+Infocomm Media Development Authority. **Technical Specification for Short Range Devices (IMDA TS SRD), September 2023**. Accessed 1 November 2026.
+
+[Official technical specification](https://www.imda.gov.sg/-/media/imda/files/regulation-licensing-and-consultations/ict-standards/telecommunication-standards/radio-comms/imdatssrd.pdf). Lists band-specific device categories and operating conditions. A listed band alone does not establish approval for the proposed radio configuration.
+
+### COM-R02 - IMDA Unmanned Aircraft Radio Guidance {#com-r02}
+
+Infocomm Media Development Authority. **Operation of Unmanned Aircraft Systems (UAS)**. Accessed 1 November 2026.
+
+[Official UAS guidance](https://www.imda.gov.sg/regulations-and-licensing-listing/spectrum-management/frequency-allocation-and-assignment/operation-of-unmanned-aircraft-systems-uas). Lists the commonly used 2.4000-2.4835 GHz UAV band with a maximum power of 100 mW EIRP under the published licence-exemption conditions.

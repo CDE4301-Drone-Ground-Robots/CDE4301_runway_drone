@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 480" width="1000" height="480" preserveAspectRatio="xMidYMid meet" role="img">
+<title>Interim ARGUS to HUNTER communication architecture</title>
+<defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="12" markerHeight="12" markerUnits="userSpaceOnUse" orient="auto"><path d="M0 0L10 5L0 10Z" fill="#d6b19c"/></marker></defs>
+<rect width="1000" height="480" rx="18" fill="#0d131d"/>
+<rect x="50" y="40" width="300" height="100" rx="12" fill="#20374a" stroke="#8fabbc" stroke-width="2"/>
+<text x="200.0" y="75.0" text-anchor="middle" dominant-baseline="middle" fill="#f1f4f7" font-family="Arial,sans-serif" font-size="24">ARGUS - Laptop</text>
+<text x="200.0" y="105.0" text-anchor="middle" dominant-baseline="middle" fill="#f1f4f7" font-family="Arial,sans-serif" font-size="24">Python C2 publisher</text>
+<rect x="50" y="200" width="300" height="80" rx="12" fill="#1d3b35" stroke="#8fabbc" stroke-width="2"/>
+<text x="200.0" y="240.0" text-anchor="middle" dominant-baseline="middle" fill="#f1f4f7" font-family="Arial,sans-serif" font-size="24">ROS 2 Jazzy / DDS</text>
+<rect x="365" y="350" width="270" height="90" rx="12" fill="#3b2c49" stroke="#8fabbc" stroke-width="2"/>
+<text x="500.0" y="380.0" text-anchor="middle" dominant-baseline="middle" fill="#f1f4f7" font-family="Arial,sans-serif" font-size="24">UDP/IP</text>
+<text x="500.0" y="410.0" text-anchor="middle" dominant-baseline="middle" fill="#f1f4f7" font-family="Arial,sans-serif" font-size="24">Local Wi-Fi</text>
+<rect x="650" y="200" width="300" height="80" rx="12" fill="#1d3b35" stroke="#8fabbc" stroke-width="2"/>
+<text x="800.0" y="240.0" text-anchor="middle" dominant-baseline="middle" fill="#f1f4f7" font-family="Arial,sans-serif" font-size="24">ROS 2 Jazzy / DDS</text>
+<rect x="650" y="40" width="300" height="100" rx="12" fill="#20374a" stroke="#8fabbc" stroke-width="2"/>
+<text x="800.0" y="75.0" text-anchor="middle" dominant-baseline="middle" fill="#f1f4f7" font-family="Arial,sans-serif" font-size="24">HUNTER - Pi 5</text>
+<text x="800.0" y="105.0" text-anchor="middle" dominant-baseline="middle" fill="#f1f4f7" font-family="Arial,sans-serif" font-size="24">Python C2 subscriber</text>
+<polyline points="200,140 200,200" fill="none" stroke="#d6b19c" stroke-width="3" stroke-linejoin="round" marker-end="url(#arrow)"/>
+<polyline points="200,280 200,395 365,395" fill="none" stroke="#d6b19c" stroke-width="3" stroke-linejoin="round" marker-end="url(#arrow)"/>
+<polyline points="635,395 800,395 800,280" fill="none" stroke="#d6b19c" stroke-width="3" stroke-linejoin="round" marker-end="url(#arrow)"/>
+<polyline points="800,200 800,140" fill="none" stroke="#d6b19c" stroke-width="3" stroke-linejoin="round" marker-end="url(#arrow)"/>
+</svg>

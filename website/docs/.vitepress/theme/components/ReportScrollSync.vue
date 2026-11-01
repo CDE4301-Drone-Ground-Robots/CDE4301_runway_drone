@@ -2,6 +2,7 @@
 import { nextTick, onMounted, onUnmounted, watch } from 'vue'
 import { useRoute, withBase } from 'vitepress'
 import { cvSubsystemSections } from '../../cv-subsystem-sections'
+import { communicationSubsystemSections } from '../../communication-subsystem-sections'
 import { flattenMechanicalSections } from '../../mechanical-subsystem-sections'
 const route = useRoute()
 let entries: { heading: HTMLElement; link: HTMLAnchorElement; item: HTMLElement | null }[] = []
@@ -42,6 +43,7 @@ function keepVisible(entry: typeof entries[number]) {
 function update() {
  frame = 0
  if (!entries.length) return
+ if (entries.some(entry => !entry.heading.isConnected || !entry.link.isConnected)) { void refresh(); return }
  const navBottom = document.querySelector('.VPNav')?.getBoundingClientRect().bottom ?? 72
  // Mechanical subsection anchors settle below the navigation at about 134px.
  const threshold = Math.max(isMechanicalReport() ? 144 : 120, navBottom + 36)
@@ -75,8 +77,9 @@ async function refresh() {
  sidebar = document.querySelector<HTMLElement>('.VPSidebar')
  if (!report || !sidebar) return
  const mechanical = isMechanicalReport()
- const sections = mechanical ? flattenMechanicalSections() : cvSubsystemSections
- const reportPath = mechanical ? '/subsystems/mechanical-design' : '/subsystems/computer-vision'
+ const communication = route.path.replace(/\.html$/, '').endsWith('/subsystems/communication-system')
+ const sections = mechanical ? flattenMechanicalSections() : communication ? communicationSubsystemSections : cvSubsystemSections
+ const reportPath = mechanical ? '/subsystems/mechanical-design' : communication ? '/subsystems/communication-system' : '/subsystems/computer-vision'
  for (const section of sections) {
   const heading = report.querySelector<HTMLElement>('[id="' + section.slug + '"]')
   const href = withBase(reportPath + '#' + section.slug)

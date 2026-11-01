@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 680" width="1000" height="680" preserveAspectRatio="xMidYMid meet" role="img">
+<title>Proposed vision and communication workflow; Stage 2 is simulated</title>
+<defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="12" markerHeight="12" markerUnits="userSpaceOnUse" orient="auto"><path d="M0 0L10 5L0 10Z" fill="#d6b19c"/></marker></defs>
+<rect width="1000" height="680" rx="18" fill="#0d131d"/>
+<rect x="50" y="35" width="270" height="85" rx="12" fill="#20374a" stroke="#8fabbc" stroke-width="2"/>
+<text x="185.0" y="62.5" text-anchor="middle" dominant-baseline="middle" fill="#f1f4f7" font-family="Arial,sans-serif" font-size="24">Navigation system</text>
+<text x="185.0" y="92.5" text-anchor="middle" dominant-baseline="middle" fill="#f1f4f7" font-family="Arial,sans-serif" font-size="24">Drone centre position</text>
+<rect x="680" y="35" width="270" height="85" rx="12" fill="#20374a" stroke="#8fabbc" stroke-width="2"/>
+<text x="815.0" y="62.5" text-anchor="middle" dominant-baseline="middle" fill="#f1f4f7" font-family="Arial,sans-serif" font-size="24">Vision system</text>
+<text x="815.0" y="92.5" text-anchor="middle" dominant-baseline="middle" fill="#f1f4f7" font-family="Arial,sans-serif" font-size="24">Inspect for FOD</text>
+<rect x="50" y="200" width="270" height="85" rx="12" fill="#1d3b35" stroke="#8fabbc" stroke-width="2"/>
+<text x="185.0" y="227.5" text-anchor="middle" dominant-baseline="middle" fill="#f1f4f7" font-family="Arial,sans-serif" font-size="24">Coordinate extraction</text>
+<text x="185.0" y="257.5" text-anchor="middle" dominant-baseline="middle" fill="#f1f4f7" font-family="Arial,sans-serif" font-size="24">FOD target position</text>
+<polygon points="800,175 950,242.5 800,310 650,242.5" fill="#3b2c49" stroke="#8fabbc" stroke-width="2"/><text x="800" y="242.5" text-anchor="middle" dominant-baseline="middle" fill="#f1f4f7" font-family="Arial,sans-serif" font-size="24">FOD detected?</text>
+<polyline points="200,120 200,200" fill="none" stroke="#d6b19c" stroke-width="3" stroke-linejoin="round" marker-end="url(#arrow)"/>
+<polyline points="815,120 815,168 800,175" fill="none" stroke="#d6b19c" stroke-width="3" stroke-linejoin="round" marker-end="url(#arrow)"/>
+<polyline points="650,242.5 320,242.5" fill="none" stroke="#d6b19c" stroke-width="3" stroke-linejoin="round" marker-end="url(#arrow)"/>
+<text x="490" y="225" text-anchor="middle" fill="#e6c7b5" font-family="Arial,sans-serif" font-size="22">Yes</text>
+<polyline points="950,242.5 978,242.5 978,77.5 950,77.5" fill="none" stroke="#d6b19c" stroke-width="3" stroke-linejoin="round" marker-end="url(#arrow)"/>
+<text x="963" y="160" text-anchor="middle" fill="#e6c7b5" font-family="Arial,sans-serif" font-size="22">No</text>
+<rect x="50" y="380" width="270" height="85" rx="12" fill="#20374a" stroke="#8fabbc" stroke-width="2"/>
+<text x="185.0" y="407.5" text-anchor="middle" dominant-baseline="middle" fill="#f1f4f7" font-family="Arial,sans-serif" font-size="24">ARGUS publisher</text>
+<text x="185.0" y="437.5" text-anchor="middle" dominant-baseline="middle" fill="#f1f4f7" font-family="Arial,sans-serif" font-size="24">JSON C2 alert</text>
+<rect x="365" y="380" width="270" height="85" rx="12" fill="#20374a" stroke="#8fabbc" stroke-width="2"/>
+<text x="500.0" y="407.5" text-anchor="middle" dominant-baseline="middle" fill="#f1f4f7" font-family="Arial,sans-serif" font-size="24">ROS 2 / DDS</text>
+<text x="500.0" y="437.5" text-anchor="middle" dominant-baseline="middle" fill="#f1f4f7" font-family="Arial,sans-serif" font-size="24">Local Wi-Fi</text>
+<rect x="680" y="380" width="270" height="85" rx="12" fill="#20374a" stroke="#8fabbc" stroke-width="2"/>
+<text x="815.0" y="407.5" text-anchor="middle" dominant-baseline="middle" fill="#f1f4f7" font-family="Arial,sans-serif" font-size="24">HUNTER receiver</text>
+<text x="815.0" y="437.5" text-anchor="middle" dominant-baseline="middle" fill="#f1f4f7" font-family="Arial,sans-serif" font-size="24">Decode and queue</text>
+<polyline points="185,285 185,380" fill="none" stroke="#d6b19c" stroke-width="3" stroke-linejoin="round" marker-end="url(#arrow)"/>
+<polyline points="320,422.5 365,422.5" fill="none" stroke="#d6b19c" stroke-width="3" stroke-linejoin="round" marker-end="url(#arrow)"/>
+<polyline points="635,422.5 680,422.5" fill="none" stroke="#d6b19c" stroke-width="3" stroke-linejoin="round" marker-end="url(#arrow)"/>
+<rect x="680" y="550" width="270" height="90" rx="12" fill="#20374a" stroke="#8fabbc" stroke-width="2"/>
+<text x="815.0" y="580.0" text-anchor="middle" dominant-baseline="middle" fill="#f1f4f7" font-family="Arial,sans-serif" font-size="24">Next queued target</text>
+<text x="815.0" y="610.0" text-anchor="middle" dominant-baseline="middle" fill="#f1f4f7" font-family="Arial,sans-serif" font-size="24">PoseStamped goal</text>
+<polyline points="815,465 815,550" fill="none" stroke="#d6b19c" stroke-width="3" stroke-linejoin="round" marker-end="url(#arrow)"/>
+</svg>

@@ -1,3 +1,4 @@
+import { communicationSubsystemSections } from './communication-subsystem-sections'
 import { cvSubsystemSections } from './cv-subsystem-sections'
 import { numberedMechanicalSections } from './mechanical-subsystem-sections'
 import { subsystems } from './theme/components/subsystems'
@@ -22,6 +23,12 @@ const reportSidebar = [
   } : subsystem.slug === 'mechanical-design' ? {
    collapsed: false,
    items: numberedMechanicalSections()
+  } : subsystem.slug === 'communication-system' ? {
+   collapsed: false,
+   items: communicationSubsystemSections.map((section, index) => ({
+    text: (index + 1) + '. ' + section.title,
+    link: '/subsystems/communication-system#' + section.slug
+   }))
   } : {})
  })) },
  { text: 'DEVELOPMENT & SOURCES', items: [
