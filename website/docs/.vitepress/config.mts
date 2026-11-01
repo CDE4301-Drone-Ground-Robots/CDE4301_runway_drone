@@ -36,7 +36,28 @@ export default defineConfig({
  lang: 'en-SG', base: '/CDE4301_runway_drone/', cleanUrls: true,
  appearance: 'dark',
  head: [['meta', { name: 'theme-color', content: '#08090b' }], ['link', { rel: 'icon', href: '/CDE4301_runway_drone/favicon.svg', type: 'image/svg+xml' }]],
- markdown: { math: true, lineNumbers: true },
+ markdown: {
+  math: true, lineNumbers: true,
+  config(md) {
+   // Use MathJax's semantic MathML for selectable, numbered report equations.
+   const renderMath = md.renderer.rules.math_block!
+   md.renderer.rules.math_block = (tokens, index, options, env, renderer) => {
+    if (env.relativePath !== 'subsystems/mechanical-design.md') {
+     return renderMath(tokens, index, options, env, renderer)
+    }
+    const source = tokens[index].content
+    const number = source.match(/\\tag\{(\d+)\}/)?.[1]
+    if (!number) return renderMath(tokens, index, options, env, renderer)
+    tokens[index].content = source.replace(/\\tag\{\d+\}/, '')
+    let rendered: string
+    try { rendered = renderMath(tokens, index, options, env, renderer) }
+    finally { tokens[index].content = source }
+    const math = rendered.match(/<math[\s\S]*?<\/math>/)?.[0]
+    if (!math) throw new Error('Missing MathML for mechanical report equation ' + number)
+    return '<div class="mechanical-equation" id="equation-md-' + number + '"><div class="mechanical-equation-math">' + math + '</div><span class="mechanical-equation-number">(' + number + ')</span></div>'
+   }
+  }
+ },
  vite: { server: { strictPort: true } },
  vue: { template: { compilerOptions: { isCustomElement: tag => tag === 'model-viewer' } } },
  themeConfig: {
