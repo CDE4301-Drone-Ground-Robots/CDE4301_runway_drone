@@ -1,0 +1,654 @@
+{
+  "source": {
+    "workbook": "CDE4301_runway_patrol_gantt.xlsx",
+    "worksheet": "Gantt Chart",
+    "semester1": "D–Q",
+    "semester2": "R–AL"
+  },
+  "weeks": [
+    {
+      "column": 4,
+      "label": "Sem 1 W1"
+    },
+    {
+      "column": 5,
+      "label": "Sem 1 W2"
+    },
+    {
+      "column": 6,
+      "label": "Sem 1 W3"
+    },
+    {
+      "column": 7,
+      "label": "Sem 1 W4"
+    },
+    {
+      "column": 8,
+      "label": "Sem 1 W5"
+    },
+    {
+      "column": 9,
+      "label": "Sem 1 W6"
+    },
+    {
+      "column": 10,
+      "label": "SEM 1 RECESS WEEK"
+    },
+    {
+      "column": 11,
+      "label": "Sem 1 W7"
+    },
+    {
+      "column": 12,
+      "label": "Sem 1 W8"
+    },
+    {
+      "column": 13,
+      "label": "Sem 1 W9"
+    },
+    {
+      "column": 14,
+      "label": "Sem 1 W10"
+    },
+    {
+      "column": 15,
+      "label": "Sem 1 W11"
+    },
+    {
+      "column": 16,
+      "label": "Sem 1 W12"
+    },
+    {
+      "column": 17,
+      "label": "Sem 1 W13"
+    },
+    {
+      "column": 18,
+      "label": "READING WEEK"
+    },
+    {
+      "column": 19,
+      "label": "EXAM WEEK 1"
+    },
+    {
+      "column": 20,
+      "label": "EXAM WEEK 2"
+    },
+    {
+      "column": 21,
+      "label": "VACATION WEEK 1"
+    },
+    {
+      "column": 22,
+      "label": "VACATION WEEK 2"
+    },
+    {
+      "column": 23,
+      "label": "VACATION WEEK 3"
+    },
+    {
+      "column": 24,
+      "label": "VACATION WEEK 4"
+    },
+    {
+      "column": 25,
+      "label": "Sem 2 W1"
+    },
+    {
+      "column": 26,
+      "label": "Sem 2 W2"
+    },
+    {
+      "column": 27,
+      "label": "Sem 2 W3"
+    },
+    {
+      "column": 28,
+      "label": "Sem 2 W4"
+    },
+    {
+      "column": 29,
+      "label": "Sem 2 W5"
+    },
+    {
+      "column": 30,
+      "label": "Sem 2 W6"
+    },
+    {
+      "column": 31,
+      "label": "Sem 2 Recess Week"
+    },
+    {
+      "column": 32,
+      "label": "Sem 2 W7"
+    },
+    {
+      "column": 33,
+      "label": "Sem 2 W8"
+    },
+    {
+      "column": 34,
+      "label": "Sem 2 W9"
+    },
+    {
+      "column": 35,
+      "label": "Sem 2 W10"
+    },
+    {
+      "column": 36,
+      "label": "Sem 2 W11"
+    },
+    {
+      "column": 37,
+      "label": "Sem 2 W12"
+    },
+    {
+      "column": 38,
+      "label": "Sem 2 W13"
+    }
+  ],
+  "members": [
+    {
+      "name": "Arun",
+      "role": "Mechanical Design / UAV",
+      "color": "blue",
+      "first": 32,
+      "last": 45,
+      "tasks": [
+        {
+          "description": "Secondary research on problem",
+          "category": "Research",
+          "start": 4,
+          "end": 6,
+          "source": "D32:F33"
+        },
+        {
+          "description": "Concept Sketch",
+          "category": "Mechanical Design",
+          "start": 4,
+          "end": 4,
+          "source": "D34:D36"
+        },
+        {
+          "description": "1st Design Iteration",
+          "category": "Mechanical Design",
+          "start": 5,
+          "end": 5,
+          "source": "E34:E35"
+        },
+        {
+          "description": "2nd Design Iteration",
+          "category": "Mechanical Design",
+          "start": 6,
+          "end": 7,
+          "source": "F34:G36"
+        },
+        {
+          "description": "3rd Design Iteration & Components Assembly",
+          "category": "Mechanical Design",
+          "start": 8,
+          "end": 10,
+          "source": "H34:J36"
+        },
+        {
+          "description": "Assembly of additional components & design adjustments",
+          "category": "Mechanical Design",
+          "start": 11,
+          "end": 12,
+          "source": "K34:L36"
+        },
+        {
+          "description": "Prototyping & Testing of CF Rod Clamps (3D Printing)",
+          "category": "Mechanical Design",
+          "start": 13,
+          "end": 14,
+          "source": "M34:N36"
+        },
+        {
+          "description": "Protyping & Assembly of Structural Prototype",
+          "category": "Mechanical Design",
+          "start": 15,
+          "end": 15,
+          "source": "O34:O36"
+        },
+        {
+          "description": "Working on Final Design Iteration and incorprating waterproofing",
+          "category": "Mechanical Design",
+          "start": 21,
+          "end": 23,
+          "source": "U34:W36"
+        },
+        {
+          "description": "Validate UAV assembly with FEA & Modal Analysis & Purchase Components",
+          "category": "Mechanical Design",
+          "start": 24,
+          "end": 25,
+          "source": "X34:Y36"
+        },
+        {
+          "description": "Fabrication & Assembly of the UAV",
+          "category": "Mechanical Design",
+          "start": 26,
+          "end": 28,
+          "source": "Z34:AB36"
+        },
+        {
+          "description": "Testing, Troubleshooting and performing further iterations",
+          "category": "Mechanical Design",
+          "start": 29,
+          "end": 33,
+          "source": "AC34:AG36"
+        },
+        {
+          "description": "Prop Configuration Research",
+          "category": "Mechanical Design",
+          "start": 5,
+          "end": 5,
+          "source": "E36"
+        },
+        {
+          "description": "Integrating Radio Controller with Pixhawk for preliminary motor testing",
+          "category": "Flight Testing",
+          "start": 21,
+          "end": 23,
+          "source": "U37:W40"
+        },
+        {
+          "description": "Obtain necessary certfications and registrations for UAV Testing",
+          "category": "Flight Testing",
+          "start": 24,
+          "end": 25,
+          "source": "X37:Y40"
+        },
+        {
+          "description": "Conduct Full Flight Testing with the UAV with Manual Control & Troubleshooting",
+          "category": "Flight Testing",
+          "start": 26,
+          "end": 33,
+          "source": "Z37:AG40"
+        },
+        {
+          "description": "Planning/Justification of Component Placement on Base Plates ",
+          "category": "Motor & Propellers Selection",
+          "start": 8,
+          "end": 9,
+          "source": "H41:I43"
+        },
+        {
+          "description": "Motor & Propellers Calculation (Mechanical)",
+          "category": "Motor & Propellers Selection",
+          "start": 10,
+          "end": 10,
+          "source": "J41:J43"
+        },
+        {
+          "description": "Reviewing Motor & Propeller Selections",
+          "category": "Motor & Propellers Selection",
+          "start": 11,
+          "end": 11,
+          "source": "K41:K43"
+        },
+        {
+          "description": "Procurement of Motors & Propellers",
+          "category": "Motor & Propellers Selection",
+          "start": 12,
+          "end": 12,
+          "source": "L41:L43"
+        },
+        {
+          "description": "Testing of Motors with Flight Controller",
+          "category": "Motor & Propellers Selection",
+          "start": 15,
+          "end": 15,
+          "source": "O41:O43"
+        },
+        {
+          "description": "Prepare Documentation & Compile Results",
+          "category": "Report",
+          "start": 13,
+          "end": 15,
+          "source": "M44:O45"
+        },
+        {
+          "description": "Prepare Documentation and collate results ",
+          "category": "Report",
+          "start": 34,
+          "end": 38,
+          "source": "AH44:AL45"
+        }
+      ],
+      "milestones": [
+        {
+          "description": "INTERRIM PRESENTATION: Critical Function Prototype",
+          "category": "Shared milestone",
+          "start": 16,
+          "end": 16,
+          "source": "P32:P84"
+        },
+        {
+          "description": "DOCCUMENTATION DUE ON THIS WEEK",
+          "category": "Shared milestone",
+          "start": 17,
+          "end": 17,
+          "source": "Q32:Q84"
+        }
+      ]
+    },
+    {
+      "name": "Charan",
+      "role": "Computer Vision / Communication",
+      "color": "orange",
+      "first": 46,
+      "last": 61,
+      "tasks": [
+        {
+          "description": "Secondary research on problem",
+          "category": "Research",
+          "start": 4,
+          "end": 6,
+          "source": "D46:F47"
+        },
+        {
+          "description": "CV research and getting familiar with Computer Vision",
+          "category": "Computer Vision",
+          "start": 5,
+          "end": 7,
+          "source": "E48:G50"
+        },
+        {
+          "description": "Coming up with the Architecture and\n obtaining YOLO & Crack Dataset",
+          "category": "Computer Vision",
+          "start": 8,
+          "end": 9,
+          "source": "H48:I50"
+        },
+        {
+          "description": "Did Synthetic compositing of the dataset for YOLO.Made YOLO and Crack models. Created dataset for Anomaly detection ",
+          "category": "Computer Vision",
+          "start": 10,
+          "end": 12,
+          "source": "J48:L50"
+        },
+        {
+          "description": "Made Anomaly detection and created Integrated systems",
+          "category": "Computer Vision",
+          "start": 13,
+          "end": 14,
+          "source": "M48:N50"
+        },
+        {
+          "description": "Jetson Integration with the Architectures while collecting new datasets for models",
+          "category": "Computer Vision",
+          "start": 21,
+          "end": 24,
+          "source": "U48:X50"
+        },
+        {
+          "description": "Integrate Comms and vision system",
+          "category": "Computer Vision",
+          "start": 25,
+          "end": 26,
+          "source": "Y48:Z53"
+        },
+        {
+          "description": "Perfrom completed integration of Vision system , comms system and nav system. ",
+          "category": "Computer Vision",
+          "start": 27,
+          "end": 30,
+          "source": "AA48:AD53"
+        },
+        {
+          "description": "Testing and iterating ",
+          "category": "Computer Vision",
+          "start": 31,
+          "end": 34,
+          "source": "AE48:AH53"
+        },
+        {
+          "description": "Prepare Documentation and collate all results for presentation slides",
+          "category": "Computer Vision",
+          "start": 35,
+          "end": 38,
+          "source": "AI48:AL60"
+        },
+        {
+          "description": "Comms research ",
+          "category": "Communication",
+          "start": 8,
+          "end": 9,
+          "source": "H51:I53"
+        },
+        {
+          "description": "Tested communication link between Laptop and raspberry pi",
+          "category": "Communication",
+          "start": 11,
+          "end": 13,
+          "source": "K51:M53"
+        },
+        {
+          "description": "Commmunication hardware research , finalisation and purchase",
+          "category": "Communication",
+          "start": 21,
+          "end": 24,
+          "source": "U51:X53"
+        },
+        {
+          "description": "RGB & Thermal Camera Calculations",
+          "category": "Calculations",
+          "start": 6,
+          "end": 8,
+          "source": "F54:H57"
+        },
+        {
+          "description": "RGB & Thermal camera research",
+          "category": "Calculations",
+          "start": 10,
+          "end": 12,
+          "source": "J54:L57"
+        },
+        {
+          "description": "Choose camer gimbal and integrate",
+          "category": "Calculations",
+          "start": 21,
+          "end": 24,
+          "source": "U54:X56"
+        },
+        {
+          "description": "integrate gimbal system ",
+          "category": "Calculations",
+          "start": 27,
+          "end": 30,
+          "source": "AA54:AD56"
+        },
+        {
+          "description": "integrate thermal to Pixhawk",
+          "category": "Calculations",
+          "start": 31,
+          "end": 34,
+          "source": "AE54:AH56"
+        },
+        {
+          "description": "Prepare Documentation and collate all results for presentation slides",
+          "category": "Report",
+          "start": 12,
+          "end": 15,
+          "source": "L58:O61"
+        }
+      ],
+      "milestones": [
+        {
+          "description": "INTERRIM PRESENTATION: Critical Function Prototype",
+          "category": "Shared milestone",
+          "start": 16,
+          "end": 16,
+          "source": "P32:P84"
+        },
+        {
+          "description": "DOCCUMENTATION DUE ON THIS WEEK",
+          "category": "Shared milestone",
+          "start": 17,
+          "end": 17,
+          "source": "Q32:Q84"
+        }
+      ]
+    },
+    {
+      "name": "Talitha",
+      "role": "Electrical Design / Navigation",
+      "color": "green",
+      "first": 62,
+      "last": 73,
+      "tasks": [
+        {
+          "description": "Secondary research on problem",
+          "category": "Research",
+          "start": 4,
+          "end": 6,
+          "source": "D62:F63"
+        },
+        {
+          "description": "Power Calculations ",
+          "category": "Electrical Design",
+          "start": 7,
+          "end": 8,
+          "source": "G64:H65"
+        },
+        {
+          "description": "Wiring and Sensor Communication for Soldering/Assembly Planning",
+          "category": "Electrical Design",
+          "start": 9,
+          "end": 10,
+          "source": "I64:J65"
+        },
+        {
+          "description": "Complete Wiring and Soldering of components ",
+          "category": "Electrical Design",
+          "start": 18,
+          "end": 22,
+          "source": "R64:V65"
+        },
+        {
+          "description": "Testing and validating wiring and power draw",
+          "category": "Electrical Design",
+          "start": 23,
+          "end": 24,
+          "source": "W64:X65"
+        },
+        {
+          "description": "Validate peripheral component ratings under different operating conditions",
+          "category": "Electrical Design",
+          "start": 25,
+          "end": 26,
+          "source": "Y64:Z65"
+        },
+        {
+          "description": "Continue troubleshooting and integration when required",
+          "category": "Electrical Design",
+          "start": 27,
+          "end": 33,
+          "source": "AA64:AG65"
+        },
+        {
+          "description": "Researching Navigation Algorithms for Surveying",
+          "category": "Navigation",
+          "start": 6,
+          "end": 7,
+          "source": "F66:G71"
+        },
+        {
+          "description": "Baseline Navigation ROS Simulation and offline testing using Python visuals",
+          "category": "Navigation",
+          "start": 9,
+          "end": 10,
+          "source": "I66:J71"
+        },
+        {
+          "description": "Gazebo Navigation Debugging and Obstacle Avoidance/Wind Kinematics Tuning",
+          "category": "Navigation",
+          "start": 11,
+          "end": 14,
+          "source": "K66:N68"
+        },
+        {
+          "description": "Finish simulating for optimal survey method and validating results",
+          "category": "Navigation",
+          "start": 21,
+          "end": 22,
+          "source": "U66:V66"
+        },
+        {
+          "description": "Integration of full hardware stack and troubleshooting ",
+          "category": "Navigation",
+          "start": 23,
+          "end": 24,
+          "source": "W66:X66"
+        },
+        {
+          "description": "Feed live results from component parameter testing to simulation and validate",
+          "category": "Navigation",
+          "start": 25,
+          "end": 29,
+          "source": "Y66:AC66"
+        },
+        {
+          "description": "Continue improving the model and tuning parameters",
+          "category": "Navigation",
+          "start": 30,
+          "end": 33,
+          "source": "AD66:AG66"
+        },
+        {
+          "description": "Prepare live implementation test cases for controlled flight testing",
+          "category": "Navigation",
+          "start": 25,
+          "end": 29,
+          "source": "Y67:AC69"
+        },
+        {
+          "description": "Survey Method Optmisation & Rationale",
+          "category": "Navigation",
+          "start": 13,
+          "end": 14,
+          "source": "M69:N71"
+        },
+        {
+          "description": "Hardware Integration for ROS and PX4",
+          "category": "Navigation",
+          "start": 15,
+          "end": 15,
+          "source": "O69:O71"
+        },
+        {
+          "description": "Documentation and Consolidation of results",
+          "category": "Navigation",
+          "start": 34,
+          "end": 38,
+          "source": "AH71:AL73"
+        },
+        {
+          "description": "Consolidation of Results and Documentation ",
+          "category": "Report",
+          "start": 13,
+          "end": 15,
+          "source": "M72:O73"
+        }
+      ],
+      "milestones": [
+        {
+          "description": "INTERRIM PRESENTATION: Critical Function Prototype",
+          "category": "Shared milestone",
+          "start": 16,
+          "end": 16,
+          "source": "P32:P84"
+        },
+        {
+          "description": "DOCCUMENTATION DUE ON THIS WEEK",
+          "category": "Shared milestone",
+          "start": 17,
+          "end": 17,
+          "source": "Q32:Q84"
+        }
+      ]
+    }
+  ]
+}
