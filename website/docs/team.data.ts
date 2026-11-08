@@ -18,6 +18,7 @@ const members = [
    'Image-to-World Coordinate Localisation for FOD/Crack Detection.',
    'Jetson Orin NX Vision Pipeline & Latency Feasibility Analysis.',
    'UAV-UGV Coordinate Communication Architecture using ROS 2 software.',
+   'Prototyping and testing ARGUS.',
    'Secondary Research.',
    'Website Report Design (GitHub).'
   ]
@@ -31,7 +32,7 @@ const members = [
    'Component Placement and CG Analysis',
    'Motor Calculations (Thrust)',
    'Propeller Arm Calculations (CF Tube Selection)',
-   'Prototyping and Testing',
+   'Prototyping and testing ARGUS',
    'Secondary Research'
   ]
  },
@@ -47,6 +48,7 @@ const members = [
    'Emergency Failsafe Measures',
    'Stress Testing of Flight Kinematics for Limit Determination',
    'Simulation (Gazebo)',
+   'Prototyping and testing ARGUS',
    'Secondary Research'
   ]
  }
