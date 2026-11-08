@@ -117,6 +117,8 @@ A 1 cm object would span about **10 pixels before resizing**. This improves the 
 
 The selected lens, distortion, focus, motion blur, lighting and model performance still need testing with real 1 cm FOD at 5 m. The coverage above is an estimate, not a calibrated measurement.
 
+ARGUS is intended to fly at 15 km/h. Short exposure times will be needed to limit motion blur. Camera settings and processing performance will be tested on Jetson after the interim stage.
+
 ### Night Operation Lighting
 
 A light source will be attached below the drone, near the RGB camera, and switched on during night operation to illuminate the inspection surface.
