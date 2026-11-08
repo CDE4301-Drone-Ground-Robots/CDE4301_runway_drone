@@ -29,14 +29,14 @@ To address the limitation of detecting only objects seen in the training dataset
 ### Requirements of This Subsystem
 
 - Detect FOD as small as 1 cm.
-- Detect cracks.
+- Detect visible surface cracks.
 - Detect water puddles.
 - Coordinate extraction.
 - Design an integrated system.
 - Suitable camera selection.
 - Day and night operations.
 
-The minimum crack and puddle sizes, target detection performance and acceptable coordinate error still need to be defined.
+No minimum crack size is specified; the aim is to detect visible surface cracks. The puddle size target, target detection performance and acceptable coordinate error still need to be defined.
 
 ### Software
 
@@ -228,7 +228,7 @@ The dataset was collected at the NUS test ground outside Techno, at the roundabo
 
 <CvFigure n="12" />
 
-PatchCore worked very well in the examples tested, detecting anomalies of different sizes, shapes, and textures. The system used the bounding boxes to crop the regions and send them to YOLO and the crack model.
+At 1 m height, PatchCore detected anomalies in 10/10 tests. Testing at 5 m is pending. The system used the bounding boxes to crop the regions and send them to YOLO and the crack model.
 
 <CvFigure n="13" />
 
@@ -315,6 +315,8 @@ The model was performing very poorly, and the test object was detected inconsist
 
 <CvFigure n="27" />
 
+In ground testing, YOLO detected the battery in 3/10 tests and the plastic part in 7/10 tests.
+
 ### Dataset Investigation
 
 The dataset was then investigated, and it was hypothesised that there was data leakage happening. Based on visual inspection, moving image by image, each FOD in the dataset was recorded as a video and sliced to generate the images. Hence, when a random split was performed above, the near-identical consecutive frames were placed across all the splits (training, testing and validation). This could explain the abnormally high YOLO results despite poor performance on the actual test ground.
@@ -351,7 +353,7 @@ Three datasets were created: one was the random split, the second was the simila
 
 ### Results and Discussion
 
-The lower mAP after similarity-aware splitting is consistent with the data leakage concern. Further fine-tuning may help, but any improvement needs testing. Nevertheless, this dataset has many limitations. The images were taken at a low height, while we require images at 5 m. The effect of the number of classes on accuracy also needs testing. During synthetic compositing, precision and recall can be affected, as realistic lighting, scale, shadow and blur are hard to tune.
+The lower mAP after similarity-aware splitting is consistent with the data leakage concern. However, removing similar images does not resolve the other dataset limitations. The images were taken at a low height, while we require images at 5 m. During synthetic compositing, precision and recall can be affected, as realistic lighting, scale, shadow and blur are hard to tune. Hence, the current FOD dataset will be replaced with a new dataset collected at the intended height and test ground. The results below document the earlier development work.
 
 The earlier random-split model comparison reported mAP@50-95 values of 92.37% to 93.39% across six models. The strict-split results below are from separate runs; they are not a controlled comparison using a confirmed matching model and training setup.
 
@@ -382,7 +384,7 @@ Therefore, we use a U-Net segmentation model. The cropped anomaly region is resi
 
 <CvFigure n="35" />
 
-The model worked well on surfaces like concrete in the examples tested, but performed poorly on the rough test-ground surface. Hence, either cracks from the original test ground or an artificial method is required to obtain the dataset. A synthetic method may be used by adding artificial cracks to images of the test ground in the training dataset, but mimicking real-world cracks remains a challenge.
+On smooth roads, U-Net detected cracks in 10/10 tests. On the rough road, it made 2/10 correct crack/no-crack decisions. It often mistook the rough texture for cracks. Training data from similar rough surfaces is needed. A synthetic method may be used by adding artificial cracks to images of the test ground in the training dataset, but mimicking real-world cracks remains a challenge.
 
 ## FOD & Crack Coordinate Retrieval {#coordinate-retrieval}
 
@@ -599,8 +601,8 @@ These are laptop processing rates, not camera capture rates. Live capture, displ
 
 | Requirement | Evidence so far | Still to test |
 | --- | --- | --- |
-| Detect FOD as small as 1 cm | Example detections and model comparison | Verify 1 cm FOD detection at 5 m height |
-| Detect cracks | Example crack masks; weaker results on rough test-ground surfaces | Define the crack size target and measure detection accuracy |
+| Detect FOD as small as 1 cm | YOLO: battery 3/10; plastic part 7/10. Detection of 1 cm FOD is not yet verified. | Verify 1 cm FOD detection at 5 m height |
+| Detect visible surface cracks | Smooth road: 10/10 crack detections. Rough road: 2/10 correct decisions; texture mistaken for cracks. | Reduce rough-surface false detections and measure crack detection performance at 5 m |
 | Detect water puddles | Water puddle class added to the FOD dataset | Define the puddle size target and test real puddles |
 | Extract coordinates | Worked example and simulated coordinate calculations | Measure real position error using camera and navigation data |
 | Run the integrated system | Laptop demonstration and three-architecture benchmarks | Test the full pipeline on Jetson NX |
@@ -611,8 +613,12 @@ These are laptop processing rates, not camera capture rates. Live capture, displ
 
 ### CV System Future Works
 
-- Obtain a new dataset with pictures taken 5 m above the test ground using the RGB camera.
+- Replace the current FOD dataset with a new dataset taken 5 m above the test ground using the RGB camera. Keep training and test capture sessions separate.
 - Add FOD items to the test ground and collect a dataset to increase YOLO robustness and reduce reliance on synthetic images.
+- Test how often PatchCore misses FOD or cracks at 5 m, extending the current 1 m tests.
+- Reduce U-Net false detections on rough surfaces using suitable training data, including crack-free test-ground images. Evaluate crack recall, Dice/IoU and false detections on separate test images.
+- Verify 1 cm FOD detection through the full pipeline at 5 m and 15 km/h, during daylight and night operation. Test the selected lens, exposure settings and light.
+- Define target detection performance, the puddle size target and acceptable coordinate error. Test real puddles and measure coordinate error using camera calibration, navigation data and gimbal angles.
 - Complete system integration using Jetson NX following the pipeline.
 - Test both RGB and thermal cameras with the models.
 - Add and test a gimbal for the RGB inspection camera, using flight controller attitude data to compensate for tilt and maintain a nadir view. Include the gimbal angles in coordinate retrieval.
@@ -621,6 +627,6 @@ These are laptop processing rates, not camera capture rates. Live capture, displ
 - Send current drone coordinates from ROS 2 navigation to the vision system.
 - Link thermal detection to the flight controller for emergency stops.
 - Set up a program to prevent repeated FOD coordinates from being sent (work with the UGV side).
-- Test the latency for each model and the entire integrated system.
+- Test the latency for each model and the entire integrated system on Jetson alongside navigation and communication. Check that captured frames do not build up in a processing queue.
 
 </div>
