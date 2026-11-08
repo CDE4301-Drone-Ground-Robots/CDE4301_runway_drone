@@ -48,7 +48,7 @@ These are some of the software tools used in this subsystem to train the model a
 
 <CvFigure n="2" />
 
-The ARGUS drone has the RGB camera facing down and centred on the drone, rather than at an angle. The intended camera view covers a 2 m × 2 m area at a height of 5 m. A suitable lens is needed to achieve this coverage. This setup makes it easier to collect training data and simplifies FOD coordinate extraction.
+The ARGUS drone has the RGB camera facing down and centred on the drone, rather than at an angle. The intended camera view covers a 2 m × 2 m area at a height of 5 m. A suitable lens is needed to achieve this coverage. A gimbal is planned for the RGB inspection camera, using attitude data from the flight controller to compensate for drone roll and pitch and keep the camera pointing straight down (nadir). Adding and testing this gimbal is future work. This setup makes it easier to collect training data and simplifies FOD coordinate extraction.
 
 ### RGB Cameras
 
@@ -473,7 +473,7 @@ $$
 
 **Drone position: (3.00 m, 4.00 m). FOD position: (2.90 m, 4.20 m).**
 
-This yaw-only example assumes roll and pitch are zero. Full integration still needs camera calibration, camera-to-body axis mapping, matching timestamps and a common navigation frame. PX4 NED data must be converted to the chosen ROS frame before using these equations.
+This yaw-only example assumes roll and pitch are zero. The planned gimbal will aim to keep the RGB camera pointing down as the drone tilts. With a tilted drone, coordinate retrieval must use the actual camera orientation from the drone attitude and gimbal angles; stabilisation alone does not make the drone body frame level. Full integration still needs camera calibration, camera-to-body axis mapping, matching timestamps and a common navigation frame. PX4 NED data must be converted to the chosen ROS frame before using these equations.
 
 </div>
 
@@ -615,6 +615,7 @@ These are laptop processing rates, not camera capture rates. Live capture, displ
 - Add FOD items to the test ground and collect a dataset to increase YOLO robustness and reduce reliance on synthetic images.
 - Complete system integration using Jetson NX following the pipeline.
 - Test both RGB and thermal cameras with the models.
+- Add and test a gimbal for the RGB inspection camera, using flight controller attitude data to compensate for tilt and maintain a nadir view. Include the gimbal angles in coordinate retrieval.
 - Attach and test the light below the drone near the RGB camera for night operation.
 - Implement the link between the cameras and the vision system in Jetson NX.
 - Send current drone coordinates from ROS 2 navigation to the vision system.

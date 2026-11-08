@@ -1,3 +1,4 @@
+import { continuousReportLink } from './report-chapters'
 import { communicationSubsystemSections } from './communication-subsystem-sections'
 import { cvSubsystemSections } from './cv-subsystem-sections'
 import { numberedMechanicalSections } from './mechanical-subsystem-sections'
@@ -33,10 +34,17 @@ const reportSidebar = [
  })) },
  { text: 'DEVELOPMENT & SOURCES', items: [
   { text: 'Timeline', link: '/timeline' },
-  { text: 'Future works', link: '/report/future-works' },
   { text: 'References', link: '/references' }
  ] }
 ]
+type ReportSidebarItem = { text: string; link?: string; items?: ReportSidebarItem[]; collapsed?: boolean }
+function continuousSidebar(items: ReportSidebarItem[]): ReportSidebarItem[] {
+ return items.map(item => ({
+  ...item,
+  ...(item.link ? { link: continuousReportLink(item.link) } : {}),
+  ...(item.items ? { items: continuousSidebar(item.items) } : {})
+ }))
+}
 export default defineConfig({
  title: 'FOD ARGUS',
  description: 'FOD ARGUS - Autonomous Runway Inspection UAV. NUS CDE4301.',
@@ -82,7 +90,7 @@ export default defineConfig({
    { text: 'Timeline', link: '/timeline' },
    { text: 'References', link: '/references' }
   ],
-  sidebar: Object.fromEntries(['/report/', '/subsystems/', '/research/', '/scopes', '/timeline', '/references'].map(path => [path, reportSidebar])),
+  sidebar: Object.fromEntries(['/report/', '/subsystems/', '/research/', '/scopes', '/timeline', '/references'].map(path => [path, path === '/report/' ? continuousSidebar(reportSidebar) : reportSidebar])),
   docFooter: { prev: false, next: false },
   search: {
    provider: 'local',

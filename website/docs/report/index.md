@@ -1,9 +1,16 @@
 ---
 title: FOD ARGUS Engineering Report
 outline: false
+prev: false
+next: false
 ---
 
-<div class="report-cover">
+<script setup>
+import FullReport from '../.vitepress/theme/components/FullReport.vue'
+import { reportChapters, reportAnchor } from '../.vitepress/report-chapters'
+</script>
+
+<div id="report-overview" class="report-cover">
 <p class="report-cover-kicker">NUS CDE4301 / AIS-407</p>
 <h1>FOD ARGUS<span>Engineering Report</span></h1>
 <p class="report-cover-subtitle">Autonomous Runway Inspection UAV</p>
@@ -12,23 +19,12 @@ outline: false
 
 ## About This Report
 
-This report brings together the project scope, system architecture, and the five subsystem reports. Use the contents panel to open a subsystem report. The Computer Vision report is one continuous page, with sidebar links that jump to its sections.
-
-::: info Report in development
-The chapter structure is ready. Engineering content, test evidence, and results will be integrated when available.
-:::
+This report brings together the project scope, research, system architecture, and five subsystem reports on one continuous page. Scroll through the chapters below or use the contents links to jump to a section.
 
 ## Report Contents
 
-1. [Project scope](../scopes)
-2. [Primary Research](../research/primary)
-3. [Secondary Research](../research/secondary)
-4. [System architecture](./system-architecture)
-5. [Mechanical Design](../subsystems/mechanical-design) - Muruganantham Arun
-6. [Electrical Design](../subsystems/electrical-design) - Kummarikunta Talitha
-7. [Navigation & Obstacle Avoidance](../subsystems/navigation-obstacle-avoidance) - Kummarikunta Talitha
-8. [Computer Vision Based Inspection and Safety System](../subsystems/computer-vision) - Charansagar Ramanujam
-9. [Communication System](../subsystems/communication-system) - Charansagar Ramanujam
-10. [Timeline](../timeline)
-11. [Future works](./future-works)
-12. [References](../references)
+<ol>
+ <li v-for="chapter in reportChapters" :key="chapter.id"><a :href="'#' + reportAnchor(chapter.id)">{{ chapter.title }}</a></li>
+</ol>
+
+<FullReport />

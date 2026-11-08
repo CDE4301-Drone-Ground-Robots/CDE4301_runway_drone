@@ -11,4 +11,5 @@ export const communicationSubsystemSections = [
   { slug: 'long-range-hardware', title: 'Long-Range Communication Hardware' },
   { slug: 'communication-testing', title: 'Communication Testing' },
   { slug: 'future-work', title: 'Limitations and Future Works' },
+  { slug: 'hunter-group-communication', title: 'Hunter Group Communication' },
 ]

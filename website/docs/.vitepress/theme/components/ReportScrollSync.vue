@@ -73,18 +73,31 @@ async function refresh() {
  clear()
  await nextTick()
  if (disposed || version !== generation) return
- const report = document.querySelector<HTMLElement>('.cv-report')
+ const fullReport = document.querySelector<HTMLElement>('.full-report')
+ const report = fullReport || document.querySelector<HTMLElement>('.cv-report')
  sidebar = document.querySelector<HTMLElement>('.VPSidebar')
  if (!report || !sidebar) return
- const mechanical = isMechanicalReport()
- const communication = route.path.replace(/\.html$/, '').endsWith('/subsystems/communication-system')
- const sections = mechanical ? flattenMechanicalSections() : communication ? communicationSubsystemSections : cvSubsystemSections
- const reportPath = mechanical ? '/subsystems/mechanical-design' : communication ? '/subsystems/communication-system' : '/subsystems/computer-vision'
- for (const section of sections) {
-  const heading = report.querySelector<HTMLElement>('[id="' + section.slug + '"]')
-  const href = withBase(reportPath + '#' + section.slug)
-  const link = sidebar.querySelector<HTMLAnchorElement>('a[href="' + href + '"]')
-  if (heading && link) entries.push({ heading, link, item: link.closest<HTMLElement>('.VPSidebarItem') })
+ if (fullReport) {
+  for (const link of sidebar.querySelectorAll<HTMLAnchorElement>('a[href]')) {
+   const url = new URL(link.href)
+   if (!url.hash) continue
+   const heading = document.getElementById(decodeURIComponent(url.hash.slice(1)))
+   if (heading && (fullReport.contains(heading) || heading.id === 'report-overview')) {
+    entries.push({ heading, link, item: link.closest<HTMLElement>('.VPSidebarItem') })
+   }
+  }
+  entries.sort((a, b) => a.heading === b.heading ? 0 : a.heading.compareDocumentPosition(b.heading) & Node.DOCUMENT_POSITION_FOLLOWING ? -1 : 1)
+ } else {
+  const mechanical = isMechanicalReport()
+  const communication = route.path.replace(/\.html$/, '').endsWith('/subsystems/communication-system')
+  const sections = mechanical ? flattenMechanicalSections() : communication ? communicationSubsystemSections : cvSubsystemSections
+  const reportPath = mechanical ? '/subsystems/mechanical-design' : communication ? '/subsystems/communication-system' : '/subsystems/computer-vision'
+  for (const section of sections) {
+   const heading = report.querySelector<HTMLElement>('[id="' + section.slug + '"]')
+   const href = withBase(reportPath + '#' + section.slug)
+   const link = sidebar.querySelector<HTMLAnchorElement>('a[href="' + href + '"]')
+   if (heading && link) entries.push({ heading, link, item: link.closest<HTMLElement>('.VPSidebarItem') })
+  }
  }
  sidebar.setAttribute('data-cv-scrollspy', '')
  sidebarObserver = new MutationObserver(() => { reveal = true; schedule() })
@@ -96,6 +109,7 @@ async function refresh() {
 }
 onMounted(() => {
  stopWatching = watch(() => route.path, refresh, { immediate: true, flush: 'post' })
+ document.addEventListener('full-report-ready', refresh)
  window.addEventListener('scroll', schedule, { passive: true })
  window.addEventListener('resize', schedule, { passive: true })
  document.fonts.ready.then(schedule)
@@ -105,6 +119,7 @@ onUnmounted(() => {
  ++generation
  stopWatching?.()
  cancelAnimationFrame(frame)
+ document.removeEventListener('full-report-ready', refresh)
  window.removeEventListener('scroll', schedule)
  window.removeEventListener('resize', schedule)
  clear()

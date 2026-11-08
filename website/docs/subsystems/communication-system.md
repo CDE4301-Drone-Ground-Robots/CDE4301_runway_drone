@@ -142,4 +142,8 @@ These tests were successful (shown in the figure above), proving that the ARGUS 
 
 Although the interim tests demonstrated successful message transmission, several limitations remain. Firstly, the current communication relies on a local Wi-Fi network, which has not been tested for the full runway. Further research led to the decision to use long-range RF communication hardware that meets IMDA regulations within the operating range. ARGUS communications scripts are still not linked to the vision system, so the next stage is to integrate with the onboard vision system to automate C2 alerts. Additional reliable communication methods will be explored, including application-level acknowledgement, sequence-number tracking, and communication-loss detection. Finally, security enhancements such as authenticated messages and encryption will improve the protection of transmitted FOD information. The final objective is to establish a reliable communication system that allows ARGUS to detect and send coordinates to HUNTER, supporting timely FOD removal.
 
+## Hunter Group Communication {#hunter-group-communication}
+
+For the HUNTER group's communication report, see [HUNTER Group Communication](https://cde4301-drone-ground-robots.github.io/CDE4301_runway_patrol/report#communications).
+
 </div>
