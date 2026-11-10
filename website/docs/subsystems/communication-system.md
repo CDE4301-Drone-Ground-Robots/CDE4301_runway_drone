@@ -8,6 +8,7 @@ next: false
 <script setup>
 import CommunicationFigure from './components/CommunicationFigure.vue'
 import CommunicationVideo from './components/CommunicationVideo.vue'
+import CommunicationDemo from '../.vitepress/theme/components/CommunicationDemo.vue'
 </script>
 
 <div class="cv-report comms-report">
@@ -26,7 +27,7 @@ The communication subsystem was initially developed and tested using ROS 2 over 
 
 ## Requirements and Considerations {#requirements}
 
-The operational range must be up to 5 km, as that’s the runway length. The 917-925 MHz band was initially considered; final frequency and power settings must meet the applicable IMDA requirements. The hardware must be small and light due to ARGUS’s payload constraints. We also need a small telemetry payload since video transmission isn't required. This also consumes less network capacity and lower bandwidth.
+The operational range must be up to 5 km, as that’s the runway length. The 917-925 MHz band was initially considered; final frequency and power settings must meet the applicable IMDA requirements. The communication device must support live video transmission and be small and lightweight to fit ARGUS’s payload limits. The thermal live feed is intended for manual override, allowing the operator to guide ARGUS back at night if the drone encounters a problem. Live-feed integration and testing are pending.
 
 ## Interim Communication {#interim-communication}
 
@@ -67,7 +68,7 @@ The KEEP_LAST history policy with a depth of 1 holds the most recent alert. Thes
 
 ## Multiple FOD Transmission {#multiple-fod-transmission}
 
-The ARGUS publisher sends the FOD alerts in sequence. The threat ID would be as follows:
+The application queue runs on ARGUS and stores pending FOD alerts in arrival order. The planned process is to send one alert and retain it until HUNTER confirms receipt with the same threat ID. ARGUS then sends the next coordinate without waiting for FOD collection to finish. Live receipt acknowledgements will be added during integration. The threat ID would be as follows:
 
 | Object | Threat ID |
 | --- | --- |
@@ -76,6 +77,12 @@ The ARGUS publisher sends the FOD alerts in sequence. The threat ID would be as 
 | Bolt | `FOD_THREAT_003` |
 
 This is reset after every run. This is also particularly useful in detecting communication loss. For example, if the HUNTER is supposed to receive _005 but receives _007 instead, it indicates a communication loss or error. Currently, no measures are implemented, but future work will have ARGUS resend those coordinates. If the problem continues, it alerts the base station.
+
+### Communication Simulator
+
+Add example FOD alerts to the ARGUS queue. Use "Acknowledge receipt" to simulate HUNTER confirming receipt and release the next coordinate.
+
+<CommunicationDemo />
 
 ## Communication and Vision System Workflow {#vision-communication-workflow}
 
@@ -89,6 +96,7 @@ The vision system continuously requests drone centre coordinates from the naviga
 | --- | ---: |
 | C2 alert JSON payload size | 588 bytes |
 | Estimated payload bandwidth (2 alerts/s) | 9.408 kbps |
+| Test setup | Publisher and subscriber on the same device (0 m separation) |
 | Consecutive messages transmitted | 100 |
 | Consecutive messages received | 100 |
 | Message delivery rate | 100% |
@@ -96,7 +104,7 @@ The vision system continuously requests drone centre coordinates from the naviga
 | Duplicate messages | 0 |
 | Nominal benchmark transmission rate | 10 Hz |
 
-A communication performance evaluation was done using ROS 2 Jazzy. The C2 alert payload size was measured at 588 bytes, and the estimated application-level bandwidth was 9.408 kbps at two alerts per second. Additionally, a ROS 2 test was conducted using 100 consecutive alerts simulating the C2 alerts at a nominal rate of 10Hz sent from publisher to subscriber. All 100 messages were received successfully hence attaining the 100% delivery rate with no missing or duplicate messages. These results show that the message transmission using ROS 2 environment is a success.
+The 100-message benchmark used ROS 2 Jazzy with the publisher and subscriber on the same device (0 m separation). The C2 alert payload size was measured at 588 bytes, and the estimated application-level bandwidth was 9.408 kbps at two alerts per second. This covers alert payloads only, excluding video and network overhead. The thermal live-feed resolution, frame rate, bandwidth and delay still need to be confirmed and tested. Additionally, a ROS 2 test was conducted using 100 consecutive alerts simulating the C2 alerts at a nominal rate of 10Hz sent from publisher to subscriber. All 100 messages were received successfully hence attaining the 100% delivery rate with no missing or duplicate messages. This checks local ROS 2 message delivery; it does not measure wireless range or performance between separate devices.
 
 ## Long-Range Communication Hardware {#long-range-hardware}
 
@@ -108,7 +116,7 @@ A communication performance evaluation was done using ROS 2 Jazzy. The C2 alert 
 | Communication type | Low-bandwidth serial telemetry | Broadband IP communication |
 | Best use for ARGUS | FOD alerts only | FOD alerts + images/video |
 
-Two radio communication methods were explored for future ARGUS – HUNTER communication. The microhard P900 V2 and the microhard pMDDL2450. The P900 provides serial RF communication suitable for transmitting small C2 alert messages. The pMDDL2450 supports higher-bandwidth IP communication. Since ARGUS must send crack images to the base station for inspection, the pMDDL2450 is a candidate, though it's heavier and consumes more power than the P900.
+Two radio communication methods were explored for future ARGUS – HUNTER communication. The microhard P900 V2 and the microhard pMDDL2450. The P900 provides serial RF communication suitable for transmitting small C2 alert messages. The pMDDL2450 supports higher-bandwidth IP communication. Since ARGUS must send crack images and a thermal live feed to the base station, the pMDDL2450 is a candidate, though it's heavier and consumes more power than the P900.
 
 The pMDDL2450 operates at 2.4 GHz with adjustable output up to 1 W. Full-power operation would exceed IMDA's published 100 mW EIRP limit for licence-exempt UAV use in this band. Antenna gain and cable losses must be included when checking the radiated power. I still need to confirm a compliant setup and test whether it can provide a reliable 5 km link at the permitted power. The radio selection is therefore not final. See [COM-H01](../references#com-h01) and [COM-R02](../references#com-r02).
 
@@ -122,7 +130,7 @@ The test was done on a laptop running Ubuntu 24.04 with WSL to simulate ARGUS’
 
 ### Stage 2: Simulated FOD Queue
 
-In this simulation, ARGUS detects the FOD and, at the backend, asks the Navigation system to send the drone centre coordinates. The Vision system performs precise coordinate extraction of the actual FOD and sends it to the communication system. The Gazebo simulation extracts the new FOD coordinate and queues it. The Queue system was designed so that, when multiple FODs are sent, it can queue them all. This prevents missed detections by storing the FODs' coordinates instead of overwriting them with newer detections. It allows sequential collection where the UGV completes its current target before proceeding to the next. This also supports continuous identification and transmission of FOD locations while the UGV is occupied. The UGV can also manage multiple targets without interruption in this system.
+In this simulation below, ARGUS detects the FOD and, at the backend, asks the Navigation system to send the drone centre coordinates. The Vision system performs precise coordinate extraction of the actual FOD and sends it to the communication system. The terminals on the right show the queueing system built on the ARGUS side. The top terminal queues new FOD coordinates, while the bottom terminal shows the next FOD coordinate that's ready to be published. The queue system was designed so that, when multiple FODs are sent, it can queue them all. This prevents missed detections by storing the FODs' coordinates instead of overwriting them with newer detections. It allows sequential collection where the UGV completes its current target before proceeding to the next. This also supports continuous identification and transmission of FOD locations while the UGV is occupied. The UGV can also manage multiple targets without interruption in this system.
 
 <CommunicationVideo src="/report-assets/communication-system/stage-2-simulation.mp4" poster="/report-assets/communication-system/stage-2-poster.jpg" caption="Stage 2: Simulated FOD coordinates and target queueing. Full integration is pending." />
 
@@ -140,7 +148,7 @@ These tests were successful (shown in the figure above), proving that the ARGUS 
 
 ## Limitations and Future Works {#future-work}
 
-Although the interim tests demonstrated successful message transmission, several limitations remain. Firstly, the current communication relies on a local Wi-Fi network, which has not been tested for the full runway. Further research led to the decision to use long-range RF communication hardware that meets IMDA regulations within the operating range. ARGUS communications scripts are still not linked to the vision system, so the next stage is to integrate with the onboard vision system to automate C2 alerts. Additional reliable communication methods will be explored, including application-level acknowledgement, sequence-number tracking, and communication-loss detection. Finally, security enhancements such as authenticated messages and encryption will improve the protection of transmitted FOD information. The final objective is to establish a reliable communication system that allows ARGUS to detect and send coordinates to HUNTER, supporting timely FOD removal.
+Although the interim tests demonstrated successful message transmission, several limitations remain. Firstly, the current communication relies on a local Wi-Fi network, which has not been tested for the full runway. Further research led to the decision to use long-range RF communication hardware that meets IMDA regulations within the operating range. ARGUS communications scripts are still not linked to the vision system, so the next stage is to integrate with the onboard vision system to automate C2 alerts. Additional reliable communication methods will be explored, including a receipt acknowledgement carrying the threat ID, sequence-number tracking, and communication-loss detection. The next queued alert will be sent after the matching receipt acknowledgement returns to ARGUS. Finally, security enhancements such as authenticated messages and encryption will improve the protection of transmitted FOD information. The final objective is to establish a reliable communication system that allows ARGUS to detect and send coordinates to HUNTER, supporting timely FOD removal.
 
 ## Hunter Group Communication {#hunter-group-communication}
 
