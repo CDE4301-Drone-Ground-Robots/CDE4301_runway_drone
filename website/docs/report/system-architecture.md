@@ -6,7 +6,7 @@ title: System Architecture
 
 # System Architecture
 
-The project is organised into five subsystem reports. Each subsystem has its own scrolling report page. The Computer Vision report is populated; the other subsystem pages are ready for their authors to add content.
+The project is organised into five subsystems, described in the chapters below. Individual subsystem pages are also available.
 
 ## Subsystem Responsibilities
 

@@ -13,10 +13,10 @@
     "cropHeight": 820
   },
   "3": {
-    "src": "/report-assets/computer-vision/cv-03.webp",
-    "width": 2048,
-    "height": 1395,
-    "caption": "Candidate e-con camera and interim UGREEN webcam comparison from the source report."
+    "src": "/report-assets/computer-vision/rgb-cameras-with-ids.png",
+    "width": 1536,
+    "height": 1024,
+    "caption": "RGB camera comparison: e-con e-CAM56_CUONX, interim UGREEN CM831, and IDS U3-31L1ACP Rev.1.2 alternative."
   },
   "4": {
     "src": "/report-assets/computer-vision/architecture-parallel.svg",
@@ -255,5 +255,11 @@
     "height": 1440,
     "caption": "System Prototype 1 - Sequential 2 (additional tested architecture).",
     "architecture": true
+  },
+  "43": {
+    "src": "/report-assets/computer-vision/argus-night-inspection-light.png",
+    "width": 1672,
+    "height": 941,
+    "caption": "AI-generated concept illustration of ARGUS with a proposed light beside the RGB camera illuminating the runway at night."
   }
 }

@@ -31,7 +31,7 @@ export const cvSubsystemSections = [
   },
   {
     "slug": "thermal-safety",
-    "title": "Thermal Safety & Camera Selection",
+    "title": "ARGUS's Additional Vision Safety Feature",
     "summary": "Thermal operation, model comparison, and camera candidates."
   },
   {
