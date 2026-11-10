@@ -68,7 +68,7 @@ export default defineConfig({
  markdown: {
   math: true, lineNumbers: true,
   config(md) {
-   // Use MathJax's semantic MathML for selectable, numbered report equations.
+   // Use the same semantic MathML for numbered equations and unnumbered calculations.
    const renderMath = md.renderer.rules.math_block!
    md.renderer.rules.math_block = (tokens, index, options, env, renderer) => {
     if (env.relativePath !== 'subsystems/mechanical-design.md') {
@@ -76,14 +76,13 @@ export default defineConfig({
     }
     const source = tokens[index].content
     const number = source.match(/\\tag\{(\d+)\}/)?.[1]
-    if (!number) return renderMath(tokens, index, options, env, renderer)
     tokens[index].content = source.replace(/\\tag\{\d+\}/, '')
     let rendered: string
     try { rendered = renderMath(tokens, index, options, env, renderer) }
     finally { tokens[index].content = source }
     const math = rendered.match(/<math[\s\S]*?<\/math>/)?.[0]
-    if (!math) throw new Error('Missing MathML for mechanical report equation ' + number)
-    return '<div class="mechanical-equation" id="equation-md-' + number + '"><div class="mechanical-equation-math">' + math + '</div><span class="mechanical-equation-number">(' + number + ')</span></div>'
+    if (!math) throw new Error('Missing MathML for mechanical report equation')
+    return '<div class="mechanical-equation"' + (number ? ' id="equation-md-' + number + '"' : '') + '><div class="mechanical-equation-math">' + math + '</div>' + (number ? '<span class="mechanical-equation-number">(' + number + ')</span>' : '') + '</div>'
    }
   }
  },

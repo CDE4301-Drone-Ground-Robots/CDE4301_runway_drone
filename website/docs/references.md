@@ -98,6 +98,36 @@ The numbers below preserve the citations in Section 10 of the supplied *Interim 
 
 **Bibliographic details missing; manual completion required.** Citation preserved from Sections 10.3?10.4 of the supplied *Interim Report.docx*.
 
+### [14] - Singapore annual mean wind speed {#md-ref-14}
+
+The Straits Times. **ST Explains: Why is February the windiest month in Singapore?** Accessed 10 November 2026.
+
+[Open the Straits Times article](https://www.straitstimes.com/singapore/st-explains-why-is-february-the-windiest-month-in-singapore). Supports the approximately 2 m/s annual mean used for preliminary headwind sizing. The source report supplied the publisher and citation number but no article title or URL; this matching article was located during integration. The [Meteorological Service Singapore climate overview](https://www.weather.gov.sg/climate-climate-of-singapore) independently reports mean surface winds of around 2 m/s. This mean does not define a maximum operating wind or gust limit.
+
+### [15] - Beaufort Wind Scale {#md-ref-15}
+
+**Bibliographic details missing; manual completion required.** Citation preserved from “Results across Different Flight Scenarios” in the supplied interim report.
+
+### [16] - DJI Matrice 350 RTK maximum pitch angle {#md-ref-16}
+
+**Bibliographic details missing; manual completion required.** Citation and reference figure preserved from “Setting Conservative Thrust Estimate” in the supplied interim report.
+
+### [17] - T-Motor MN501-S KV360 performance data {#md-ref-17}
+
+**Bibliographic details missing; manual completion required.** Manufacturer performance data citation preserved from “T-Motor MN501-S KV360 with 17-inch Propellers” in the supplied interim report.
+
+### [18] - MAD 5005 IPE KV440 performance data {#md-ref-18}
+
+**Bibliographic details missing; manual completion required.** Manufacturer performance data citation preserved from “MAD 5005 IPE KV440 with 14-inch Propellers” in the supplied interim report.
+
+### [19] - Toray T300 carbon fibre datasheet {#md-ref-19}
+
+**Bibliographic details missing; manual completion required.** Datasheet citation preserved from “Beam Deflection Calculation” in the supplied interim report, which adopts a Young's modulus of 123 GPa.
+
+### [20] - ArduPilot vibration documentation {#md-ref-20}
+
+**Bibliographic details missing; manual completion required.** Documentation citation preserved from “Natural Bending Frequency Calculation” in the supplied interim report, identifying motor rotational frequency as a common source of multirotor vibration.
+
 ## Computer Vision Safety Sources
 
 ### CV-S01 - Pavement Cracking and FOD Risk {#cv-s01}
