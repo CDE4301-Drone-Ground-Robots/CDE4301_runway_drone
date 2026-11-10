@@ -101,8 +101,7 @@ export default defineConfig({
    { text: 'Drone Specification', link: '/engineering/drone-specification' },
    { component: 'SubsystemNav' },
    { text: 'Report', link: '/report/', activeMatch: '/(report/|scopes)' },
-   { text: 'Timeline', link: '/timeline' },
-   { text: 'References', link: '/references' }
+   { text: 'Timeline', link: '/timeline' }
   ],
   sidebar: Object.fromEntries(['/report/', '/subsystems/', '/research/', '/scopes', '/timeline', '/references'].map(path => [path, path === '/report/' ? continuousSidebar(reportSidebar) : reportSidebar])),
   docFooter: { prev: false, next: false },

@@ -1,6 +1,8 @@
 ---
 title: FOD ARGUS Engineering Report
 outline: false
+aside: false
+pageClass: full-report-page
 prev: false
 next: false
 ---
