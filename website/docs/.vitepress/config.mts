@@ -1,5 +1,7 @@
 import { communicationSubsystemSections } from './communication-subsystem-sections'
 import { cvSubsystemSections } from './cv-subsystem-sections'
+import { electricalSubsystemSections } from './electrical-subsystem-sections'
+import { navigationSubsystemSections } from './navigation-subsystem-sections'
 import { numberedMechanicalSections } from './mechanical-subsystem-sections'
 import { subsystems } from './theme/components/subsystems'
 import { defineConfig } from 'vitepress'
@@ -28,6 +30,18 @@ const reportSidebar = [
    items: communicationSubsystemSections.map((section, index) => ({
     text: (index + 1) + '. ' + section.title,
     link: '/subsystems/communication-system#' + section.slug
+   }))
+  } : subsystem.slug === 'electrical-design' ? {
+   collapsed: false,
+   items: electricalSubsystemSections.map((section, index) => ({
+    text: (index + 1) + '. ' + section.title,
+    link: '/subsystems/electrical-design#' + section.slug
+   }))
+  } : subsystem.slug === 'navigation-obstacle-avoidance' ? {
+   collapsed: false,
+   items: navigationSubsystemSections.map((section, index) => ({
+    text: (index + 1) + '. ' + section.title,
+    link: '/subsystems/navigation-obstacle-avoidance#' + section.slug
    }))
   } : {})
  })) },
