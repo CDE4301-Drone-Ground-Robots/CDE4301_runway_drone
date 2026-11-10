@@ -42,6 +42,12 @@ export const mechanicalSubsystemSections: MechanicalSection[] = [
  ] },
  { slug: 'motor-propellers-selection', title: 'Motor & Propellers Selection', sections: [
   { slug: 'interactive-uav-attitude-thrust-simulator', title: 'Interactive UAV Attitude & Thrust Simulator' }
+ ] },
+ { slug: 'propeller-arm-selection', title: 'Propeller Arm Selection', sections: [
+  { slug: 'bending-stress-calculation', title: 'Bending Stress Calculation' },
+  { slug: 'beam-deflection-calculation', title: 'Beam Deflection Calculation' },
+  { slug: 'natural-bending-frequency-calculation', title: 'Natural Bending Frequency Calculation' },
+  { slug: 'evaluation-of-different-beam-configurations', title: 'Evaluation of Different Beam Configurations' }
  ] }
 ]
 
