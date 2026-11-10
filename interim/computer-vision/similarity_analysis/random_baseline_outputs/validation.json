@@ -1,0 +1,21 @@
+{
+  "status": "passed",
+  "seed": 4301,
+  "images": {
+    "train": 23655,
+    "val": 5069,
+    "test": 5069
+  },
+  "boxes": {
+    "train": 24139,
+    "val": 5170,
+    "test": 5163
+  },
+  "total_images": 33793,
+  "total_boxes": 34472,
+  "all_source_and_copied_image_sha256_verified": true,
+  "all_yolo_labels_verified": true,
+  "all_classes_present_in_every_split": true,
+  "measured_strong_similarity_pairs_crossing_splits": 51361,
+  "measured_similarity_groups_crossing_splits": 4471
+}

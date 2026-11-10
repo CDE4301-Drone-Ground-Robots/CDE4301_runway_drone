@@ -1,0 +1,19 @@
+{
+  "input_output": "similarity_analysis/strict_outputs",
+  "output": "similarity_analysis/reduced_outputs",
+  "destination": "corrected_yolo_strict_reduced",
+  "source": "FODPascalVOCFormat-V.2.1/VOC2007",
+  "seed": 4301,
+  "io_workers": 32,
+  "batch_size": 128,
+  "crop_context": 1.6,
+  "minimum_crop_pixels": 64,
+  "object_cosine": 0.99,
+  "maximum_center_delta": 0.08,
+  "maximum_log_area_delta": 0.30,
+  "rare_class_box_cutoff": 500,
+  "small_object_quantile": 0.10,
+  "edge_margin_pixels": 3,
+  "split_fractions": [0.70, 0.15, 0.15],
+  "optimizer_time_limit_seconds": 180
+}

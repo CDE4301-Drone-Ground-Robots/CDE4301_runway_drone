@@ -1,0 +1,19 @@
+{
+  "settings_version": "0.0.8",
+  "datasets_dir": "C:\\Users\\Chara\\OneDrive\\Documents\\YR4_SEM1\\CDE4301\\All_Model_Integration\\datasets",
+  "weights_dir": "weights",
+  "runs_dir": "runs",
+  "uuid": "cc4cf708e1123fec46e3458297a150ec0308ac8b555a16e177985f6a6ef9b726",
+  "sync": true,
+  "api_key": "",
+  "openai_api_key": "",
+  "clearml": true,
+  "comet": true,
+  "dvc": true,
+  "mlflow": true,
+  "raytune": true,
+  "tensorboard": false,
+  "wandb": false,
+  "vscode_msg": true,
+  "openvino_msg": true
+}

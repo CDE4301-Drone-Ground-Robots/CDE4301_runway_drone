@@ -1,0 +1,41 @@
+{
+  "device": "cuda:0",
+  "cudnn_benchmark": true,
+  "cudnn_deterministic": false,
+  "matmul_allow_tf32": false,
+  "cudnn_allow_tf32": true,
+  "cpu_threads": 12,
+  "opencv_threads": 24,
+  "models": {
+    "patchcore": {
+      "class_name": "PatchcoreModel",
+      "image_size": [
+        256,
+        256
+      ],
+      "score_threshold": 0.05,
+      "heatmap_percentile": 95.0,
+      "min_region_area": 80,
+      "padding": 20,
+      "checkpoint_hparams": {
+        "pre_processor": true,
+        "post_processor": true,
+        "evaluator": true,
+        "visualizer": false,
+        "backbone": "wide_resnet50_2",
+        "layers": [
+          "layer2",
+          "layer3"
+        ],
+        "pre_trained": true,
+        "coreset_sampling_ratio": 0.1,
+        "num_neighbors": 9,
+        "precision": "float32"
+      },
+      "memory_bank_shape": [
+        5734,
+        1536
+      ]
+    }
+  }
+}

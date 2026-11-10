@@ -1,0 +1,45 @@
+Loading patchcore
+W1031 13:35:12.565000 91060 site-packages\torch\utils\flop_counter.py:29] triton not found; flop counting will not work for triton kernels
+C:\Users\Chara\miniconda3\envs\fod_synthetic\lib\site-packages\timm\models\layers\__init__.py:49: FutureWarning: Importing from timm.models.layers is deprecated, please import via timm.layers
+  warnings.warn(f"Importing from {__name__} is deprecated, please import via timm.layers", FutureWarning)
+C:\Users\Chara\miniconda3\envs\fod_synthetic\lib\site-packages\anomalib\models\image\dinomaly\components\layers.py:22: FutureWarning: The anomalib.models.components.dinov2 package is deprecated and will be removed in a future release. Please use the timm-based feature extractor instead: anomalib.models.components.feature_extractors.TimmFeatureExtractor
+  from anomalib.models.components.dinov2.layers import Attention, DropPath, LayerScale, MemEffAttention
+C:\Users\Chara\miniconda3\envs\fod_synthetic\lib\site-packages\lightning\fabric\utilities\cloud_io.py:73: Environment variable TORCH_FORCE_NO_WEIGHTS_ONLY_LOAD detected, since the`weights_only` argument was not explicitly passed to `torch.load`, forcing weights_only=False.
+Loading fod
+Loading crack
+Warmup 1
+Warmup 2
+Warmup 3
+Warmup 4
+Warmup 5
+parallel 1 1 / 30 133.46 ms
+parallel 1 2 / 30 94.88 ms
+parallel 1 3 / 30 92.52 ms
+parallel 1 4 / 30 91.94 ms
+parallel 1 5 / 30 89.72 ms
+parallel 1 6 / 30 87.15 ms
+parallel 1 7 / 30 82.85 ms
+parallel 1 8 / 30 72.41 ms
+parallel 1 9 / 30 88.07 ms
+parallel 1 10 / 30 86.89 ms
+parallel 1 11 / 30 170.61 ms
+parallel 1 12 / 30 21.55 ms
+parallel 1 13 / 30 20.38 ms
+parallel 1 14 / 30 242.22 ms
+parallel 1 15 / 30 121.9 ms
+parallel 1 16 / 30 112.79 ms
+parallel 1 17 / 30 35.72 ms
+parallel 1 18 / 30 179.23 ms
+parallel 1 19 / 30 189.05 ms
+parallel 1 20 / 30 34.77 ms
+parallel 1 21 / 30 63.23 ms
+parallel 1 22 / 30 77.26 ms
+parallel 1 23 / 30 61.54 ms
+parallel 1 24 / 30 59.08 ms
+parallel 1 25 / 30 57.17 ms
+parallel 1 26 / 30 57.5 ms
+parallel 1 27 / 30 58.78 ms
+parallel 1 28 / 30 66.7 ms
+parallel 1 29 / 30 58.4 ms
+parallel 1 30 / 30 57.0 ms
+Saved C:\Users\Chara\OneDrive\Documents\YR4_SEM1\CDE4301\All_Model_Integration\benchmark_results\20261031T053452_316923Z_parallel status completed

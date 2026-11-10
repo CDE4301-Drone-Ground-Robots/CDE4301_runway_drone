@@ -1,0 +1,22 @@
+{
+  "status": "Time limit reached. (HiGHS Status 13: Time limit reached)",
+  "objective": 1.470473322012935,
+  "images": {
+    "train": 20716,
+    "test": 4451,
+    "val": 4496
+  },
+  "boxes": {
+    "train": 21211,
+    "test": 4535,
+    "val": 4596
+  },
+  "blocks": {
+    "train": 8229,
+    "val": 1111,
+    "test": 1328
+  },
+  "largest_block": 802,
+  "strong_pairs_crossing": 0,
+  "source_video_independent": false
+}

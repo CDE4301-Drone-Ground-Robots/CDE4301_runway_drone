@@ -1,0 +1,11 @@
+Loading patchcore
+W1031 15:01:59.628000 118260 site-packages\torch\utils\flop_counter.py:29] triton not found; flop counting will not work for triton kernels
+C:\Users\Chara\miniconda3\envs\fod_synthetic\lib\site-packages\timm\models\layers\__init__.py:49: FutureWarning: Importing from timm.models.layers is deprecated, please import via timm.layers
+  warnings.warn(f"Importing from {__name__} is deprecated, please import via timm.layers", FutureWarning)
+C:\Users\Chara\miniconda3\envs\fod_synthetic\lib\site-packages\anomalib\models\image\dinomaly\components\layers.py:22: FutureWarning: The anomalib.models.components.dinov2 package is deprecated and will be removed in a future release. Please use the timm-based feature extractor instead: anomalib.models.components.feature_extractors.TimmFeatureExtractor
+  from anomalib.models.components.dinov2.layers import Attention, DropPath, LayerScale, MemEffAttention
+C:\Users\Chara\miniconda3\envs\fod_synthetic\lib\site-packages\lightning\fabric\utilities\cloud_io.py:73: Environment variable TORCH_FORCE_NO_WEIGHTS_ONLY_LOAD detected, since the`weights_only` argument was not explicitly passed to `torch.load`, forcing weights_only=False.
+Loading fod
+Loading crack
+SMOKE OK sequential2 {'crop_count': 2, 'stages': ['patchcore', 'fod', 'crack', 'simulated_coordinate_extraction'], 'crop_resize_host_ms': 3.8573999918298796, 'output_merge_host_ms': 0.0069999805418774486, 'coordinate_extraction_ms': 0.05369998689275235, 'coordinate_count': 1, 'message_preparation_ms': 0.2344999957131222, 'fod_calls': 2, 'crack_calls': 2, 'fod_positive_crops': 1, 'crack_positive_crops': 0, 'neither_detected_crops': 1, 'no_crack_base_crops': 2, 'message_count': 3, 'ugv_message_count': 1, 'base_message_count': 2}
+Saved C:\Users\Chara\OneDrive\Documents\YR4_SEM1\CDE4301\All_Model_Integration\benchmark_results\20261031T070140_095462Z_smoke_sequential2 status completed

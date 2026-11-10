@@ -1,0 +1,25 @@
+{
+  "config": {
+    "source": "FODPascalVOCFormat-V.2.1/VOC2007",
+    "output": "similarity_analysis/outputs",
+    "corrected_destination": "corrected_yolo_proposed",
+    "seed": 4301,
+    "io_workers": 8,
+    "cpu_threads": 4,
+    "batch_size": 64,
+    "search_block": 512,
+    "knn_k": 30,
+    "phash_radius": 6,
+    "strong_phash": 4,
+    "strong_cosine": 0.98,
+    "review_cosine": 0.95,
+    "split_fractions": [
+      0.7,
+      0.15,
+      0.15
+    ],
+    "split_restarts": 24,
+    "gallery_pairs_per_category": 24
+  },
+  "manifest": "65063fb01eaf59e7e643bd65e0c8ad0184d21d761324931d958e7b0b18a96946"
+}

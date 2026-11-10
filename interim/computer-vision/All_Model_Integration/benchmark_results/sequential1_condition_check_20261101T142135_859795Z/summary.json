@@ -1,0 +1,56 @@
+{
+  "configurations": {
+    "previous": {
+      "unique_inputs": 30,
+      "observations": 90,
+      "mean_ms": 97.55517222222099,
+      "median_ms": 78.64369999970222,
+      "p95_ms": 223.69778999991468,
+      "max_ms": 312.7751000001808,
+      "processing_frames_per_s": 10.250609754673995,
+      "crop_count": 84,
+      "fod_calls": 84,
+      "crack_calls": 84,
+      "coordinate_count": 54,
+      "base_messages": 84,
+      "ugv_messages": 54,
+      "peak_cuda_allocated_bytes": 410690048,
+      "max_rss_bytes": 2618826752,
+      "failures": 0,
+      "unprocessed": 0
+    },
+    "revised": {
+      "unique_inputs": 30,
+      "observations": 90,
+      "mean_ms": 96.04132555549667,
+      "median_ms": 79.65044999991733,
+      "p95_ms": 214.78029499980946,
+      "max_ms": 305.6293999998161,
+      "processing_frames_per_s": 10.412184486376736,
+      "crop_count": 84,
+      "fod_calls": 84,
+      "crack_calls": 84,
+      "coordinate_count": 54,
+      "base_messages": 72,
+      "ugv_messages": 54,
+      "peak_cuda_allocated_bytes": 410690048,
+      "max_rss_bytes": 2618900480,
+      "failures": 0,
+      "unprocessed": 0
+    }
+  },
+  "mean_change_percent": -1.5517851409004968,
+  "p95_change_percent": -3.9864028160978338,
+  "paired_image_bootstrap_95_percent_interval": [
+    -3.290817710552834,
+    0.38252769704801637
+  ],
+  "decision": "negligible_within_5_percent",
+  "margin_percent": 5,
+  "existing_sequential1_mean_ms": 99.18527000037203,
+  "original_file_integrity": {
+    "verified": 84,
+    "changed": []
+  },
+  "caveat": "Timing margin applies to this laptop and simulated local JSON transport; no camera, Jetson or network measured."
+}

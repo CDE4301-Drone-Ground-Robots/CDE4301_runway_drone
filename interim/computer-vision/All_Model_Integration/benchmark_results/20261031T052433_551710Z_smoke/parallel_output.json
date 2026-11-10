@@ -1,0 +1,75 @@
+{
+  "messages": [
+    {
+      "type": "FOD",
+      "destination": "UGV",
+      "body": {
+        "name": "MetalPart",
+        "confidence": 0.6544949412345886,
+        "coordinates": {
+          "simulated": true,
+          "bbox_original_px": [
+            35,
+            147,
+            63,
+            229
+          ],
+          "center_px": [
+            49.0,
+            188.0
+          ],
+          "offset_px": [
+            -101.0,
+            38.0
+          ],
+          "ground_offset_m": [
+            -0.6733333333333333,
+            0.25333333333333335
+          ],
+          "world_xy_m": [
+            2.3266666666666667,
+            4.253333333333333
+          ]
+        }
+      },
+      "simulated_transport": true,
+      "payload": "{\"type\":\"FOD\",\"destination\":\"UGV\",\"body\":{\"name\":\"MetalPart\",\"confidence\":0.6544949412345886,\"coordinates\":{\"simulated\":true,\"bbox_original_px\":[35,147,63,229],\"center_px\":[49.0,188.0],\"offset_px\":[-101.0,38.0],\"ground_offset_m\":[-0.6733333333333333,0.25333333333333335],\"world_xy_m\":[2.3266666666666667,4.253333333333333]}},\"simulated\":true}"
+    },
+    {
+      "type": "UNCLASSIFIED_ANOMALY",
+      "destination": "BASE",
+      "body": {
+        "roi": [
+          163,
+          148,
+          220,
+          206
+        ]
+      },
+      "simulated_transport": true,
+      "payload": "{\"type\":\"UNCLASSIFIED_ANOMALY\",\"destination\":\"BASE\",\"body\":{\"roi\":[163,148,220,206]},\"simulated\":true}"
+    }
+  ],
+  "routing": {
+    "crop_count": 2,
+    "stages": [
+      "patchcore",
+      "fod",
+      "crack",
+      "simulated_coordinate_extraction"
+    ],
+    "crop_resize_host_ms": 3.3297000045422465,
+    "output_merge_host_ms": 0.002800006768666208,
+    "coordinate_extraction_ms": 0.03539999306667596,
+    "coordinate_count": 1,
+    "message_preparation_ms": 0.09709999721962959,
+    "fod_calls": 2,
+    "crack_calls": 2,
+    "fod_positive_crops": 1,
+    "crack_positive_crops": 0,
+    "neither_detected_crops": 1,
+    "message_count": 2,
+    "ugv_message_count": 1,
+    "base_message_count": 1
+  }
+}

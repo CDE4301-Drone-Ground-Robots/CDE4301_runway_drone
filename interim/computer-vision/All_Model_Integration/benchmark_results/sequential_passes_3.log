@@ -1,0 +1,105 @@
+Loading patchcore
+W1031 13:41:13.208000 40080 site-packages\torch\utils\flop_counter.py:29] triton not found; flop counting will not work for triton kernels
+C:\Users\Chara\miniconda3\envs\fod_synthetic\lib\site-packages\timm\models\layers\__init__.py:49: FutureWarning: Importing from timm.models.layers is deprecated, please import via timm.layers
+  warnings.warn(f"Importing from {__name__} is deprecated, please import via timm.layers", FutureWarning)
+C:\Users\Chara\miniconda3\envs\fod_synthetic\lib\site-packages\anomalib\models\image\dinomaly\components\layers.py:22: FutureWarning: The anomalib.models.components.dinov2 package is deprecated and will be removed in a future release. Please use the timm-based feature extractor instead: anomalib.models.components.feature_extractors.TimmFeatureExtractor
+  from anomalib.models.components.dinov2.layers import Attention, DropPath, LayerScale, MemEffAttention
+C:\Users\Chara\miniconda3\envs\fod_synthetic\lib\site-packages\lightning\fabric\utilities\cloud_io.py:73: Environment variable TORCH_FORCE_NO_WEIGHTS_ONLY_LOAD detected, since the`weights_only` argument was not explicitly passed to `torch.load`, forcing weights_only=False.
+Loading fod
+Loading crack
+Warmup 1
+Warmup 2
+Warmup 3
+Warmup 4
+Warmup 5
+sequential 1 1 / 30 101.81 ms
+sequential 1 2 / 30 76.73 ms
+sequential 1 3 / 30 49.29 ms
+sequential 1 4 / 30 49.54 ms
+sequential 1 5 / 30 51.56 ms
+sequential 1 6 / 30 58.48 ms
+sequential 1 7 / 30 48.73 ms
+sequential 1 8 / 30 62.16 ms
+sequential 1 9 / 30 52.78 ms
+sequential 1 10 / 30 51.77 ms
+sequential 1 11 / 30 162.84 ms
+sequential 1 12 / 30 25.65 ms
+sequential 1 13 / 30 20.44 ms
+sequential 1 14 / 30 222.85 ms
+sequential 1 15 / 30 97.23 ms
+sequential 1 16 / 30 85.51 ms
+sequential 1 17 / 30 21.39 ms
+sequential 1 18 / 30 160.68 ms
+sequential 1 19 / 30 132.91 ms
+sequential 1 20 / 30 21.3 ms
+sequential 1 21 / 30 60.18 ms
+sequential 1 22 / 30 59.24 ms
+sequential 1 23 / 30 57.5 ms
+sequential 1 24 / 30 65.64 ms
+sequential 1 25 / 30 71.21 ms
+sequential 1 26 / 30 59.28 ms
+sequential 1 27 / 30 59.47 ms
+sequential 1 28 / 30 61.53 ms
+sequential 1 29 / 30 59.77 ms
+sequential 1 30 / 30 68.07 ms
+sequential 2 1 / 30 111.94 ms
+sequential 2 2 / 30 77.37 ms
+sequential 2 3 / 30 52.94 ms
+sequential 2 4 / 30 49.76 ms
+sequential 2 5 / 30 49.12 ms
+sequential 2 6 / 30 50.3 ms
+sequential 2 7 / 30 49.57 ms
+sequential 2 8 / 30 48.88 ms
+sequential 2 9 / 30 49.94 ms
+sequential 2 10 / 30 48.71 ms
+sequential 2 11 / 30 164.36 ms
+sequential 2 12 / 30 22.56 ms
+sequential 2 13 / 30 22.15 ms
+sequential 2 14 / 30 217.75 ms
+sequential 2 15 / 30 79.29 ms
+sequential 2 16 / 30 78.84 ms
+sequential 2 17 / 30 20.97 ms
+sequential 2 18 / 30 183.28 ms
+sequential 2 19 / 30 131.72 ms
+sequential 2 20 / 30 21.59 ms
+sequential 2 21 / 30 57.86 ms
+sequential 2 22 / 30 59.4 ms
+sequential 2 23 / 30 66.75 ms
+sequential 2 24 / 30 67.05 ms
+sequential 2 25 / 30 66.75 ms
+sequential 2 26 / 30 62.5 ms
+sequential 2 27 / 30 61.64 ms
+sequential 2 28 / 30 57.84 ms
+sequential 2 29 / 30 57.75 ms
+sequential 2 30 / 30 59.83 ms
+sequential 3 1 / 30 111.04 ms
+sequential 3 2 / 30 97.05 ms
+sequential 3 3 / 30 58.95 ms
+sequential 3 4 / 30 49.59 ms
+sequential 3 5 / 30 51.81 ms
+sequential 3 6 / 30 51.51 ms
+sequential 3 7 / 30 59.85 ms
+sequential 3 8 / 30 50.64 ms
+sequential 3 9 / 30 49.15 ms
+sequential 3 10 / 30 48.96 ms
+sequential 3 11 / 30 162.31 ms
+sequential 3 12 / 30 21.44 ms
+sequential 3 13 / 30 28.82 ms
+sequential 3 14 / 30 217.91 ms
+sequential 3 15 / 30 80.71 ms
+sequential 3 16 / 30 90.65 ms
+sequential 3 17 / 30 29.03 ms
+sequential 3 18 / 30 203.98 ms
+sequential 3 19 / 30 132.65 ms
+sequential 3 20 / 30 21.07 ms
+sequential 3 21 / 30 59.1 ms
+sequential 3 22 / 30 59.52 ms
+sequential 3 23 / 30 58.54 ms
+sequential 3 24 / 30 66.52 ms
+sequential 3 25 / 30 66.59 ms
+sequential 3 26 / 30 67.58 ms
+sequential 3 27 / 30 65.8 ms
+sequential 3 28 / 30 59.03 ms
+sequential 3 29 / 30 57.52 ms
+sequential 3 30 / 30 57.05 ms
+Saved C:\Users\Chara\OneDrive\Documents\YR4_SEM1\CDE4301\All_Model_Integration\benchmark_results\20261031T054056_009593Z_sequential status completed

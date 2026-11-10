@@ -1,0 +1,24 @@
+{
+  "original_images": 33793,
+  "kept_images": 29663,
+  "removed_images": 4130,
+  "retained_fraction": 0.8777853401592046,
+  "protected_images": 10756,
+  "rare_classes": [
+    "AdjustableWrench",
+    "Hose",
+    "MetalSheet",
+    "Pen",
+    "Screw",
+    "Tape",
+    "Wood"
+  ],
+  "thresholds": {
+    "object_cosine": 0.99,
+    "maximum_center_delta": 0.08,
+    "maximum_log_area_delta": 0.3,
+    "rare_class_box_cutoff": 500,
+    "small_object_quantile": 0.1,
+    "edge_margin_pixels": 3
+  }
+}

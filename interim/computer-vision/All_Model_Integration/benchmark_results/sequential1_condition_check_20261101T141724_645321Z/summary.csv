@@ -1,0 +1,3 @@
+variant,unique_inputs,observations,mean_ms,median_ms,p95_ms,max_ms,processing_frames_per_s,crop_count,fod_calls,crack_calls,coordinate_count,base_messages,ugv_messages,peak_cuda_allocated_bytes,max_rss_bytes,failures,unprocessed
+previous,30,90,96.20763555555338,77.2820000001957,223.18093500025492,285.42079999988346,10.394185391060441,84,84,84,54,84,54,444253696,2611257344,0,0
+revised,30,90,93.64656888883474,77.50770000029661,222.9424999999537,264.40089999960037,10.678447826391508,84,84,84,54,72,54,444253696,2611355648,0,0

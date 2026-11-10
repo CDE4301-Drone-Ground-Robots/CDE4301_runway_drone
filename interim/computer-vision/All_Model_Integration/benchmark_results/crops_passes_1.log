@@ -1,0 +1,43 @@
+Loading patchcore
+W1031 13:29:51.041000 109996 site-packages\torch\utils\flop_counter.py:29] triton not found; flop counting will not work for triton kernels
+C:\Users\Chara\miniconda3\envs\fod_synthetic\lib\site-packages\timm\models\layers\__init__.py:49: FutureWarning: Importing from timm.models.layers is deprecated, please import via timm.layers
+  warnings.warn(f"Importing from {__name__} is deprecated, please import via timm.layers", FutureWarning)
+C:\Users\Chara\miniconda3\envs\fod_synthetic\lib\site-packages\anomalib\models\image\dinomaly\components\layers.py:22: FutureWarning: The anomalib.models.components.dinov2 package is deprecated and will be removed in a future release. Please use the timm-based feature extractor instead: anomalib.models.components.feature_extractors.TimmFeatureExtractor
+  from anomalib.models.components.dinov2.layers import Attention, DropPath, LayerScale, MemEffAttention
+C:\Users\Chara\miniconda3\envs\fod_synthetic\lib\site-packages\lightning\fabric\utilities\cloud_io.py:73: Environment variable TORCH_FORCE_NO_WEIGHTS_ONLY_LOAD detected, since the`weights_only` argument was not explicitly passed to `torch.load`, forcing weights_only=False.
+Warmup 1
+Warmup 2
+Warmup 3
+Warmup 4
+Warmup 5
+crops 1 1 / 30 21.81 ms
+crops 1 2 / 30 30.7 ms
+crops 1 3 / 30 30.07 ms
+crops 1 4 / 30 21.64 ms
+crops 1 5 / 30 29.72 ms
+crops 1 6 / 30 27.42 ms
+crops 1 7 / 30 21.32 ms
+crops 1 8 / 30 21.09 ms
+crops 1 9 / 30 21.2 ms
+crops 1 10 / 30 23.76 ms
+crops 1 11 / 30 34.46 ms
+crops 1 12 / 30 22.24 ms
+crops 1 13 / 30 29.14 ms
+crops 1 14 / 30 26.07 ms
+crops 1 15 / 30 26.43 ms
+crops 1 16 / 30 26.6 ms
+crops 1 17 / 30 29.88 ms
+crops 1 18 / 30 25.61 ms
+crops 1 19 / 30 26.45 ms
+crops 1 20 / 30 27.54 ms
+crops 1 21 / 30 60.52 ms
+crops 1 22 / 30 54.49 ms
+crops 1 23 / 30 43.27 ms
+crops 1 24 / 30 42.13 ms
+crops 1 25 / 30 41.21 ms
+crops 1 26 / 30 47.47 ms
+crops 1 27 / 30 43.35 ms
+crops 1 28 / 30 41.27 ms
+crops 1 29 / 30 49.24 ms
+crops 1 30 / 30 42.19 ms
+Saved C:\Users\Chara\OneDrive\Documents\YR4_SEM1\CDE4301\All_Model_Integration\benchmark_results\20261031T052930_960030Z_crops status completed

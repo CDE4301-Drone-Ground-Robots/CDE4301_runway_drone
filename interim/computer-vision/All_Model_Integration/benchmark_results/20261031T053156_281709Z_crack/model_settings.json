@@ -1,0 +1,16 @@
+{
+  "device": "cuda:0",
+  "cudnn_benchmark": false,
+  "cudnn_deterministic": false,
+  "matmul_allow_tf32": false,
+  "cudnn_allow_tf32": true,
+  "cpu_threads": 12,
+  "opencv_threads": 24,
+  "models": {
+    "crack": {
+      "class_name": "Unet",
+      "image_size": 512,
+      "threshold": 0.5
+    }
+  }
+}

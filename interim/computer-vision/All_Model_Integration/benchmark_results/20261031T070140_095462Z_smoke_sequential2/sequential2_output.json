@@ -1,0 +1,92 @@
+{
+  "messages": [
+    {
+      "type": "FOD",
+      "destination": "UGV",
+      "body": {
+        "name": "MetalPart",
+        "confidence": 0.6541880965232849,
+        "coordinates": {
+          "simulated": true,
+          "bbox_original_px": [
+            35,
+            147,
+            63,
+            229
+          ],
+          "center_px": [
+            49.0,
+            188.0
+          ],
+          "offset_px": [
+            -101.0,
+            38.0
+          ],
+          "ground_offset_m": [
+            -0.6733333333333333,
+            0.25333333333333335
+          ],
+          "world_xy_m": [
+            2.3266666666666667,
+            4.253333333333333
+          ]
+        }
+      },
+      "simulated_transport": true,
+      "payload": "{\"type\":\"FOD\",\"destination\":\"UGV\",\"body\":{\"name\":\"MetalPart\",\"confidence\":0.6541880965232849,\"coordinates\":{\"simulated\":true,\"bbox_original_px\":[35,147,63,229],\"center_px\":[49.0,188.0],\"offset_px\":[-101.0,38.0],\"ground_offset_m\":[-0.6733333333333333,0.25333333333333335],\"world_xy_m\":[2.3266666666666667,4.253333333333333]}},\"simulated\":true}"
+    },
+    {
+      "type": "NO_CRACK_DETECTED",
+      "destination": "BASE",
+      "body": {
+        "roi": [
+          6,
+          120,
+          103,
+          254
+        ],
+        "fod_detected": true
+      },
+      "simulated_transport": true,
+      "payload": "{\"type\":\"NO_CRACK_DETECTED\",\"destination\":\"BASE\",\"body\":{\"roi\":[6,120,103,254],\"fod_detected\":true},\"simulated\":true}"
+    },
+    {
+      "type": "NO_CRACK_DETECTED",
+      "destination": "BASE",
+      "body": {
+        "roi": [
+          163,
+          148,
+          220,
+          206
+        ],
+        "fod_detected": false
+      },
+      "simulated_transport": true,
+      "payload": "{\"type\":\"NO_CRACK_DETECTED\",\"destination\":\"BASE\",\"body\":{\"roi\":[163,148,220,206],\"fod_detected\":false},\"simulated\":true}"
+    }
+  ],
+  "routing": {
+    "crop_count": 2,
+    "stages": [
+      "patchcore",
+      "fod",
+      "crack",
+      "simulated_coordinate_extraction"
+    ],
+    "crop_resize_host_ms": 3.8573999918298796,
+    "output_merge_host_ms": 0.0069999805418774486,
+    "coordinate_extraction_ms": 0.05369998689275235,
+    "coordinate_count": 1,
+    "message_preparation_ms": 0.2344999957131222,
+    "fod_calls": 2,
+    "crack_calls": 2,
+    "fod_positive_crops": 1,
+    "crack_positive_crops": 0,
+    "neither_detected_crops": 1,
+    "no_crack_base_crops": 2,
+    "message_count": 3,
+    "ugv_message_count": 1,
+    "base_message_count": 2
+  }
+}

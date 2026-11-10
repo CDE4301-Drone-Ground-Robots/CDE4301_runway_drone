@@ -1,0 +1,110 @@
+﻿{
+  "core.py": [
+    {
+      "old": "def pipeline(frame, models, parallel=False, executor=None, streams=None):",
+      "new": "def pipeline(frame, models, parallel=False, executor=None, streams=None, sequential2=False):"
+    },
+    {
+      "old": "        crack_positive_crops=0,neither_detected_crops=0)",
+      "new": "        crack_positive_crops=0,neither_detected_crops=0,no_crack_base_crops=0)"
+    },
+    {
+      "old": "            if not fod_records:\n                cr=detect(models[\"crack\"],zoom)",
+      "new": "            if sequential2 or not fod_records:\n                cr=detect(models[\"crack\"],zoom)"
+    },
+    {
+      "old": "        elif not fod_records:\n            details[\"neither_detected_crops\"]+=1\n            records.append(pack_message(\"UNCLASSIFIED_ANOMALY\",\"BASE\",dict(roi=roi)))",
+      "new": "        elif sequential2:\n            details[\"no_crack_base_crops\"]+=1\n            if not fod_records:details[\"neither_detected_crops\"]+=1\n            records.append(pack_message(\"NO_CRACK_DETECTED\",\"BASE\",\n                dict(roi=roi,fod_detected=bool(fod_records))))\n        elif not fod_records:\n            details[\"neither_detected_crops\"]+=1\n            records.append(pack_message(\"UNCLASSIFIED_ANOMALY\",\"BASE\",dict(roi=roi)))"
+    },
+    {
+      "old": "\"parallel\":[\"patchcore\",\"fod\",\"crack\"]}.get(args.config,[args.config])",
+      "new": "\"parallel\":[\"patchcore\",\"fod\",\"crack\"],\"sequential2\":[\"patchcore\",\"fod\",\"crack\"],\n                \"smoke_sequential2\":[\"patchcore\",\"fod\",\"crack\"]}.get(args.config,[args.config])"
+    },
+    {
+      "old": "        if args.config==\"smoke\":\n            source=source[:1]",
+      "new": "        if args.config in (\"smoke\",\"smoke_sequential2\"):\n            source=source[:1]"
+    },
+    {
+      "old": "(\"sequential\",\"parallel\",\"patchcore\",\"crops\")",
+      "new": "(\"sequential\",\"sequential2\",\"parallel\",\"patchcore\",\"crops\")"
+    },
+    {
+      "old": "        if args.config==\"smoke\":\n            for name in names:",
+      "new": "        if args.config==\"smoke_sequential2\":\n            sync()\n            result,detail=pipeline(images[0][1],models,sequential2=True)\n            sync()\n            assert detail[\"crack_calls\"]==detail[\"crop_count\"]\n            assert detail[\"base_message_count\"]==detail[\"crop_count\"]\n            write_json(run_dir/\"sequential2_output.json\",dict(messages=result,routing=detail))\n            write_json(run_dir/\"coordinate_math_test.json\",self_test(SIMULATION))\n            status.update(status=\"completed\",completed=1,selected_inputs=1,unique_source_frames=1,\n                          smoke_architecture_checks=1)\n            print(\"SMOKE OK sequential2\",detail,flush=True)\n            return\n        if args.config==\"smoke\":\n            for name in names:"
+    },
+    {
+      "old": "integrated=args.config in (\"sequential\",\"parallel\")",
+      "new": "integrated=args.config in (\"sequential\",\"sequential2\",\"parallel\")"
+    },
+    {
+      "old": "pipeline(workload[0][1],models,bool(executor),executor,active_streams); sync()",
+      "new": "pipeline(workload[0][1],models,bool(executor),executor,active_streams,sequential2=args.config==\"sequential2\"); sync()"
+    },
+    {
+      "old": "pipeline(im,models,bool(executor),executor,active_streams)",
+      "new": "pipeline(im,models,bool(executor),executor,active_streams,sequential2=args.config==\"sequential2\")"
+    },
+    {
+      "old": "(\"report\",\"inventory\",\"smoke\")",
+      "new": "(\"report\",\"inventory\",\"smoke\",\"smoke_sequential2\")"
+    },
+    {
+      "old": "\"coordinates\",\"sequential\",\"parallel\",\"report\"]",
+      "new": "\"coordinates\",\"sequential\",\"sequential2\",\"parallel\",\"smoke_sequential2\",\"report\"]"
+    }
+  ],
+  "finalize.py": [
+    {
+      "old": "config in (\"sequential\",\"parallel\")",
+      "new": "config in (\"sequential\",\"sequential2\",\"parallel\")"
+    },
+    {
+      "old": "count if config==\"parallel\" else count-integer(r,\"fod_positive_crops\")",
+      "new": "count if config in (\"parallel\",\"sequential2\") else count-integer(r,\"fod_positive_crops\")"
+    },
+    {
+      "old": "integer(r,\"crack_positive_crops\")+integer(r,\"neither_detected_crops\"))))",
+      "new": "(count if config==\"sequential2\" else integer(r,\"crack_positive_crops\")+integer(r,\"neither_detected_crops\")))))"
+    },
+    {
+      "old": "\"sequential\",\"parallel\")",
+      "new": "\"sequential\",\"sequential2\",\"parallel\")"
+    },
+    {
+      "old": "    \"Sequential now skips U-Net whenever YOLO detects FOD in that crop. Parallel always runs both downstream models on every valid crop.\",",
+      "new": "    \"Sequential fallback skips U-Net when YOLO detects FOD. Sequential 2 runs YOLO then U-Net on every crop and sends every U-Net outcome to Base. Parallel runs both models concurrently on every crop.\",\n    \"The existing fallback/parallel measurements were retained; Sequential 2 was measured in a later session. Background-load drift limits strict cross-session ranking.\","
+    },
+    {
+      "old": "ten routing-unit checks",
+      "new": "fifteen routing-unit checks"
+    },
+    {
+      "old": "if not all_unchanged or not all_covered or not routing_ok:",
+      "new": "# Curated comparison keeps earlier raw measurements and identifies their sessions.\ncomparison=[]\nfor config,label in ((\"sequential\",\"Sequential 1 (fallback)\"),(\"sequential2\",\"Sequential 2\"),(\"parallel\",\"Parallel\")):\n    if config not in latest:continue\n    item=dict(latest[config]);item[\"architecture\"]=label\n    run_path=OUT/item[\"run\"]\n    state=jread(run_path/\"status.json\")\n    item[\"session_start_utc\"]=state[\"start_utc\"]\n    raw=cread(run_path/\"raw_timings.csv\") if (run_path/\"raw_timings.csv\").exists() else []\n    good=[r for r in raw if r[\"status\"]==\"ok\"]\n    item[\"base_message_count\"]=sum(integer(r,\"base_message_count\") for r in good)\n    item[\"ugv_message_count\"]=sum(integer(r,\"ugv_message_count\") for r in good)\n    comparison.append(item)\nif comparison:\n    fields=list(dict.fromkeys(k for row in comparison for k in row))\n    with (OUT/\"architecture_comparison.csv\").open(\"w\",newline=\"\",encoding=\"utf-8\") as f:\n        w=csv.DictWriter(f,fieldnames=fields);w.writeheader();w.writerows(comparison)\n    compare_lines=[\"# Three-architecture laptop comparison\",\"\",\n        \"Sequential 1 and Parallel retain their earlier measured runs. Sequential 2 was measured subsequently.\",\n        \"All use the same input files, weights, thresholds, precision and simulated coordinate settings; cross-session background load remains a limitation.\",\n        \"\",\n        \"| Architecture | Unique RGB | Observations | Mean ms | Median ms | P95 ms | Max ms | Processing frames/s | YOLO calls | U-Net calls | Coordinate calls | Base messages |\",\n        \"|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|\"]\n    for row in comparison:\n        compare_lines.append(\"| \"+\" | \".join([row[\"architecture\"],row[\"unique_inputs\"],row[\"measured_observations\"]]+\n            [fmt(row[k]) for k in (\"mean_ms\",\"median_ms\",\"p95_ms\",\"max_ms\",\"processing_throughput_per_s\")]+\n            [row[\"fod_calls\"],row[\"crack_calls\"],row[\"coordinate_count\"],str(row[\"base_message_count\"])])+\" |\")\n    compare_lines+=[\"\",\n        \"Sequential 1: YOLO first; skip U-Net on FOD-positive crops. FOD -> simulated UGV coordinates; fallback outcomes -> Base.\",\n        \"Sequential 2: YOLO first and U-Net next on every crop. FOD -> simulated UGV coordinates; every U-Net outcome -> Base, including no-crack outcomes.\",\n        \"Parallel: YOLO and U-Net concurrently on every crop. FOD -> simulated UGV coordinates; cracks or neither-detected anomalies -> Base.\",\n        \"\",\n        \"Sequential 1 has less neural inference work. Sequential 2 and Parallel have equal model-call counts but differ in message routing and scheduling; results are not a perfectly isolated concurrency experiment.\",\n        \"Coordinates are planar arithmetic with simulated position/coverage; messages are local JSON only. No camera, GPS, network or Jetson performance is measured.\",\n        \"Full statistics, memory, failures and source run/session identifiers are in architecture_comparison.csv. Raw observations remain in each timestamped run directory.\"]\n    (OUT/\"architecture_comparison.md\").write_text(\"\\n\".join(compare_lines)+\"\\n\",encoding=\"utf-8\")\n    with (OUT/\"results_and_limitations.md\").open(\"a\",encoding=\"utf-8\") as f:\n        f.write(\"\\n\\n\"+\"\\n\".join(compare_lines)+\"\\n\")\n    for row in comparison:\n        print(\"ARCHITECTURE\",row[\"architecture\"],\"observations\",row[\"measured_observations\"],\n              \"mean_ms\",row[\"mean_ms\"],\"frames_per_second\",row[\"processing_throughput_per_s\"],flush=True)\n\nif not all_unchanged or not all_covered or not routing_ok:"
+    }
+  ],
+  "routing_checks.py": [
+    {
+      "old": "if __name__==\"__main__\":",
+      "new": "def check_sequential2(fod,crack,anomaly=True):\n    events=[]\n    class Ordered(Stub):\n        def __init__(self,name,result):super().__init__(result);self.name=name\n        def detect(self,frame):events.append(self.name);return super().detect(frame)\n    models=dict(patchcore=Ordered(\"patchcore\",dict(boxes=[(0,0,8,8)] if anomaly else [])),\n                fod=Ordered(\"fod\",[dict(object=\"test\",confidence=.9,bbox=(0,0,1280,720))] if fod else []),\n                crack=Ordered(\"crack\",dict(bbox=(0,0,1280,720)) if crack else None))\n    records,details=core.pipeline(np.zeros((8,8,3),dtype=np.uint8),models,sequential2=True)\n    assert events==([\"patchcore\",\"fod\",\"crack\"] if anomaly else [\"patchcore\"])\n    assert details[\"crack_calls\"]==int(anomaly)\n    assert details[\"coordinate_count\"]==int(anomaly and fod)\n    assert details[\"base_message_count\"]==int(anomaly)\n    assert details[\"ugv_message_count\"]==int(anomaly and fod)\n    if anomaly:\n        base=[r for r in records if r[\"destination\"]==\"BASE\"]\n        assert base[0][\"type\"]==(\"CRACK\" if crack else \"NO_CRACK_DETECTED\")\n    return dict(mode=\"sequential2\",fod=fod,crack=crack,anomaly=anomaly,status=\"passed\",routing=details)\n\nif __name__==\"__main__\":"
+    },
+    {
+      "old": "    core.write_json(core.OUT/\"routing_checks.json\"",
+      "new": "    checks += [check_sequential2(f,c) for f,c in ((True,True),(True,False),(False,True),(False,False))]\n    checks.append(check_sequential2(False,False,anomaly=False))\n    core.write_json(core.OUT/\"routing_checks.json\""
+    },
+    {
+      "old": "Passed 10 routing checks",
+      "new": "Passed 15 routing checks"
+    }
+  ],
+  "run_all.py": [
+    {
+      "old": "configs=(\"patchcore\",\"fod\",\"crack\",\"coordinates\",\"thermal_sampling\",\"thermal\",\"sequential\",\"parallel\")",
+      "new": "configs=(\"patchcore\",\"fod\",\"crack\",\"coordinates\",\"thermal_sampling\",\"thermal\",\"sequential\",\"sequential2\",\"parallel\")"
+    },
+    {
+      "old": "(\"fod\",\"crack\",\"coordinates\",\"sequential\",\"parallel\")",
+      "new": "(\"fod\",\"crack\",\"coordinates\",\"sequential\",\"sequential2\",\"parallel\")"
+    }
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "status": "passed",
+  "images": {
+    "train": 23106,
+    "test": 5386,
+    "val": 5301
+  },
+  "bounding_boxes": {
+    "train": 23601,
+    "test": 5439,
+    "val": 5432
+  },
+  "groups_crossing_splits": 0,
+  "strong_pairs_crossing_splits": 0,
+  "allocation_blocks_crossing_splits": 0,
+  "all_exported_images_sha256_verified": true,
+  "all_yolo_class_ids_and_boxes_verified": true,
+  "source_manifest_sha256": "65063fb01eaf59e7e643bd65e0c8ad0184d21d761324931d958e7b0b18a96946",
+  "pipeline_sha256": "33c9649e878ceaac5e2a3affb0b651352a7f46cd91b0b18992c06ce4b4933f67"
+}

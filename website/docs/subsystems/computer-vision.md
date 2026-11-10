@@ -497,6 +497,8 @@ The thermal detection layer was implemented as a safety layer in addition to obs
 
 Hence, the thermal camera is mounted along with the RGB camera below, pointed at an approximate angle of 45 degrees. This camera is positioned such that it will detect the area ahead on the road for potential obstacles such as people, birds and other heat emitters. If a thermal object is detected, the system is intended to stop and hold until the obstacle is cleared or gone, which reduces the risk of collision. This thermal sub-system operates independently from the RGB FOD detection pipeline. In the current prototype, it's simulated in software for testing, and some results are shown below.
 
+The thermal camera is also planned to provide a live feed for manual override. If the drone encounters a problem at night, the operator can use this view to guide ARGUS back. Live-feed integration and testing are future work.
+
 <CvFigure n="38" />
 
 ### Thermal Datasets and Training Settings
@@ -626,6 +628,7 @@ These are laptop processing rates, not camera capture rates. Live capture, displ
 - Implement the link between the cameras and the vision system in Jetson NX.
 - Send current drone coordinates from ROS 2 navigation to the vision system.
 - Link thermal detection to the flight controller for emergency stops.
+- Integrate and test the thermal live feed for manual override and guiding ARGUS back at night. Check image clarity and video delay.
 - Set up a program to prevent repeated FOD coordinates from being sent (work with the UGV side).
 - Test the latency for each model and the entire integrated system on Jetson alongside navigation and communication. Check that captured frames do not build up in a processing queue.
 
