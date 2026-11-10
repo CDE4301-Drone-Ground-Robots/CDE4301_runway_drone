@@ -1,7 +1,7 @@
 export const subsystems = [
  {slug:'mechanical-design', title:'Mechanical Design', owner:'Muruganantham Arun', portrait:'/team/Arun.png', area:'Structure & airframe', color:'#be967e'},
  {slug:'electrical-design', title:'Electrical Design', owner:'Kummarikunta Talitha', portrait:'/team/Talitha.jpg', area:'Power & electronics', color:'#d5b85e'},
- {slug:'navigation-obstacle-avoidance', title:'Navigation & Obstacle Avoidance', owner:'Kummarikunta Talitha', portrait:'/team/Talitha.jpg', area:'Movement & awareness', color:'#6ebdb1'},
+ {slug:'navigation-obstacle-avoidance', title:'Navigation and Obstacle Avoidance', owner:'Kummarikunta Talitha', portrait:'/team/Talitha.jpg', area:'Movement & awareness', color:'#6ebdb1'},
  {slug:'computer-vision', title:'Computer Vision Based Inspection and Safety System', owner:'Charansagar Ramanujam', portrait:'/team/Charan.png', area:'Inspection & perception', color:'#a598d4'},
  {slug:'communication-system', title:'Communication System', owner:'Charansagar Ramanujam', portrait:'/team/Charan.png', area:'Data & connectivity', color:'#7eaed3'}
 ]
