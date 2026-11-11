@@ -1,9 +1,7 @@
 <script setup lang="ts">
 import { nextTick, onMounted, onUnmounted, watch } from 'vue'
 import { useRoute, withBase } from 'vitepress'
-import { cvSubsystemSections } from '../../cv-subsystem-sections'
-import { communicationSubsystemSections } from '../../communication-subsystem-sections'
-import { flattenMechanicalSections } from '../../mechanical-subsystem-sections'
+import { rubricSections } from '../../rubric-sections'
 const route = useRoute()
 let entries: { heading: HTMLElement; link: HTMLAnchorElement; item: HTMLElement | null }[] = []
 let sidebar: HTMLElement | null = null
@@ -88,10 +86,10 @@ async function refresh() {
   }
   entries.sort((a, b) => a.heading === b.heading ? 0 : a.heading.compareDocumentPosition(b.heading) & Node.DOCUMENT_POSITION_FOLLOWING ? -1 : 1)
  } else {
-  const mechanical = isMechanicalReport()
-  const communication = route.path.replace(/\.html$/, '').endsWith('/subsystems/communication-system')
-  const sections = mechanical ? flattenMechanicalSections() : communication ? communicationSubsystemSections : cvSubsystemSections
-  const reportPath = mechanical ? '/subsystems/mechanical-design' : communication ? '/subsystems/communication-system' : '/subsystems/computer-vision'
+  const subsystem = route.path.replace(/\.html$/, '').match(/\/subsystems\/([^/]+)\/?$/)?.[1]
+  if (!subsystem) return
+  const reportPath = '/subsystems/' + subsystem
+  const sections = rubricSections
   for (const section of sections) {
    const heading = report.querySelector<HTMLElement>('[id="' + section.slug + '"]')
    const href = withBase(reportPath + '#' + section.slug)

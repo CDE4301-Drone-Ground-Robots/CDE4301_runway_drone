@@ -19,8 +19,8 @@ const reportSidebar = [
   link: '/subsystems/' + subsystem.slug,
   ...(subsystem.slug === 'computer-vision' ? {
    collapsed: false,
-   items: cvSubsystemSections.map((section, index) => ({
-    text: (index + 1) + '. ' + section.title,
+   items: cvSubsystemSections.map(section => ({
+    text: section.title,
     link: '/subsystems/computer-vision#' + section.slug
    }))
   } : subsystem.slug === 'mechanical-design' ? {
@@ -28,20 +28,20 @@ const reportSidebar = [
    items: numberedMechanicalSections()
   } : subsystem.slug === 'communication-system' ? {
    collapsed: false,
-   items: communicationSubsystemSections.map((section, index) => ({
-    text: (index + 1) + '. ' + section.title,
+   items: communicationSubsystemSections.map(section => ({
+    text: section.title,
     link: '/subsystems/communication-system#' + section.slug
    }))
   } : subsystem.slug === 'electrical-design' ? {
    collapsed: false,
-   items: electricalSubsystemSections.map((section, index) => ({
-    text: (index + 1) + '. ' + section.title,
+   items: electricalSubsystemSections.map(section => ({
+    text: section.title,
     link: '/subsystems/electrical-design#' + section.slug
    }))
   } : subsystem.slug === 'navigation-obstacle-avoidance' ? {
    collapsed: false,
-   items: navigationSubsystemSections.map((section, index) => ({
-    text: (index + 1) + '. ' + section.title,
+   items: navigationSubsystemSections.map(section => ({
+    text: section.title,
     link: '/subsystems/navigation-obstacle-avoidance#' + section.slug
    }))
   } : {})

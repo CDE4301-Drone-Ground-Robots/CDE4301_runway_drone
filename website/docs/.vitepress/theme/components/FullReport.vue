@@ -25,7 +25,7 @@ onMounted(async () => {
   const section = document.getElementById(reportAnchor(chapter.id))
   if (!section) continue
   // Each chapter keeps its own heading namespace when assembled on one page.
-  for (const heading of section.querySelectorAll<HTMLElement>('h1[id], h2[id], h3[id], h4[id], h5[id], h6[id], .mechanical-equation[id]')) {
+  for (const heading of section.querySelectorAll<HTMLElement>('h1[id], h2[id], h3[id], h4[id], h5[id], h6[id], .mechanical-equation[id], details[id]')) {
    heading.id = reportAnchor(chapter.id, heading.id)
   }
   for (const anchor of section.querySelectorAll<HTMLAnchorElement>('a[href]')) {

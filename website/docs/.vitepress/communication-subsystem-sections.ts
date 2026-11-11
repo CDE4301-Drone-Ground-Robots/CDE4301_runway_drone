@@ -1,15 +1,3 @@
-export const communicationSubsystemSections = [
-  { slug: 'uav-ugv-communication', title: 'Summary' },
-  { slug: 'requirements', title: 'Requirements and Considerations' },
-  { slug: 'interim-communication', title: 'Interim Communication' },
-  { slug: 'communication-architecture', title: 'UAV Communication Architecture' },
-  { slug: 'c2-alert-message', title: 'C2 Alert Message Structure' },
-  { slug: 'dds-qos', title: 'DDS & QoS' },
-  { slug: 'multiple-fod-transmission', title: 'Multiple FOD Transmission' },
-  { slug: 'vision-communication-workflow', title: 'Communication and Vision System Workflow' },
-  { slug: 'performance-evaluation', title: 'Communication Performance Evaluation' },
-  { slug: 'long-range-hardware', title: 'Long-Range Communication Hardware' },
-  { slug: 'communication-testing', title: 'Communication Testing' },
-  { slug: 'future-work', title: 'Limitations and Future Works' },
-  { slug: 'hunter-group-communication', title: 'Hunter Group Communication' },
-]
+import { rubricSections } from './rubric-sections'
+
+export const communicationSubsystemSections = rubricSections.map(section => ({ ...section }))

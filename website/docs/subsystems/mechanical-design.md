@@ -12,7 +12,7 @@ import MechanicalFigure from './components/MechanicalFigure.vue'
 import UAVTiltThrustSimulator from '../.vitepress/theme/components/UAVTiltThrustSimulator.vue'
 </script>
 
-<div class="cv-report">
+<div class="cv-report rubric-report">
 
 <p class="chapter-kicker">FOD ARGUS / MECHANICAL DESIGN</p>
 
@@ -20,7 +20,9 @@ import UAVTiltThrustSimulator from '../.vitepress/theme/components/UAVTiltThrust
 
 <SubsystemLead class="cv-report-byline" name="Muruganantham Arun" matric="A0308280J" portrait="/team/Arun.png" />
 
-## Overview of Mechanical Design of the UAV
+## A1. Objective, Scope and Context {#a1-objective-scope-context}
+
+### Overview of Mechanical Design of the UAV {#overview-of-mechanical-design-of-the-uav}
 
 Initial requirements were established to guide the mechanical design of the UAV. Additional considerations, including vibration management and manufacturability, were identified as the design progressed. The table below summarises the requirements and considerations intended for the final design.
 
@@ -36,13 +38,15 @@ Initial requirements were established to guide the mechanical design of the UAV.
 | Manufacturability | Ensure that the design is feasible and practical for fabrication with available materials, equipment and processes. |
 | Water resistance | Ensure reliable UAV operation under adverse weather conditions, particularly during light rainfall. |
 
-### Initial Concept Sketch
+## A2. Methodology / Concept Development {#a2-methodology-concept-development}
+
+### Initial Concept Sketch {#initial-concept-sketch}
 
 <MechanicalFigure n="1" src="/report-assets/mechanical-design/initial-concept-sketch.png" :width="1150" :height="863" caption="Initial Concept Sketch" />
 
 An initial concept sketch was developed to provide a foundation for the UAV’s mechanical design. Rather than prescribing the exact geometry, it established a layered layout in which different components were allocated to each level. This arrangement guided subsequent design iterations while allowing flexibility in the detailed design. Furthermore, a quadcopter configuration was selected as a suitable balance between lifting capability, structural simplicity and overall mass, which was targeted to be below 7 kg as mentioned above. Using four motors reduced the number of propulsion components and associated mounting structures compared with six- or eight-rotor configurations. The motors and propellers were subsequently selected to provide sufficient thrust and control margin for the estimated takeoff mass.
 
-### Plus vs X vs H Propeller Configuration
+### Plus vs X vs H Propeller Configuration {#plus-vs-x-vs-h-propeller-configuration}
 
 <MechanicalFigure n="2" src="/report-assets/mechanical-design/propeller-configurations.png" :width="750" :height="279" caption="Different Propeller Configurations" />
 
@@ -50,7 +54,7 @@ The X configuration was selected over the plus configuration due to its improved
 
 The H configuration was considered, but its limitations in accommodating larger propellers made the X configuration more desirable. Extending the arms diagonally increases motor spacing in both longitudinal and lateral directions. In comparison, an H-frame arrangement would require additional longitudinal extension to prevent propeller overlap.
 
-### Pusher vs Puller Configuration
+### Pusher vs Puller Configuration {#pusher-vs-puller-configuration}
 
 <div class="cv-figure-grid">
 
@@ -62,108 +66,11 @@ The H configuration was considered, but its limitations in accommodating larger 
 
 A puller configuration, with the propellers positioned above the motors and supporting arms, was selected for the UAV. A comparative CFD study reported higher thrust generation for the puller configurations under the conditions investigated [\[3\]](../references#md-ref-3). This arrangement also provides greater propeller ground clearance and reduces the potential for interference with the field of view of the forward-facing thermal camera mounted beneath the body. These considerations supported its suitability for the proposed mechanical layout.
 
-## Design Iterations
-
-The UAV’s mechanical design underwent two preliminary iterations before arriving at the final prototype design. Each iteration refined the component layout and structural arrangement to address the design requirements and issues identified during development.
-
-### First Iteration
-
-<MechanicalFigure n="5" src="/report-assets/mechanical-design/first-iteration-structural-body.png" :width="1380" :height="688" caption="Structural body design for the first iteration" />
-
-<MechanicalFigure n="6" src="/report-assets/mechanical-design/first-iteration-layered-section.png" :width="1381" :height="699" caption="Layered design approach from concept sketch (Sectioned View)" />
-
-<div class="cv-figure-grid">
-
-<MechanicalFigure n="7" src="/report-assets/mechanical-design/first-iteration-bottom-layer.png" :width="609" :height="434" caption="Bottom Layer" />
-
-<MechanicalFigure n="8" src="/report-assets/mechanical-design/first-iteration-top-layer.png" :width="631" :height="428" caption="Top Layer" />
-
-</div>
-
-<MechanicalFigure n="9" src="/report-assets/mechanical-design/propeller-arm.png" :width="633" :height="527" caption="Propeller Arm" />
-
-The first design iteration retained the layered approach established in the concept sketch shown above, focusing on the two central component layers between the RTK-GNSS antenna layer above and camera layer below. As this was a preliminary design, the first layer containing the antenna and the fourth layer housing the cameras were not yet incorporated. The top layer included mounting holes for securing an acrylic plate to support electronic components, while the bottom layer was intended to accommodate the battery, Jetson onboard computer and other key electrical components. The propeller arms were designed with the intention to withstand the bending moments generated by motor thrust and component weight while minimising structural mass.
-
-#### Limitations
-
-The first iteration prioritised component arrangement and structural geometry, with less consideration given to the eventual material selection and manufacturing process. The complex geometry of the top layer structure and the propeller arms was more suited for 3D-printing. However, subsequent research identified carbon-fibre-reinforced polymer (CFRP) as a suitable material for the UAV’s primary structure due to its high stiffness and strength relative to mass [\[4\]](../references#md-ref-4) [\[5\]](../references#md-ref-5) [\[8\]](../references#md-ref-8). Adapting the initial design for CFRP would require custom moulding or substantial changes to accommodate standard sheets and tubes, prompting a revision of the geometry and assembly approach.
-
-#### CFRP Sheets & Tubes vs 3D-Printed Parts
-
-As discussed in the previous section, CFRP offers a higher strength-to-weight ratio than conventional 3D-printed polymers, making it suitable for the UAV’s primary structure. This is particularly important for supporting an estimated takeoff mass of 4–6 kg and withstanding the loads generated by motor thrust while minimising structural mass.
-
-In addition, CFRP offers potential benefits for vibration management. An experiment demonstrated reduced vibration amplitudes in a CFRP motor frame compared with an aluminium-alloy frame [\[7\]](../references#md-ref-7). This characteristic is relevant to our application, where limiting camera vibration is important for maintaining image clarity during FOD detection and minimising interference with the flight controller's inertial sensor measurements.
-
-### Second Iteration
-
-<MechanicalFigure n="10" src="/report-assets/mechanical-design/second-iteration-structural-body.png" :width="1073" :height="751" caption="Structural body design for the second iteration" />
-
-<MechanicalFigure n="11" src="/report-assets/mechanical-design/second-iteration-layered-section.png" :width="1066" :height="790" caption="Layered design approach from concept sketch (Sectioned View)" />
-
-To address the material and manufacturing limitations of the first iteration, the second design retained the layered layout while adapting the structure for CFRP fabrication. The previously proposed 3D-printed propeller arms were replaced with carbon-fibre tubes, and the top and bottom body structures were simplified for fabrication in CFRP. These changes aimed to improve structural stiffness, strength and vibration management while limiting mass. Custom 3D-printed clamps were used to secure the propeller arms and landing legs to the bottom layer.
-
-#### Limitations
-
-A key limitation of the second iteration was the geometry of the top and bottom body structures. Although intended for CFRP fabrication, each structure had an overall depth of 50 mm, making machining from solid CFRP stock impractical. Producing these features from thick plates would require substantial material removal, resulting in considerable waste, increased machining time and high fabrication costs. Further redesign was therefore needed to accommodate thinner CFRP plates joined using separate supports.
-
-### Final Prototype Design
-
-<MechanicalFigure n="12" src="/report-assets/mechanical-design/final-prototype-cad-assembly.png" :width="1378" :height="665" caption="CAD Assembly of Final Prototype Design" />
-
-<MechanicalFigure n="13" src="/report-assets/mechanical-design/final-prototype-layers.png" :width="734" :height="342" caption="Different Layers of the Prototype Design" />
-
-| Layer / Assembly | Allocated Components |
-| --- | --- |
-| Top Layer | Pixhawk Flight Controller, Jetson Orin NX, GNSS Antenna and 360° LiDAR |
-| Bottom Layer | 12 Ah Battery, Power Distribution Boards, Fuse and Electronic Speed Controllers (ESC) |
-| Camera & Sensor Assembly | RGB Camera, Thermal Camera and Single-Point LiDAR |
-| Propeller Assembly | Motors and Propellers |
-
-To address the fabrication limitations of the second iteration, the final FOD ARGUS prototype design combines CFRP structural components with 3D-printed parts. CFRP was selected for the main structural components, including the base plates that mount the electrical and key onboard components, motor mounting plates and propeller arms. Its material properties, discussed earlier, and suitability for components with relatively simple geometry address the design requirement for manufacturability. For parts requiring greater geometric complexity and flexibility in customisation, such as enclosures and tube clamps, 3D-printed PETG CF would be used, as it demonstrates better mechanical properties than conventional PETG and PLA filaments [\[9\]](../references#md-ref-9).
-
-## Centre of Gravity (CG) of UAV
-
-The centre of gravity (CG) of the completed UAV prototype assembly was determined in SolidWorks from the mass distribution of its individual components. The coordinates below are relative to the assembly coordinate origin; the vertical coordinate is distinct from the distance below the propeller plane.
-
-| Axis | CG coordinate (mm) |
-| --- | ---: |
-| X | −5.85 |
-| Y | 0.61 |
-| Z | 36.49 |
-
-<div class="cv-figure-grid">
-
-<MechanicalFigure n="14" src="/report-assets/mechanical-design/cg-top-view.png" :width="600" :height="572" caption="CG point in the top view of the SolidWorks assembly (project CAD)." />
-
-<MechanicalFigure n="15" src="/report-assets/mechanical-design/cg-front-view.png" :width="1101" :height="502" caption="CG point in the front view of the SolidWorks assembly (project CAD)." />
-
-</div>
-
-### 3.1 Horizontal CG Positioning {#horizontal-cg-positioning}
-
-The SolidWorks mass properties give the horizontal displacement of the CG from the geometric centre of the four motors in the X configuration:
-
-$$
-d_{CG}=\sqrt{(-5.85)^2+(0.61)^2}=5.88\ \mathrm{mm} \tag{1}
-$$
-
-The calculated horizontal offset is approximately 5.88 mm. This relatively small offset limits the additional pitch and roll moments associated with uneven mass distribution, reducing the differential thrust required to maintain level hover. This can preserve more motor control authority for manoeuvres and responses to external disturbances, such as wind gusts.
-
-### 3.2 Vertical CG Positioning {#vertical-cg-positioning}
-
-The SolidWorks assembly places the UAV's CG approximately 40 mm below the propeller plane.
-
-The thesis cited in the source report [\[10\]](../references#md-ref-10) describes how positioning the CG below the propellers can contribute to stability during forward flight and wind disturbances. Aerodynamic drag acting above the CG can generate a stabilising moment opposing an attitude disturbance, as illustrated below.
-
-<MechanicalFigure n="16" src="/report-assets/mechanical-design/vertical-cg-stability-reference.png" :width="1040" :height="378" caption="Influence of vertical CG positioning on multicopter stability. External thesis illustration reproduced in the supplied report [10]; bibliographic details were not supplied." />
-
-FOD ARGUS incorporates a lower CG through the arrangement of its onboard components, particularly the battery. This configuration may contribute to a stabilising aerodynamic response if the resultant aerodynamic forces act above the CG. Overall stability remains dependent on the flight control system, and flight testing is required to evaluate the effectiveness of this arrangement.
-
-## Placement of Key Onboard Components
+### Placement of Key Onboard Components {#placement-of-key-onboard-components}
 
 The placement of key onboard components supports flight stability and operational requirements. The flight controller, cameras and other electronics were positioned with consideration of mass distribution, accessibility, vibration isolation and electrical connectivity.
 
-### 4.1 Central Alignment of GNSS Antenna and RGB Camera {#central-alignment-of-gnss-antenna-and-rgb-camera}
+#### Central Alignment of GNSS Antenna and RGB Camera {#central-alignment-of-gnss-antenna-and-rgb-camera}
 
 The RGB camera detects foreign object debris (FOD) and identifies its location within captured images, while the GNSS system provides the UAV's geographical position. To simplify geolocation, the GNSS antenna and RGB camera were placed centrally in the X–Y plane along the same vertical axis, separated in height.
 
@@ -186,7 +93,7 @@ $$
 
 The signed separation $\Delta z$ is measured from the GNSS antenna to the RGB camera along the UAV body Z-axis. Central alignment simplifies the lever-arm offset used for FOD geolocation, but UAV attitude must still be considered when transforming the camera position into the navigation frame.
 
-### 4.2 Placement of the Pixhawk Flight Controller near Centre of Gravity {#placement-of-the-pixhawk-flight-controller-near-centre-of-gravity}
+#### Placement of the Pixhawk Flight Controller near Centre of Gravity {#placement-of-the-pixhawk-flight-controller-near-centre-of-gravity}
 
 The placement of the Pixhawk flight controller in the FOD ARGUS UAV was determined based on recommendations from PX4 and ArduPilot documentation, which recommend placing the flight controller as close as possible to the CG [\[12\]](../references#md-ref-12) [\[13\]](../references#md-ref-13).
 
@@ -224,31 +131,147 @@ $$
 
 The resultant displacement obtained is approximately 45 mm from the CG, which is still within ArduPilot's recommendation of placing the flight controller within a few centimetres of the CG. Although both PX4 and ArduPilot provide software parameters to compensate for positional offsets when the flight controller cannot be mounted directly at the CG, positioning it as close as practically possible remains desirable. This is because a greater displacement from the CG increases the additional accelerations experienced by the IMU during rotational motion, potentially affecting sensor measurements and flight control performance [\[13\]](../references#md-ref-13).
 
-### 4.3 Placement of the 360° LiDAR {#placement-of-the-360-lidar}
+#### Placement of the 360° LiDAR {#placement-of-the-360-lidar}
 
 The 360° LiDAR was initially intended to be mounted centrally on the top plate. However, this position was prioritised for the GNSS antenna to maintain its central alignment with the RGB camera, so the LiDAR was relocated towards the front. It is intended to support obstacle detection and avoidance, as discussed in the [Computer Vision section](./computer-vision#thermal-safety). This placement aims to minimise obstruction of the LiDAR's scanning field by surrounding onboard components while maintaining sufficient clearance from the propellers and structural elements.
 
 <MechanicalFigure n="22" src="/report-assets/mechanical-design/lidar-front-isometric-view.png" :width="916" :height="586" caption="Front placement of the 360° LiDAR in the isometric view (project CAD)." />
 
-### 4.4 45° Placement of the Thermal Camera {#45-degree-placement-of-the-thermal-camera}
+#### 45° Placement of the Thermal Camera {#45-degree-placement-of-the-thermal-camera}
 
 The thermal camera is mounted at approximately 45° using a rigid, custom-designed mount that will be 3D-printed. This arrangement allows the thermal camera to complement the 360° LiDAR for obstacle detection. Further details of the planned sensor integration for obstacle detection and avoidance are discussed in the [Computer Vision section](./computer-vision#thermal-safety).
 
 <MechanicalFigure n="23" src="/report-assets/mechanical-design/thermal-camera-side-view.png" :width="928" :height="392" caption="Placement of the thermal camera in the side view (project CAD)." />
 
-### 4.5 Placement of Batteries and Other Electrical Components in the Bottom Layer {#placement-of-batteries-and-other-electrical-components-in-the-bottom-layer}
+#### Placement of Batteries and Other Electrical Components in the Bottom Layer {#placement-of-batteries-and-other-electrical-components-in-the-bottom-layer}
 
-The batteries and other electrical components, particularly the Electronic Speed Controllers (ESCs), were positioned on the bottom layer of the UAV. As the batteries contribute significantly to the overall mass of the UAV as it is the heaviest component, weighing approximately 1.5kg, their placement in the lower section helps lower the CG, as discussed in [Section 3](#centre-of-gravity-cg-of-uav).
+The batteries and other electrical components, particularly the Electronic Speed Controllers (ESCs), were positioned on the bottom layer of the UAV. As the batteries contribute significantly to the overall mass of the UAV as it is the heaviest component, weighing approximately 1.5kg, their placement in the lower section helps lower the CG, as discussed in [the CG analysis](#centre-of-gravity-cg-of-uav).
 
 For the ESCs, although some multirotor designs mount them externally along the propeller arms, the FOD Argus prototype adopts an internal mounting configuration within the bottom layer. This arrangement provides additional protection against direct exposure to water and environmental conditions, particularly since the selected AMPX 40A ESCs do not have a specified waterproof rating.
 
 However, with the planned integration of the Raspberry Pi into the bottom layer, spatial constraints may require the ESCs to be relocated externally. If necessary, 3D printed protective enclosures will be designed to provide water resistance.
 
-## Motor & Propellers Selection
+## A3. Fabrication of Specimens/Prototypes {#a3-prototype-development}
+
+### Design Iterations {#design-iterations}
+
+The UAV’s mechanical design underwent two preliminary iterations before arriving at the final prototype design. Each iteration refined the component layout and structural arrangement to address the design requirements and issues identified during development.
+
+#### First Iteration {#first-iteration}
+
+<MechanicalFigure n="5" src="/report-assets/mechanical-design/first-iteration-structural-body.png" :width="1380" :height="688" caption="Structural body design for the first iteration" />
+
+<MechanicalFigure n="6" src="/report-assets/mechanical-design/first-iteration-layered-section.png" :width="1381" :height="699" caption="Layered design approach from concept sketch (Sectioned View)" />
+
+<div class="cv-figure-grid">
+
+<MechanicalFigure n="7" src="/report-assets/mechanical-design/first-iteration-bottom-layer.png" :width="609" :height="434" caption="Bottom Layer" />
+
+<MechanicalFigure n="8" src="/report-assets/mechanical-design/first-iteration-top-layer.png" :width="631" :height="428" caption="Top Layer" />
+
+</div>
+
+<MechanicalFigure n="9" src="/report-assets/mechanical-design/propeller-arm.png" :width="633" :height="527" caption="Propeller Arm" />
+
+The first design iteration retained the layered approach established in the concept sketch shown above, focusing on the two central component layers between the RTK-GNSS antenna layer above and camera layer below. As this was a preliminary design, the first layer containing the antenna and the fourth layer housing the cameras were not yet incorporated. The top layer included mounting holes for securing an acrylic plate to support electronic components, while the bottom layer was intended to accommodate the battery, Jetson onboard computer and other key electrical components. The propeller arms were designed with the intention to withstand the bending moments generated by motor thrust and component weight while minimising structural mass.
+
+##### Limitations {#limitations}
+
+The first iteration prioritised component arrangement and structural geometry, with less consideration given to the eventual material selection and manufacturing process. The complex geometry of the top layer structure and the propeller arms was more suited for 3D-printing. However, subsequent research identified carbon-fibre-reinforced polymer (CFRP) as a suitable material for the UAV’s primary structure due to its high stiffness and strength relative to mass [\[4\]](../references#md-ref-4) [\[5\]](../references#md-ref-5) [\[8\]](../references#md-ref-8). Adapting the initial design for CFRP would require custom moulding or substantial changes to accommodate standard sheets and tubes, prompting a revision of the geometry and assembly approach.
+
+##### CFRP Sheets & Tubes vs 3D-Printed Parts {#cfrp-sheets-tubes-vs-3d-printed-parts}
+
+As discussed in the previous section, CFRP offers a higher strength-to-weight ratio than conventional 3D-printed polymers, making it suitable for the UAV’s primary structure. This is particularly important for supporting an estimated takeoff mass of 4–6 kg and withstanding the loads generated by motor thrust while minimising structural mass.
+
+In addition, CFRP offers potential benefits for vibration management. An experiment demonstrated reduced vibration amplitudes in a CFRP motor frame compared with an aluminium-alloy frame [\[7\]](../references#md-ref-7). This characteristic is relevant to our application, where limiting camera vibration is important for maintaining image clarity during FOD detection and minimising interference with the flight controller's inertial sensor measurements.
+
+#### Second Iteration {#second-iteration}
+
+<MechanicalFigure n="10" src="/report-assets/mechanical-design/second-iteration-structural-body.png" :width="1073" :height="751" caption="Structural body design for the second iteration" />
+
+<MechanicalFigure n="11" src="/report-assets/mechanical-design/second-iteration-layered-section.png" :width="1066" :height="790" caption="Layered design approach from concept sketch (Sectioned View)" />
+
+To address the material and manufacturing limitations of the first iteration, the second design retained the layered layout while adapting the structure for CFRP fabrication. The previously proposed 3D-printed propeller arms were replaced with carbon-fibre tubes, and the top and bottom body structures were simplified for fabrication in CFRP. These changes aimed to improve structural stiffness, strength and vibration management while limiting mass. Custom 3D-printed clamps were used to secure the propeller arms and landing legs to the bottom layer.
+
+##### Limitations {#limitations-1}
+
+A key limitation of the second iteration was the geometry of the top and bottom body structures. Although intended for CFRP fabrication, each structure had an overall depth of 50 mm, making machining from solid CFRP stock impractical. Producing these features from thick plates would require substantial material removal, resulting in considerable waste, increased machining time and high fabrication costs. Further redesign was therefore needed to accommodate thinner CFRP plates joined using separate supports.
+
+#### Final Prototype Design {#final-prototype-design}
+
+<MechanicalFigure n="12" src="/report-assets/mechanical-design/final-prototype-cad-assembly.png" :width="1378" :height="665" caption="CAD Assembly of Final Prototype Design" />
+
+<MechanicalFigure n="13" src="/report-assets/mechanical-design/final-prototype-layers.png" :width="734" :height="342" caption="Different Layers of the Prototype Design" />
+
+| Layer / Assembly | Allocated Components |
+| --- | --- |
+| Top Layer | Pixhawk Flight Controller, Jetson Orin NX, GNSS Antenna and 360° LiDAR |
+| Bottom Layer | 12 Ah Battery, Power Distribution Boards, Fuse and Electronic Speed Controllers (ESC) |
+| Camera & Sensor Assembly | RGB Camera, Thermal Camera and Single-Point LiDAR |
+| Propeller Assembly | Motors and Propellers |
+
+To address the fabrication limitations of the second iteration, the final FOD ARGUS prototype design combines CFRP structural components with 3D-printed parts. CFRP was selected for the main structural components, including the base plates that mount the electrical and key onboard components, motor mounting plates and propeller arms. Its material properties, discussed earlier, and suitability for components with relatively simple geometry address the design requirement for manufacturability. For parts requiring greater geometric complexity and flexibility in customisation, such as enclosures and tube clamps, 3D-printed PETG CF would be used, as it demonstrates better mechanical properties than conventional PETG and PLA filaments [\[9\]](../references#md-ref-9).
+
+## A4. Testing {#a4-testing}
+
+Thrust behaviour is illustrated below using the preliminary model. Physical load-test and flight-test results remain to be documented.
+
+### Interactive Thrust Illustration {#mechanical-thrust-illustration}
+
+<details class="mechanical-flight-case" id="interactive-uav-attitude-thrust-simulator">
+<summary>Interactive UAV Attitude and Thrust Simulator</summary>
+
+<UAVTiltThrustSimulator />
+
+This interactive visualisation supports preliminary thrust sizing for an X-configuration quadcopter. It assumes constant altitude with no vertical acceleration, thrust aligned with the body thrust axis, and no aerodynamic disturbances or additional forces.
+
+</details>
+
+## A5. Analysis {#a5-analysis}
+
+### Centre of Gravity (CG) of UAV {#centre-of-gravity-cg-of-uav}
+
+The centre of gravity (CG) of the completed UAV prototype assembly was determined in SolidWorks from the mass distribution of its individual components. The coordinates below are relative to the assembly coordinate origin; the vertical coordinate is distinct from the distance below the propeller plane.
+
+| Axis | CG coordinate (mm) |
+| --- | ---: |
+| X | −5.85 |
+| Y | 0.61 |
+| Z | 36.49 |
+
+<div class="cv-figure-grid">
+
+<MechanicalFigure n="14" src="/report-assets/mechanical-design/cg-top-view.png" :width="600" :height="572" caption="CG point in the top view of the SolidWorks assembly (project CAD)." />
+
+<MechanicalFigure n="15" src="/report-assets/mechanical-design/cg-front-view.png" :width="1101" :height="502" caption="CG point in the front view of the SolidWorks assembly (project CAD)." />
+
+</div>
+
+#### Horizontal CG Positioning {#horizontal-cg-positioning}
+
+The SolidWorks mass properties give the horizontal displacement of the CG from the geometric centre of the four motors in the X configuration:
+
+$$
+d_{CG}=\sqrt{(-5.85)^2+(0.61)^2}=5.88\ \mathrm{mm} \tag{1}
+$$
+
+The calculated horizontal offset is approximately 5.88 mm. This relatively small offset limits the additional pitch and roll moments associated with uneven mass distribution, reducing the differential thrust required to maintain level hover. This can preserve more motor control authority for manoeuvres and responses to external disturbances, such as wind gusts.
+
+#### Vertical CG Positioning {#vertical-cg-positioning}
+
+The SolidWorks assembly places the UAV's CG approximately 40 mm below the propeller plane.
+
+The thesis cited in the source report [\[10\]](../references#md-ref-10) describes how positioning the CG below the propellers can contribute to stability during forward flight and wind disturbances. Aerodynamic drag acting above the CG can generate a stabilising moment opposing an attitude disturbance, as illustrated below.
+
+<MechanicalFigure n="16" src="/report-assets/mechanical-design/vertical-cg-stability-reference.png" :width="1040" :height="378" caption="Influence of vertical CG positioning on multicopter stability. External thesis illustration reproduced in the supplied report [10]; bibliographic details were not supplied." />
+
+FOD ARGUS incorporates a lower CG through the arrangement of its onboard components, particularly the battery. This configuration may contribute to a stabilising aerodynamic response if the resultant aerodynamic forces act above the CG. Overall stability remains dependent on the flight control system, and flight testing is required to evaluate the effectiveness of this arrangement.
+
+### Motor & Propellers Selection {#motor-propellers-selection}
 
 <div class="mechanical-propulsion">
 
-### 5.1 Preliminary Mass Estimation and Component Placement
+#### Preliminary Mass Estimation and Component Placement {#_5-1-preliminary-mass-estimation-and-component-placement}
 
 The selection of motors and propellers was done prior to the completion of the final FOD Argus prototype design. Therefore, a preliminary mass estimation was conducted to establish a reasonable estimate of the UAV's total mass for subsequent thrust calculations and motor selection.
 
@@ -279,7 +302,7 @@ The masses of structural components, including the carbon fibre base plates, pro
 
 Based on these estimates, the preliminary mass of the identified components was approximately 3.6 kg. After accounting for additional planned components that had not yet been incorporated into the preliminary design, the total UAV mass was estimated to be approximately 5 kg. Furthermore, as shown in the table, the masses of the 3D-printed components were estimated using SolidWorks' default mass properties, as the final material and fabrication specifications had not yet been determined. This further justifies the adoption of a conservative total UAV mass estimate.
 
-### 5.2 Preliminary Thrust Calculations
+#### Preliminary Thrust Calculations {#_5-2-preliminary-thrust-calculations}
 
 Preliminary thrust calculations were conducted to determine the thrust requirements of the UAV under different flight conditions, providing a basis for the selection of suitable motors and propellers. To simplify the calculations, several assumptions were made, as summarised in the table below.
 
@@ -297,7 +320,7 @@ Preliminary thrust calculations were conducted to determine the thrust requireme
 | Rotating-propeller aerodynamic effects | — | Neglected |
 | Motor thrust distribution | — | Equal average thrust across four motors |
 
-#### General Equations
+##### General Equations {#general-equations}
 
 Let $T_{\mathrm{total}}$ be the combined motor thrust and $\theta$ the forward tilt of its axis from vertical. The required horizontal thrust is $F_H$; it is zero in hover, balances drag in steady cruise, and supplies both drag compensation and acceleration in Case 3. The shared relationships are:
 
@@ -434,7 +457,7 @@ Therefore, the UAV requires approximately 1.262 kgf of thrust per motor when acc
 
 </details>
 
-#### 5.2.4 Results across Different Flight Scenarios
+##### Results across Different Flight Scenarios {#_5-2-4-results-across-different-flight-scenarios}
 
 | Flight scenario | Relative velocity (m/s) | $F_D$ (N) | $\theta$ (°) | Thrust / motor (kgf) |
 | --- | ---: | ---: | ---: | ---: |
@@ -450,7 +473,7 @@ Therefore, the UAV requires approximately 1.262 kgf of thrust per motor when acc
 
 The calculated thrust requirements for various flight scenarios are summarised in the table above, considering different headwind speeds and acceleration conditions. The results indicate that increasing headwind speed and acceleration leads to higher pitch angles and thrust requirements. Extreme wind conditions were also evaluated to assess the additional thrust demand where 12 m/s is the approximate wind speed that is considered as a “Strong Breeze”, based on the Beaufort Wind Scale [\[15\]](../references#md-ref-15). These results served as a basis for the team when selecting a suitable motor and propeller combination with sufficient thrust reserve.
 
-### 5.3 Setting Conservative Thrust Estimate
+#### Setting Conservative Thrust Estimate {#_5-3-setting-conservative-thrust-estimate}
 
 The previous thrust calculations primarily considered longitudinal motion, where the UAV pitches forward during cruising and acceleration. However, lateral wind disturbances and manoeuvring may also require additional roll corrections. To account for these conditions, a conservative maximum combined tilt angle of 45° was adopted for preliminary motor and propeller sizing, with the DJI Matrice 350 RTK's maximum pitch angle of 30° used as a reference [\[16\]](../references#md-ref-16). The DJI Matrice 350 RTK was selected as a reference due to its industrial-grade design and comparable weight class.
 
@@ -500,16 +523,9 @@ $$
 
 Based on the calculations, a maximum combined tilt angle of 45° requires a total thrust of 69.37 N, equivalent to approximately 1.768 kgf per motor. This value was taken into consideration when evaluating suitable motor and propeller combinations.
 
-<details class="mechanical-flight-case" id="interactive-uav-attitude-thrust-simulator">
-<summary>5.3.1 Interactive UAV Attitude and Thrust Simulator</summary>
 
-<UAVTiltThrustSimulator />
 
-This interactive visualisation supports preliminary thrust sizing for an X-configuration quadcopter. It assumes constant altitude with no vertical acceleration, thrust aligned with the body thrust axis, and no aerodynamic disturbances or additional forces.
-
-</details>
-
-### 5.4 Motors and Propellers Evaluation
+#### Motors and Propellers Evaluation {#_5-4-motors-and-propellers-evaluation}
 
 Based on the calculations and estimates conducted, a target thrust-to-weight ratio of 2:1 was adopted to provide sufficient thrust reserve for wind disturbance rejection, manoeuvrability, control authority, and future payload accommodation. For an estimated UAV mass of 5 kg, this corresponds to a minimum required maximum thrust capability of approximately 2.5 kgf per motor. Following a review of commercially available motors, two potential motor options, the T-Motor MN501-S KV360 and MAD 5005 IPE KV440, were shortlisted for further evaluation based on their thrust capabilities and performance characteristics.
 
@@ -609,7 +625,7 @@ $$
 
 </details>
 
-#### 5.4.3 Motors Comparison
+##### Motors Comparison {#_5-4-3-motors-comparison}
 
 Following the evaluation of both motor options as shown in the table below, the MAD 5005 IPE KV440 was selected for the UAV design. Although the T-Motor MN501-S KV360 demonstrated slightly lower power consumption during cruising, the MAD motor offered several advantages in terms of size, weight, and cost. Firstly, its smaller 14-inch propellers allow for a more compact UAV frame. Secondly, the MAD motor is lighter and more cost-effective, while still satisfying the target thrust-to-weight ratio of 2:1. Lastly, its IP35 water-resistance rating provides a degree of protection against water exposure, making it suitable for the intended outdoor operating conditions. Considering these factors, the MAD 5005 IPE KV440 was selected as the more suitable motor for our proposed UAV design.
 
@@ -627,9 +643,9 @@ Following the evaluation of both motor options as shown in the table below, the 
 
 </div>
 
-### 5.5 Differential Motor Thrust Calculation
+#### Differential Motor Thrust Calculation {#_5-5-differential-motor-thrust-calculation}
 
-The initial thrust calculations assumed equal thrust distribution across all four motors during flight. However, following the assembly of the UAV prototype in SolidWorks, the centre of gravity (CG) and its corresponding distances from the front and rear motors were determined. Based on the assumptions listed below, these values were subsequently used to calculate the differential thrust required between the front and rear motors to maintain pitch equilibrium during constant-speed cruise. The thrust and tilt angles used were obtained from [Section 5.2](#_5-2-preliminary-thrust-calculations) for each respective scenario.
+The initial thrust calculations assumed equal thrust distribution across all four motors during flight. However, following the assembly of the UAV prototype in SolidWorks, the centre of gravity (CG) and its corresponding distances from the front and rear motors were determined. Based on the assumptions listed below, these values were subsequently used to calculate the differential thrust required between the front and rear motors to maintain pitch equilibrium during constant-speed cruise. The thrust and tilt angles used were obtained from [the preliminary thrust calculations](#_5-2-preliminary-thrust-calculations) for each respective scenario.
 
 Assumptions:
 
@@ -808,13 +824,13 @@ The calculated thrust requirements during the nose-down angular acceleration pha
 
 </div>
 
-## Propeller Arm Selection {#propeller-arm-selection}
+### Propeller Arm Selection {#propeller-arm-selection}
 
 This section focuses on the selection of an appropriate tube diameter and wall thickness for the UAV's CFRP propeller arms. The selection process considers the structural strength, stiffness, weight and vibration characteristics of different tube configurations to determine a suitable design that minimises weight while maintaining structural integrity during flight.
 
 <div class="mechanical-propulsion">
 
-### 6.1 Bending Stress Calculation {#bending-stress-calculation}
+#### Bending Stress Calculation {#bending-stress-calculation}
 
 To evaluate the structural integrity of the CFRP propeller arms, a simplified beam model was used to determine the reaction forces at the clamp supports and the maximum bending moment induced by motor thrust. The FBD drawn represents how the propeller arm would be clamped based on the FOD Argus prototype design.
 
@@ -899,7 +915,7 @@ $$
 \sigma_{\max}=\frac{32FaD_o}{\pi\left(D_o^4-D_i^4\right)}
 $$
 
-### 6.2 Beam Deflection Calculation {#beam-deflection-calculation}
+#### Beam Deflection Calculation {#beam-deflection-calculation}
 
 The motor-end bending deflection was calculated using Euler–Bernoulli beam theory. A Young's modulus of 123 GPa, obtained from the manufacturer's Toray T300 carbon fibre datasheet, was adopted for the preliminary calculation [\[19\]](../references#md-ref-19).
 
@@ -919,7 +935,7 @@ $$
 | Young's modulus | $E$ | $123\times10^9\ \mathrm{Pa}$ |
 | Second moment of area of the hollow circular tube | $I$ | [Equation (27)](#equation-md-27), m⁴ |
 
-### 6.3 Natural Bending Frequency Calculation {#natural-bending-frequency-calculation}
+#### Natural Bending Frequency Calculation {#natural-bending-frequency-calculation}
 
 <MechanicalFigure n="37" src="/report-assets/mechanical-design/cantilever-bending-modes.png" :width="546" :height="366" caption="Figure showing the different bending modes, reproduced from the supplied report; the original illustration source was not provided." />
 
@@ -984,13 +1000,13 @@ $$
 m_{\mathrm{arm}}=\rho\frac{\pi}{4}\left(D_o^2-D_i^2\right)(0.219)
 $$
 
-Here, $\rho$ is the density of the CFRP tube (kg/m³), and $D_o$ and $D_i$ are the outer and inner tube diameters in metres, as defined in Section 6.1. The second moment of area is calculated using [Equation (27)](#equation-md-27):
+Here, $\rho$ is the density of the CFRP tube (kg/m³), and $D_o$ and $D_i$ are the outer and inner tube diameters in metres, as defined in [the bending stress calculation](#bending-stress-calculation). The second moment of area is calculated using [Equation (27)](#equation-md-27):
 
 $$
 I=\frac{\pi}{64}\left(D_o^4-D_i^4\right)
 $$
 
-### 6.4 Evaluation of Different Beam Configurations {#evaluation-of-different-beam-configurations}
+#### Evaluation of Different Beam Configurations {#evaluation-of-different-beam-configurations}
 
 The propeller arm configurations were evaluated based on their structural performance, natural bending frequency and mass. To minimise the risk of resonance while maintaining a lightweight design, the following selection criteria were established:
 
@@ -1018,6 +1034,9 @@ Red indicates configurations rejected because their first bending natural freque
 
 </div>
 
+## A6. Discussion of Problems and Project Plan {#a6-problems-project-plan}
+
+The [first and second design iterations](#design-iterations) describe the limitations encountered and the changes made. Physical verification and dated next-stage milestones remain to be documented.
 
 </div>
 
