@@ -32,6 +32,20 @@ Lyu, Zefeng; Yu, Andrew; Starr, Christopher (2026). **CrackAirport: A Dataset fo
 
 [Open dataset page supplied by the author](https://www.kaggle.com/datasets/sikdermdsaiful/thermal-images-for-human-detection/data?select=dataset). Used for thermal human detection.
 
+## Computer Vision Model Sources
+
+### CV-M01 - U-Net Encoder and Decoder {#cv-m01}
+
+Segmentation Models PyTorch. **Unet model documentation**.
+
+[Official documentation](https://smp.readthedocs.io/en/latest/models.html#unet). Describes the encoder, decoder, encoder-to-decoder skip connections, pretrained encoder options and segmentation outputs. Implementation settings in the report were checked against the project's crack training and inference scripts.
+
+### CV-M02 - ResNet Residual Learning {#cv-m02}
+
+He, Kaiming; Zhang, Xiangyu; Ren, Shaoqing; Sun, Jian (2015). **Deep Residual Learning for Image Recognition**. arXiv:1512.03385.
+
+[Original paper](https://arxiv.org/abs/1512.03385). Explains residual learning and shortcut connections used in the ResNet family.
+
 ## Computer Vision Hardware Sources
 
 ### CV-H01 - RGB Camera: e-CAM56_CUONX {#cv-h01}

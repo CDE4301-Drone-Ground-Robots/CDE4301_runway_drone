@@ -26,7 +26,7 @@ import { data as integrationDemo } from '../cv-integration-demo.data'
 
 The computer vision system was developed to enable the UAV to autonomously inspect runway surfaces for FOD (Foreign Object Debris), water puddles, surface cracks, and other common objects. A key challenge in this system is the impracticality of obtaining every possible object that can appear on the runway for the training dataset. Hence, it can identify classes within the training set, but it would not recognise unseen objects.
 
-To address the limitation of detecting only objects seen in the training dataset, we adopted a multi-stage computer vision architecture. The RGB camera is used as the primary runway inspection system.
+To address the limitation of detecting only objects seen in the training dataset, we adopted a multi-stage computer vision architecture. The RGB camera is used for primary runway inspection.
 
 <span id="subsystem-overview" class="report-anchor" aria-hidden="true"></span>
 
@@ -40,7 +40,7 @@ To address the limitation of detecting only objects seen in the training dataset
 - Suitable camera selection.
 - Day and night operations.
 
-No minimum crack size is specified; the aim is to detect visible surface cracks. The puddle size target, target detection performance and acceptable coordinate error still need to be defined.
+No minimum crack size is specified. The aim is to detect visible surface cracks. The puddle size target and target detection performance still need to be defined.
 
 ## 2. Vision Methodology and Architecture Development {#a2-methodology-concept-development}
 
@@ -79,7 +79,7 @@ $$
 | Ground sampling distance | 9266.6 / 2472 = 3.75 mm/pixel | 7298.8 / 2064 = 3.54 mm/pixel |
 | Pixels across a 1 cm object | 10 / 3.75 ≈ 2.7 pixels | 10 / 3.54 ≈ 2.8 pixels |
 
-A 1 cm object would span only about 3 pixels at full resolution, so reliable detection is not yet confirmed. Resizing the full frame before anomaly detection can reduce this further; enlarging a crop cannot recover lost detail.
+A 1 cm object would span only about 3 pixels at full resolution, so reliable detection is not yet confirmed. Resizing the full frame before anomaly detection can reduce this further. Enlarging a crop cannot recover lost detail.
 
 #### Lens Needed for the Intended 2 m × 2 m View {#lens-needed-for-the-intended-2-m-×-2-m-view}
 
@@ -97,7 +97,7 @@ f=\frac{H S_y}{L}
 =14.14\ \mathrm{mm}
 $$
 
-A **14 mm M12 lens** is therefore a candidate, provided it supports the camera's 1/1.8-inch sensor and can focus at 5 m. This is a calculated lens requirement; a specific lens model has not been confirmed.
+A **14 mm M12 lens** is therefore a candidate, provided it supports the camera's 1/1.8-inch sensor and can focus at 5 m. The lens requirement is calculated, but the lens model is not confirmed.
 
 With a 14 mm lens, the estimated full-frame coverage is:
 
@@ -119,15 +119,19 @@ The selected lens, distortion, focus, motion blur, lighting and model performanc
 
 ARGUS is intended to fly at 15 km/h. Short exposure times will be needed to limit motion blur. Camera settings and processing performance will be tested on Jetson after the interim stage.
 
+::: details IDS Camera Calculation
+
+:::
+
 ### Night Operation Lighting {#night-operation-lighting}
 
-A light source will be attached below the drone, near the RGB camera, and switched on during night operation to illuminate the inspection surface.
+A light source will be attached below the drone, near the RGB camera, and automatically turned on during night operation to illuminate the inspection surface.
 
 <CvFigure n="43" />
 
 ### Computer Vision System Architecture - Parallel {#computer-vision-system-architecture-parallel}
 
-The RGB camera captures images continuously, which then pass through the system. The captured images first enter a PatchCore anomaly detection model. Each frame captured will keep triggering the navigation system to send the current drone position and orientation. The position gives the drone X and Y coordinates, while the quaternion gives its orientation. If there is no anomaly on the road, it continues the inspection. If an anomalous region is identified, the model produces a bounding box and crops it. The system then sends it to the second layer. The second layer consists of 2 models: a YOLO object detector and a U-Net segmentation model for runway cracks, which run in parallel. The cropped image is then resized to each model's input size and fed into that model. If any cracks are detected, the system sends them to the base. On the YOLO side, if it detects a FOD object, it performs more localised coordinate extraction and sends the coordinates to the UGV for extraction. If neither the crack detection model nor YOLO identifies it, the system sends it to the base station as it is an anomaly that neither model identifies. The models will be explained in more depth in the later sections. The drone position, quaternion heading and precise FOD coordinate calculations are explained in [FOD & Crack Coordinate Retrieval](#coordinate-retrieval).
+The RGB camera captures images continuously, which then pass through the system. The captured images first enter a PatchCore anomaly detection model. For each captured frame, the system requests the drone's X and Y coordinates and orientation (quaternion) from navigation. Coordinate extraction finds the object's ground offset from the image. Heading from the quaternion aligns this offset with the map before adding the drone's X and Y. If there is no anomaly on the road, it continues the inspection. If an anomalous region is identified, the model produces a bounding box and crops it. The system then sends it to the second layer. The second layer consists of 2 models: a YOLO object detector and a U-Net segmentation model for runway cracks, which runs in parallel. The cropped image is then resized to each model's input size and fed into that model. If any cracks are detected, the system sends them to the base. On the YOLO side, if it detects a FOD object, it performs more localised coordinate extraction and sends the coordinates to the UGV for extraction. If neither the crack detection model nor YOLO identifies it, the system sends it to the base station as it is an anomaly that neither model identifies. The models will be explained in more depth in the later sections. The quaternion-to-heading conversion, 2D rotation and precise FOD coordinate calculations are explained in [FOD & Crack Coordinate Retrieval](#coordinate-retrieval).
 
 <CvFigure n="4" />
 
@@ -174,7 +178,17 @@ The crack dataset is obtained from [Mendeley Data: CrackAirport, version 1](http
 
 Runway and road cracks are essentially different from the normal FOD objects. Cracks are usually thin, long and irregular, so segmentation is used to identify their shape at pixel level.
 
-Therefore, we use a U-Net segmentation model. The cropped anomaly region is resized to 512 x 512 and fed into the U-Net, as this is the input size used in this implementation. The model then produces a pixel-level crack mask.
+Therefore, we use a U-Net segmentation model with a ResNet34 encoder. The cropped anomaly region is resized to 512 x 512 and fed into the U-Net, as this is the input size used in this implementation. The model then produces a pixel-level crack mask.
+
+::: details How U-Net Uses ResNet34
+
+- **ResNet34 encoder:** Extracts features from the RGB crop at different scales. It uses residual shortcuts that add a block's input to its output, helping deeper networks train ([CV-M02](../references#cv-m02)).
+- **U-Net decoder:** Upsamples these features to produce the crack mask. U-Net also passes encoder features to the decoder through skip connections to retain spatial detail. These are separate from the residual shortcuts inside ResNet34 ([CV-M01](../references#cv-m01)).
+- **Training:** The training script loads ImageNet-pretrained encoder weights and freezes the encoder parameters. The decoder and segmentation head are trained on the crack dataset using combined Dice and binary cross-entropy losses.
+- **Input and output:** A 512 x 512 RGB crop produces a single-channel output. During inference, sigmoid converts this output to pixel probabilities. Values above the default threshold of 0.5 are marked as cracks. The binary mask is resized back to the original crop size.
+
+:::
+
 
 <div class="cv-figure-grid">
 <CvFigure n="32" />
@@ -182,43 +196,41 @@ Therefore, we use a U-Net segmentation model. The cropped anomaly region is resi
 <CvFigure n="33" />
 
 <CvFigure n="34" />
+
 </div>
 
 ### FOD & Crack Coordinate Retrieval {#coordinate-retrieval}
 
-#### Drone Position and Quaternion Worked Example {#drone-position-and-quaternion-worked-example}
+<CvFigure n="45" />
 
-A quaternion gives orientation, not position. The navigation system must provide both. ROS 2 stores them separately in a pose message ([CV-N01](../references#cv-n01)). The following values are an example, not measured flight data.
+#### Navigation Data: Drone Position and Heading {#drone-position-and-quaternion-worked-example}
+
+Navigation provides the drone's X and Y position and orientation as a quaternion ([CV-N01](../references#cv-n01)). The position gives the starting coordinates. Heading from the quaternion is used to rotate the ground offset into map directions.
+
+The example below assumes a level camera pointing down at flat ground. These are example values, not flight measurements.
 
 <div class="cv-supporting-evidence pose-worked-example">
 
-##### Step 1: Given navigation data {#step-1-given-navigation-data}
+##### Step 1: Get the drone position from navigation {#step-1-given-navigation-data}
 
-Assume a level drone, a flat runway, and position already expressed in the shared map frame. The quaternion rotates the drone's body axes into that frame. ROS body axes are X forward, Y left and Z up ([CV-N02](../references#cv-n02)).
+Assume navigation provides this position in the shared map frame:
 
 $$
 \mathbf{p}_{\mathrm{UAV}}=(p_x,p_y,p_z)=(3,4,5)\ \mathrm{m}
 $$
 
-The quaternion uses ROS ordering $(q_x,q_y,q_z,q_w)$ and has unit length:
+<span id="step-2-read-the-current-drone-x-and-y" class="report-anchor" aria-hidden="true"></span>
+
+The drone's starting coordinates are therefore **X = 3 m and Y = 4 m**, at a height of 5 m above the flat ground in this example.
+
+##### Step 2: Convert the quaternion to heading {#step-3-calculate-heading-from-the-quaternion}
+
+Using ROS quaternion ordering $(q_x,q_y,q_z,q_w)$, assume:
 
 $$
 q=\left(0,0,\frac{1}{\sqrt{2}},\frac{1}{\sqrt{2}}\right)
 \approx(0,0,0.7071,0.7071)
 $$
-
-##### Step 2: Read the current drone X and Y {#step-2-read-the-current-drone-x-and-y}
-
-Take these from the position fields, not the quaternion:
-
-$$
-X_{\mathrm{UAV}}=p_x=3\ \mathrm{m},\qquad
-Y_{\mathrm{UAV}}=p_y=4\ \mathrm{m}
-$$
-
-So the current drone position is **(3 m, 4 m)** in this map frame. A quaternion alone cannot provide these coordinates.
-
-##### Step 3: Calculate heading from the quaternion {#step-3-calculate-heading-from-the-quaternion}
 
 For a unit quaternion, away from the pitch singularity:
 
@@ -226,20 +238,39 @@ $$
 \psi=\operatorname{atan2}\left(
 2(q_wq_z+q_xq_y),\ 1-2(q_y^2+q_z^2)
 \right)
+=\operatorname{atan2}(1,0)=90^\circ
 $$
 
-Substitute the exact quaternion values:
+This gives the drone's heading. Its position remains **(3 m, 4 m)**.
+
+</div>
+
+#### Image-Based Coordinate Extraction {#coordinate-retrieval-example}
+
+##### Step 3: Use the bounding box and crop to find the ground offset {#image-to-ground-offset}
+
+Suppose an original image size is 1280 x 720. The first PatchCore layer detects an anomalous region and bounds it. (x1,y1,x2,y2) = (400,200,700,500) is a bounded region in this case. Hence, the anomaly crop is 300 x 300. This crop will be resized before going to the other 2 models.
+
+The calculation below maps the bounding box back to the original image, finds its centre and converts the pixel offset into metres. The quaternion is used after this calculation to correct the direction of the ground offset.
+
+<CvFigure n="36" />
+
+Steps 1-5 in the image give a ground offset of approximately **-0.172 m along image-right and -0.056 m along image-down**. Step 6 in the image directly adds these to the drone position, assuming those image directions already match the map axes. When the camera rotates with ARGUS, use the heading correction below before adding the drone position.
+
+<div class="cv-supporting-evidence pose-worked-example">
+
+##### Step 4: Align the ground offset with the map {#step-4-use-heading-when-locating-fod}
+
+For this example, assume the camera is mounted so that image-top points forward and image-right points to the drone's right. ROS body axes are X forward, Y left and Z up ([CV-N02](../references#cv-n02)). The offset from Step 3 becomes:
 
 $$
-\psi=\operatorname{atan2}(1,0)
-=\frac{\pi}{2}\ \mathrm{rad}=90^\circ
+\begin{aligned}
+\Delta x_{\mathrm{body}}&=-\Delta y_{\mathrm{image}}=+0.05556\ \mathrm{m}\\
+\Delta y_{\mathrm{body}}&=-\Delta x_{\mathrm{image}}=+0.171875\ \mathrm{m}
+\end{aligned}
 $$
 
-The drone is at **(3 m, 4 m)** with a heading of **90 degrees**. Changing its heading does not by itself change its position.
-
-##### Step 4: Use heading when locating FOD {#step-4-use-heading-when-locating-fod}
-
-Suppose the image-to-ground calculation gives an offset of **0.20 m forward and 0.10 m left**, already converted into the drone's body axes. This is a separate illustrative offset, not a raw pixel measurement.
+Use the heading from Step 2 to rotate this offset into the map axes:
 
 $$
 \begin{bmatrix}\Delta X\\\Delta Y\end{bmatrix}
@@ -248,7 +279,7 @@ $$
 \cos\psi&-\sin\psi\\
 \sin\psi&\cos\psi
 \end{bmatrix}
-\begin{bmatrix}0.20\\0.10\end{bmatrix}
+\begin{bmatrix}0.05556\\0.171875\end{bmatrix}
 $$
 
 At $\psi=90^\circ$:
@@ -257,35 +288,29 @@ $$
 \begin{bmatrix}\Delta X\\\Delta Y\end{bmatrix}
 =
 \begin{bmatrix}0&-1\\1&0\end{bmatrix}
-\begin{bmatrix}0.20\\0.10\end{bmatrix}
+\begin{bmatrix}0.05556\\0.171875\end{bmatrix}
 =
-\begin{bmatrix}-0.10\\0.20\end{bmatrix}\ \mathrm{m}
+\begin{bmatrix}-0.171875\\0.05556\end{bmatrix}\ \mathrm{m}
 $$
 
-Add the drone's map position:
+##### Step 5: Add the drone position to get the FOD coordinates {#add-drone-position-to-fod-offset}
 
 $$
 \begin{aligned}
-X_{\mathrm{FOD}}&=3+(-0.10)=2.90\ \mathrm{m}\\
-Y_{\mathrm{FOD}}&=4+0.20=4.20\ \mathrm{m}
+X_{\mathrm{FOD}}&=3-0.171875\approx2.828\ \mathrm{m}\\
+Y_{\mathrm{FOD}}&=4+0.05556\approx4.056\ \mathrm{m}
 \end{aligned}
 $$
 
-**Drone position: (3.00 m, 4.00 m). FOD position: (2.90 m, 4.20 m).**
+**Drone position: (3.000 m, 4.000 m). FOD position after heading correction: (2.828 m, 4.056 m).**
 
-This yaw-only example assumes roll and pitch are zero. The planned gimbal will aim to keep the RGB camera pointing down as the drone tilts. With a tilted drone, coordinate retrieval must use the actual camera orientation from the drone attitude and gimbal angles; stabilisation alone does not make the drone body frame level. Full integration still needs camera calibration, camera-to-body axis mapping, matching timestamps and a common navigation frame. PX4 NED data must be converted to the chosen ROS frame before using these equations.
+This combines the image-based extraction with navigation data in one calculation. Full integration is pending. It requires camera calibration, the actual camera-to-body mounting alignment, matching timestamps and a common navigation frame. The planned gimbal will aim to keep the camera pointing down. If the camera is tilted, its full orientation, including the gimbal angles, must be used rather than heading alone. PX4 NED data must be converted to the chosen ROS frame before using these equations.
 
 </div>
 
-#### Coordinate Retrieval Example {#coordinate-retrieval-example}
-
-Suppose an original image size is 1280 x 720. The first PatchCore layer detects an anomalous region and bounds it. (x1,y1,x2,y2) = (400,200,700,500) is a bounded region in this case. Hence, the anomaly crop is 300 x 300. This crop will be resized before going to the other 2 models.
-
-<CvFigure n="36" />
-
 ### ARGUS's Additional Vision Safety Feature {#thermal-safety}
 
-Alongside runway inspection, ARGUS uses a separate thermal detection pipeline to monitor potential obstacles.
+ARGUS also uses a separate thermal detection pipeline to monitor potential obstacles. It uses YOLO11s with the `Thermal_yolo11s.pt` weights to detect people and birds. Live thermal integration is pending.
 
 #### Thermal Detection for Safety {#thermal-detection-for-safety}
 
@@ -426,22 +451,6 @@ These were preliminary functional checks using sample objects, including a batte
  <figcaption><strong>Video CV-01</strong><span>Laptop demonstration of the integrated system running the sequential fallback architecture, showing visible processing lag.</span></figcaption>
 </figure>
 
-#### Laptop Setup and Test Conditions {#laptop-setup-and-test-conditions}
-
-| Item | Test condition |
-| --- | --- |
-| Processor | AMD Ryzen 9 7845HX |
-| GPU | NVIDIA GeForce RTX 4060 Laptop GPU; 8.00 GiB VRAM |
-| System memory | 15.21 GiB RAM |
-| Software | Python environment `fod_synthetic`; PyTorch 2.11.0+cu128; CUDA build 12.8 |
-| RGB inputs | 30 images: 10 each at 300 x 300, 512 x 512 and 3024 x 4032 |
-| Thermal inputs | 30 images: 15 each at 1280 x 1024 and 640 x 480 |
-| Inference settings | Batch size 1; float32; models warmed up before measured processing |
-| Repetitions | Three passes over the same RGB inputs: 90 frame observations per architecture; 84 YOLO calls; 84 U-Net calls for Parallel and Sequential 1, and 30 for Sequential 2 |
-| Timing boundary | Already-loaded images; excludes model loading, live capture, GUI display and result-file writing |
-
-All three used the same inputs, weights and settings. Sequential 1 was tested later; background activity and different message routing may affect the comparison.
-
 ### PatchCore Dataset and Test Results {#dataset-and-test-results}
 
 The dataset was collected at the NUS test ground outside Techno, at the roundabout.
@@ -473,7 +482,7 @@ The model was performing very poorly, and the test object was detected inconsist
 
 <CvFigure n="27" />
 
-In ground testing, YOLO detected the battery in 3/10 tests and the plastic part in 7/10 tests.
+In ground testing, YOLO detected the battery in 3/10 tests and the plastic part in 7/10 tests. Further investigation of the dataset was conducted, as discussed in [Section 5](#dataset-investigation).
 
 ### U-Net On-the-Ground Results {#on-the-ground-results}
 
@@ -483,7 +492,7 @@ On smooth roads, U-Net detected cracks in 10/10 tests. On the rough road, it mad
 
 ### Thermal Model Comparison {#thermal-model-comparison}
 
-Different YOLO versions were tested as shown in the table below. The thermal model comparison shows greater variance across models. YOLO11m achieved the highest mAP@50-95, while YOLOv8s achieved the highest mAP@50 at 97.70%. YOLO11L achieved the highest recall at 95.38%, meaning it detected the largest proportion of thermal targets, even though it had the lowest precision. Since this detection serves as a safety layer for detecting people, birds, and potential obstacles, recall is important, as missing an obstacle is more critical than occasional false detections. Therefore, the final model should be chosen based on detection accuracy and reliable real-time performance onboard the UAV.
+YOLO11s is the current thermal model for detecting people and birds. It was also used for the standalone laptop benchmark. The table below compares the tested models. YOLO11m had the highest mAP@50-95, YOLOv8s had the highest mAP@50 at 97.70%, and YOLO11L had the highest recall at 95.38%. Recall matters for this safety system because missed obstacles can cause collisions. The final onboard model will be confirmed after Jetson testing.
 
 | Model | Precision | Recall | mAP@50 | mAP@50-95 |
 | --- | ---: | ---: | ---: | ---: |
@@ -496,9 +505,27 @@ Different YOLO versions were tested as shown in the table below. The thermal mod
 
 ## 5. Vision Performance and Dataset Analysis {#a5-analysis}
 
+### Laptop Benchmark Setup and Test Conditions {#laptop-setup-and-test-conditions}
+
+This is the setup used for the laptop benchmarks below. Ground-detection tests are in Section 4.
+
+| Item | Test condition |
+| --- | --- |
+| Processor | AMD Ryzen 9 7845HX |
+| GPU | NVIDIA GeForce RTX 4060 Laptop GPU, 8.00 GiB VRAM |
+| System memory | 15.21 GiB RAM |
+| Software | Python environment `fod_synthetic`, PyTorch 2.11.0+cu128, CUDA build 12.8 |
+| RGB inputs | 30 images: 10 each at 300 x 300, 512 x 512 and 3024 x 4032 |
+| Thermal inputs | 30 images: 15 each at 1280 x 1024 and 640 x 480 |
+| Inference settings | Batch size 1, float32, models warmed up before measured processing |
+| Repetitions | Three passes over the same RGB inputs: 90 frame observations per architecture, 84 YOLO calls, 84 U-Net calls for Parallel and Sequential 1, and 30 for Sequential 2 |
+| Timing boundary | Already-loaded images, excludes model loading, live capture, GUI display and result-file writing |
+
+All three used the same inputs, weights and settings. Sequential 1 was tested later. Background activity and different message routing may affect the comparison.
+
 ### Architecture Comparison and Memory Use {#architecture-comparison-and-memory-use}
 
-All three architectures were tested on the same laptop. The setup is in [Section 4: Testing](#a4-testing), and full timing results are in [Section 5: Analysis](#a5-analysis).
+All three architectures used the [laptop setup above](#laptop-setup-and-test-conditions). Full timings are under [Measured Processing and Inference Results](#measured-processing-and-inference-results) in Section 5.
 
 | Architecture | Average processing time (ms/frame) | Processing rate (frames/s) | Peak allocated GPU memory (MiB) |
 | --- | ---: | ---: | ---: |
@@ -520,13 +547,13 @@ All three architectures were tested on the same laptop. The setup is in [Section
 
 Running YOLO and U-Net in Sequential 1 used about 26.4% less GPU memory, while running them in parallel reduced processing time by about 11.9%. This gives us a reason to keep the sequential fallback when less memory is available. We still need to test it on the Jetson alongside navigation and communication.
 
-Memory figures show peak PyTorch allocation, not total GPU memory. Coordinates were simulated and messages were local JSON; camera, GPS, network and Jetson performance were not measured.
+Memory figures show peak PyTorch allocation, not total GPU memory. Coordinates were simulated and messages were local JSON. Camera, GPS, network and Jetson performance were not measured.
 
 Source data: [CSV](/report-assets/computer-vision/architecture_comparison.csv) and <a :href="withBase('/report-assets/computer-vision/architecture_comparison.md')" download>benchmark notes</a>.
 
 ### Why Sequential 2 Is Not Selected {#why-sequential-2-is-not-selected}
 
-Sequential 2 was not selected even though it was faster. When YOLO detects FOD, it skips U-Net and can miss a crack in the same crop.
+Sequential 2 was the fastest of the three architectures in the laptop benchmark, averaging 72.87 ms per frame (13.72 frames/s). It was not selected because it skips U-Net when YOLO detects FOD and can miss a crack in the same crop.
 
 FAA guidance explains that concrete corner cracks can begin as hairline cracks and deteriorate until pieces come loose. Minor cracks may also need sealing to limit water entry ([CV-S02](../references#cv-s02), pp. 8-9). FAA research links crack-related spalling to loose pieces that can become FOD ([CV-S01](../references#cv-s01)).
 
@@ -536,7 +563,9 @@ This supports keeping the crack check for every anomalous crop in Parallel and S
 
 ### YOLO Dataset Investigation {#dataset-investigation}
 
-The dataset was then investigated, and it was hypothesised that there was data leakage happening. Based on visual inspection, moving image by image, each FOD in the dataset was recorded as a video and sliced to generate the images. Hence, when a random split was performed above, the near-identical consecutive frames were placed across all the splits (training, testing and validation). This could explain the abnormally high YOLO results despite poor performance on the actual test ground.
+Since the YOLO models that gave very high results performed poorly on the test ground, a dataset investigation was conducted.
+
+Data leakage was suspected. Based on visual inspection, moving image by image, each FOD in the dataset was recorded as a video and sliced to generate the images. Hence, when a random split was performed above, the near-identical consecutive frames were placed across all the splits (training, testing and validation). This could explain the abnormally high YOLO results despite poor performance on the actual test ground.
 
 I applied two similarity detection techniques to check for data leaks and reduce them. Perceptual hash identifies near-duplicate images by comparing their visual structure, while DINOv2 uses pretrained deep learning to identify similar features. Both techniques are combined to group strongly similar images and assign them to a single split.
 
@@ -549,7 +578,7 @@ $$
 
 ### YOLO Similarity-Aware Splitting {#similarity-aware-splitting}
 
-| Metric | Random split | Similarity-aware split |
+| Metric | Random split | Strict |
 | --- | ---: | ---: |
 | Total images analysed | 33,793 | 33,793 |
 | Strongly similar pairs crossing splits | 51,361 | 0 |
@@ -558,30 +587,20 @@ $$
 | Strong pair constraints identified | 110,605 | 110,605 |
 | Related images kept in the same split | No | Yes |
 
-### YOLO Dataset Variants {#dataset-variants}
-
-Three datasets were created: one was the random split, the second was the similarity split, and the third was the similarity split plus removal of redundant images.
-
-| Dataset | Images | Main purpose |
-| --- | ---: | --- |
-| Random baseline | 33,793 | Baseline split; may contain similarity leakage and inflated performance |
-| Strict | 33,793 | Keep all images while grouping strongly similar frames into the same split |
-| Strict-reduced | 29,663 | Group similar frames and remove 4,130 redundant images |
+The original splits contained 51,361 strongly similar image pairs across the training, validation and test sets. The dataset was re-split so that similar images stayed in the same set. This split was named Strict to reduce data leakage and give a fairer test of the model.
 
 ### YOLO Results and Discussion {#results-and-discussion}
 
-The lower mAP after similarity-aware splitting is consistent with the data leakage concern. However, removing similar images does not resolve the other dataset limitations. The images were taken at a low height, while we require images at 5 m. During synthetic compositing, precision and recall can be affected, as realistic lighting, scale, shadow and blur are hard to tune. Hence, the current FOD dataset will be replaced with a new dataset collected at the intended height and test ground. The results below document the earlier development work.
-
-The earlier random-split model comparison reported mAP@50-95 values of 92.37% to 93.39% across six models. The strict-split results below are from separate runs; they are not a controlled comparison using a confirmed matching model and training setup.
-
 | Dataset | Reported mAP@50-95 | Interpretation |
 | --- | ---: | --- |
-| Strict | 88.10% | All images retained with similarity-aware grouping |
-| Strict-reduced | 88.93% | Similarity-aware grouping with redundant images removed |
+| Original Kaggle dataset (random split) | 93.39% | Best result from the six YOLO models tested (YOLOv8L) |
+| Strict (Original Kaggle dataset) | 88.10% | All images retained, with similar images kept in the same split |
+
+The lower mAP after Strict splitting supports the concern about data leakage. However, re-splitting does not fix the other dataset limitations. The images were taken at a low height, while we require images at 5 m. Synthetic images can also differ from real images in lighting, scale, shadows and blur. The current FOD dataset will therefore be replaced with a new dataset collected at the intended height and test ground.
 
 ### Measured Processing and Inference Results {#measured-processing-and-inference-results}
 
-The results below use the laptop setup and test conditions listed above. This table shows how long each model or complete pipeline takes to process an image or crop. Individual-model timings are from the earlier tests; the three pipeline timings are from the architecture comparison using 30 RGB images, each processed three times.
+The results below use the [laptop benchmark setup and test conditions](#laptop-setup-and-test-conditions) listed above. This table shows how long each model or complete pipeline takes to process an image or crop. Individual-model timings are from the earlier tests. The three pipeline timings are from the architecture comparison using 30 RGB images, each processed three times.
 
 | Configuration | Mean processing time (ms) | P95 processing time (ms) | Mean forward inference time (ms) | Processing throughput | Unit |
 | --- | ---: | ---: | ---: | ---: | --- |
@@ -599,7 +618,7 @@ PatchCore produced 28 crops from 16 RGB images. The other 14 images had no valid
 
 ### Architecture Workload and Result Routing {#architecture-workload-and-result-routing}
 
-This table uses the same architecture comparison described above: 30 RGB images processed three times, giving 90 frame observations per architecture. The counts show how many times YOLO, U-Net and coordinate extraction ran, and how many simulated messages were generated for the UGV and base station. Median is the middle processing time; Max is the longest recorded time.
+Each architecture processed the same 30 RGB images three times, giving 90 frame observations. The table counts the YOLO, U-Net and coordinate extraction calls, along with simulated messages to the UGV and base station. Median is the middle processing time. Max is the longest recorded time.
 
 | Architecture | YOLO calls | U-Net calls | Coordinate calls / UGV messages | Base messages | Median (ms/frame) | Max (ms/frame) |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: |
@@ -607,7 +626,7 @@ This table uses the same architecture comparison described above: 30 RGB images 
 | Sequential 1 | 84 | 84 | 54 / 54 | 84 | 80.43 | 306.70 |
 | Sequential 2 | 84 | 30 | 54 / 54 | 30 | 59.34 | 222.85 |
 
-Sequential 2 made 30 crack-model calls, compared with 84 for each of the other architectures. It is faster partly because it skips these checks.
+Sequential 2 made 30 crack-model calls, compared with 84 for each of the other architectures. Skipping these checks partly explains why it was the fastest in this benchmark.
 
 These are laptop processing rates, not camera capture rates. Live capture, display and thermal integration may add delays. Detection accuracy under the intended operating conditions, night operation and performance on the Jetson still need to be tested.
 
@@ -615,12 +634,12 @@ These are laptop processing rates, not camera capture rates. Live capture, displ
 
 | Requirement | Evidence so far | Still to test |
 | --- | --- | --- |
-| Detect FOD as small as 1 cm | YOLO: battery 3/10; plastic part 7/10. Detection of 1 cm FOD is not yet verified. | Verify 1 cm FOD detection at 5 m height |
-| Detect visible surface cracks | Smooth road: 10/10 crack detections. Rough road: 2/10 correct decisions; texture mistaken for cracks. | Reduce rough-surface false detections and measure crack detection performance at 5 m |
+| Detect FOD as small as 1 cm | YOLO: battery 3/10, plastic part 7/10. Detection of 1 cm FOD is not yet verified. | Verify 1 cm FOD detection at 5 m height |
+| Detect visible surface cracks | Smooth road: 10/10 crack detections. Rough road: 2/10 correct decisions. Texture was mistaken for cracks. | Reduce rough-surface false detections and measure crack detection performance at 5 m |
 | Detect water puddles | Water puddle class added to the FOD dataset | Define the puddle size target and test real puddles |
 | Extract coordinates | Worked example and simulated coordinate calculations | Measure real position error using camera and navigation data |
 | Run the integrated system | Laptop demonstration and three-architecture benchmarks | Test the full pipeline on Jetson NX |
-| Select a suitable camera | RGB camera proposed; webcam used for interim testing | Confirm camera selection and test at the intended height |
+| Select a suitable camera | RGB camera proposed. Webcam used for interim testing | Confirm camera selection and test at the intended height |
 | Day and night operation | Ground tests and proposed lighting | Test detection in daylight and at night with the light fitted |
 
 ## 6. Discussion of Problems and Future Project Plan {#a6-problems-project-plan}
@@ -629,21 +648,100 @@ These are laptop processing rates, not camera capture rates. Live capture, displ
 
 #### CV System Future Works {#cv-system-future-works}
 
-- Replace the current FOD dataset with a new dataset taken 5 m above the test ground using the RGB camera. Keep training and test capture sessions separate.
-- Add FOD items to the test ground and collect a dataset to increase YOLO robustness and reduce reliance on synthetic images.
-- Test how often PatchCore misses FOD or cracks at 5 m, extending the current 1 m tests.
-- Reduce U-Net false detections on rough surfaces using suitable training data, including crack-free test-ground images. Evaluate crack recall, Dice/IoU and false detections on separate test images.
-- Verify 1 cm FOD detection through the full pipeline at 5 m and 15 km/h, during daylight and night operation. Test the selected lens, exposure settings and light.
-- Define target detection performance, the puddle size target and acceptable coordinate error. Test real puddles and measure coordinate error using camera calibration, navigation data and gimbal angles.
-- Complete system integration using Jetson NX following the pipeline.
-- Test both RGB and thermal cameras with the models.
-- Add and test a gimbal for the RGB inspection camera, using flight controller attitude data to compensate for tilt and maintain a nadir view. Include the gimbal angles in coordinate retrieval.
-- Attach and test the light below the drone near the RGB camera for night operation.
-- Implement the link between the cameras and the vision system in Jetson NX.
-- Send current drone coordinates from ROS 2 navigation to the vision system.
-- Link thermal detection to the flight controller for emergency stops.
-- Integrate and test the thermal live feed for manual override and guiding ARGUS back at night. Check image clarity and video delay.
-- Set up a program to prevent repeated FOD coordinates from being sent (work with the UGV side).
-- Test the latency for each model and the entire integrated system on Jetson alongside navigation and communication. Check that captured frames do not build up in a processing queue.
+::: details New FOD Dataset at 5 m
+
+Replace the current FOD dataset with a new dataset taken 5 m above the test ground using the RGB camera. Keep training and test capture sessions separate.
+
+:::
+
+::: details Collect Real FOD Images
+
+Add FOD items to the test ground and collect a dataset to increase YOLO robustness and reduce reliance on synthetic images.
+
+:::
+
+::: details Test PatchCore at 5 m
+
+Test how often PatchCore misses FOD or cracks at 5 m, extending the current 1 m tests.
+
+:::
+
+::: details Improve Crack Detection on Rough Surfaces
+
+Reduce U-Net false detections on rough surfaces using suitable training data, including crack-free test-ground images. Evaluate crack recall, Dice/IoU and false detections on separate test images.
+
+:::
+
+::: details Test 1 cm FOD Detection During Flight
+
+Verify 1 cm FOD detection through the full pipeline at 5 m and 15 km/h, during daylight and night operation. Test the selected lens, exposure settings and light.
+
+:::
+
+::: details Set Detection Targets and Measure Coordinate Error
+
+Define the target detection performance and puddle size target. Test real puddles and measure coordinate error using camera calibration, navigation data and gimbal angles.
+
+:::
+
+::: details Integrate the Pipeline on Jetson NX
+
+Complete system integration using Jetson NX following the pipeline.
+
+:::
+
+::: details Test RGB and Thermal Cameras
+
+Test both RGB and thermal cameras with the models.
+
+:::
+
+::: details Add and Test the Camera Gimbal
+
+Add and test a gimbal for the RGB inspection camera, using flight controller attitude data to compensate for tilt and maintain a nadir view. Include the gimbal angles in coordinate retrieval.
+
+:::
+
+::: details Test Night Operation Lighting
+
+Attach and test the light below the drone near the RGB camera for night operation.
+
+:::
+
+::: details Connect Cameras to Jetson NX
+
+Implement the link between the cameras and the vision system in Jetson NX.
+
+:::
+
+::: details Link Navigation Coordinates to Vision
+
+Send current drone coordinates from ROS 2 navigation to the vision system.
+
+:::
+
+::: details Link Thermal Detection to Emergency Stops
+
+Link thermal detection to the flight controller for emergency stops.
+
+:::
+
+::: details Add the Thermal Live Feed
+
+Integrate and test the thermal live feed for manual override and guiding ARGUS back at night. Check image clarity and video delay.
+
+:::
+
+::: details Prevent Repeated FOD Coordinates
+
+Set up a program to prevent repeated FOD coordinates from being sent (work with the UGV side).
+
+:::
+
+::: details Measure Processing Time on Jetson
+
+Test the latency for each model and the entire integrated system on Jetson alongside navigation and communication. Check that captured frames do not build up in a processing queue.
+
+:::
 
 </div>

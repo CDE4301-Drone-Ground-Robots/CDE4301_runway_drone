@@ -23,7 +23,7 @@ import CommunicationDemo from '../.vitepress/theme/components/CommunicationDemo.
 
 ## 1. Objective and Requirements {#a1-objective-scope-context}
 
-### Summary {#uav-ugv-communication}
+<span id="uav-ugv-communication" class="report-anchor" aria-hidden="true"></span>
 
 ARGUS UAV and HUNTER UGV are designed to work collaboratively for FOD detection and removal. ARGUS searches the runway for FOD. HUNTER receives the detected object locations and navigates to collect them. A communication system is required to transmit the accurate FOD position from ARGUS to HUNTER. The transmitted message includes object classification, detection confidence score and target coordinates. This allows ARGUS to scan while HUNTER handles object retrieval.
 
@@ -162,7 +162,35 @@ The 100-message benchmark used ROS 2 Jazzy with the publisher and subscriber on 
 
 ### Limitations and Future Works {#future-work}
 
-Although the interim tests demonstrated successful message transmission, several limitations remain. Firstly, the current communication relies on a local Wi-Fi network, which has not been tested for the full runway. Further research led to the decision to use long-range RF communication hardware that meets IMDA regulations within the operating range. ARGUS communications scripts are still not linked to the vision system, so the next stage is to integrate with the onboard vision system to automate C2 alerts. Additional reliable communication methods will be explored, including a receipt acknowledgement carrying the threat ID, sequence-number tracking, and communication-loss detection. The next queued alert will be sent after the matching receipt acknowledgement returns to ARGUS. Finally, security enhancements such as authenticated messages and encryption will improve the protection of transmitted FOD information. The final objective is to establish a reliable communication system that allows ARGUS to detect and send coordinates to HUNTER, supporting timely FOD removal.
+::: details Select and Test Long-Range Communication Hardware
+
+The current communication relies on a local Wi-Fi network, which has not been tested for the full runway. The next step is to confirm long-range RF hardware that meets IMDA regulations and test it at the required range.
+
+:::
+
+::: details Link Vision to Communication
+
+ARGUS communication scripts are still not linked to the vision system. The next stage is to integrate with the onboard vision system to automate C2 alerts.
+
+:::
+
+::: details Add Receipt Acknowledgements and Communication-Loss Detection
+
+Add a receipt acknowledgement carrying the threat ID, sequence-number tracking and communication-loss detection. The next queued alert will be sent after the matching receipt acknowledgement returns to ARGUS.
+
+:::
+
+::: details Confirm and Test the Thermal Live Feed
+
+The thermal live-feed resolution, frame rate, bandwidth and delay still need to be confirmed and tested.
+
+:::
+
+::: details Protect Transmitted Messages
+
+Add message authentication and encryption to protect transmitted FOD information.
+
+:::
 
 ### Hunter Group Communication {#hunter-group-communication}
 

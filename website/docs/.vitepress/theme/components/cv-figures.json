@@ -261,5 +261,11 @@
     "width": 1672,
     "height": 941,
     "caption": "AI-generated concept illustration of ARGUS with a proposed light beside the RGB camera illuminating the runway at night."
+  },
+  "45": {
+    "src": "/report-assets/computer-vision/argus-camera-to-map-coordinates.png",
+    "width": 1672,
+    "height": 941,
+    "caption": "AI-generated illustration of ARGUS coordinate retrieval: convert the image offset to metres, rotate it into map axes using heading, then add the drone position. The example assumes a level, downward-facing camera."
   }
 }
