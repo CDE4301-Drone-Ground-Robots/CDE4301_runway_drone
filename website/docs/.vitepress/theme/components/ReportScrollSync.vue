@@ -2,6 +2,7 @@
 import { nextTick, onMounted, onUnmounted, watch } from 'vue'
 import { useRoute, withBase } from 'vitepress'
 import { rubricSections } from '../../rubric-sections'
+import { flattenMechanicalSections } from '../../mechanical-subsystem-sections'
 const route = useRoute()
 let entries: { heading: HTMLElement; link: HTMLAnchorElement; item: HTMLElement | null }[] = []
 let sidebar: HTMLElement | null = null
@@ -89,7 +90,7 @@ async function refresh() {
   const subsystem = route.path.replace(/\.html$/, '').match(/\/subsystems\/([^/]+)\/?$/)?.[1]
   if (!subsystem) return
   const reportPath = '/subsystems/' + subsystem
-  const sections = rubricSections
+  const sections = subsystem === 'mechanical-design' ? flattenMechanicalSections() : rubricSections
   for (const section of sections) {
    const heading = report.querySelector<HTMLElement>('[id="' + section.slug + '"]')
    const href = withBase(reportPath + '#' + section.slug)

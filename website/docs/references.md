@@ -142,6 +142,10 @@ The Straits Times. **ST Explains: Why is February the windiest month in Singapor
 
 **Bibliographic details missing; manual completion required.** Documentation citation preserved from “Natural Bending Frequency Calculation” in the supplied interim report, identifying motor rotational frequency as a common source of multirotor vibration.
 
+### [21] - PETG toughness and impact resistance {#md-ref-21}
+
+**Bibliographic details missing; manual completion required.** Citation preserved from “3D-Printed Carbon Fiber Tube Clamps” in the supplied *Interim Report.docx*. The document cites [21] but does not include the corresponding bibliography entry.
+
 ## Computer Vision Safety Sources
 
 ### CV-S01 - Pavement Cracking and FOD Risk {#cv-s01}
