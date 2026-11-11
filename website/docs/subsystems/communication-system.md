@@ -158,7 +158,7 @@ These tests were successful (shown in the figure above), proving that the ARGUS 
 
 The 100-message benchmark used ROS 2 Jazzy with the publisher and subscriber on the same device (0 m separation). The C2 alert payload size was measured at 588 bytes, and the estimated application-level bandwidth was 9.408 kbps at two alerts per second. This covers alert payloads only, excluding video and network overhead. The thermal live-feed resolution, frame rate, bandwidth and delay still need to be confirmed and tested. Additionally, a ROS 2 test was conducted using 100 consecutive alerts simulating the C2 alerts at a nominal rate of 10Hz sent from publisher to subscriber. All 100 messages were received successfully hence attaining the 100% delivery rate with no missing or duplicate messages. This checks local ROS 2 message delivery; it does not measure wireless range or performance between separate devices.
 
-## 6. Discussion of Problems and Future Project Plan {#a6-problems-project-plan}
+## 6. Discussion of Future Works {#a6-problems-project-plan}
 
 ### Limitations and Future Works {#future-work}
 

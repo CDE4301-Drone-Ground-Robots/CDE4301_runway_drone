@@ -642,7 +642,7 @@ These are laptop processing rates, not camera capture rates. Live capture, displ
 | Select a suitable camera | RGB camera proposed. Webcam used for interim testing | Confirm camera selection and test at the intended height |
 | Day and night operation | Ground tests and proposed lighting | Test detection in daylight and at night with the light fitted |
 
-## 6. Discussion of Problems and Future Project Plan {#a6-problems-project-plan}
+## 6. Discussion of Future Works {#a6-problems-project-plan}
 
 ### Semester 2 Development Plan {#semester-2-development-plan}
 

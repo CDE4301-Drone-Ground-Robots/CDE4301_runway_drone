@@ -26,7 +26,7 @@ export const rubricSections = [
   },
   {
     "slug": "a6-problems-project-plan",
-    "title": "6. Discussion of Problems and Future Project Plan",
+    "title": "6. Discussion of Future Works",
     "summary": "Limitations, remaining work and development plan."
   }
 ]
@@ -37,8 +37,8 @@ const subsystemRubricTitles = {
     "2. Mechanical Design and Concept Development",
     "3. Mechanical Prototype Development",
     "4. Mechanical Testing and Verification",
-    "5. Structural and Propulsion Analysis",
-    "6. Discussion of Problems and Future Project Plan"
+    "5. Mechanical Analysis",
+    "6. Discussion of Future Works"
   ],
   "electrical-design": [
     "1. Objective and Requirements",
@@ -46,7 +46,7 @@ const subsystemRubricTitles = {
     "3. Wiring and Hardware Prototype Development",
     "4. Electrical Testing and Verification",
     "5. Power and Battery Analysis",
-    "6. Discussion of Problems and Future Project Plan"
+    "6. Discussion of Future Works"
   ],
   "navigation-obstacle-avoidance": [
     "1. Objective and Requirements",
@@ -54,7 +54,7 @@ const subsystemRubricTitles = {
     "3. Navigation Prototype Implementation",
     "4. Navigation Simulation Testing",
     "5. Navigation Performance Analysis",
-    "6. Discussion of Problems and Future Project Plan"
+    "6. Discussion of Future Works"
   ],
   "computer-vision": [
     "1. Objective and Requirements",
@@ -62,7 +62,7 @@ const subsystemRubricTitles = {
     "3. Vision Model and Pipeline Implementation",
     "4. Vision Model and Integration Testing",
     "5. Vision Performance and Dataset Analysis",
-    "6. Discussion of Problems and Future Project Plan"
+    "6. Discussion of Future Works"
   ],
   "communication-system": [
     "1. Objective and Requirements",
@@ -70,7 +70,7 @@ const subsystemRubricTitles = {
     "3. Communication Prototype Implementation",
     "4. Communication Testing",
     "5. Communication Performance Analysis",
-    "6. Discussion of Problems and Future Project Plan"
+    "6. Discussion of Future Works"
   ]
 }
 

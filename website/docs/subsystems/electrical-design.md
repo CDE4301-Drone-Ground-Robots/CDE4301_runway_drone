@@ -246,7 +246,7 @@ $$
 
 The power calculations assume a 10% sag, but the predicted sag is only about 3.5% at the 98 A peak, leaving the pack at about 24.1 V, about 1.9 V above the 22.2 V minimum. The sag scales with internal resistance, and 10% would only be reached at about 25 mΩ, nearly three times the measured value. The prediction uses a charger measurement at full charge, the resistance under sustained load is likely higher, and the margin narrows as the pack drains, so it is to be confirmed with a loaded discharge test.
 
-## 6. Discussion of Problems and Future Project Plan {#a6-problems-project-plan}
+## 6. Discussion of Future Works {#a6-problems-project-plan}
 
 ### Semester 2 Development Plan {#electrical-future-works}
 

@@ -508,7 +508,7 @@ Results unchanged across camera and coverage changes:
 
 Source: offline kinematic sim, lanes along the runway, wind blowing across (90°) or along (0°) the runway, seeds 1 to 3, 25% turbulence. The Gazebo demonstrations use a 60 m sector.
 
-## 6. Discussion of Problems and Future Project Plan {#a6-problems-project-plan}
+## 6. Discussion of Future Works {#a6-problems-project-plan}
 
 ### Further Concerns and Solutions {#nav-future-works}
 

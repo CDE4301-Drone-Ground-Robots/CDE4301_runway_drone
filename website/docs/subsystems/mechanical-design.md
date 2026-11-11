@@ -1087,7 +1087,7 @@ The simultaneous motor test was intended to assess the response of all four moto
 
 <MechanicalVideo src="/report-assets/mechanical-design/simultaneous-motor-testing.mov" poster="/report-assets/mechanical-design/simultaneous-motor-testing-poster.jpg" caption="Simultaneous motor testing." />
 
-## 5. Structural and Propulsion Analysis {#a5-analysis}
+## 5. Mechanical Analysis {#a5-analysis}
 
 <span id="analysis" class="report-anchor" aria-hidden="true"></span>
 
@@ -1159,7 +1159,7 @@ To address these limitations, a commercially available aluminium landing leg mou
 
 <MechanicalFigure n="50" src="/report-assets/mechanical-design/proposed-aluminium-landing-leg-mount.png" :width="485" :height="609" caption="Proposed commercially available aluminium landing leg mount from Taobao, with supplier dimensions shown; this alternative has not been installed or validated by the team." />
 
-## 6. Discussion of Problems and Future Project Plan {#a6-problems-project-plan}
+## 6. Discussion of Future Works {#a6-problems-project-plan}
 
 <span id="challenges-limitations-future-work" class="report-anchor" aria-hidden="true"></span>
 

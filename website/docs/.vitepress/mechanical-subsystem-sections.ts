@@ -181,7 +181,7 @@ export const mechanicalSubsystemSections: MechanicalSection[] = [
   },
   {
     "slug": "a5-analysis",
-    "title": "A5. Analysis",
+    "title": "5. Mechanical Analysis",
     "sections": [
       {
         "slug": "centre-of-gravity-cg-of-uav",
@@ -209,7 +209,7 @@ export const mechanicalSubsystemSections: MechanicalSection[] = [
   },
   {
     "slug": "a6-problems-project-plan",
-    "title": "A6. Discussion of Problems and Project Plan",
+    "title": "6. Discussion of Future Works",
     "sections": [
       {
         "slug": "semester-2-development-plan",
