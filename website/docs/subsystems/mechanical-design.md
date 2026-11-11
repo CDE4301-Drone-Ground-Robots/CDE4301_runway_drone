@@ -3,6 +3,8 @@ title: "Mechanical Design"
 outline: false
 prev: false
 next: false
+aside: false
+pageClass: subsystem-report-page
 ---
 
 <script setup>

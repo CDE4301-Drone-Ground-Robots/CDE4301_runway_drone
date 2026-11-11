@@ -3,6 +3,8 @@ title: "Navigation and Obstacle Avoidance"
 outline: false
 prev: false
 next: false
+aside: false
+pageClass: subsystem-report-page
 ---
 
 <div class="cv-report">

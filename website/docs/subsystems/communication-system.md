@@ -3,6 +3,8 @@ title: Communication System
 outline: [2, 2]
 prev: false
 next: false
+aside: false
+pageClass: subsystem-report-page
 ---
 
 <script setup>

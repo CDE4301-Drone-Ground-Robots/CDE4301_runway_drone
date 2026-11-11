@@ -352,11 +352,11 @@ html:not(.dark) .hero h1 .hero-wordmark{--argus-rose-glow:rgba(226,160,140,.32);
  .VPNavBarMenu .subsystem-nav{padding-left:7px}
 }
 
-/* Let the continuous report use the space alongside its contents sidebar. */
-.Layout.full-report-page{--vp-layout-max-width:100vw}
-.Layout.full-report-page .VPDoc .container,
-.Layout.full-report-page .VPDoc .content,
-.Layout.full-report-page .VPDoc .content-container{width:100%;max-width:none;min-width:0}
+/* Use the same reading width for the continuous report and individual subsystems. */
+.Layout:is(.full-report-page,.subsystem-report-page){--vp-layout-max-width:100vw}
+.Layout:is(.full-report-page,.subsystem-report-page) .VPDoc .container,
+.Layout:is(.full-report-page,.subsystem-report-page) .VPDoc .content,
+.Layout:is(.full-report-page,.subsystem-report-page) .VPDoc .content-container{width:100%;max-width:none;min-width:0}
 @media(min-width:960px){
- .Layout.full-report-page .VPDoc .content{padding-left:0;padding-right:0}
+ .Layout:is(.full-report-page,.subsystem-report-page) .VPDoc .content{padding-left:0;padding-right:0}
 }
