@@ -1,3 +1,3 @@
-import { rubricSections } from './rubric-sections'
+import { subsystemRubricSections } from './rubric-sections'
 
-export const navigationSubsystemSections = rubricSections.map(section => ({ ...section }))
+export const navigationSubsystemSections = subsystemRubricSections('navigation-obstacle-avoidance')

@@ -361,5 +361,5 @@ html:not(.dark) .hero h1 .hero-wordmark{--argus-rose-glow:rgba(226,160,140,.32);
  .Layout:is(.full-report-page,.subsystem-report-page) .VPDoc .content{padding-left:0;padding-right:0}
 }
 
-/* Rubric labels already identify A1-A6; avoid a second section number. */
+/* Headings include their section numbers; avoid a second automatic number. */
 .vp-doc .cv-report.rubric-report>h2::before{content:none}

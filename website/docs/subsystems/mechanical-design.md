@@ -20,7 +20,9 @@ import UAVTiltThrustSimulator from '../.vitepress/theme/components/UAVTiltThrust
 
 <SubsystemLead class="cv-report-byline" name="Muruganantham Arun" matric="A0308280J" portrait="/team/Arun.png" />
 
-## A1. Objective, Scope and Context {#a1-objective-scope-context}
+## 1. Objective and Requirements {#a1-objective-scope-context}
+
+The objective is to design a lightweight UAV structure that supports the inspection payload.
 
 ### Overview of Mechanical Design of the UAV {#overview-of-mechanical-design-of-the-uav}
 
@@ -38,7 +40,7 @@ Initial requirements were established to guide the mechanical design of the UAV.
 | Manufacturability | Ensure that the design is feasible and practical for fabrication with available materials, equipment and processes. |
 | Water resistance | Ensure reliable UAV operation under adverse weather conditions, particularly during light rainfall. |
 
-## A2. Methodology / Concept Development {#a2-methodology-concept-development}
+## 2. Mechanical Design and Concept Development {#a2-methodology-concept-development}
 
 ### Initial Concept Sketch {#initial-concept-sketch}
 
@@ -151,7 +153,7 @@ For the ESCs, although some multirotor designs mount them externally along the p
 
 However, with the planned integration of the Raspberry Pi into the bottom layer, spatial constraints may require the ESCs to be relocated externally. If necessary, 3D printed protective enclosures will be designed to provide water resistance.
 
-## A3. Fabrication of Specimens/Prototypes {#a3-prototype-development}
+## 3. Mechanical Prototype Development {#a3-prototype-development}
 
 ### Design Iterations {#design-iterations}
 
@@ -212,7 +214,7 @@ A key limitation of the second iteration was the geometry of the top and bottom 
 
 To address the fabrication limitations of the second iteration, the final FOD ARGUS prototype design combines CFRP structural components with 3D-printed parts. CFRP was selected for the main structural components, including the base plates that mount the electrical and key onboard components, motor mounting plates and propeller arms. Its material properties, discussed earlier, and suitability for components with relatively simple geometry address the design requirement for manufacturability. For parts requiring greater geometric complexity and flexibility in customisation, such as enclosures and tube clamps, 3D-printed PETG CF would be used, as it demonstrates better mechanical properties than conventional PETG and PLA filaments [\[9\]](../references#md-ref-9).
 
-## A4. Testing {#a4-testing}
+## 4. Mechanical Testing and Verification {#a4-testing}
 
 Thrust behaviour is illustrated below using the preliminary model. Physical load-test and flight-test results remain to be documented.
 
@@ -227,7 +229,7 @@ This interactive visualisation supports preliminary thrust sizing for an X-confi
 
 </details>
 
-## A5. Analysis {#a5-analysis}
+## 5. Structural and Propulsion Analysis {#a5-analysis}
 
 ### Centre of Gravity (CG) of UAV {#centre-of-gravity-cg-of-uav}
 
@@ -1034,7 +1036,7 @@ Red indicates configurations rejected because their first bending natural freque
 
 </div>
 
-## A6. Discussion of Problems and Project Plan {#a6-problems-project-plan}
+## 6. Discussion of Problems and Future Project Plan {#a6-problems-project-plan}
 
 The [first and second design iterations](#design-iterations) describe the limitations encountered and the changes made. Physical verification and dated next-stage milestones remain to be documented.
 

@@ -1,3 +1,3 @@
-import { rubricSections } from './rubric-sections'
+import { subsystemRubricSections } from './rubric-sections'
 
-export const cvSubsystemSections = rubricSections.map(section => ({ ...section }))
+export const cvSubsystemSections = subsystemRubricSections('computer-vision')

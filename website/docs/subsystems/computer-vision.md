@@ -20,17 +20,17 @@ import { data as integrationDemo } from '../cv-integration-demo.data'
 
 <SubsystemLead class="cv-report-byline" name="Charansagar Ramanujam" matric="A0301658E" portrait="/team/Charan.png" />
 
-## A1. Objective, Scope and Context {#a1-objective-scope-context}
+## 1. Objective and Requirements {#a1-objective-scope-context}
 
-### Executive Summary {#executive-summary}
+<span id="executive-summary" class="report-anchor" aria-hidden="true"></span>
 
 The computer vision system was developed to enable the UAV to autonomously inspect runway surfaces for FOD (Foreign Object Debris), water puddles, surface cracks, and other common objects. A key challenge in this system is the impracticality of obtaining every possible object that can appear on the runway for the training dataset. Hence, it can identify classes within the training set, but it would not recognise unseen objects.
 
 To address the limitation of detecting only objects seen in the training dataset, we adopted a multi-stage computer vision architecture. The RGB camera is used as the primary runway inspection system.
 
-### System Overview & Requirements {#subsystem-overview}
+<span id="subsystem-overview" class="report-anchor" aria-hidden="true"></span>
 
-#### Requirements of This Subsystem {#requirements-of-this-subsystem}
+### Requirements of This Subsystem {#requirements-of-this-subsystem}
 
 - Detect FOD as small as 1 cm.
 - Detect visible surface cracks.
@@ -42,7 +42,7 @@ To address the limitation of detecting only objects seen in the training dataset
 
 No minimum crack size is specified; the aim is to detect visible surface cracks. The puddle size target, target detection performance and acceptable coordinate error still need to be defined.
 
-## A2. Methodology / Concept Development {#a2-methodology-concept-development}
+## 2. Vision Methodology and Architecture Development {#a2-methodology-concept-development}
 
 ### ARGUS Camera View {#argus-camera-view}
 
@@ -142,7 +142,7 @@ The RGB camera captures images continuously, which then pass through the system.
 
 Computational workload was estimated across the AI models. Based on the GFLOPs calculated, FOD detection and Crack segmentation are the most computationally demanding tasks. In the parallel architecture above, these models are running in parallel. This is addressed in the next section.
 
-GFLOPs describe the amount of computation. Measured laptop inference times are reported in [A5: Analysis](#a5-analysis).
+GFLOPs describe the amount of computation. Measured laptop inference times are reported in [Section 5: Analysis](#a5-analysis).
 
 ### Computer Vision System Architecture - Sequential 1 (Fallback) {#computer-vision-system-architecture-sequential-1-fallback}
 
@@ -152,7 +152,7 @@ There would be cases when Jetson NX resources are scarce due to multiple subsyst
 
 ### Additional Tested Architecture - Sequential 2 {#additional-tested-architecture-sequential-2}
 
-Sequential 2 is an extra architecture that was tested where YOLO runs first. If FOD is detected, the coordinates are sent to the UGV and ARGUS continues inspection. Otherwise, the crop goes to U-Net for crack detection. This architecture bypasses the crack model whenever YOLO detects FOD. Nevertheless, it was rejected for the reasons explained after the next architecture comparison section.
+Sequential 2 is an extra architecture that was tested where YOLO runs first. If FOD is detected, the coordinates are sent to the UGV and ARGUS continues inspection. Otherwise, the crop goes to U-Net for crack detection. This architecture bypasses the crack model whenever YOLO detects FOD. The reason for rejecting it is explained in [Section 5: Analysis](#a5-analysis).
 
 <CvFigure n="42" />
 
@@ -309,7 +309,7 @@ This thermal camera provides the wide field of view needed for forward safety mo
 
 <CvFigure n="41" />
 
-## A3. Fabrication of Specimens/Prototypes {#a3-prototype-development}
+## 3. Vision Model and Pipeline Implementation {#a3-prototype-development}
 
 ### Software {#software}
 
@@ -406,7 +406,7 @@ The thermal models used the [same training settings as the YOLO FOD models](#yol
 
 <PipelineDemo />
 
-## A4. Testing {#a4-testing}
+## 4. Vision Model and Integration Testing {#a4-testing}
 
 ### System Integration & Evaluation {#integration-evaluation}
 
@@ -494,11 +494,11 @@ Different YOLO versions were tested as shown in the table below. The thermal mod
 | YOLO11m | 96.22% | 89.45% | 96.05% | 71.27% |
 | YOLO11L | 88.00% | 95.38% | 95.46% | 69.36% |
 
-## A5. Analysis {#a5-analysis}
+## 5. Vision Performance and Dataset Analysis {#a5-analysis}
 
 ### Architecture Comparison and Memory Use {#architecture-comparison-and-memory-use}
 
-All three architectures were tested on the same laptop. The setup is in [A4: Testing](#a4-testing), and full timing results are in [A5: Analysis](#a5-analysis).
+All three architectures were tested on the same laptop. The setup is in [Section 4: Testing](#a4-testing), and full timing results are in [Section 5: Analysis](#a5-analysis).
 
 | Architecture | Average processing time (ms/frame) | Processing rate (frames/s) | Peak allocated GPU memory (MiB) |
 | --- | ---: | ---: | ---: |
@@ -623,7 +623,7 @@ These are laptop processing rates, not camera capture rates. Live capture, displ
 | Select a suitable camera | RGB camera proposed; webcam used for interim testing | Confirm camera selection and test at the intended height |
 | Day and night operation | Ground tests and proposed lighting | Test detection in daylight and at night with the light fitted |
 
-## A6. Discussion of Problems and Project Plan {#a6-problems-project-plan}
+## 6. Discussion of Problems and Future Project Plan {#a6-problems-project-plan}
 
 ### Semester 2 Development Plan {#semester-2-development-plan}
 

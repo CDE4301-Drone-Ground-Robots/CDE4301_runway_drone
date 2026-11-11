@@ -27,7 +27,9 @@ and replace the <div class="cv-video-pending"> line with the pattern used in com
 This also needs a script-setup block at the top of the page that imports withBase from 'vitepress'.
 -->
 
-## A1. Objective, Scope and Context {#a1-objective-scope-context}
+## 1. Objective and Requirements {#a1-objective-scope-context}
+
+The objective is to survey the runway, avoid obstacles and return within the available flight time.
 
 ### Design Concerns and Sensor Models {#design-concerns}
 
@@ -71,7 +73,7 @@ The two cameras play different roles. The nadir RGB camera detects, and the side
 
 Sources: runway dimensions follow FAA AC 150/5300-13B [\[3\]](../references#nav-ref-3) and ICAO Annex 14 Vol. I [\[13\]](../references#nav-ref-13); RGB footprint (e-CAM56_CUONX, M12 lens); thermal footprint (BNW2T256T04010ASSWC).
 
-## A2. Methodology / Concept Development {#a2-methodology-concept-development}
+## 2. Navigation Methodology and Concept Development {#a2-methodology-concept-development}
 
 ### Survey Planning {#survey-planning}
 
@@ -326,7 +328,7 @@ Sources: Mechanical calculations (take-off mass, CAD frontal area, assumed $C_d$
 
 *Figure 19. Wind guard (highlighted): slow the lanes at a lean of 14° or more, resume under 14°, and land at 33° or more for 6 s (red arrow).*
 
-## A3. Fabrication of Specimens/Prototypes {#a3-prototype-development}
+## 3. Navigation Prototype Implementation {#a3-prototype-development}
 
 ### Navigation Architecture {#navigation-architecture}
 
@@ -370,7 +372,7 @@ The total is 476 s (7.9 min) in calm air and 533 s (8.9 min) at 10 m/s wind. The
 
 Source: offline kinematic sim, lanes along the runway, 30 m sector, seed 1 (calm) and mean of 3 seeds (10 m/s). Climb energy from the Power Calculations in the [Electrical Design](./electrical-design#power-calculations) report (climb 1.3× hover, 236 W per motor).
 
-## A4. Testing {#a4-testing}
+## 4. Navigation Simulation Testing {#a4-testing}
 
 ### Software Used {#software-used}
 
@@ -463,7 +465,7 @@ In every simulation video the overlay legend is: **RGB covered**, **thermal only
  <figcaption><strong>Video NAV-11</strong><span>Turbulent winds from 6 to 12 m/s in the +y direction (90°): revisit pass after the baseline survey finishes.</span></figcaption>
 </figure>
 
-## A5. Analysis {#a5-analysis}
+## 5. Navigation Performance Analysis {#a5-analysis}
 
 ### Endurance vs. Mission Time {#endurance-vs-mission-time}
 
@@ -506,7 +508,7 @@ Results unchanged across camera and coverage changes:
 
 Source: offline kinematic sim, lanes along the runway, wind blowing across (90°) or along (0°) the runway, seeds 1 to 3, 25% turbulence. The Gazebo demonstrations use a 60 m sector.
 
-## A6. Discussion of Problems and Project Plan {#a6-problems-project-plan}
+## 6. Discussion of Problems and Future Project Plan {#a6-problems-project-plan}
 
 ### Further Concerns and Solutions {#nav-future-works}
 

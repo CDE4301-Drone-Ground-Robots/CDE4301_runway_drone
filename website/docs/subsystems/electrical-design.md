@@ -20,7 +20,9 @@ import ElectricalFigure from './components/ElectricalFigure.vue'
 
 <SubsystemLead class="cv-report-byline" name="Kummarikunta Talitha" matric="A0286653R" portrait="/team/Talitha.jpg" />
 
-## A1. Objective, Scope and Context {#a1-objective-scope-context}
+## 1. Objective and Requirements {#a1-objective-scope-context}
+
+The objective is to power and connect the propulsion, flight controller, onboard computer and sensors.
 
 ### Electrical System Overview {#electrical-overview}
 
@@ -28,7 +30,7 @@ The electrical system connects the battery, propulsion, flight controller, onboa
 
 <ElectricalFigure n="1" src="/report-assets/electrical-design/electrical-system-interaction.png" :width="1930" :height="985" caption="Electrical System Interaction" />
 
-## A2. Methodology / Concept Development {#a2-methodology-concept-development}
+## 2. Electrical Design and Component Selection {#a2-methodology-concept-development}
 
 ### Flight Controller and Onboard Computer Selection {#compute-selection}
 
@@ -77,7 +79,7 @@ The Pixhawk specifications above are taken from the PX4 documentation [\[ED-H01\
 | Power | 10 / 15 / 25 W modes; ≈ 23 W average in our budget | About 3% of flight power |
 | Interfaces | UART, USB 3.2, CSI, Gigabit Ethernet | Pixhawk, N10 LiDAR, thermal and RGB camera connect directly |
 
-The Jetson specifications above are taken from the manufacturer's data sheet [\[ED-H02\]](../references.md#ed-h02). The Jetson was chosen because it can run four to five vision models concurrently within about 23 W and includes every interface the payload needs. In the Best Case it runs ROS 2 and all FOD models by itself. Published INT8 benchmarks (about 13 frames per second for each of five models) are, however, more optimistic than the estimates from the actual FOD models (see [Computer Vision Based Inspection and Safety System, A5 – Architecture Comparison and Memory Use](../subsystems/computer-vision.md#architecture-comparison-and-memory-use)). The Best Case therefore remains unconfirmed until ROS 2 and the models are benchmarked together.
+The Jetson specifications above are taken from the manufacturer's data sheet [\[ED-H02\]](../references.md#ed-h02). The Jetson was chosen because it can run four to five vision models concurrently within about 23 W and includes every interface the payload needs. In the Best Case it runs ROS 2 and all FOD models by itself. Published INT8 benchmarks (about 13 frames per second for each of five models) are, however, more optimistic than the estimates from the actual FOD models (see [Computer Vision Based Inspection and Safety System, Section 5 – Architecture Comparison and Memory Use](../subsystems/computer-vision.md#architecture-comparison-and-memory-use)). The Best Case therefore remains unconfirmed until ROS 2 and the models are benchmarked together.
 
 #### Fallback Computer: Raspberry Pi 5 (Worst Case) {#fallback-computer-raspberry-pi-5-worst-case}
 
@@ -91,9 +93,9 @@ The Jetson specifications above are taken from the manufacturer's data sheet [\[
 
 The Raspberry Pi 5 specifications are taken from its product brief [\[ED-H03\]](../references.md#ed-h03), and the 4,500 points/s LiDAR rate follows from the N10's 4.5 kHz measurement rate [\[14\]](../references.md#nav-ref-14). The 8 W and 70 g are estimates used in our budget. Navigation is a light workload (4,500 LiDAR points in and 20 velocity commands out per second) that a four-core Cortex-A76 handles comfortably without competing for the Jetson's GPU. Its cost is small but not negligible: the 70 g forces the motors to draw extra power, so the overall penalty (≈ 24 W) is three times the Pi's own 8 W. There is also virtually no margin left for spare payload, as shown in [the power budget](#power-calculations).
 
-### Battery Selection and Initial Verifications {#battery}
+### Battery Selection {#battery}
 
-#### Battery Selection {#battery-selection}
+#### Battery Requirements and Chosen Pack {#battery-selection}
 
 | Need | HRB pack | Result |
 | --- | --- | --- |
@@ -102,9 +104,9 @@ The Raspberry Pi 5 specifications are taken from its product brief [\[ED-H03\]](
 | Current | 25C = 300 A | Avg 35–36 A (3C), Peak 98 A (8C) |
 | Weight | ~1.45 kg (est.) | Thrust-to-weight: 2.03 / 2.00 (target ≥ 2.0) |
 
-The pack was selected against four requirements together: the 6S voltage of the motor data, a 15 min flight, the peak current, and a mass that keeps thrust-to-weight at 2.0 or above. It meets the 15 min (see [Navigation and Obstacle Avoidance, A5 – Endurance vs. Mission Time](./navigation-obstacle-avoidance#endurance-vs-mission-time)) and 2.0 ratio targets with little margin and about 3× current headroom. The pack capacity, discharge rating and cell voltage limits are taken from the manufacturer's specifications [\[ED-H04\]](../references.md#ed-h04). Runtime is mission-weighted with an 80% depth of discharge, and the manufacturer's limit of 3.7 V per cell (22.2 V for the pack) sets the practical lower bound. Real flights should give 10–20% less, and weights are estimates.
+The pack was selected against four requirements together: the 6S voltage of the motor data, a 15 min flight, the peak current, and a mass that keeps thrust-to-weight at 2.0 or above. It meets the 15 min (see [Navigation and Obstacle Avoidance, Section 5 – Endurance vs. Mission Time](./navigation-obstacle-avoidance#endurance-vs-mission-time)) and 2.0 ratio targets with little margin and about 3× current headroom. The pack capacity, discharge rating and cell voltage limits are taken from the manufacturer's specifications [\[ED-H04\]](../references.md#ed-h04). Runtime is mission-weighted with an 80% depth of discharge, and the manufacturer's limit of 3.7 V per cell (22.2 V for the pack) sets the practical lower bound. Real flights should give 10–20% less, and weights are estimates.
 
-## A3. Fabrication of Specimens/Prototypes {#a3-prototype-development}
+## 3. Wiring and Hardware Prototype Development {#a3-prototype-development}
 
 The wiring plans below document the proposed arrangement. Wiring assembly and hardware validation are planned for Semester 2.
 
@@ -162,7 +164,7 @@ This leaves one open design question: how does the Jetson obtain the drone's pos
 
 Further testing and verification of latency will decide between them.
 
-## A4. Testing {#a4-testing}
+## 4. Electrical Testing and Verification {#a4-testing}
 
 ### Battery Verification {#battery-verification}
 
@@ -175,7 +177,7 @@ The pack was checked on a balance charger. Internal resistance is 1–2 mΩ per 
 
 The cells are low in resistance and closely matched, with a spread of 0.076 V, so the pack is healthy and balanced.
 
-## A5. Analysis {#a5-analysis}
+## 5. Power and Battery Analysis {#a5-analysis}
 
 ### Power Calculations {#power-calculations}
 
@@ -244,7 +246,7 @@ $$
 
 The power calculations assume a 10% sag, but the predicted sag is only about 3.5% at the 98 A peak, leaving the pack at about 24.1 V, about 1.9 V above the 22.2 V minimum. The sag scales with internal resistance, and 10% would only be reached at about 25 mΩ, nearly three times the measured value. The prediction uses a charger measurement at full charge, the resistance under sustained load is likely higher, and the margin narrows as the pack drains, so it is to be confirmed with a loaded discharge test.
 
-## A6. Discussion of Problems and Project Plan {#a6-problems-project-plan}
+## 6. Discussion of Problems and Future Project Plan {#a6-problems-project-plan}
 
 ### Semester 2 Development Plan {#electrical-future-works}
 

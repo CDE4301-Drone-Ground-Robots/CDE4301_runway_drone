@@ -4,9 +4,9 @@ export type MechanicalSection = {
  sections?: MechanicalSection[]
 }
 
-import { rubricSections } from './rubric-sections'
+import { subsystemRubricSections } from './rubric-sections'
 
-export const mechanicalSubsystemSections: MechanicalSection[] = rubricSections.map(section => ({ ...section }))
+export const mechanicalSubsystemSections: MechanicalSection[] = subsystemRubricSections('mechanical-design')
 
 type MechanicalSidebarItem = { text: string; link: string }
 

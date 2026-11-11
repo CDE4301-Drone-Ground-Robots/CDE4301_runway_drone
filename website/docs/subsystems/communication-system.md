@@ -21,7 +21,7 @@ import CommunicationDemo from '../.vitepress/theme/components/CommunicationDemo.
 
 <SubsystemLead class="cv-report-byline" name="Charansagar Ramanujam" matric="A0301658E" portrait="/team/Charan.png" />
 
-## A1. Objective, Scope and Context {#a1-objective-scope-context}
+## 1. Objective and Requirements {#a1-objective-scope-context}
 
 ### Summary {#uav-ugv-communication}
 
@@ -33,7 +33,7 @@ The communication subsystem was initially developed and tested using ROS 2 over 
 
 The operational range must be up to 5 km, as that’s the runway length. The 917-925 MHz band was initially considered; final frequency and power settings must meet the applicable IMDA requirements. The communication device must support live video transmission and be small and lightweight to fit ARGUS’s payload limits. The thermal live feed is intended for manual override, allowing the operator to guide ARGUS back at night if the drone encounters a problem. Live-feed integration and testing are pending.
 
-## A2. Methodology / Concept Development {#a2-methodology-concept-development}
+## 2. Communication Methodology and Architecture Development {#a2-methodology-concept-development}
 
 ### UAV Communication Architecture {#communication-architecture}
 
@@ -86,7 +86,7 @@ The vision system continuously requests drone centre coordinates from the naviga
 
 <CommunicationFigure src="/report-assets/communication-system/vision-communication-workflow.svg" :width="1000" :height="680" caption="Proposed vision-to-comms workflow. Stage 2 uses a simulation; full integration is pending." />
 
-## A3. Fabrication of Specimens/Prototypes {#a3-prototype-development}
+## 3. Communication Prototype Implementation {#a3-prototype-development}
 
 ### Interim Communication {#interim-communication}
 
@@ -112,9 +112,9 @@ Add example FOD alerts to the ARGUS queue. Use "Acknowledge receipt" to simulate
 
 <CommunicationDemo />
 
-## A4. Testing {#a4-testing}
+## 4. Communication Testing {#a4-testing}
 
-### Communication Testing {#communication-testing}
+### Communication Test Demonstrations {#communication-testing}
 
 #### Stage 1: Local Wi-Fi Test {#stage-1-local-wi-fi-test}
 
@@ -140,7 +140,7 @@ On the Raspberry Pi 5, the receiver successfully receives and decodes the messag
 
 These tests were successful (shown in the figure above), proving that the ARGUS and HUNTER can exchange structured data over a local wireless network. This served as the baseline foundation for integrating the real-time FOD detection from the vision system with the HUNTER’s autonomous navigation system.
 
-## A5. Analysis {#a5-analysis}
+## 5. Communication Performance Analysis {#a5-analysis}
 
 ### Communication Performance Evaluation {#performance-evaluation}
 
@@ -158,7 +158,7 @@ These tests were successful (shown in the figure above), proving that the ARGUS 
 
 The 100-message benchmark used ROS 2 Jazzy with the publisher and subscriber on the same device (0 m separation). The C2 alert payload size was measured at 588 bytes, and the estimated application-level bandwidth was 9.408 kbps at two alerts per second. This covers alert payloads only, excluding video and network overhead. The thermal live-feed resolution, frame rate, bandwidth and delay still need to be confirmed and tested. Additionally, a ROS 2 test was conducted using 100 consecutive alerts simulating the C2 alerts at a nominal rate of 10Hz sent from publisher to subscriber. All 100 messages were received successfully hence attaining the 100% delivery rate with no missing or duplicate messages. This checks local ROS 2 message delivery; it does not measure wireless range or performance between separate devices.
 
-## A6. Discussion of Problems and Project Plan {#a6-problems-project-plan}
+## 6. Discussion of Problems and Future Project Plan {#a6-problems-project-plan}
 
 ### Limitations and Future Works {#future-work}
 

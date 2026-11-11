@@ -1,3 +1,3 @@
-import { rubricSections } from './rubric-sections'
+import { subsystemRubricSections } from './rubric-sections'
 
-export const communicationSubsystemSections = rubricSections.map(section => ({ ...section }))
+export const communicationSubsystemSections = subsystemRubricSections('communication-system')
