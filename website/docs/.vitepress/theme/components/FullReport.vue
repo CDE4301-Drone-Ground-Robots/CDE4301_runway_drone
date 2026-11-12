@@ -2,8 +2,7 @@
 import { nextTick, onMounted, ref } from 'vue'
 import { withBase } from 'vitepress'
 import ProjectScope from '../../../scopes.md'
-import PrimaryResearch from '../../../research/primary.md'
-import SecondaryResearch from '../../../research/secondary.md'
+import Research from '../../../research/index.md'
 import SystemArchitecture from '../../../report/system-architecture.md'
 import MechanicalDesign from '../../../subsystems/mechanical-design.md'
 import ElectricalDesign from '../../../subsystems/electrical-design.md'
@@ -14,7 +13,7 @@ import Timeline from '../../../timeline.md'
 import References from '../../../references.md'
 import { continuousReportLink, reportAnchor, reportChapters } from '../../report-chapters'
 
-const components = [ProjectScope, PrimaryResearch, SecondaryResearch, SystemArchitecture,
+const components = [ProjectScope, Research, SystemArchitecture,
  MechanicalDesign, ElectricalDesign, Navigation, ComputerVision, Communication, Timeline, References]
 const report = ref<HTMLElement>()
 
@@ -44,7 +43,12 @@ onMounted(async () => {
  document.dispatchEvent(new Event('full-report-ready'))
  // Direct subsection links can arrive before the imported chapters mount.
  if (window.location.hash) {
-  const id = decodeURIComponent(window.location.hash.slice(1))
+  let id = decodeURIComponent(window.location.hash.slice(1))
+  const legacyResearch = id.match(/^report-(primary|secondary)-research(?:--(.+))?$/)
+  if (legacyResearch) {
+   id = reportAnchor('research', legacyResearch[2] || legacyResearch[1] + '-research')
+   window.history.replaceState(window.history.state, '', '#' + encodeURIComponent(id))
+  }
   requestAnimationFrame(() => document.getElementById(id)?.scrollIntoView())
  }
 })

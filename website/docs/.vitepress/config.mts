@@ -10,8 +10,10 @@ const reportSidebar = [
  { text: 'PROJECT REPORT', items: [
   { text: 'Report overview', link: '/report/' },
   { text: 'Project scope', link: '/scopes' },
-  { text: 'Primary Research', link: '/research/primary' },
-  { text: 'Secondary Research', link: '/research/secondary' },
+  { text: 'Research', link: '/research/', collapsed: false, items: [
+   { text: 'Primary Research', link: '/research/#primary-research' },
+   { text: 'Secondary Research', link: '/research/#secondary-research' }
+  ] },
   { text: 'System architecture', link: '/report/system-architecture' }
  ] },
  { text: 'SUBSYSTEM REPORTS', items: subsystems.map(subsystem => ({
@@ -93,10 +95,7 @@ export default defineConfig({
   nav: [
    { text: 'Overview', link: '/' },
    { text: 'Meet the Team', link: '/team' },
-   { text: 'Research', activeMatch: '/research/', items: [
-    { text: 'Primary Research', link: '/research/primary' },
-    { text: 'Secondary Research', link: '/research/secondary' }
-   ] },
+   { text: 'Research', link: '/research/', activeMatch: '/research/' },
    { text: 'Drone Specification', link: '/engineering/drone-specification' },
    { component: 'SubsystemNav' },
    { text: 'Report', link: '/report/', activeMatch: '/(report/|scopes)' },

@@ -1,37 +1,66 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 680" width="1000" height="680" preserveAspectRatio="xMidYMid meet" role="img">
-<title>Proposed vision and communication workflow; Stage 2 is simulated</title>
-<defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="12" markerHeight="12" markerUnits="userSpaceOnUse" orient="auto"><path d="M0 0L10 5L0 10Z" fill="#d6b19c"/></marker></defs>
-<rect width="1000" height="680" rx="18" fill="#0d131d"/>
-<rect x="50" y="35" width="270" height="85" rx="12" fill="#20374a" stroke="#8fabbc" stroke-width="2"/>
-<text x="185.0" y="62.5" text-anchor="middle" dominant-baseline="middle" fill="#f1f4f7" font-family="Arial,sans-serif" font-size="24">Navigation system</text>
-<text x="185.0" y="92.5" text-anchor="middle" dominant-baseline="middle" fill="#f1f4f7" font-family="Arial,sans-serif" font-size="24">Drone centre position</text>
-<rect x="680" y="35" width="270" height="85" rx="12" fill="#20374a" stroke="#8fabbc" stroke-width="2"/>
-<text x="815.0" y="62.5" text-anchor="middle" dominant-baseline="middle" fill="#f1f4f7" font-family="Arial,sans-serif" font-size="24">Vision system</text>
-<text x="815.0" y="92.5" text-anchor="middle" dominant-baseline="middle" fill="#f1f4f7" font-family="Arial,sans-serif" font-size="24">Inspect for FOD</text>
-<rect x="50" y="200" width="270" height="85" rx="12" fill="#1d3b35" stroke="#8fabbc" stroke-width="2"/>
-<text x="185.0" y="227.5" text-anchor="middle" dominant-baseline="middle" fill="#f1f4f7" font-family="Arial,sans-serif" font-size="24">Coordinate extraction</text>
-<text x="185.0" y="257.5" text-anchor="middle" dominant-baseline="middle" fill="#f1f4f7" font-family="Arial,sans-serif" font-size="24">FOD target position</text>
-<polygon points="800,175 950,242.5 800,310 650,242.5" fill="#3b2c49" stroke="#8fabbc" stroke-width="2"/><text x="800" y="242.5" text-anchor="middle" dominant-baseline="middle" fill="#f1f4f7" font-family="Arial,sans-serif" font-size="24">FOD detected?</text>
-<polyline points="200,120 200,200" fill="none" stroke="#d6b19c" stroke-width="3" stroke-linejoin="round" marker-end="url(#arrow)"/>
-<polyline points="815,120 815,168 800,175" fill="none" stroke="#d6b19c" stroke-width="3" stroke-linejoin="round" marker-end="url(#arrow)"/>
-<polyline points="650,242.5 320,242.5" fill="none" stroke="#d6b19c" stroke-width="3" stroke-linejoin="round" marker-end="url(#arrow)"/>
-<text x="490" y="225" text-anchor="middle" fill="#e6c7b5" font-family="Arial,sans-serif" font-size="22">Yes</text>
-<polyline points="950,242.5 978,242.5 978,77.5 950,77.5" fill="none" stroke="#d6b19c" stroke-width="3" stroke-linejoin="round" marker-end="url(#arrow)"/>
-<text x="963" y="160" text-anchor="middle" fill="#e6c7b5" font-family="Arial,sans-serif" font-size="22">No</text>
-<rect x="50" y="380" width="270" height="85" rx="12" fill="#20374a" stroke="#8fabbc" stroke-width="2"/>
-<text x="185.0" y="407.5" text-anchor="middle" dominant-baseline="middle" fill="#f1f4f7" font-family="Arial,sans-serif" font-size="24">ARGUS publisher</text>
-<text x="185.0" y="437.5" text-anchor="middle" dominant-baseline="middle" fill="#f1f4f7" font-family="Arial,sans-serif" font-size="24">JSON C2 alert</text>
-<rect x="365" y="380" width="270" height="85" rx="12" fill="#20374a" stroke="#8fabbc" stroke-width="2"/>
-<text x="500.0" y="407.5" text-anchor="middle" dominant-baseline="middle" fill="#f1f4f7" font-family="Arial,sans-serif" font-size="24">ROS 2 / DDS</text>
-<text x="500.0" y="437.5" text-anchor="middle" dominant-baseline="middle" fill="#f1f4f7" font-family="Arial,sans-serif" font-size="24">Local Wi-Fi</text>
-<rect x="680" y="380" width="270" height="85" rx="12" fill="#20374a" stroke="#8fabbc" stroke-width="2"/>
-<text x="815.0" y="407.5" text-anchor="middle" dominant-baseline="middle" fill="#f1f4f7" font-family="Arial,sans-serif" font-size="24">HUNTER receiver</text>
-<text x="815.0" y="437.5" text-anchor="middle" dominant-baseline="middle" fill="#f1f4f7" font-family="Arial,sans-serif" font-size="24">Decode and queue</text>
-<polyline points="185,285 185,380" fill="none" stroke="#d6b19c" stroke-width="3" stroke-linejoin="round" marker-end="url(#arrow)"/>
-<polyline points="320,422.5 365,422.5" fill="none" stroke="#d6b19c" stroke-width="3" stroke-linejoin="round" marker-end="url(#arrow)"/>
-<polyline points="635,422.5 680,422.5" fill="none" stroke="#d6b19c" stroke-width="3" stroke-linejoin="round" marker-end="url(#arrow)"/>
-<rect x="680" y="550" width="270" height="90" rx="12" fill="#20374a" stroke="#8fabbc" stroke-width="2"/>
-<text x="815.0" y="580.0" text-anchor="middle" dominant-baseline="middle" fill="#f1f4f7" font-family="Arial,sans-serif" font-size="24">Next queued target</text>
-<text x="815.0" y="610.0" text-anchor="middle" dominant-baseline="middle" fill="#f1f4f7" font-family="Arial,sans-serif" font-size="24">PoseStamped goal</text>
-<polyline points="815,465 815,550" fill="none" stroke="#d6b19c" stroke-width="3" stroke-linejoin="round" marker-end="url(#arrow)"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 1090" width="1200" height="1090" preserveAspectRatio="xMidYMid meet" role="img" aria-labelledby="title desc">
+<title id="title">Proposed vision-to-comms queue and retry workflow</title>
+<desc id="desc">Vision detections are converted to precise FOD coordinates and stored in an ARGUS sender queue. Send one alert, retain it until a matching HUNTER receipt acknowledgement, and retry the same alert after a timeout or restored link. Stage 2 is simulated; live integration and retries are pending.</desc>
+<defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="11" markerHeight="11" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0L10 5L0 10Z" fill="#d6b19c"/></marker><marker id="ack" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="11" markerHeight="11" markerUnits="userSpaceOnUse" orient="auto"><path d="M0 0L10 5L0 10Z" fill="#91c7ac"/></marker></defs>
+<rect width="1200" height="1090" rx="18" fill="#0d131d"/>
+<text x="600" y="34" text-anchor="middle" dominant-baseline="middle" fill="#f1f4f7" font-family="Arial,sans-serif" font-size="29" font-weight="600">Vision-to-Comms Workflow</text>
+<text x="600" y="68" text-anchor="middle" dominant-baseline="middle" fill="#c2cad3" font-family="Arial,sans-serif" font-size="19" font-weight="400">Stage 2 simulation. Live integration, receipt ACK and retry are planned.</text>
+<rect x="40" y="125" width="280" height="75" rx="12" fill="#20374a" stroke="#8fabbc" stroke-width="2"/>
+<text x="180.0" y="148.0" text-anchor="middle" dominant-baseline="middle" fill="#f1f4f7" font-family="Arial,sans-serif" font-size="22" font-weight="600">ARGUS vision system</text>
+<text x="180.0" y="177.0" text-anchor="middle" dominant-baseline="middle" fill="#f1f4f7" font-family="Arial,sans-serif" font-size="20" font-weight="400">Inspect for FOD</text>
+<polygon points="600,105 760,162 600,219 440,162" fill="#3b2c49" stroke="#8fabbc" stroke-width="2"/>
+<text x="600" y="162" text-anchor="middle" dominant-baseline="middle" fill="#f1f4f7" font-family="Arial,sans-serif" font-size="23" font-weight="400">FOD detected?</text>
+<polyline points="320,162 440,162" fill="none" stroke="#d6b19c" stroke-width="3" stroke-linejoin="round" marker-end="url(#arrow)"/>
+<polyline points="600,105 600,92 180,92 180,125" fill="none" stroke="#d6b19c" stroke-width="3" stroke-linejoin="round" marker-end="url(#arrow)"/>
+<text x="364" y="111" text-anchor="middle" dominant-baseline="middle" fill="#e6c7b5" font-family="Arial,sans-serif" font-size="18" font-weight="400">No</text>
+<rect x="40" y="250" width="280" height="75" rx="12" fill="#20374a" stroke="#8fabbc" stroke-width="2"/>
+<text x="180.0" y="273.0" text-anchor="middle" dominant-baseline="middle" fill="#f1f4f7" font-family="Arial,sans-serif" font-size="21" font-weight="600">Navigation system</text>
+<text x="180.0" y="302.0" text-anchor="middle" dominant-baseline="middle" fill="#f1f4f7" font-family="Arial,sans-serif" font-size="19" font-weight="400">Drone position and orientation</text>
+<rect x="360" y="250" width="480" height="75" rx="12" fill="#20374a" stroke="#8fabbc" stroke-width="2"/>
+<text x="600.0" y="273.0" text-anchor="middle" dominant-baseline="middle" fill="#f1f4f7" font-family="Arial,sans-serif" font-size="23" font-weight="600">Vision coordinate extraction</text>
+<text x="600.0" y="302.0" text-anchor="middle" dominant-baseline="middle" fill="#f1f4f7" font-family="Arial,sans-serif" font-size="21" font-weight="400">Calculate the precise FOD coordinates</text>
+<polyline points="600,219 600,250" fill="none" stroke="#d6b19c" stroke-width="3" stroke-linejoin="round" marker-end="url(#arrow)"/>
+<text x="635" y="234" text-anchor="middle" dominant-baseline="middle" fill="#e6c7b5" font-family="Arial,sans-serif" font-size="18" font-weight="400">Yes</text>
+<polyline points="320,287 360,287" fill="none" stroke="#d6b19c" stroke-width="3" stroke-linejoin="round" marker-end="url(#arrow)"/>
+<rect x="360" y="370" width="480" height="110" rx="12" fill="#1d3b35" stroke="#8fabbc" stroke-width="2"/>
+<text x="600.0" y="396.0" text-anchor="middle" dominant-baseline="middle" fill="#f1f4f7" font-family="Arial,sans-serif" font-size="23" font-weight="600">ARGUS sender queue</text>
+<text x="600.0" y="425.0" text-anchor="middle" dominant-baseline="middle" fill="#f1f4f7" font-family="Arial,sans-serif" font-size="21" font-weight="400">Store all pending FOD coordinates</text>
+<text x="600.0" y="454.0" text-anchor="middle" dominant-baseline="middle" fill="#f1f4f7" font-family="Arial,sans-serif" font-size="21" font-weight="400">Keep them in arrival order</text>
+<polyline points="600,325 600,370" fill="none" stroke="#d6b19c" stroke-width="3" stroke-linejoin="round" marker-end="url(#arrow)"/>
+<rect x="360" y="525" width="480" height="75" rx="12" fill="#20374a" stroke="#8fabbc" stroke-width="2"/>
+<text x="600.0" y="548.0" text-anchor="middle" dominant-baseline="middle" fill="#f1f4f7" font-family="Arial,sans-serif" font-size="23" font-weight="600">Send the oldest queued alert</text>
+<text x="600.0" y="577.0" text-anchor="middle" dominant-baseline="middle" fill="#f1f4f7" font-family="Arial,sans-serif" font-size="21" font-weight="400">Retain a copy until receipt ACK</text>
+<polyline points="600,480 600,525" fill="none" stroke="#d6b19c" stroke-width="3" stroke-linejoin="round" marker-end="url(#arrow)"/>
+<rect x="360" y="645" width="480" height="85" rx="12" fill="#20374a" stroke="#8fabbc" stroke-width="2"/>
+<text x="600.0" y="673.0" text-anchor="middle" dominant-baseline="middle" fill="#f1f4f7" font-family="Arial,sans-serif" font-size="23" font-weight="600">HUNTER receives and stores the target</text>
+<text x="600.0" y="702.0" text-anchor="middle" dominant-baseline="middle" fill="#f1f4f7" font-family="Arial,sans-serif" font-size="21" font-weight="400">Return receipt ACK with the threat ID</text>
+<polyline points="600,600 600,645" fill="none" stroke="#d6b19c" stroke-width="3" stroke-linejoin="round" marker-end="url(#arrow)"/>
+<text x="715" y="622" text-anchor="middle" dominant-baseline="middle" fill="#e6c7b5" font-family="Arial,sans-serif" font-size="18" font-weight="400">ROS 2 / DDS link</text>
+<rect x="40" y="650" width="260" height="75" rx="12" fill="#20374a" stroke="#8fabbc" stroke-width="2"/>
+<text x="170.0" y="673.0" text-anchor="middle" dominant-baseline="middle" fill="#f1f4f7" font-family="Arial,sans-serif" font-size="21" font-weight="600">HUNTER navigation</text>
+<text x="170.0" y="702.0" text-anchor="middle" dominant-baseline="middle" fill="#f1f4f7" font-family="Arial,sans-serif" font-size="19" font-weight="400">Handle each target once</text>
+<polyline points="360,687 300,687" fill="none" stroke="#d6b19c" stroke-width="3" stroke-linejoin="round" marker-end="url(#arrow)"/>
+<polygon points="600,780 770,842 600,904 430,842" fill="#3b2c49" stroke="#8fabbc" stroke-width="2"/>
+<text x="600" y="829" text-anchor="middle" dominant-baseline="middle" fill="#f1f4f7" font-family="Arial,sans-serif" font-size="21" font-weight="400">Matching receipt ACK?</text>
+<text x="600" y="856" text-anchor="middle" dominant-baseline="middle" fill="#c7cbd1" font-family="Arial,sans-serif" font-size="18" font-weight="400">ARGUS checks threat ID</text>
+<polyline points="600,730 600,780" fill="none" stroke="#d6b19c" stroke-width="3" stroke-linejoin="round" marker-end="url(#arrow)"/>
+<rect x="900" y="780" width="270" height="125" rx="12" fill="#3b2c49" stroke="#8fabbc" stroke-width="2"/>
+<text x="1035.0" y="813.5" text-anchor="middle" dominant-baseline="middle" fill="#f1f4f7" font-family="Arial,sans-serif" font-size="21" font-weight="600">Keep the alert queued</text>
+<text x="1035.0" y="842.5" text-anchor="middle" dominant-baseline="middle" fill="#f1f4f7" font-family="Arial,sans-serif" font-size="19" font-weight="400">Retry on timeout</text>
+<text x="1035.0" y="871.5" text-anchor="middle" dominant-baseline="middle" fill="#f1f4f7" font-family="Arial,sans-serif" font-size="19" font-weight="400">Up to 100 retries</text>
+<polyline points="770,842 900,842" fill="none" stroke="#d6b19c" stroke-width="3" stroke-linejoin="round" marker-end="url(#arrow)"/>
+<text x="832" y="821" text-anchor="middle" dominant-baseline="middle" fill="#e6c7b5" font-family="Arial,sans-serif" font-size="18" font-weight="400">No ACK</text>
+<polyline points="1035,780 1035,562 840,562" fill="none" stroke="#d6b19c" stroke-width="3" stroke-linejoin="round" marker-end="url(#arrow)"/>
+<text x="940" y="543" text-anchor="middle" fill="#e6c7b5" font-family="Arial,sans-serif" font-size="17">Fewer than 100 retries</text>
+<polyline points="1035,905 1035,955" fill="none" stroke="#d6b19c" stroke-width="3" marker-end="url(#arrow)"/>
+<text x="1035" y="934" text-anchor="middle" fill="#e6c7b5" font-family="Arial,sans-serif" font-size="17">100 retries failed</text>
+<rect x="900" y="955" width="270" height="78" rx="12" fill="#49303b" stroke="#8fabbc" stroke-width="2"/>
+<text x="1035" y="982" text-anchor="middle" fill="#f1f4f7" font-family="Arial,sans-serif" font-size="21" font-weight="600">Notify base station</text>
+<text x="1035" y="1011" text-anchor="middle" fill="#f1f4f7" font-family="Arial,sans-serif" font-size="18">If that link is available</text>
+<rect x="360" y="955" width="480" height="78" rx="12" fill="#1d3b35" stroke="#8fabbc" stroke-width="2"/>
+<text x="600.0" y="979.5" text-anchor="middle" dominant-baseline="middle" fill="#f1f4f7" font-family="Arial,sans-serif" font-size="23" font-weight="600">Remove the acknowledged alert</text>
+<text x="600.0" y="1008.5" text-anchor="middle" dominant-baseline="middle" fill="#f1f4f7" font-family="Arial,sans-serif" font-size="21" font-weight="400">Send the next coordinate in the queue</text>
+<polyline points="600,904 600,955" fill="none" stroke="#91c7ac" stroke-width="3" stroke-linejoin="round" stroke-dasharray="9 6" marker-end="url(#ack)"/>
+<text x="638" y="929" text-anchor="middle" dominant-baseline="middle" fill="#a8d4bc" font-family="Arial,sans-serif" font-size="19" font-weight="400">Yes</text>
+<text x="600" y="1065" text-anchor="middle" dominant-baseline="middle" fill="#c2cad3" font-family="Arial,sans-serif" font-size="19" font-weight="400">Receipt ACK releases the next alert. FOD collection can finish later.</text>
 </svg>

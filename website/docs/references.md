@@ -314,7 +314,13 @@ Foote, Tully and Purvis, Mike. **REP 103: Standard Units of Measure and Coordina
 
 Microhard. **pMDDL2450 - Wireless MIMO (2X2) OEM Digital Data Link**. Manufacturer product page; accessed 1 November 2026.
 
-[Manufacturer specifications](https://www.microhardcorp.com/pMDDL2450.php). Identifies the candidate radio as a 2.4 GHz data link.
+[Manufacturer product page](https://www.microhardcorp.com/pMDDL2450.php) and [manufacturer brochure, revision 1.3.0](https://www.microhardcorp.com/brochures/pMDDL2450.Brochure.Rev.1.3.0.pdf), checked 12 November 2026. List 2.402-2.478 GHz operation, up to 25 Mbps advertised throughput, adjustable total RF output up to 1 W, Ethernet/serial/USB interfaces and wireless video support. These specifications do not establish a tested 5 km range at Singapore's permitted operating power.
+
+### COM-H02 - Microhard P900 V2 Serial Radio {#com-h02}
+
+Holybro. **Microhard Telemetry Radio V2: P900 V2**. Manufacturer specifications. Accessed 12 November 2026.
+
+[Holybro product specifications](https://holybro.com/products/microhard-telemetry-radio-v2) and [radio overview](https://docs.holybro.com/radio/microhard-radio/overview). List the 902-928 MHz band, up to 276 kbps link rate, serial interfaces and adjustable RF output from 100 mW to 1 W. Singapore frequency and power compliance must be checked separately.
 
 ### COM-R01 - IMDA Short Range Devices Specification {#com-r01}
 
@@ -327,3 +333,21 @@ Infocomm Media Development Authority. **Technical Specification for Short Range 
 Infocomm Media Development Authority. **Operation of Unmanned Aircraft Systems (UAS)**. Accessed 1 November 2026.
 
 [Official UAS guidance](https://www.imda.gov.sg/regulations-and-licensing-listing/spectrum-management/frequency-allocation-and-assignment/operation-of-unmanned-aircraft-systems-uas). Lists the commonly used 2.4000-2.4835 GHz UAV band with a maximum power of 100 mW EIRP under the published licence-exemption conditions.
+
+### COM-R03 - Shared Spectrum and Interference Conditions {#com-r03}
+
+Infocomm Media Development Authority. **Spectrum Management Handbook, Chapter 7: Short Range Devices**. Accessed 12 November 2026.
+
+[IMDA handbook](https://www.imda.gov.sg/-/media/imda/files/regulation-licensing-and-consultations/frameworks-and-policies/spectrum-management-and-coordination/spectrummgmthb.pdf). Explains shared use and operation on a non-interference and non-protection basis. Used for the shared-band interference discussion.
+
+### COM-T01 - Interference Between Shared-Band Devices {#com-t01}
+
+Marcel, Jason (2020). **How Bluetooth technology uses adaptive frequency hopping to overcome packet interference**. Bluetooth SIG, 15 November 2020. Accessed 12 November 2026.
+
+[Bluetooth SIG explanation](https://www.bluetooth.com/blog/how-bluetooth-technology-uses-adaptive-frequency-hopping-to-overcome-packet-interference/). Explains how overlapping transmissions from Bluetooth, Wi-Fi and other devices can corrupt or lose packets. Cited for coexistence risks, not as evidence that the proposed Microhard link implements Bluetooth frequency hopping.
+
+### COM-S01 - ROS 2 Communication Security {#com-s01}
+
+Open Robotics. **ROS 2 Jazzy: ROS 2 Security, Setting Up Security and Setting Access Controls**. Accessed 12 November 2026.
+
+[Security overview](https://github.com/ros2/ros2_documentation/blob/jazzy/source/Concepts/Intermediate/About-Security.rst), [SROS2 setup](https://github.com/ros2/ros2_documentation/blob/jazzy/source/Tutorials/Advanced/Security/Introducing-ros2-security.rst) and [topic access controls](https://github.com/ros2/ros2_documentation/blob/jazzy/source/Tutorials/Advanced/Security/Access-Controls.rst). Official documentation for DDS-based encryption, participant authentication, data integrity, certificate and key files, enforced security and publish/subscribe permissions. The application's stale-alert and duplicate-target checks are proposed project work.

@@ -1,7 +1,6 @@
 export const reportChapters = [
  { id: 'project-scope', title: 'Project scope', path: '/scopes' },
- { id: 'primary-research', title: 'Primary Research', path: '/research/primary' },
- { id: 'secondary-research', title: 'Secondary Research', path: '/research/secondary' },
+ { id: 'research', title: 'Research', path: '/research' },
  { id: 'system-architecture', title: 'System architecture', path: '/report/system-architecture' },
  { id: 'mechanical-design', title: 'Mechanical Design', path: '/subsystems/mechanical-design' },
  { id: 'electrical-design', title: 'Electrical Design', path: '/subsystems/electrical-design' },
@@ -20,6 +19,10 @@ export function continuousReportLink(link: string) {
  const [pathname, hash] = link.split('#')
  const path = pathname.replace(/\.html$/, '').replace(/\/$/, '')
  if (path === '/report') return '/report/#report-overview'
+ if (path === '/research/primary' || path === '/research/secondary') {
+  const section = path.endsWith('/primary') ? 'primary-research' : 'secondary-research'
+  return '/report/#' + reportAnchor('research', hash || section)
+ }
  const chapter = reportChapters.find(chapter => chapter.path === path)
  return chapter ? '/report/#' + reportAnchor(chapter.id, hash) : link
 }
