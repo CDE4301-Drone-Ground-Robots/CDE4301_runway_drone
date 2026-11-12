@@ -1,3 +1,4 @@
+import ReportImageViewer from './components/ReportImageViewer.vue'
 import PipelineDemo from './components/PipelineDemo.vue'
 import SubsystemLead from './components/SubsystemLead.vue'
 import ReportScrollSync from './components/ReportScrollSync.vue'
@@ -17,7 +18,7 @@ import TeamCarousel from './components/TeamCarousel.vue'
 export default {
  extends: DefaultTheme,
  Layout: () => h(DefaultTheme.Layout, null, {
-  'layout-bottom': () => [h(CursorSpotlight), h(ReportScrollSync)],
+  'layout-bottom': () => [h(CursorSpotlight), h(ReportScrollSync), h(ReportImageViewer)],
   'sidebar-nav-before': () => h('div', { class: 'report-sidebar-identity' }, [
    h('span', 'FOD ARGUS'), h('small', 'ENGINEERING REPORT / AIS-407')
   ]),

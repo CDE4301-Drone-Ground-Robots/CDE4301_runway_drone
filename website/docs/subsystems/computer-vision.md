@@ -24,9 +24,9 @@ import { data as integrationDemo } from '../cv-integration-demo.data'
 
 <span id="executive-summary" class="report-anchor" aria-hidden="true"></span>
 
-The computer vision system was developed to enable the UAV to autonomously inspect runway surfaces for FOD (Foreign Object Debris), water puddles, surface cracks, and other common objects. A key challenge in this system is the impracticality of obtaining every possible object that can appear on the runway for the training dataset. Hence, it can identify classes within the training set, but it would not recognise unseen objects.
+The computer vision system was developed to enable the UAV to autonomously inspect runway surfaces for FOD (Foreign Object Debris), water puddles, surface cracks, and other common objects. A key challenge in this system is the impracticality of obtaining every possible object that can appear on the runway for the training dataset. A supervised object detector can identify its trained classes, but may not recognise unseen objects.
 
-To address the limitation of detecting only objects seen in the training dataset, we adopted a multi-stage computer vision architecture. The RGB camera is used for primary runway inspection.
+To address the limitation of detecting only objects seen in the training dataset, we adopted a multi-stage computer vision architecture. The RGB camera is used for primary runway inspection. Interim testing used the UGREEN webcam and a laptop. The final cameras, 5 m setup, Jetson deployment and live navigation link are proposed work.
 
 <span id="subsystem-overview" class="report-anchor" aria-hidden="true"></span>
 
@@ -48,7 +48,7 @@ No minimum crack size is specified. The aim is to detect visible surface cracks.
 
 <CvFigure n="2" />
 
-The ARGUS drone has the RGB camera facing down and centred on the drone, rather than at an angle. The intended camera view covers a 2 m × 2 m area at a height of 5 m. A suitable lens is needed to achieve this coverage. A gimbal is planned for the RGB inspection camera, using attitude data from the flight controller to compensate for drone roll and pitch and keep the camera pointing straight down (nadir). Adding and testing this gimbal is future work. This setup makes it easier to collect training data and simplifies FOD coordinate extraction.
+In the proposed setup, the RGB camera will face down and be centred on ARGUS. The intended camera view covers a 2 m × 2 m area at a height of 5 m. A suitable lens is needed to achieve this coverage. A gimbal is planned for the RGB inspection camera, using attitude data from the flight controller to compensate for drone roll and pitch and keep the camera pointing straight down (nadir). Adding and testing this gimbal is future work. This setup is intended to simplify training-data collection and FOD coordinate extraction.
 
 ### RGB Cameras {#rgb-cameras}
 
@@ -59,6 +59,32 @@ The RGB camera proposed for the final drone is the e-con e-CAM56_CUONX as shown 
 Manufacturer product page: [e-con Systems e-CAM56_CUONX - Sony IMX568 global-shutter camera](https://www.e-consystems.com/nvidia-cameras/jetson-orin-nx-cameras/5mp-imx568-global-shutter-camera.asp). See [CV-H01 in References](../references#cv-h01). IDS alternative: [U3-31L1ACP Rev.1.2](https://en.ids-imaging.com/store/u3-31l1acp-rev-1-2.html), [CV-H02 in References](../references#cv-h02).
 
 ### RGB Camera Calculation for 1 cm FOD {#rgb-camera-calculation-for-1-cm-fod}
+
+::: details UGREEN CM831 Calculation at 1 m Height (Interim)
+
+The UGREEN CM831 was used for interim testing at **1 m height** ([CV-H03](../references#cv-h03)). The integration script requests **1280 x 720 pixels**. Using the stated whole-image coverage of **0.5 m x 0.5 m**:
+
+$$
+W=L=500\ \mathrm{mm}
+$$
+
+$$
+\mathrm{GSD}_x=\frac{500}{1280}=0.390625\ \mathrm{mm/pixel},\qquad
+\mathrm{GSD}_y=\frac{500}{720}\approx0.694444\ \mathrm{mm/pixel}
+$$
+
+For a **1 cm x 1 cm object**:
+
+$$
+n_x=\frac{10}{0.390625}=25.6\ \mathrm{pixels},\qquad
+n_y=\frac{10}{0.694444}=14.4\ \mathrm{pixels}
+$$
+
+The object would span about **26 x 14 pixels before resizing**. This calculation uses the stated ground coverage, with separate horizontal and vertical scales. The coverage and image mapping need checking against a measured ground target.
+
+:::
+
+::: details e-CAM56_CUONX Calculation at 5 m Height (Proposed Final Setup)
 
 The requirement is to detect FOD as small as **1 cm at a flight height of 5 m**. The e-CAM56_CUONX has 2472 × 2064 active pixels. The supplied lens has a horizontal field of view of 85.64° and a vertical field of view of 72.25° ([CV-H01](../references#cv-h01)).
 
@@ -81,7 +107,9 @@ $$
 
 A 1 cm object would span only about 3 pixels at full resolution, so reliable detection is not yet confirmed. Resizing the full frame before anomaly detection can reduce this further. Enlarging a crop cannot recover lost detail.
 
-#### Lens Needed for the Intended 2 m × 2 m View {#lens-needed-for-the-intended-2-m-×-2-m-view}
+<span id="lens-needed-for-the-intended-2-m-×-2-m-view" class="report-anchor" aria-hidden="true"></span>
+
+**Lens Needed for the Intended 2 m × 2 m View**
 
 The camera has a 2.74 µm pixel pitch and an M12 lens holder ([CV-H01](../references#cv-h01)). Its active sensor height is:
 
@@ -113,25 +141,73 @@ $$
 n_{\mathrm{1\,cm}}=\frac{10}{0.979}\approx10.2\ \mathrm{pixels}
 $$
 
-A 1 cm object would span about **10 pixels before resizing**. This improves the sampling compared with the supplied wide-angle lens, but does not prove reliable detection. The anomaly stage must retain enough detail to identify the object before cropping.
-
 The selected lens, distortion, focus, motion blur, lighting and model performance still need testing with real 1 cm FOD at 5 m. The coverage above is an estimate, not a calibrated measurement.
 
 ARGUS is intended to fly at 15 km/h. Short exposure times will be needed to limit motion blur. Camera settings and processing performance will be tested on Jetson after the interim stage.
 
-::: details IDS Camera Calculation
+At 5 m, a 1 cm x 1 cm object spans about **10 x 10 pixels** with this camera and the proposed lens. This may be too small for the current PatchCore setup to detect reliably after resizing the full image. The proposed PatchCore modification uses overlapping tiles, as explained in [Section 6.1.2](#patchcore-5m-plan) under Future Works.
 
 :::
 
-### Night Operation Lighting {#night-operation-lighting}
+::: details IDS U3-31L1ACP Calculation at 5 m Height (Proposed Final Setup)
 
-A light source will be attached below the drone, near the RGB camera, and automatically turned on during night operation to illuminate the inspection surface.
+The IDS U3-31L1ACP has **4128 x 3008 pixels**, a **2.74 micrometre pixel pitch** and a **1/1.1-inch sensor** ([CV-H02](../references#cv-h02)). Use the same requirement: **1 cm FOD, 5 m height and a 2 m x 2 m view**. Assume a level camera pointing down at flat ground.
+
+**1. Calculate the sensor size**
+
+$$
+S_x=4128(0.00274)=11.31072\ \mathrm{mm},\qquad
+S_y=3008(0.00274)=8.24192\ \mathrm{mm}
+$$
+
+**2. Find the lens needed for 2 m vertical coverage**
+
+$$
+f=\frac{H S_y}{L}
+=\frac{5000(8.24192)}{2000}
+=20.6048\ \mathrm{mm}
+$$
+
+With this focal length, a centred **3008 x 3008 pixel crop** covers **2 m x 2 m** without stretching the image.
+
+$$
+\mathrm{GSD}=\frac{2000}{3008}=0.6649\ \mathrm{mm/pixel},\qquad
+n_{\mathrm{1\,cm}}=\frac{10}{0.6649}\approx15.04\ \mathrm{pixels}
+$$
+
+**3. Check a 20 mm lens**
+
+A 20 mm lens is close to the calculated focal length. The lens must cover the 1/1.1-inch sensor, fit the camera's lens mount and focus at 5 m. A lens model has not been selected.
+
+$$
+W=\frac{5000(11.31072)}{20}=2827.68\ \mathrm{mm},\qquad
+L=\frac{5000(8.24192)}{20}=2060.48\ \mathrm{mm}
+$$
+
+The full frame covers **2.83 m x 2.06 m**. A centred **3008 x 3008 pixel crop** covers **2.06 m x 2.06 m**.
+
+$$
+\mathrm{GSD}=\frac{2060.48}{3008}=0.685\ \mathrm{mm/pixel},\qquad
+n_{\mathrm{1\,cm}}=\frac{10}{0.685}\approx14.60\ \mathrm{pixels}
+$$
+
+At 5 m, a 1 cm x 1 cm object spans about **15 x 15 pixels** with this camera and the proposed lens. This may be too small for the current PatchCore setup to detect reliably after resizing the full image. The proposed PatchCore modification uses overlapping tiles, as explained in [Section 6.1.2](#patchcore-5m-plan) under Future Works. Actual 1 cm detection still needs testing.
+
+:::
+
+### Proposed Night Operation Lighting {#night-operation-lighting}
+
+The proposed setup includes a light below the drone, near the RGB camera, that will turn on automatically during night operation to illuminate the inspection surface.
 
 <CvFigure n="43" />
 
 ### Computer Vision System Architecture - Parallel {#computer-vision-system-architecture-parallel}
 
-The RGB camera captures images continuously, which then pass through the system. The captured images first enter a PatchCore anomaly detection model. For each captured frame, the system requests the drone's X and Y coordinates and orientation (quaternion) from navigation. Coordinate extraction finds the object's ground offset from the image. Heading from the quaternion aligns this offset with the map before adding the drone's X and Y. If there is no anomaly on the road, it continues the inspection. If an anomalous region is identified, the model produces a bounding box and crops it. The system then sends it to the second layer. The second layer consists of 2 models: a YOLO object detector and a U-Net segmentation model for runway cracks, which runs in parallel. The cropped image is then resized to each model's input size and fed into that model. If any cracks are detected, the system sends them to the base. On the YOLO side, if it detects a FOD object, it performs more localised coordinate extraction and sends the coordinates to the UGV for extraction. If neither the crack detection model nor YOLO identifies it, the system sends it to the base station as it is an anomaly that neither model identifies. The models will be explained in more depth in the later sections. The quaternion-to-heading conversion, 2D rotation and precise FOD coordinate calculations are explained in [FOD & Crack Coordinate Retrieval](#coordinate-retrieval).
+The following describes the proposed onboard flow. The model pipeline was tested on a laptop using simulated navigation coordinates and local messages. Live navigation and communication links are pending.
+
+The RGB camera captures images continuously, which then pass through the system. The captured images first enter a PatchCore anomaly detection model. For each captured frame, the system requests the drone's X and Y coordinates and orientation (quaternion) from navigation. Coordinate extraction finds the object's ground offset from the image. Heading from the quaternion aligns this offset with the map before adding the drone's X and Y. If there is no anomaly on the road, it continues the inspection. If an anomalous region is identified, the model produces a bounding box and crops it. The system then sends it to the second layer. The second layer consists of 2 models: a YOLO object detector and a U-Net segmentation model for runway cracks. Both run in parallel. The cropped image is then resized to each model's input size and fed into that model. If any cracks are detected, the system sends them to the base. On the YOLO side, if it detects a FOD object, it performs more localised coordinate extraction and sends the coordinates to the UGV for extraction. If neither the crack detection model nor YOLO identifies it, the system sends it to the base station as it is an anomaly that neither model identifies. The models will be explained in more depth in the later sections. The quaternion-to-heading conversion, 2D rotation and precise FOD coordinate calculations are explained in [FOD & Crack Coordinate Retrieval](#coordinate-retrieval).
+
+The base station is the control room where operators can receive updates from ARGUS or HUNTER and take the necessary actions. In the proposed vision system, crack detections and unknown anomalies will be sent there for operator review. The base-station communication link is planned for the final setup.
 
 <CvFigure n="4" />
 
@@ -150,7 +226,7 @@ GFLOPs describe the amount of computation. Measured laptop inference times are r
 
 ### Computer Vision System Architecture - Sequential 1 (Fallback) {#computer-vision-system-architecture-sequential-1-fallback}
 
-There would be cases when Jetson NX resources are scarce due to multiple subsystems running, such as navigation and communication systems. They would all be competing for GPU resources, memory bandwidth and power. Hence, a fallback architecture was designed for low-resource scenarios. This pipeline runs YOLO and Crack sequentially instead of in parallel, reducing resource consumption. Both models check every crop.
+Jetson NX resources may be limited when vision, navigation and communication run together. They would all be competing for GPU resources, memory bandwidth and power. Hence, a fallback architecture was designed for low-resource scenarios. This pipeline runs YOLO and Crack sequentially instead of in parallel, reducing resource consumption. Both models check every crop. This fallback was tested on the laptop and still needs testing on Jetson.
 
 <CvFigure n="6" />
 
@@ -205,7 +281,7 @@ Therefore, we use a U-Net segmentation model with a ResNet34 encoder. The croppe
 
 #### Navigation Data: Drone Position and Heading {#drone-position-and-quaternion-worked-example}
 
-Navigation provides the drone's X and Y position and orientation as a quaternion ([CV-N01](../references#cv-n01)). The position gives the starting coordinates. Heading from the quaternion is used to rotate the ground offset into map directions.
+For the proposed navigation link, the vision system will receive the drone's X and Y position and a quaternion describing its orientation ([CV-N01](../references#cv-n01)). The position gives the starting coordinates. Heading from the quaternion is used to rotate the ground offset into map directions.
 
 The example below assumes a level camera pointing down at flat ground. These are example values, not flight measurements.
 
@@ -255,7 +331,7 @@ The calculation below maps the bounding box back to the original image, finds it
 
 <CvFigure n="36" />
 
-Steps 1-5 in the image give a ground offset of approximately **-0.172 m along image-right and -0.056 m along image-down**. Step 6 in the image directly adds these to the drone position, assuming those image directions already match the map axes. When the camera rotates with ARGUS, use the heading correction below before adding the drone position.
+Use Steps 1-5 in the image to obtain the ground offset: approximately **-0.172 m along image-right and -0.056 m along image-down**. For the rotated-camera example here, replace Step 6 in the image with Steps 4 and 5 below. These apply the heading correction before adding the drone position.
 
 <div class="cv-supporting-evidence pose-worked-example">
 
@@ -310,15 +386,15 @@ This combines the image-based extraction with navigation data in one calculation
 
 ### ARGUS's Additional Vision Safety Feature {#thermal-safety}
 
-ARGUS also uses a separate thermal detection pipeline to monitor potential obstacles. It uses YOLO11s with the `Thermal_yolo11s.pt` weights to detect people and birds. Live thermal integration is pending.
+A separate thermal detection pipeline is proposed to monitor potential obstacles. YOLO11s with the `Thermal_yolo11s.pt` weights was tested separately on thermal images of people and birds. Live thermal integration is pending.
 
 #### Thermal Detection for Safety {#thermal-detection-for-safety}
 
-The thermal detection layer was implemented as a safety layer in addition to obstacle avoidance. The LIDAR mounted can only detect obstacles at the height the drone is flying, leaving the road below outside its scanning plane. The thermal camera is used instead of a secondary RGB camera as it can operate in poor lighting.
+The thermal detection layer is proposed as an additional safety feature alongside obstacle avoidance. The LIDAR mounted can only detect obstacles at the height the drone is flying, leaving the road below outside its scanning plane. The thermal camera is used instead of a secondary RGB camera as it can operate in poor lighting.
 
 <CvFigure n="37" />
 
-Hence, the thermal camera is mounted along with the RGB camera below, pointed at an approximate angle of 45 degrees. This camera is positioned such that it will detect the area ahead on the road for potential obstacles such as people, birds and other heat emitters. If a thermal object is detected, the system is intended to stop and hold until the obstacle is cleared or gone, which reduces the risk of collision. This thermal sub-system operates independently from the RGB FOD detection pipeline. In the current prototype, it's simulated in software for testing, and some results are shown below.
+The thermal camera is planned to be mounted below the drone at about 45 degrees to view the road ahead. It will be used to detect people and birds. If a target is detected, the proposed response is to stop and hold until the obstacle clears. The thermal pipeline is intended to run separately from RGB inspection. The stop-and-hold response is simulated in the current prototype. Linking it to the flight controller is future work.
 
 The thermal camera is also planned to provide a live feed for manual override. If the drone encounters a problem at night, the operator can use this view to guide ARGUS back. Live-feed integration and testing are future work.
 
@@ -326,11 +402,13 @@ The thermal camera is also planned to provide a live feed for manual override. I
 
 #### Thermal Camera Selection {#thermal-camera-selection}
 
-This thermal camera provides the wide field of view needed for forward safety monitoring while remaining compact and lightweight. The camera uses a 256 x 196 thermal sensor with a 4 mm F/1.1 lens and a 45.5 degrees x 33.5 degrees field of view. This ensures a large area is monitored for people, birds and possibly other potential obstacles. The module operates at 25 Hz and supports interfaces such as MIPI and USB 2.0. It has a low power consumption, making it suitable for drone use.
+The proposed thermal camera has a wide field of view for forward safety monitoring and is compact and lightweight. The camera uses a 256 x 196 thermal sensor with a 4 mm F/1.1 lens and a 45.5 degrees x 33.5 degrees field of view. Its coverage and detection performance still need testing on the drone. The module operates at 25 Hz and supports interfaces such as MIPI and USB 2.0. It has a low power consumption, making it suitable for drone use.
 
 <CvFigure n="40" />
 
-### Overall Onboard Architecture {#overall-onboard-architecture}
+### Proposed Overall Onboard Architecture {#overall-onboard-architecture}
+
+This is the overall proposed architecture for the Jetson NX. It may change after the hardware is obtained and the appropriate benchmarks are tested. If the Jetson cannot handle all the systems, a Raspberry Pi will also be used to share the workload.
 
 <CvFigure n="41" />
 
@@ -354,7 +432,7 @@ PatchCore produces an image-level anomaly score and a heatmap showing the unusua
 <CvFigure n="11" />
 </div>
 
-PatchCore also serves as a fallback mechanism for previously unseen objects. If PatchCore detects an anomaly that is unrecognised by either YOLO or U-Net (crack detector), the system can store it as an unknown anomaly and send it to the base station for further investigation.
+PatchCore also flags previously unseen objects. If neither YOLO nor U-Net identifies a detected anomaly, it is stored as an unknown anomaly. In the proposed onboard system, it will be sent to the base station for inspection. Current transmission is simulated using local messages.
 
 ### YOLO FOD Detection & Dataset Development {#yolo-fod-detection}
 
@@ -644,103 +722,67 @@ These are laptop processing rates, not camera capture rates. Live capture, displ
 
 ## 6. Discussion of Future Works {#a6-problems-project-plan}
 
-### Semester 2 Development Plan {#semester-2-development-plan}
+### 6.1 Semester 2 Development Plan {#semester-2-development-plan}
 
-#### CV System Future Works {#cv-system-future-works}
+<span id="cv-system-future-works" class="report-anchor" aria-hidden="true"></span>
 
-::: details New FOD Dataset at 5 m
+::: details 6.1.1 FOD Dataset and Crack Model Training
 
-Replace the current FOD dataset with a new dataset taken 5 m above the test ground using the RGB camera. Keep training and test capture sessions separate.
-
-:::
-
-::: details Collect Real FOD Images
-
-Add FOD items to the test ground and collect a dataset to increase YOLO robustness and reduce reliance on synthetic images.
+- **Collect a new dataset:** Replace the current FOD dataset with a new dataset taken 5 m above the test ground using the RGB camera. Keep training and test capture sessions separate.
+- **Capture real FOD objects:** Add FOD items to the test ground and collect a dataset to increase YOLO robustness and reduce reliance on synthetic images.
+- **Train for rough surfaces:** Reduce U-Net false detections on rough surfaces using suitable training data, including crack-free test-ground images. Evaluate crack recall, Dice/IoU and false detections on separate test images.
 
 :::
 
-::: details Test PatchCore at 5 m
+<span id="patchcore-5m-plan" class="report-anchor" aria-hidden="true"></span>
 
-Test how often PatchCore misses FOD or cracks at 5 m, extending the current 1 m tests.
+::: details 6.1.2 PatchCore for 1 cm FOD at 5 m (Proposed)
 
-:::
+The workflow below is planned for PatchCore inspection at **5 m height** using the IDS camera. The 3008 x 3008 image is a square crop from the full 4128 x 3008 frame. Each tile keeps the original pixel scale.
 
-::: details Improve Crack Detection on Rough Surfaces
+<CvFigure n="46" />
 
-Reduce U-Net false detections on rough surfaces using suitable training data, including crack-free test-ground images. Evaluate crack recall, Dice/IoU and false detections on separate test images.
+For the proposed final setup at 5 m, a 1 cm object spans only about 10 or 15 pixels with the e-CAM or IDS camera and lens setups. The proposed change is to divide the inspection image into overlapping 512 x 512 pixel tiles, each processed individually by PatchCore for anomaly detection. Each tile's anomaly heatmap will then be mapped back to the inspection image using its tile coordinate offsets. The heatmaps will be combined to identify anomalous regions. These regions will be marked and cropped directly from the original camera image, accounting for any inspection-crop offset, before continuing through the remaining stages of the selected architecture.
 
-:::
-
-::: details Test 1 cm FOD Detection During Flight
-
-Verify 1 cm FOD detection through the full pipeline at 5 m and 15 km/h, during daylight and night operation. Test the selected lens, exposure settings and light.
+Compare the current model with a dual-branch model using different feature layers. Measure 1 cm FOD detection, false alarms, processing time and GPU memory before selecting the final setup. This is a proposed configuration and has not been tested.
 
 :::
 
-::: details Set Detection Targets and Measure Coordinate Error
+::: details 6.1.3 Detection and Coordinate Testing
 
-Define the target detection performance and puddle size target. Test real puddles and measure coordinate error using camera calibration, navigation data and gimbal angles.
-
-:::
-
-::: details Integrate the Pipeline on Jetson NX
-
-Complete system integration using Jetson NX following the pipeline.
+- **Check PatchCore misses:** Test how often PatchCore misses FOD or cracks at 5 m, extending the current 1 m tests.
+- **Test detection during flight:** Verify 1 cm FOD detection through the full pipeline at 5 m and 15 km/h, during daylight and night operation. Test the selected lens, exposure settings and light.
+- **Set targets and check coordinate error:** Define the target detection performance and puddle size target. Test real puddles and measure coordinate error using camera calibration, navigation data and gimbal angles.
 
 :::
 
-::: details Test RGB and Thermal Cameras
+::: details 6.1.4 Camera Setup, Gimbal and Night Lighting
 
-Test both RGB and thermal cameras with the models.
-
-:::
-
-::: details Add and Test the Camera Gimbal
-
-Add and test a gimbal for the RGB inspection camera, using flight controller attitude data to compensate for tilt and maintain a nadir view. Include the gimbal angles in coordinate retrieval.
+- **Test the cameras:** Test both RGB and thermal cameras with the models.
+- **Add the gimbal:** Add and test a gimbal for the RGB inspection camera, using flight controller attitude data to compensate for tilt and maintain a nadir view. Include the gimbal angles in coordinate retrieval.
+- **Test night lighting:** Attach and test the light below the drone near the RGB camera for night operation.
 
 :::
 
-::: details Test Night Operation Lighting
+::: details 6.1.5 Jetson Integration and Processing Tests
 
-Attach and test the light below the drone near the RGB camera for night operation.
-
-:::
-
-::: details Connect Cameras to Jetson NX
-
-Implement the link between the cameras and the vision system in Jetson NX.
+- **Integrate the pipeline:** Complete system integration using Jetson NX following the pipeline.
+- **Connect the cameras:** Implement the link between the cameras and the vision system in Jetson NX.
+- **Measure processing time:** Test the latency for each model and the entire integrated system on Jetson alongside navigation and communication. Check that captured frames do not build up in a processing queue.
 
 :::
 
-::: details Link Navigation Coordinates to Vision
+::: details 6.1.6 Thermal Safety and Live Feed
 
-Send current drone coordinates from ROS 2 navigation to the vision system.
-
-:::
-
-::: details Link Thermal Detection to Emergency Stops
-
-Link thermal detection to the flight controller for emergency stops.
+- **Connect emergency stops:** Link thermal detection to the flight controller for emergency stops.
+- **Test the thermal live feed:** Integrate and test the thermal live feed for manual override and guiding ARGUS back at night. Check image clarity and video delay.
 
 :::
 
-::: details Add the Thermal Live Feed
+::: details 6.1.7 Navigation and FOD Coordinate Transmission
 
-Integrate and test the thermal live feed for manual override and guiding ARGUS back at night. Check image clarity and video delay.
-
-:::
-
-::: details Prevent Repeated FOD Coordinates
-
-Set up a program to prevent repeated FOD coordinates from being sent (work with the UGV side).
-
-:::
-
-::: details Measure Processing Time on Jetson
-
-Test the latency for each model and the entire integrated system on Jetson alongside navigation and communication. Check that captured frames do not build up in a processing queue.
+- **Link navigation data:** Send current drone coordinates from ROS 2 navigation to the vision system.
+- **Prevent repeated coordinates:** Set up a program to prevent repeated FOD coordinates from being sent (work with the UGV side).
 
 :::
 

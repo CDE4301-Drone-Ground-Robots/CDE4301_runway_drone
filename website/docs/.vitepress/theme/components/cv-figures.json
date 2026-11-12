@@ -267,5 +267,11 @@
     "width": 1672,
     "height": 941,
     "caption": "AI-generated illustration of ARGUS coordinate retrieval: convert the image offset to metres, rotate it into map axes using heading, then add the drone position. The example assumes a level, downward-facing camera."
+  },
+  "46": {
+    "src": "/report-assets/computer-vision/patchcore-5m-tiling-workflow.svg",
+    "width": 720,
+    "height": 560,
+    "caption": "Proposed PatchCore workflow for 1 cm FOD at 5 m using the IDS inspection crop. Tiling preserves the original pixel scale. Testing is pending."
   }
 }

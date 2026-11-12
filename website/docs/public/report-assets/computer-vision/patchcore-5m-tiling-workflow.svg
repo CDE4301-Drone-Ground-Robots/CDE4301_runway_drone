@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="560" viewBox="0 0 720 560" role="img" aria-labelledby="title desc">
+<title id="title">Proposed PatchCore tiling workflow at 5 m</title>
+<desc id="desc">A 3008 by 3008 IDS inspection crop is divided into overlapping 512 by 512 tiles. PatchCore produces anomaly heatmaps per tile, which are mapped back using tile offsets to form a full-image heatmap.</desc>
+<rect width="720" height="560" rx="12" fill="#08090b"/>
+<defs><marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M1 1 L6 4 L1 7" fill="none" stroke="#bfc5cd" stroke-width="1.5"/></marker></defs>
+<g fill="#f2f3f5" font-family="Arial, sans-serif" text-anchor="middle">
+<text x="360" y="54" font-size="22" font-weight="600">1. IDS Inspection Crop</text>
+<text x="360" y="86" font-size="18" fill="#c7cbd1">3008 x 3008 pixels</text>
+<path d="M360 108 V144" stroke="#bfc5cd" stroke-width="2" marker-end="url(#arrow)"/>
+<text x="360" y="190" font-size="22" font-weight="600">2. Divide into Overlapping Tiles</text>
+<text x="360" y="222" font-size="18" fill="#c7cbd1">512 x 512 pixels, 50% overlap</text>
+<path d="M360 244 V280" stroke="#bfc5cd" stroke-width="2" marker-end="url(#arrow)"/>
+<text x="360" y="326" font-size="22" font-weight="600">3. PatchCore Anomaly Detection</text>
+<text x="360" y="358" font-size="18" fill="#c7cbd1">Detect anomalies and generate a heatmap for each tile</text>
+<path d="M360 380 V416" stroke="#bfc5cd" stroke-width="2" marker-end="url(#arrow)"/>
+<text x="360" y="462" font-size="22" font-weight="600">4. Map Anomalies Back to the Inspection Crop</text>
+<text x="360" y="494" font-size="18" fill="#c7cbd1">Use tile offsets to merge heatmaps at the original crop resolution</text>
+</g>
+</svg>

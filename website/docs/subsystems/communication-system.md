@@ -29,6 +29,10 @@ ARGUS UAV and HUNTER UGV are designed to work collaboratively for FOD detection 
 
 The communication subsystem was initially developed and tested using ROS 2 over a local WI-FI network. This provides a preliminary communication framework that’s needed before integration with the actual hardware and choosing a suitable communication method.
 
+### Base Station {#base-station}
+
+The base station is the control room where operators can receive updates from ARGUS or HUNTER and take the necessary actions. The base-station communication link is planned for the final setup.
+
 ### Requirements and Considerations {#requirements}
 
 The operational range must be up to 5 km, as that’s the runway length. The 917-925 MHz band was initially considered; final frequency and power settings must meet the applicable IMDA requirements. The communication device must support live video transmission and be small and lightweight to fit ARGUS’s payload limits. The thermal live feed is intended for manual override, allowing the operator to guide ARGUS back at night if the drone encounters a problem. Live-feed integration and testing are pending.
@@ -160,35 +164,38 @@ The 100-message benchmark used ROS 2 Jazzy with the publisher and subscriber on 
 
 ## 6. Discussion of Future Works {#a6-problems-project-plan}
 
-### Limitations and Future Works {#future-work}
+### 6.1 Limitations and Future Works {#future-work}
 
-::: details Select and Test Long-Range Communication Hardware
+::: details 6.1.1 Long-Range Communication Hardware
 
-The current communication relies on a local Wi-Fi network, which has not been tested for the full runway. The next step is to confirm long-range RF hardware that meets IMDA regulations and test it at the required range.
-
-:::
-
-::: details Link Vision to Communication
-
-ARGUS communication scripts are still not linked to the vision system. The next stage is to integrate with the onboard vision system to automate C2 alerts.
+- **Current limitation:** The current communication relies on a local Wi-Fi network, which has not been tested for the full runway.
+- **Select and test the radio:** Confirm long-range RF hardware that meets IMDA regulations and test it at the required range.
 
 :::
 
-::: details Add Receipt Acknowledgements and Communication-Loss Detection
+::: details 6.1.2 Vision and Communication Integration
 
-Add a receipt acknowledgement carrying the threat ID, sequence-number tracking and communication-loss detection. The next queued alert will be sent after the matching receipt acknowledgement returns to ARGUS.
-
-:::
-
-::: details Confirm and Test the Thermal Live Feed
-
-The thermal live-feed resolution, frame rate, bandwidth and delay still need to be confirmed and tested.
+- **Link the scripts:** ARGUS communication scripts are still not linked to the vision system. Integrate with the onboard vision system to automate C2 alerts.
 
 :::
 
-::: details Protect Transmitted Messages
+::: details 6.1.3 Queue Delivery and Communication-Loss Detection
 
-Add message authentication and encryption to protect transmitted FOD information.
+- **Confirm receipt:** Add a receipt acknowledgement carrying the threat ID.
+- **Release the next alert:** Send the next queued alert after the matching receipt acknowledgement returns to ARGUS.
+- **Detect missing messages:** Add sequence-number tracking and communication-loss detection.
+
+:::
+
+::: details 6.1.4 Thermal Live-Feed Testing
+
+- **Set and test the video settings:** The thermal live-feed resolution, frame rate, bandwidth and delay still need to be confirmed and tested.
+
+:::
+
+::: details 6.1.5 Message Security
+
+- **Protect FOD information:** Add message authentication and encryption to protect transmitted FOD information.
 
 :::
 

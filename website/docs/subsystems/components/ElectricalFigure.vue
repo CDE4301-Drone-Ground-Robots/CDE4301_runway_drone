@@ -9,12 +9,12 @@ const figure = defineProps<{ n: string; src: string; width: number; height: numb
   class="cv-figure"
   :style="{ maxWidth: figure.cardWidth ? figure.cardWidth + 'px' : '100%' }"
  >
-  <a class="cv-figure-image" :href="withBase(figure.src)" target="_blank" rel="noopener" :aria-label="'Open Figure ED-' + figure.n + ' at full resolution'" :style="{backgroundImage:'linear-gradient(rgba(5,9,15,.91),rgba(5,9,15,.95)),url(' + withBase('/runway-night-photo.png') + ')'}">
+  <a class="cv-figure-image" :href="withBase(figure.src)" :aria-label="'Open Figure ED-' + figure.n + ' at full resolution'" :style="{backgroundImage:'linear-gradient(rgba(5,9,15,.91),rgba(5,9,15,.95)),url(' + withBase('/runway-night-photo.png') + ')'}">
    <span v-if="figure.cropHeight" class="cv-figure-crop" :style="{aspectRatio: figure.width + '/' + figure.cropHeight}">
     <img :src="withBase(figure.src)" :alt="figure.caption" :width="figure.width" :height="figure.height" :style="{maxWidth: 'min(100%, ' + figure.width + 'px)'}" loading="lazy" decoding="async">
    </span>
    <img v-else :src="withBase(figure.src)" :alt="figure.caption" :width="figure.width" :height="figure.height" :style="{maxWidth: 'min(100%, ' + figure.width + 'px)'}" loading="lazy" decoding="async">
-   <span class="cv-figure-open" aria-hidden="true">{{ figure.cropHeight ? 'View original' : 'View full size' }} &#8599;</span>
+   <span class="cv-figure-open" aria-hidden="true">{{ figure.cropHeight ? 'View original' : 'View full size' }}</span>
   </a>
   <figcaption><strong>Figure ED-{{ String(figure.n).padStart(2,'0') }}</strong><span>{{ figure.caption }}</span></figcaption>
  </figure>

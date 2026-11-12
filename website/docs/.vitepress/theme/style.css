@@ -363,3 +363,14 @@ html:not(.dark) .hero h1 .hero-wordmark{--argus-rose-glow:rgba(226,160,140,.32);
 
 /* Headings include their section numbers; avoid a second automatic number. */
 .vp-doc .cv-report.rubric-report>h2::before{content:none}
+
+/* A small pulse marks closed report dropdowns without moving their contents. */
+@keyframes report-dropdown-pulse{
+ 0%,100%{border-color:rgba(201,154,141,.45);box-shadow:0 0 0 1px rgba(201,154,141,.12)}
+ 50%{border-color:rgba(201,154,141,.85);box-shadow:0 0 0 1px rgba(201,154,141,.3),0 0 9px rgba(201,154,141,.16)}
+}
+.vp-doc details:is(.custom-block,.mechanical-flight-case):not([open]){animation:report-dropdown-pulse 3.5s ease-in-out infinite}
+.vp-doc details:is(.custom-block,.mechanical-flight-case):is(:hover,:focus-within){animation-play-state:paused}
+html:has(.report-image-viewer[open]){overflow:hidden}
+@media(prefers-reduced-motion:reduce){.vp-doc details:is(.custom-block,.mechanical-flight-case):not([open]){animation:none}}
+@media print{.vp-doc details:is(.custom-block,.mechanical-flight-case){animation:none!important;box-shadow:none!important}}
