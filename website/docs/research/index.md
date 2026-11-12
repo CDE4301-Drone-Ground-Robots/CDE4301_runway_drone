@@ -47,7 +47,7 @@ Based on interviews conducted by the [FOD Hunter Team](https://cde4301-drone-gro
 
 ### Stakeholder Interview Findings Relevant to UAV Detection
 
-Based on the stakeholder interviews conducted by the FOD Hunter Team, the FOD Argus Team categorised the primary research findings into six key areas relevant to UAV detection and scanning. The findings and their corresponding insights are summarised in the table below ([see full transcripts here](../appendices#stakeholder-interview-transcripts)).
+The FOD Argus Team categorised the primary research findings into six key areas relevant to UAV detection and scanning. The findings and their corresponding insights are summarised in the table below ([see full transcripts here](../appendices#stakeholder-interview-transcripts)).
 
 <ul class="research-interview-legend" aria-label="Interview insight categories">
 <li class="insight-fod">Types and characteristics of FOD</li>
