@@ -6,6 +6,14 @@ title: References
 
 # References
 
+## Secondary Research Sources
+
+### SR-01 - CNA video on Changi Airport FOD detection {#research-cna-01}
+
+CNA. **Video about FOD detection and the iFerret system at Changi Airport**. YouTube, video ID YigBVMgCgVA.
+
+[Watch the CNA video](https://www.youtube.com/watch?v=YigBVMgCgVA). Source for the secondary research findings on FOD types, detection capability, AI-based detection, operational efficiency and human verification.
+
 ## Mechanical Design Sources
 
 The numbers below preserve the citations in Section 10 of the supplied *Interim Report.docx*. The supplied document contains no bibliography. Full bibliographic details must be completed manually; these entries do not identify verified sources.
@@ -91,6 +99,46 @@ The Straits Times. **ST Explains: Why is February the windiest month in Singapor
 ### [21] - PETG toughness and impact resistance {#md-ref-21}
 
 **Bibliographic details missing; manual completion required.** Citation preserved from “3D-Printed Carbon Fiber Tube Clamps” in the supplied *Interim Report.docx*. The document cites [21] but does not include the corresponding bibliography entry.
+
+## Primary Research Sources
+
+The numbers below preserve the citations in the supplied *Interim Report.docx*. The document contains no corresponding bibliography. Full bibliographic details must be completed manually; these entries do not identify verified sources.
+
+### [22] - FAA estimate of FOD costs {#research-ref-22}
+
+**Bibliographic details missing; manual completion required.** Referenced in Primary Research for the cost estimate in 2020 dollars.
+
+### [23] - El-Sayed estimate of FOD costs {#research-ref-23}
+
+**Bibliographic details missing; manual completion required.** Referenced in Primary Research for annual global direct and indirect FOD costs.
+
+### [24] - Runway FOD damage, detection and removal {#research-ref-24}
+
+**Bibliographic details missing; manual completion required.** Referenced in Primary Research for runway FOD damage, research, and manual detection and removal.
+
+### [25] - Air France Flight 4590 accident {#research-ref-25}
+
+**Bibliographic details missing; manual completion required.** Referenced in Primary Research for the Concorde accident.
+
+### [26] - Postponed runway inspection {#research-ref-26}
+
+**Bibliographic details missing; manual completion required.** Referenced in Primary Research for the runway inspection postponed due to a fire drill.
+
+### [27] - Runway FOD safety and manual clearance {#research-ref-27}
+
+**Bibliographic details missing; manual completion required.** Referenced in Primary Research for aviation safety concerns and manual FOD detection and removal.
+
+### [28] - Singapore manpower and manpower optimisation {#research-ref-28}
+
+**Bibliographic details missing; manual completion required.** Referenced in Primary Research for Singapore's fertility rate and MINDEF's manpower concerns.
+
+### [29] - SAF automated vehicles and AI-enabled drones {#research-ref-29}
+
+**Bibliographic details missing; manual completion required.** Referenced in Primary Research for automation trials at SAF air bases and runway damage assessment.
+
+### [30] - Projected SAF manpower reduction {#research-ref-30}
+
+**Bibliographic details missing; manual completion required.** Referenced in Primary Research for the projected manpower reduction by 2030.
 
 ## Electrical Design Sources
 
