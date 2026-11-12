@@ -12,7 +12,9 @@ const reportSidebar = [
   { text: 'Project scope', link: '/scopes' },
   { text: 'Research', link: '/research/', collapsed: false, items: [
    { text: 'Primary Research', link: '/research/#primary-research' },
-   { text: 'Secondary Research', link: '/research/#secondary-research' }
+   { text: 'Secondary Research', link: '/research/#secondary-research', collapsed: false, items: [
+    { text: 'Problem Statement and Scope', link: '/research/#problem-statement-and-scope' }
+   ] }
   ] },
   { text: 'System architecture', link: '/report/system-architecture' }
  ] },
@@ -50,7 +52,13 @@ const reportSidebar = [
  })) },
  { text: 'DEVELOPMENT & SOURCES', items: [
   { text: 'Timeline', link: '/timeline' },
-  { text: 'References', link: '/references' }
+  { text: 'References', link: '/references' },
+  { text: 'Appendices', link: '/appendices', collapsed: false, items: [
+   { text: 'Appendix A: Industry Partner', link: '/appendices#appendix-a' },
+   { text: 'Appendix B: RSAF Technician', link: '/appendices#appendix-b' },
+   { text: 'Appendix C: RSAF Air Traffic Controller', link: '/appendices#appendix-c' },
+   { text: 'Appendix D: CAAS Officer', link: '/appendices#appendix-d' }
+  ] }
  ] }
 ]
 type ReportSidebarItem = { text: string; link?: string; items?: ReportSidebarItem[]; collapsed?: boolean }
@@ -101,7 +109,7 @@ export default defineConfig({
    { text: 'Report', link: '/report/', activeMatch: '/(report/|scopes)' },
    { text: 'Timeline', link: '/timeline' }
   ],
-  sidebar: Object.fromEntries(['/report/', '/subsystems/', '/research/', '/scopes', '/timeline', '/references'].map(path => [path, path === '/report/' ? continuousSidebar(reportSidebar) : reportSidebar])),
+  sidebar: Object.fromEntries(['/report/', '/subsystems/', '/research/', '/scopes', '/timeline', '/references', '/appendices'].map(path => [path, path === '/report/' ? continuousSidebar(reportSidebar) : reportSidebar])),
   docFooter: { prev: false, next: false },
   search: {
    provider: 'local',

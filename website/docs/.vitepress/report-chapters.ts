@@ -8,7 +8,8 @@ export const reportChapters = [
  { id: 'computer-vision', title: 'Computer Vision Based Inspection and Safety System', path: '/subsystems/computer-vision' },
  { id: 'communication-system', title: 'Communication System', path: '/subsystems/communication-system' },
  { id: 'timeline', title: 'Timeline', path: '/timeline' },
- { id: 'references', title: 'References', path: '/references' }
+ { id: 'references', title: 'References', path: '/references' },
+ { id: 'appendices', title: 'Appendices', path: '/appendices' }
 ]
 
 export function reportAnchor(chapter: string, heading?: string) {

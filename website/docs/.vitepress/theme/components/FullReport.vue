@@ -11,10 +11,11 @@ import ComputerVision from '../../../subsystems/computer-vision.md'
 import Communication from '../../../subsystems/communication-system.md'
 import Timeline from '../../../timeline.md'
 import References from '../../../references.md'
+import Appendices from '../../../appendices.md'
 import { continuousReportLink, reportAnchor, reportChapters } from '../../report-chapters'
 
 const components = [ProjectScope, Research, SystemArchitecture,
- MechanicalDesign, ElectricalDesign, Navigation, ComputerVision, Communication, Timeline, References]
+ MechanicalDesign, ElectricalDesign, Navigation, ComputerVision, Communication, Timeline, References, Appendices]
 const report = ref<HTMLElement>()
 
 onMounted(async () => {
