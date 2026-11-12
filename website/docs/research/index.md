@@ -43,11 +43,11 @@ As shown in the Stakeholder power–interest map, the RSAF holds high power and 
 <figcaption>Stakeholder power–interest map.</figcaption>
 </figure>
 
-Based on interviews conducted by the [FOD Hunter Team](https://cde4301-drone-ground-robots.github.io/CDE4301_runway_patrol/report#sec-affected) with various stakeholders, the FOD Argus Team identified several challenges specifically related to FOD detection and the application of UAV technologies.
+Based on interviews conducted by the [FOD Hunter Team](https://cde4301-drone-ground-robots.github.io/CDE4301_runway_patrol/report#sec-affected) with various stakeholders, the FOD Argus Team identified some key insights that could help develop our FOD Argus solution.
 
 ### Stakeholder Interview Findings Relevant to UAV Detection
 
-The key findings are listed below ([see full transcripts here](../appendices#stakeholder-interview-transcripts)).
+Based on the stakeholder interviews conducted by the FOD Hunter Team, the FOD Argus Team categorised the primary research findings into six key areas relevant to UAV detection and scanning. The findings and their corresponding insights are summarised in the table below ([see full transcripts here](../appendices#stakeholder-interview-transcripts)).
 
 <ul class="research-interview-legend" aria-label="Interview insight categories">
 <li class="insight-fod">Types and characteristics of FOD</li>
@@ -89,7 +89,7 @@ The key findings are listed below ([see full transcripts here](../appendices#sta
 </table>
 </div>
 
-The stakeholder interviews highlighted several challenges associated with runway FOD detection. Common FOD includes small metallic objects, such as screws and rivets, as well as non-metallic debris, which can be difficult to identify through manual inspection. While existing UAV solutions have been used for runway inspections, they still rely on human visual detection.
+The stakeholder interviews highlighted several challenges associated with runway FOD detection. Common FOD includes small metallic objects as small as 2 cm, such as screws and rivets, as well as non-metallic debris, which can be difficult to identify through manual inspection. While existing UAV solutions have been used for runway inspections, they still rely on human visual detection.
 
 Stakeholders also highlighted limitations of vision-based systems, including false detections and reduced visibility under adverse weather conditions. Understanding these limitations allows the team to identify potential challenges and explore ways to address them during the development of the UAV's detection system.
 
