@@ -11,6 +11,7 @@ pageClass: subsystem-report-page
 import CommunicationFigure from './components/CommunicationFigure.vue'
 import CommunicationVideo from './components/CommunicationVideo.vue'
 import CommunicationDemo from '../.vitepress/theme/components/CommunicationDemo.vue'
+import CommsDashboardDemo from '../.vitepress/theme/components/CommsDashboardDemo.vue'
 </script>
 
 <div class="cv-report comms-report rubric-report">
@@ -83,13 +84,13 @@ Two radio communication methods were explored for the final setup:
 | FOD coordinates / JSON alerts | Suitable | Suitable |
 | Images and live video | Limited bandwidth, not suitable for the required live feed | Supports wireless images, video and telemetry |
 | Range for this project | 5 km requirement, not verified | 5 km requirement, not verified at the permitted power |
-| Selection | Not selected because it cannot support the required live feed | Selected for the final design |
+| Selection | Not preferred because it cannot support the required live feed | Preferred candidate, final selection pending validation |
 
 Specifications: [P900 V2](../references#com-h02) and [pMDDL2450](../references#com-h01). The listed RF output capabilities are hardware specifications, not permitted operating powers.
 
-The **pMDDL2450 was selected for the final design** because its broadband IP radio link supports FOD alerts, crack images and the thermal live feed. The P900 V2 is suitable for small serial messages but does not provide the bandwidth needed for the live feed.
+The **pMDDL2450 is the preferred candidate** because its broadband IP radio link supports FOD alerts, crack images and the thermal live feed. The final device will be confirmed after checking its permitted power configuration and testing the required range and video performance. The P900 V2 is suitable for small serial messages but does not provide the bandwidth needed for the live feed.
 
-For the selected **2.4 GHz UAV link**, IMDA specifies a maximum of **100 mW EIRP (20 dBm)**. The setup must be configured to operate below 100 mW EIRP, including antenna gain and cable losses. The radio's full 1 W setting will not be used under these licence-exempt conditions. Configuration and a reliable 5 km link still need testing at the permitted power ([COM-R02](../references#com-r02)). The 100 mW limit should not be assumed to apply to every frequency band.
+For the proposed **2.4 GHz UAV link**, IMDA specifies a maximum of **100 mW EIRP (20 dBm)**. The setup must be configured to operate below 100 mW EIRP, including antenna gain and cable losses. The radio's full 1 W setting will not be used under these licence-exempt conditions. Configuration and a reliable 5 km link still need testing at the permitted power ([COM-R02](../references#com-r02)). The 100 mW limit should not be assumed to apply to every frequency band.
 
 ### Interference in Shared Frequency Bands {#shared-frequency-interference}
 
@@ -188,7 +189,7 @@ The 100-message benchmark used ROS 2 Jazzy with the publisher and subscriber on 
 ::: details 6.1.1 Long-Range Communication Hardware
 
 - **Current limitation:** The current communication relies on a local Wi-Fi network, which has not been tested for the full runway.
-- **Configure and test the selected radio:** Configure the pMDDL2450 and antenna setup below 100 mW EIRP for the 2.4 GHz UAV link. Test message delivery and the live feed over the required 5 km range.
+- **Confirm the radio:** Evaluate the preferred pMDDL2450 and antenna setup below 100 mW EIRP for the 2.4 GHz UAV link. Test message delivery and the live feed over the required 5 km range before confirming the final device.
 - **Test interference:** Compare message delivery, receipt-acknowledgement delay and live-feed delay on quiet and busy channels, with alerts and video running together at the permitted power.
 
 :::
@@ -224,6 +225,37 @@ The 100-message benchmark used ROS 2 Jazzy with the publisher and subscriber on 
 - **Check old and repeated alerts:** Use mission IDs, threat IDs and timestamps to reject stale alerts and avoid adding the same target twice. Still acknowledge valid retransmissions so the sender can release the next alert.
 - **Protect private keys:** Keep private keys out of the shared code repository and restrict access on each device.
 - **Test the setup:** Check that unauthorised nodes and incorrect topic permissions are blocked. Test stale alerts and valid retries, and measure any added message delay.
+
+:::
+
+<span id="communication-monitoring-interface" class="report-anchor" aria-hidden="true"></span>
+
+::: details 6.1.6 Communication Monitoring Website
+
+Develop a website for operators to view stored FOD coordinates, queue order, receipt acknowledgements, retry counts and error notifications. Connect it to the ARGUS queue, database and ROS 2 messages. Unacknowledged alerts will stay stored for resending after communication loss. Acknowledged records will remain available as delivery history.
+
+The simulator below shows the proposed interface. It uses example records saved in this browser, not a live database or radio connection. Add a FOD, disconnect and restore the HUNTER link, confirm receipt, or simulate 100 failed retries. The real interface and its backend are future work.
+
+<CommsDashboardDemo />
+
+:::
+
+<span id="communication-validation-plan" class="report-anchor" aria-hidden="true"></span>
+
+::: details 6.1.7 Communication Validation Plan
+
+The final communication device is still to be confirmed. Range, interference and radio video tests need candidate hardware. Queue, ACK, storage and security tests can start using the existing Wi-Fi setup, then be repeated on the final link. The tests below are planned. Undecided performance targets will be set before validation.
+
+| Test | Planned method | Check or target | Hardware needed |
+| --- | --- | --- | --- |
+| Alert delivery and ACK timing | Send numbered alerts between two devices and log send, receive and ACK times. | Set the ACK timeout, delivery-rate target and acceptable delay. | Start on Wi-Fi, repeat on the radio. |
+| Communication-loss recovery | Disconnect HUNTER, add FOD alerts and restore the link. Also test missing ACKs. | Retain coordinates, preserve queue order and avoid duplicate targets. Stop after 100 failed retries and notify the base station if reachable. | Start on Wi-Fi. |
+| Record storage and queue capacity | Restart ARGUS with pending alerts and test the storage limit. | Pending records survive restart. Set queue capacity and define what happens when storage is full. | ARGUS storage and application. |
+| Coordinate agreement | Send known coordinates with agreed units, map frame, mission ID and threat ID. | HUNTER receives the same target values and interprets the agreed frame correctly. | Start on Wi-Fi. |
+| Radio power configuration | Check the radio settings, antenna gain and cable losses. | The proposed 2.4 GHz UAV setup stays below 100 mW EIRP. | Candidate radio and antenna setup. |
+| Wireless range | Increase separation towards 5 km and record delivery, delays and dropouts. | Meet the 5 km requirement and the agreed delivery and delay targets. | Candidate radio at the permitted power. |
+| Live feed and interference | Run alerts and video together under quiet and busy channel conditions. | Set video resolution, frame rate, bandwidth and acceptable delay. Check the effect on alert delivery. | Start on Wi-Fi, validate on the radio. |
+| Security | Test unauthorised nodes, topic permissions, stale alerts and valid retransmissions. | Block unauthorised access and stale targets. Acknowledge valid retries without creating duplicate targets. | Start on Wi-Fi with DDS Security enabled. |
 
 :::
 
