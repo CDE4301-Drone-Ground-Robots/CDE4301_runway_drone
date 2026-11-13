@@ -381,6 +381,17 @@ html:has(.report-image-viewer[open]){overflow:hidden}
 .vp-doc .research-figure img{display:block;max-width:100%;height:auto;margin:0 auto;border-radius:6px}
 .vp-doc .research-stakeholder-map{max-width:640px;margin-left:auto;margin-right:auto}
 
+/* Secondary Research operational journey. */
+.vp-doc .research-journey-illustration{max-width:1100px;margin-left:auto;margin-right:auto}
+.vp-doc .research-journey-flow{--journey-accent:#0e7490;display:flex;flex-direction:column;align-items:center;width:100%;max-width:760px;margin:32px auto}
+.dark .vp-doc .research-journey-flow{--journey-accent:#67e8f9}
+.vp-doc .research-journey-step{box-sizing:border-box;width:100%;min-width:0;padding:20px 24px;border:1px solid color-mix(in srgb,var(--journey-accent) 40%,var(--vp-c-divider));border-left:4px solid var(--journey-accent);border-radius:10px;background:var(--vp-c-bg-soft);overflow-wrap:break-word}
+.vp-doc .research-journey-step h4{margin:0 0 10px;color:var(--journey-accent);font-size:17px;font-weight:700;line-height:1.5}
+.vp-doc .research-journey-step p{margin:0;color:var(--vp-c-text-1);line-height:1.75}
+.vp-doc .research-journey-arrow{display:flex;align-items:center;justify-content:center;flex:none;height:40px;color:var(--journey-accent);font-size:28px;line-height:1}
+.vp-doc .research-journey-video video{display:block;width:100%;height:auto;background:#080b10;border-radius:6px}
+@media(max-width:600px){.vp-doc .research-journey-step{padding:16px}.vp-doc .research-journey-step h4{font-size:16px}.vp-doc .research-journey-arrow{height:34px}}
+
 /* CNA secondary research video and findings. */
 .research-cna-video iframe{border:0;height:auto}
 .vp-doc .research-secondary-table{max-width:100%;overflow-x:auto;margin:20px 0;border:1px solid var(--vp-c-divider);border-radius:10px}

@@ -14,6 +14,18 @@ CNA. **Video about FOD detection and the iFerret system at Changi Airport**. You
 
 [Watch the CNA video](https://www.youtube.com/watch?v=YigBVMgCgVA). Source for the secondary research findings on FOD types, detection capability, AI-based detection, operational efficiency and human verification.
 
+### [31] - Existing FOD detection technologies {#research-ref-31}
+
+**Bibliographic details missing; manual completion required.** Citation preserved from the Existing Detection Technologies comparison for QinetiQ Tarsier, Xsight FODetect and RunWize, iFerret 2.0, and Trex FOD Finder XM. This entry does not identify a verified source.
+
+### [32] - Roboxi airside robot trial {#research-ref-32}
+
+**Bibliographic details missing; manual completion required.** Referenced in Existing Detection Technologies for the Roboxi trial at Berlin Brandenburg Airport. This entry does not identify a verified source.
+
+### [33] - Roboxi airside robot trial {#research-ref-33}
+
+**Bibliographic details missing; manual completion required.** Referenced alongside [32] in Existing Detection Technologies for the Roboxi trial at Berlin Brandenburg Airport. This entry does not identify a verified source.
+
 ## Mechanical Design Sources
 
 The numbers below preserve the citations in Section 10 of the supplied *Interim Report.docx*. The supplied document contains no bibliography. Full bibliographic details must be completed manually; these entries do not identify verified sources.

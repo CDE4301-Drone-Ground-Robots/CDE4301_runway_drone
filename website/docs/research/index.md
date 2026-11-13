@@ -5,6 +5,10 @@ pageClass: research-report-page
 aside: false
 ---
 
+<script setup>
+import { withBase } from 'vitepress'
+</script>
+
 <p class="chapter-kicker">FOD ARGUS / PROJECT REPORT</p>
 
 # Research
@@ -133,18 +137,18 @@ In addition to iFerret 2.0, several existing FOD detection technologies were rev
 <caption>Table 2: Comparison of Existing FOD Detection Technologies</caption>
 <thead><tr><th scope="col">Image</th><th scope="col">System</th><th scope="col">How it works</th><th scope="col">Shortcomings</th></tr></thead>
 <tbody>
-<tr><td><img src="/report-assets/research/qinetiq-tarsier.jpeg" alt="QinetiQ Tarsier detection system" loading="lazy" /></td><th scope="row">QinetiQ Tarsier</th><td>Stationary radar detects; a camera pans to confirm [31]</td><td>Radar cannot classify FOD and is sensitive to ground clutter</td></tr>
-<tr><td><img src="/report-assets/research/xsight-fodetect-runwize.jpeg" alt="Xsight FODetect and RunWize detection system" loading="lazy" /></td><th scope="row">Xsight FODetect and RunWize</th><td>Radar and optical sensors mounted along the runway edge lights, with laser illumination [31]</td><td>Hardware-intensive deployment along the full runway</td></tr>
-<tr><td><img src="/report-assets/research/iferret-2-changi.jpeg" alt="iFerret 2.0 detection system at Changi" loading="lazy" /></td><th scope="row">iFerret 2.0 (Changi)</th><td>Fixed AI-powered cameras detect and verify FOD visually [31]</td><td>Vision-based detection may be less reliable under poor visibility conditions, highlighting the need for supplementary sensing technologies (see <a href="../appendices#appendix-d">Appendix D</a>).</td></tr>
+<tr><td><img src="/report-assets/research/qinetiq-tarsier.jpeg" alt="QinetiQ Tarsier detection system" loading="lazy" /></td><th scope="row">QinetiQ Tarsier</th><td>Stationary radar detects; a camera pans to confirm <a href="../references#research-ref-31">[31]</a></td><td>Radar cannot classify FOD and is sensitive to ground clutter</td></tr>
+<tr><td><img src="/report-assets/research/xsight-fodetect-runwize.jpeg" alt="Xsight FODetect and RunWize detection system" loading="lazy" /></td><th scope="row">Xsight FODetect and RunWize</th><td>Radar and optical sensors mounted along the runway edge lights, with laser illumination <a href="../references#research-ref-31">[31]</a></td><td>Hardware-intensive deployment along the full runway</td></tr>
+<tr><td><img src="/report-assets/research/iferret-2-changi.jpeg" alt="iFerret 2.0 detection system at Changi" loading="lazy" /></td><th scope="row">iFerret 2.0 (Changi)</th><td>Fixed AI-powered cameras detect and verify FOD visually <a href="../references#research-ref-31">[31]</a></td><td>Vision-based detection may be less reliable under poor visibility conditions, highlighting the need for supplementary sensing technologies (see <a href="../appendices#appendix-d">Appendix D</a>).</td></tr>
 <tr><td><img src="/report-assets/research/elva-1.jpeg" alt="ELVA-1 detection system" loading="lazy" /></td><th scope="row">ELVA-1</th><td>Stationary radar</td><td>Long scan time of about 3 minutes</td></tr>
-<tr><td><img src="/report-assets/research/trex-fod-finder-xm.jpeg" alt="Trex FOD Finder XM vehicle-mounted detection system" loading="lazy" /></td><th scope="row">Trex FOD Finder XM</th><td>Radar mounted on a vehicle [31]</td><td>Intermittent scanning; needs a driver at all times</td></tr>
+<tr><td><img src="/report-assets/research/trex-fod-finder-xm.jpeg" alt="Trex FOD Finder XM vehicle-mounted detection system" loading="lazy" /></td><th scope="row">Trex FOD Finder XM</th><td>Radar mounted on a vehicle <a href="../references#research-ref-31">[31]</a></td><td>Intermittent scanning; needs a driver at all times</td></tr>
 </tbody>
 </table>
 </div>
 
 The existing technologies reviewed demonstrate that FOD detection is relatively established, with various systems employing radar, optical sensors and AI-powered cameras. However, these systems have limitations, and furthermore, detection alone does not eliminate the need for human intervention in FOD removal, which is the core issue the team is trying to tackle. Therefore, FOD detection using a UAV alone is not a particularly novel solution. To address this gap, our proposed solution integrates FOD Argus, a UAV responsible for detecting and locating FOD, with FOD Hunter, an autonomous ground rover responsible for navigating to and collecting the detected objects.
 
-Integrated detection and collection solutions are also emerging. One example is Roboxi, a Norwegian multifunctional airside robot designed to detect and collect FOD while also inspecting runway pavement and lighting. The system began a four-month trial at Berlin Brandenburg Airport in 2026 [32], [33]. However, its cost has not been publicly disclosed, and independent performance data on its FOD detection and removal capabilities remain limited. This further demonstrates that autonomous FOD detection and collection is an emerging field, with opportunities for further development and improvement.
+Integrated detection and collection solutions are also emerging. One example is Roboxi, a Norwegian multifunctional airside robot designed to detect and collect FOD while also inspecting runway pavement and lighting. The system began a four-month trial at Berlin Brandenburg Airport in 2026 [\[32\]](../references#research-ref-32), [\[33\]](../references#research-ref-33). However, its cost has not been publicly disclosed, and independent performance data on its FOD detection and removal capabilities remain limited. This further demonstrates that autonomous FOD detection and collection is an emerging field, with opportunities for further development and improvement.
 
 ### Problem Statement and Scope
 
@@ -159,3 +163,53 @@ A multi-robot approach was adopted to overcome the limitations of using a single
 This approach is further supported by research conducted by Öztürk and Kuzucuoğlu [\[24\]](../references#research-ref-24), which demonstrated the potential efficiency of multi-robot systems, with coordinated robots completing FOD collection faster than a conventional manual vehicle in simulation. However, the cost benefits depend on operational conditions, particularly runway closure costs and usage frequency.
 
 A more detailed analysis of multi-robot coordination, operational efficiency and cost considerations is presented in the [FOD Hunter report – Why a Multi-Robot Approach](https://cde4301-drone-ground-robots.github.io/CDE4301_runway_patrol/report#sec-multirobot).
+
+### User Journey and Demonstration
+
+<figure class="research-figure research-journey-illustration">
+
+![Six-panel operational journey showing runway debris, FOD Argus scanning, data transmission, FOD Hunter navigation and pickup, and both robots returning to base](/report-assets/research/user-journey.png)
+
+<figcaption>FOD Argus and FOD Hunter operational journey.</figcaption>
+</figure>
+
+<div class="research-journey-flow" role="group" aria-label="Six-step operational flowchart">
+  <div class="research-journey-step">
+    <h4>Step 1: FOD on the runway</h4>
+    <p>Bolts, nuts, screws, stones and dead birds lie on the runway, posing a risk to aircraft.</p>
+  </div>
+  <div class="research-journey-arrow" aria-hidden="true">↓</div>
+  <div class="research-journey-step">
+    <h4>Step 2: Aerial scanning</h4>
+    <p>FOD Argus flies a pre-planned path during a scheduled inspection or closure window and flags candidate FOD with its location.</p>
+  </div>
+  <div class="research-journey-arrow" aria-hidden="true">↓</div>
+  <div class="research-journey-step">
+    <h4>Step 3: Data transmission</h4>
+    <p>FOD Argus sends the detected locations to the ground station, where the operator confirms each flag and filters false positives.</p>
+  </div>
+  <div class="research-journey-arrow" aria-hidden="true">↓</div>
+  <div class="research-journey-step">
+    <h4>Step 4: Ground navigation</h4>
+    <p>FOD Hunter travels to each confirmed location and verifies the target using its onboard sensors.</p>
+  </div>
+  <div class="research-journey-arrow" aria-hidden="true">↓</div>
+  <div class="research-journey-step">
+    <h4>Step 5: Pickup</h4>
+    <p>FOD Hunter removes the item using the sweep box and vacuum.</p>
+  </div>
+  <div class="research-journey-arrow" aria-hidden="true">↓</div>
+  <div class="research-journey-step">
+    <h4>Step 6: Return to home</h4>
+    <p>FOD Hunter returns to base, and FOD Argus lands on top. Each item is logged with its location and time.</p>
+  </div>
+</div>
+
+The video below is a simulation demonstrating the coordination between the FOD Argus and FOD Hunter.
+
+<figure class="research-figure research-journey-video">
+  <video controls playsinline preload="metadata" :src="withBase('/report-assets/research/user-journey-simulation.mp4')" aria-label="Simulation of FOD Argus and FOD Hunter coordination">
+    Your browser does not support embedded video. <a :href="withBase('/report-assets/research/user-journey-simulation.mp4')">Open the simulation video</a>.
+  </video>
+  <figcaption>Simulation of coordination between FOD Argus and FOD Hunter.</figcaption>
+</figure>
