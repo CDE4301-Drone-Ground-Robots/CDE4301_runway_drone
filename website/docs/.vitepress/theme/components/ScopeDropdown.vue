@@ -27,7 +27,7 @@ defineProps<{ name: string; matric: string; portrait: string }>()
 .scope-chevron{width:20px;height:20px;flex-shrink:0;fill:none;stroke:#c99a8d;stroke-width:1.7;transition:transform .2s}
 .scope-dropdown[open] .scope-chevron{transform:rotate(90deg)}
 .scope-dropdown[open]>summary{border-bottom:1px solid var(--vp-c-divider)}
-.scope-member-content{padding:4px 0 16px}
+.scope-member-content{padding:4px 0 16px;font-size:15px}
 @media(max-width:600px){.scope-dropdown{padding:0 14px}.scope-dropdown>summary{gap:12px}.scope-dropdown>summary img{width:54px;height:54px}}
 @media(prefers-reduced-motion:reduce){.scope-chevron{transition:none}}
 </style>

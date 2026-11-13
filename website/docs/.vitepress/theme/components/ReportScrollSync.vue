@@ -7,6 +7,7 @@ const route = useRoute()
 let entries: { heading: HTMLElement; link: HTMLAnchorElement; item: HTMLElement | null }[] = []
 let sidebar: HTMLElement | null = null
 let active = ''
+let highlightedParent: HTMLElement | null = null
 let frame = 0
 let generation = 0
 let reveal = false
@@ -16,6 +17,8 @@ let sidebarObserver: MutationObserver | undefined
 let contentObserver: ResizeObserver | undefined
 function isMechanicalReport() { return route.path.replace(/\.html$/, '').endsWith('/subsystems/mechanical-design') }
 function clear() {
+ highlightedParent?.classList.remove('cv-section-current')
+ highlightedParent = null
  for (const entry of entries) {
   entry.link.classList.remove('cv-section-current')
   entry.link.removeAttribute('aria-current')
@@ -53,7 +56,9 @@ function update() {
  }
  if (window.scrollY > 0 && Math.ceil(window.scrollY + window.innerHeight) >= document.documentElement.scrollHeight - 2) current = entries[entries.length - 1]
  const changed = current.heading.id !== active
- if (changed) {
+ if (changed || reveal) {
+  highlightedParent?.classList.remove('cv-section-current')
+  highlightedParent = null
   active = current.heading.id
   for (const entry of entries) {
    const selected = entry === current
@@ -62,8 +67,19 @@ function update() {
    if (selected) entry.link.setAttribute('aria-current', 'location')
    else entry.link.removeAttribute('aria-current')
   }
+  // A collapsed sidebar branch hides its active descendant. Mark its visible
+  // parent instead so the reader can still locate the section while scrolling.
+  let parent = current.item?.parentElement?.closest<HTMLElement>('.VPSidebarItem')
+  while (parent) {
+   if (parent.classList.contains('collapsed')) highlightedParent = parent
+   parent = parent.parentElement?.closest<HTMLElement>('.VPSidebarItem')
+  }
+  highlightedParent?.classList.add('cv-section-current')
  }
- if (changed || reveal) keepVisible(current)
+ if (changed || reveal) {
+  const visibleLink = highlightedParent?.querySelector<HTMLAnchorElement>(':scope > .item > a.link')
+  keepVisible(visibleLink ? { ...current, link: visibleLink } : current)
+ }
  reveal = false
 }
 function schedule() { if (!frame && !disposed) frame = requestAnimationFrame(update) }
@@ -99,8 +115,15 @@ async function refresh() {
   }
  }
  sidebar.setAttribute('data-cv-scrollspy', '')
- sidebarObserver = new MutationObserver(() => { reveal = true; schedule() })
- sidebarObserver.observe(sidebar, { attributes: true, attributeFilter: ['class'] })
+ sidebarObserver = new MutationObserver(records => {
+  const visibilityChanged = records.some(record => {
+   const element = record.target as HTMLElement
+   const previous = new Set((record.oldValue ?? '').split(/\s+/))
+   return ['collapsed', 'open'].some(name => previous.has(name) !== element.classList.contains(name))
+  })
+  if (visibilityChanged) { reveal = true; schedule() }
+ })
+ sidebarObserver.observe(sidebar, { attributes: true, attributeFilter: ['class'], attributeOldValue: true, subtree: true })
  contentObserver = new ResizeObserver(schedule)
  contentObserver.observe(report)
  reveal = true
