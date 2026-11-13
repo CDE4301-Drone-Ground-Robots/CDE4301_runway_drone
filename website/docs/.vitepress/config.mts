@@ -13,7 +13,9 @@ const reportSidebar = [
   { text: 'Research', link: '/research/', collapsed: false, items: [
    { text: 'Primary Research', link: '/research/#primary-research' },
    { text: 'Secondary Research', link: '/research/#secondary-research', collapsed: false, items: [
-    { text: 'Problem Statement and Scope', link: '/research/#problem-statement-and-scope' }
+    { text: 'Existing Detection Technologies', link: '/research/#existing-detection-technologies' },
+    { text: 'Problem Statement and Scope', link: '/research/#problem-statement-and-scope' },
+    { text: 'Multi-Robot Approach', link: '/research/#multi-robot-approach' }
    ] }
   ] },
   { text: 'System architecture', link: '/report/system-architecture' }

@@ -124,8 +124,38 @@ The CNA video provides further insight into FOD detection at Changi Airport, sup
 
 With such a robust detection system already in place, implementing the team's UAV solution at Changi Airport would be challenging, particularly given the airport's strict operational constraints. These findings give us a clearer picture of where the FOD Argus UAV could provide greater value, particularly at airports or air bases with low to medium air traffic, where automated FOD detection infrastructure may be less extensive and UAV deployment could be more feasible.
 
+### Existing Detection Technologies
+
+In addition to iFerret 2.0, several existing FOD detection technologies were reviewed to understand their operating principles and limitations. Table 2 provides a comparison of these systems.
+
+<div class="research-secondary-table research-detection-table" role="region" aria-label="Comparison of existing FOD detection technologies" tabindex="0">
+<table>
+<caption>Table 2: Comparison of Existing FOD Detection Technologies</caption>
+<thead><tr><th scope="col">Image</th><th scope="col">System</th><th scope="col">How it works</th><th scope="col">Shortcomings</th></tr></thead>
+<tbody>
+<tr><td><img src="/report-assets/research/qinetiq-tarsier.jpeg" alt="QinetiQ Tarsier detection system" loading="lazy" /></td><th scope="row">QinetiQ Tarsier</th><td>Stationary radar detects; a camera pans to confirm [31]</td><td>Radar cannot classify FOD and is sensitive to ground clutter</td></tr>
+<tr><td><img src="/report-assets/research/xsight-fodetect-runwize.jpeg" alt="Xsight FODetect and RunWize detection system" loading="lazy" /></td><th scope="row">Xsight FODetect and RunWize</th><td>Radar and optical sensors mounted along the runway edge lights, with laser illumination [31]</td><td>Hardware-intensive deployment along the full runway</td></tr>
+<tr><td><img src="/report-assets/research/iferret-2-changi.jpeg" alt="iFerret 2.0 detection system at Changi" loading="lazy" /></td><th scope="row">iFerret 2.0 (Changi)</th><td>Fixed AI-powered cameras detect and verify FOD visually [31]</td><td>Vision-based detection may be less reliable under poor visibility conditions, highlighting the need for supplementary sensing technologies (see <a href="../appendices#appendix-d">Appendix D</a>).</td></tr>
+<tr><td><img src="/report-assets/research/elva-1.jpeg" alt="ELVA-1 detection system" loading="lazy" /></td><th scope="row">ELVA-1</th><td>Stationary radar</td><td>Long scan time of about 3 minutes</td></tr>
+<tr><td><img src="/report-assets/research/trex-fod-finder-xm.jpeg" alt="Trex FOD Finder XM vehicle-mounted detection system" loading="lazy" /></td><th scope="row">Trex FOD Finder XM</th><td>Radar mounted on a vehicle [31]</td><td>Intermittent scanning; needs a driver at all times</td></tr>
+</tbody>
+</table>
+</div>
+
+The existing technologies reviewed demonstrate that FOD detection is relatively established, with various systems employing radar, optical sensors and AI-powered cameras. However, these systems have limitations, and furthermore, detection alone does not eliminate the need for human intervention in FOD removal, which is the core issue the team is trying to tackle. Therefore, FOD detection using a UAV alone is not a particularly novel solution. To address this gap, our proposed solution integrates FOD Argus, a UAV responsible for detecting and locating FOD, with FOD Hunter, an autonomous ground rover responsible for navigating to and collecting the detected objects.
+
+Integrated detection and collection solutions are also emerging. One example is Roboxi, a Norwegian multifunctional airside robot designed to detect and collect FOD while also inspecting runway pavement and lighting. The system began a four-month trial at Berlin Brandenburg Airport in 2026 [32], [33]. However, its cost has not been publicly disclosed, and independent performance data on its FOD detection and removal capabilities remain limited. This further demonstrates that autonomous FOD detection and collection is an emerging field, with opportunities for further development and improvement.
+
 ### Problem Statement and Scope
 
 Based on the insights gathered from our primary and secondary research, the team identified the following problem. RSAF air bases rely on servicemen walking or driving along runways to detect and remove Foreign Object Debris (FOD). This process is manpower-intensive, lacks a systematic method of ensuring thorough coverage, and often misses small objects that can cause significant aircraft damage. These challenges are further compounded by Singapore's declining manpower availability.
 
 The project focuses on airports and air bases with low to medium air traffic, such as military air bases in Singapore. High-traffic commercial airports like Changi Airport are currently excluded from the project's scope due to their short runway inspection windows, strict UAV operating restrictions and existing automated FOD detection systems. Within this scope, the project aims to demonstrate how a UAV and an unmanned ground vehicle (UGV) can work together to autonomously detect, locate and remove small FOD from a section of runway, reducing the need for manual intervention.
+
+### Multi-Robot Approach
+
+A multi-robot approach was adopted to overcome the limitations of using a single robot for both FOD detection and collection. While FOD Argus can efficiently survey large runway areas from the air, it cannot physically remove debris. Conversely, FOD Hunter can collect FOD but requires more time to cover the same area. By combining both systems, FOD Argus can identify and relay FOD locations to FOD Hunter, allowing the ground rover to navigate directly to detected objects rather than scanning the entire runway.
+
+This approach is further supported by research conducted by Öztürk and Kuzucuoğlu [\[24\]](../references#research-ref-24), which demonstrated the potential efficiency of multi-robot systems, with coordinated robots completing FOD collection faster than a conventional manual vehicle in simulation. However, the cost benefits depend on operational conditions, particularly runway closure costs and usage frequency.
+
+A more detailed analysis of multi-robot coordination, operational efficiency and cost considerations is presented in the [FOD Hunter report – Why a Multi-Robot Approach](https://cde4301-drone-ground-robots.github.io/CDE4301_runway_patrol/report#sec-multirobot).
