@@ -32,11 +32,11 @@ The communication subsystem was initially developed and tested using ROS 2 over 
 
 ### Base Station {#base-station}
 
-The base station is the control room where operators can receive updates from ARGUS or HUNTER and take the necessary actions. The base-station communication link is planned for the final setup.
+The base station is the control room where operators can receive updates from ARGUS or HUNTER and take the necessary actions if required. The base-station communication link is planned for the final setup.
 
 ### Requirements and Considerations {#requirements}
 
-The operational range must be up to 5 km, as that’s the runway length. The 917-925 MHz band was initially considered; final frequency and power settings must meet the applicable IMDA requirements. The communication device must support live video transmission and be small and lightweight to fit ARGUS’s payload limits. The thermal live feed is intended for manual override, allowing the operator to guide ARGUS back at night if the drone encounters a problem. Live-feed integration and testing are pending.
+The operational range must be up to 5 km, as that’s the runway length. The 917-925 MHz band was initially considered for telemetry messages only. The final frequency and power settings must meet the applicable IMDA requirements. The communication device must support live video transmission at a minimum resolution of 1080p (1920 × 1080) and be small and lightweight to fit ARGUS’s payload limits. The thermal live feed is intended for manual override, allowing the operator to guide ARGUS back at night if the drone encounters a problem. Live-feed integration and testing are pending.
 
 ## 2. Communication Methodology and Architecture Development {#a2-methodology-concept-development}
 
@@ -180,7 +180,7 @@ These tests were successful (shown in the figure above), proving that the ARGUS 
 | Duplicate messages | 0 |
 | Nominal benchmark transmission rate | 10 Hz |
 
-The 100-message benchmark used ROS 2 Jazzy with the publisher and subscriber on the same device (0 m separation). The C2 alert payload size was measured at 588 bytes, and the estimated application-level bandwidth was 9.408 kbps at two alerts per second. This covers alert payloads only, excluding video and network overhead. The thermal live-feed resolution, frame rate, bandwidth and delay still need to be confirmed and tested. Additionally, a ROS 2 test was conducted using 100 consecutive alerts simulating the C2 alerts at a nominal rate of 10Hz sent from publisher to subscriber. All 100 messages were received successfully hence attaining the 100% delivery rate with no missing or duplicate messages. This checks local ROS 2 message delivery; it does not measure wireless range or performance between separate devices.
+The 100-message benchmark used ROS 2 Jazzy with the publisher and subscriber on the same device (0 m separation). The C2 alert payload size was measured at 588 bytes, and the estimated application-level bandwidth was 9.408 kbps at two alerts per second. This covers alert payloads only, excluding video and network overhead. The live-video target is at least 1080p (1920 × 1080). Camera support, frame rate, bandwidth and delay still need to be confirmed and tested. Additionally, a ROS 2 test was conducted using 100 consecutive alerts simulating the C2 alerts at a nominal rate of 10Hz sent from publisher to subscriber. All 100 messages were received successfully hence attaining the 100% delivery rate with no missing or duplicate messages. This checks local ROS 2 message delivery; it does not measure wireless range or performance between separate devices.
 
 ## 6. Discussion of Future Works {#a6-problems-project-plan}
 
@@ -212,7 +212,7 @@ The 100-message benchmark used ROS 2 Jazzy with the publisher and subscriber on 
 
 ::: details 6.1.4 Thermal Live-Feed Testing
 
-- **Set and test the video settings:** The thermal live-feed resolution, frame rate, bandwidth and delay still need to be confirmed and tested.
+- **Set and test the video settings:** The live-video target is at least 1080p (1920 × 1080). Camera support, frame rate, bandwidth and delay still need to be confirmed and tested.
 
 :::
 
@@ -254,7 +254,7 @@ The final communication device is still to be confirmed. Range, interference and
 | Coordinate agreement | Send known coordinates with agreed units, map frame, mission ID and threat ID. | HUNTER receives the same target values and interprets the agreed frame correctly. | Start on Wi-Fi. |
 | Radio power configuration | Check the radio settings, antenna gain and cable losses. | The proposed 2.4 GHz UAV setup stays below 100 mW EIRP. | Candidate radio and antenna setup. |
 | Wireless range | Increase separation towards 5 km and record delivery, delays and dropouts. | Meet the 5 km requirement and the agreed delivery and delay targets. | Candidate radio at the permitted power. |
-| Live feed and interference | Run alerts and video together under quiet and busy channel conditions. | Set video resolution, frame rate, bandwidth and acceptable delay. Check the effect on alert delivery. | Start on Wi-Fi, validate on the radio. |
+| Live feed and interference | Run alerts and video together under quiet and busy channel conditions. | Check support for at least 1080p (1920 × 1080). Set the frame rate and acceptable delay, measure bandwidth and check the effect on alert delivery. | Start on Wi-Fi, validate on the radio. |
 | Security | Test unauthorised nodes, topic permissions, stale alerts and valid retransmissions. | Block unauthorised access and stale targets. Acknowledge valid retries without creating duplicate targets. | Start on Wi-Fi with DDS Security enabled. |
 
 :::
