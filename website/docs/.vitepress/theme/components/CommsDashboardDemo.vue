@@ -2,10 +2,11 @@
 import { computed, onMounted, ref, watch } from 'vue'
 
 type DeliveryState = 'queued' | 'awaiting' | 'acknowledged' | 'failed'
-type FodRecord = { id: number; object: string; x: number; y: number; state: DeliveryState; retries: number; received: boolean; created: string; sent: string | null; ack: string | null }
+type FodRecord = { id: number; object: string; x: number; y: number; state: DeliveryState; received: boolean; created: string; sent: string | null; ack: string | null }
 type Notice = { id: number; target: string; sent: boolean }
 type Event = { id: number; time: string; text: string }
-const storageKey = 'argus-comms-monitor-demo-v1'
+const storageKey = 'argus-comms-monitor-demo-v2'
+const linkSilence = ref(0)
 const records = ref<FodRecord[]>([])
 const notices = ref<Notice[]>([])
 const events = ref<Event[]>([])
@@ -21,12 +22,11 @@ const filter = ref('all')
 const current = computed(() => records.value.find(r => r.state !== 'acknowledged'))
 const pending = computed(() => records.value.filter(r => r.state !== 'acknowledged').length)
 const acknowledged = computed(() => records.value.filter(r => r.state === 'acknowledged').length)
-const failed = computed(() => records.value.filter(r => r.state === 'failed').length)
+const failed = computed(() => notices.value.length)
 const visible = computed(() => records.value.filter(r => filter.value === 'all' || (filter.value === 'pending' ? r.state !== 'acknowledged' : r.state === 'acknowledged')))
 const validInput = computed(() => x.value !== '' && y.value !== '' && Number.isFinite(Number(x.value)) && Number.isFinite(Number(y.value)))
 const canAck = computed(() => !!current.value?.received && hunterOnline.value)
-const canTimeout = computed(() => current.value?.state === 'awaiting')
-const names: Record<DeliveryState, string> = { queued: 'Queued', awaiting: 'Awaiting ACK', acknowledged: 'Acknowledged', failed: 'Retry limit reached' }
+const names: Record<DeliveryState, string> = { queued: 'Queued', awaiting: 'Awaiting ACK', acknowledged: 'Acknowledged', failed: 'Link lost' }
 const targetId = (r: FodRecord) => 'FOD_THREAT_' + String(r.id).padStart(3, '0')
 const coords = (r: FodRecord) => `(${r.x.toFixed(2)}, ${r.y.toFixed(2)}) m`
 const clock = (iso: string) => new Date(iso).toLocaleTimeString('en-GB', { hour12: false })
@@ -49,7 +49,7 @@ function sendNext() {
 }
 function addFod() {
  if (!validInput.value) return
- const record: FodRecord = { id: nextId.value++, object: object.value, x: Number(x.value), y: Number(y.value), state: 'queued', retries: 0, received: false, created: new Date().toISOString(), sent: null, ack: null }
+ const record: FodRecord = { id: nextId.value++, object: object.value, x: Number(x.value), y: Number(y.value), state: 'queued', received: false, created: new Date().toISOString(), sent: null, ack: null }
  records.value.push(record)
  log(`${targetId(record)} saved to the ARGUS records and added to the queue.`)
  x.value = Number((record.x + 1.2).toFixed(2)); y.value = Number((record.y + 0.5).toFixed(2))
@@ -63,29 +63,30 @@ function acknowledge() {
  log(`Receipt ACK matched ${targetId(record)}. Next alert released. Collection is not confirmed.`)
  sendNext()
 }
-function exhaust(record: FodRecord) {
- record.state = 'failed'
- notices.value.unshift({ id: record.id, target: targetId(record), sent: baseOnline.value })
- log(`${targetId(record)}: 100 retries failed. ${baseOnline.value ? 'Error sent to the base station.' : 'Base error stored until its link returns.'}`)
+function handshake() {
+ if (hunterOnline.value) {
+  linkSilence.value = 0
+  log('Handshake response received. HUNTER link is available. FOD receipt ACK is separate.')
+  return
+ }
+ if (linkSilence.value >= 10) return
+ linkSilence.value++
+ log(`No handshake response for ${linkSilence.value} second(s). Coordinates remain stored.`)
+ if (linkSilence.value === 10) {
+  notices.value.unshift({ id: (notices.value[0]?.id ?? 0) + 1, target: 'HUNTER link', sent: baseOnline.value })
+  log(`No handshake response for 10 seconds. ${baseOnline.value ? 'Error sent to the base station.' : 'Base notification stored until its link returns.'}`)
+ }
 }
-function timeout() {
- const record = current.value
- if (!record || record.state !== 'awaiting') return
- if (record.retries >= 100) { exhaust(record); return }
- record.retries++
- deliver(record)
-}
-function retryLimit() {
- const record = current.value
- if (!record || record.state !== 'awaiting') return
- // Fast-forward simulated missing acknowledgements, not real network requests.
- while (record.state === 'awaiting') timeout()
+function simulateLoss() {
+ if (hunterOnline.value) return
+ while (linkSilence.value < 10) handshake()
 }
 function toggleHunter() {
  hunterOnline.value = !hunterOnline.value
- log(hunterOnline.value ? 'HUNTER link restored.' : 'HUNTER link lost. Pending coordinates remain stored on ARGUS.')
+ linkSilence.value = 0
+ log(hunterOnline.value ? 'HUNTER link restored. Handshake response received.' : 'HUNTER link unavailable. Checking for a handshake response every second.')
  if (hunterOnline.value) {
-  if (current.value?.state === 'awaiting' && current.value.retries < 100) timeout()
+  if (current.value?.state === 'awaiting') deliver(current.value)
   else sendNext()
  }
 }
@@ -99,7 +100,7 @@ function toggleBase() {
 }
 function reset() {
  records.value = []; notices.value = []; events.value = []
- nextId.value = 1; hunterOnline.value = true; baseOnline.value = true; filter.value = 'all'
+ linkSilence.value = 0; nextId.value = 1; hunterOnline.value = true; baseOnline.value = true; filter.value = 'all'
  object.value = 'Battery'; x.value = 3; y.value = 4
  for (const sample of ['Battery', 'Plastic part', 'Bolt']) { object.value = sample; addFod() }
  object.value = 'Battery'
@@ -109,13 +110,13 @@ function isFod(value: unknown): value is FodRecord {
  if (!value || typeof value !== 'object') return false
  const r = value as FodRecord
  return Number.isInteger(r.id) && r.id > 0 && typeof r.object === 'string' && Number.isFinite(r.x) && Number.isFinite(r.y)
-  && Object.hasOwn(names, r.state) && Number.isInteger(r.retries) && r.retries >= 0 && r.retries <= 100
+  && Object.hasOwn(names, r.state)
   && typeof r.received === 'boolean' && typeof r.created === 'string' && Number.isFinite(Date.parse(r.created))
   && (r.sent === null || typeof r.sent === 'string') && (r.ack === null || typeof r.ack === 'string')
 }
 function save() {
  if (!ready.value) return
- try { localStorage.setItem(storageKey, JSON.stringify({ records: records.value, notices: notices.value, events: events.value, nextId: nextId.value, hunterOnline: hunterOnline.value, baseOnline: baseOnline.value })) }
+ try { localStorage.setItem(storageKey, JSON.stringify({ records: records.value, notices: notices.value, events: events.value, nextId: nextId.value, hunterOnline: hunterOnline.value, baseOnline: baseOnline.value, linkSilence: linkSilence.value })) }
  catch { browserStorage.value = false }
 }
 onMounted(() => {
@@ -126,6 +127,7 @@ onMounted(() => {
    const saved = JSON.parse(raw)
    if (Array.isArray(saved.records) && saved.records.every(isFod) && new Set(saved.records.map((r: FodRecord) => r.id)).size === saved.records.length) {
     records.value = saved.records
+    linkSilence.value = Number.isInteger(saved.linkSilence) ? Math.max(0, Math.min(10, saved.linkSilence)) : 0
     nextId.value = Math.max(0, ...records.value.map(r => r.id)) + 1
     hunterOnline.value = saved.hunterOnline !== false; baseOnline.value = saved.baseOnline !== false
     notices.value = Array.isArray(saved.notices) ? saved.notices.filter((n: Notice) => Number.isInteger(n?.id) && typeof n.target === 'string' && typeof n.sent === 'boolean') : []
@@ -138,7 +140,7 @@ onMounted(() => {
  ready.value = true
  sendNext(); save()
 })
-watch([records, notices, events, nextId, hunterOnline, baseOnline], save, { deep: true })
+watch([records, notices, events, nextId, hunterOnline, baseOnline, linkSilence], save, { deep: true })
 </script>
 
 <template>
@@ -153,13 +155,18 @@ watch([records, notices, events, nextId, hunterOnline, baseOnline], save, { deep
     <div><span>Stored FODs</span><strong data-monitor-stat="stored">{{ records.length }}</strong></div>
     <div><span>Pending delivery</span><strong data-monitor-stat="pending">{{ pending }}</strong></div>
     <div><span>Receipt ACKs</span><strong data-monitor-stat="acknowledged">{{ acknowledged }}</strong></div>
-    <div><span>Failed alerts</span><strong data-monitor-stat="failed">{{ failed }}</strong></div>
+    <div><span>Link-loss notifications</span><strong data-monitor-stat="failed">{{ failed }}</strong></div>
    </div>
    <div class="monitor-connections">
     <span><i :class="{ offline: !hunterOnline }"></i>HUNTER {{ hunterOnline ? 'connected' : 'disconnected' }}</span>
     <button type="button" :aria-pressed="!hunterOnline" @click="toggleHunter">{{ hunterOnline ? 'Disconnect HUNTER' : 'Reconnect HUNTER' }}</button>
     <span><i :class="{ offline: !baseOnline }"></i>Base {{ baseOnline ? 'connected' : 'disconnected' }}</span>
     <button type="button" :aria-pressed="!baseOnline" @click="toggleBase">{{ baseOnline ? 'Disconnect base' : 'Reconnect base' }}</button>
+   </div>
+   <div class="monitor-connections" aria-label="Simulated link handshake">
+    <span>Handshake interval: 1 s. No response: {{ linkSilence }} / 10 s</span>
+    <button type="button" @click="handshake">Advance 1 second</button>
+    <button type="button" :disabled="hunterOnline || linkSilence >= 10" @click="simulateLoss">Simulate 10 seconds without response</button>
    </div>
    <form class="monitor-form" @submit.prevent="addFod">
     <label>FOD object<select v-model="object"><option>Battery</option><option>Plastic part</option><option>Bolt</option></select></label>
@@ -174,12 +181,12 @@ watch([records, notices, events, nextId, hunterOnline, baseOnline], save, { deep
       <button v-for="option in ['all', 'pending', 'acknowledged']" :key="option" type="button" :aria-pressed="filter === option" @click="filter = option">{{ option === 'all' ? 'All records' : option === 'pending' ? 'Pending' : 'Acknowledged' }}</button>
      </div>
      <div class="monitor-table-scroll" tabindex="0" aria-label="FOD delivery records. Scroll horizontally on small screens.">
-      <table><thead><tr><th>Threat ID</th><th>Object / coordinates</th><th>Status</th><th>Retries</th></tr></thead>
+      <table><thead><tr><th>Threat ID</th><th>Object / coordinates</th><th>Status</th><th>HUNTER receipt</th></tr></thead>
        <tbody><tr v-for="record in visible" :key="record.id" :class="{ selected: current?.id === record.id }">
         <td><code>{{ targetId(record) }}</code><small>{{ clock(record.created) }}</small></td>
         <td>{{ record.object }}<small>{{ coords(record) }}</small></td>
         <td><span class="monitor-state" :class="record.state">{{ names[record.state] }}</span></td>
-        <td>{{ record.retries }} / 100</td>
+        <td>{{ record.received ? 'Received' : 'Not received' }}</td>
        </tr><tr v-if="!visible.length"><td colspan="4">No records in this view.</td></tr></tbody>
       </table>
      </div>
@@ -191,22 +198,20 @@ watch([records, notices, events, nextId, hunterOnline, baseOnline], save, { deep
       <template v-if="current">
        <code class="monitor-current-id">{{ targetId(current) }}</code>
        <p class="monitor-current-object">{{ current.object }} <span>{{ coords(current) }}</span></p>
-       <p class="monitor-current-status" role="status">{{ current.state === 'failed' ? 'Retry limit reached. Coordinates retained. Queue paused.' : current.state === 'queued' ? 'Stored on ARGUS. Waiting for the HUNTER link.' : current.received ? 'Received by HUNTER. Waiting for its receipt ACK.' : 'No response from HUNTER. Alert retained on ARGUS.' }}</p>
-       <label class="monitor-retry-label">Retries <strong>{{ current.retries }} / 100</strong></label>
-       <progress :value="current.retries" max="100" aria-label="Retry count out of 100"></progress>
+       <p class="monitor-current-status" role="status">{{ current.state === 'failed' ? 'Link lost. Coordinates retained.' : current.state === 'queued' ? 'Stored on ARGUS. Waiting for the HUNTER link.' : current.received ? 'Received by HUNTER. Waiting for its receipt ACK.' : 'No response from HUNTER. Alert retained on ARGUS.' }}</p>
+
        <div class="monitor-actions">
         <button type="button" class="monitor-primary" :disabled="!canAck" @click="acknowledge">Acknowledge receipt</button>
-        <button type="button" :disabled="!canTimeout" @click="timeout">Simulate ACK timeout</button>
-        <button type="button" :disabled="!canTimeout" @click="retryLimit">Simulate 100 failed retries</button>
+
        </div>
       </template>
       <p v-else>All stored alerts have been acknowledged.</p>
-      <p class="monitor-help">A receipt ACK releases the next coordinate. It does not confirm FOD collection. Timeout controls advance the simulation, not real time.</p>
+      <p class="monitor-help">A receipt ACK releases the next coordinate. It does not confirm FOD collection. Handshake controls advance simulated seconds, not real time.</p>
      </section>
      <section class="monitor-panel" aria-label="Base station notifications">
       <div class="monitor-panel-title"><strong>Base station notifications</strong><span>{{ notices.length }}</span></div>
-      <ul v-if="notices.length" class="monitor-notices"><li v-for="notice in notices" :key="notice.id"><strong>{{ notice.target }}</strong><span>Delivery failed after 100 retries.</span><small>{{ notice.sent ? 'Error notification sent to base.' : 'Stored error. Waiting for the base link.' }}</small></li></ul>
-      <p v-else class="monitor-empty">No delivery errors.</p>
+      <ul v-if="notices.length" class="monitor-notices"><li v-for="notice in notices" :key="notice.id"><strong>{{ notice.target }}</strong><span>No handshake response for 10 seconds.</span><small>{{ notice.sent ? 'Error notification sent to base.' : 'Stored error. Waiting for the base link.' }}</small></li></ul>
+      <p v-else class="monitor-empty">No link-loss notifications.</p>
      </section>
     </div>
    </div>

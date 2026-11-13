@@ -36,13 +36,13 @@ The base station is the control room where operators can receive updates from AR
 
 ### Requirements and Considerations {#requirements}
 
-The operational range must be up to 5 km, as that’s the runway length. The 917-925 MHz band was initially considered for telemetry messages only. The final frequency and power settings must meet the applicable IMDA requirements. The communication device must support live video transmission at a minimum resolution of 1080p (1920 × 1080) and be small and lightweight to fit ARGUS’s payload limits. The thermal live feed is intended for manual override, allowing the operator to guide ARGUS back at night if the drone encounters a problem. Live-feed integration and testing are pending.
+The operational range must be up to 5 km, as that’s the runway length. The 917-925 MHz band was initially considered for telemetry messages only. The final frequency and power settings must meet the applicable IMDA requirements. The communication device must support live video transmission at a minimum resolution of 1080p (1920 × 1080) and be small and lightweight to fit ARGUS’s payload limits. The thermal live feed is intended for manual override, allowing the operator to guide ARGUS back at night if the drone encounters a problem. Live-feed integration and testing will be carried out after the interim assessment.
 
 ## 2. Communication Methodology and Architecture Development {#a2-methodology-concept-development}
 
 ### UAV Communication Architecture {#communication-architecture}
 
-<CommunicationFigure src="/report-assets/communication-system/interim-communication-architecture.svg" :width="1200" :height="680" caption="ARGUS sender queue and message delivery over the interim link. The queue is demonstrated in Stage 2. Live receipt acknowledgements and retries are planned." />
+<CommunicationFigure src="/report-assets/communication-system/interim-communication-architecture.svg" :width="1200" :height="680" caption="ARGUS sender queue and message delivery over the interim link. The queue is demonstrated in Stage 2. Live receipt acknowledgements and handshake-based recovery will be implemented and tested after the interim assessment." />
 
 This architecture enables communication between the two systems without requiring the Python scripts to establish direct network socket connections manually.
 
@@ -106,9 +106,9 @@ The plan also includes checks for old or repeated alerts and protection of priva
 
 ### Communication and Vision System Workflow {#vision-communication-workflow}
 
-In the proposed workflow, vision uses navigation data to calculate the precise FOD coordinates. The ARGUS queue stores the coordinates in arrival order and sends one alert at a time. Each alert stays queued until HUNTER confirms receipt with the same threat ID. If communication is lost, ARGUS keeps the alert and resends it when the link returns. After the matching receipt acknowledgement, ARGUS sends the next queued coordinate without waiting for collection to finish. Live acknowledgements and retries are still pending.
+In the proposed workflow, vision uses navigation data to calculate the precise FOD coordinates. The ARGUS queue stores FOD coordinates in the order they are detected and sends one alert at a time. Each alert stays queued until HUNTER confirms receipt with the same threat ID. If communication is lost, ARGUS keeps the alert and resends it when the link returns. After the matching receipt acknowledgement, ARGUS sends the next queued coordinate without waiting for collection to finish. Live acknowledgements and retransmission will be implemented and tested after the interim assessment.
 
-<CommunicationFigure src="/report-assets/communication-system/vision-communication-workflow.svg" :width="1200" :height="1090" caption="Proposed vision-to-comms workflow with the queue on ARGUS. Unacknowledged alerts are retained for retry. Stage 2 is simulated, and live integration is pending." />
+<CommunicationFigure src="/report-assets/communication-system/vision-communication-workflow.svg" :width="1200" :height="900" caption="Proposed vision-to-comms workflow with the queue on ARGUS. Unacknowledged alerts are retained for retry. Stage 2 is simulated. Live integration will be implemented and tested after the interim assessment." />
 
 ## 3. Communication Prototype Implementation {#a3-prototype-development}
 
@@ -120,7 +120,7 @@ For interim communication, I implemented ROS 2 Jazzy to establish communication 
 
 ### Multiple FOD Transmission {#multiple-fod-transmission}
 
-The application queue runs on ARGUS and stores pending FOD alerts in arrival order. The planned process is to send one alert and retain it until HUNTER confirms receipt with the same threat ID. ARGUS then sends the next coordinate without waiting for FOD collection to finish. Live receipt acknowledgements will be added during integration. The threat ID would be as follows:
+The application queue runs on ARGUS and stores pending FOD alerts in the order they are detected. The planned process is to send one alert and retain it until HUNTER confirms receipt with the same threat ID. ARGUS then sends the next coordinate without waiting for FOD collection to finish. Live receipt acknowledgements will be added during integration. The threat ID would be as follows:
 
 | Object | Threat ID |
 | --- | --- |
@@ -128,13 +128,19 @@ The application queue runs on ARGUS and stores pending FOD alerts in arrival ord
 | Wrench | `FOD_THREAT_002` |
 | Bolt | `FOD_THREAT_003` |
 
-The threat ID sequence resets after every run. For the planned retry process, an alert without a matching receipt acknowledgement will remain in the ARGUS queue. ARGUS will retry the same alert up to 100 times if no matching receipt acknowledgement is received. The ACK timeout will be set during testing. HUNTER will recognise repeated threat IDs within the same mission so retries do not create duplicate targets. If all 100 retries fail, ARGUS will send an error notification to the base station if that link is available. The undelivered coordinates will remain stored on ARGUS. This recovery process still needs implementation and testing.
+The threat ID sequence resets after the ARGUS drone has finished its run for that particular day. HUNTER will use the mission and threat IDs to avoid duplicate targets.
 
 #### Communication Simulator {#communication-simulator}
 
 Add example FOD alerts to the ARGUS queue. Use "Acknowledge receipt" to simulate HUNTER confirming receipt and release the next coordinate.
 
 <CommunicationDemo />
+
+### Link Handshake and Communication Loss {#link-handshake-and-communication-loss}
+
+In the proposed setup, ARGUS sends a link-check message to HUNTER every second, and HUNTER replies to confirm that both are still connected. If ARGUS receives no replies for 10 seconds, it informs the base station if reachable and waits for further commands. This handshake only checks the link between them, while the receipt ACK confirms that a specific FOD target was received.
+
+If the base station cannot be reached, the notification will remain stored until its link returns. Undelivered FOD coordinates will stay in the ARGUS queue and be resent when communication returns. This recovery process will be implemented and tested after the interim assessment.
 
 ## 4. Communication Testing {#a4-testing}
 
@@ -206,7 +212,7 @@ The 100-message benchmark used ROS 2 Jazzy with the publisher and subscriber on 
 - **Release the next alert:** Send the next queued alert after the matching receipt acknowledgement returns to ARGUS.
 - **Detect missing messages:** Add sequence-number tracking and communication-loss detection.
 - **Keep alerts during link loss:** Retain unacknowledged FOD coordinates on ARGUS and resend them when communication returns. Test that valid retries are acknowledged without creating duplicate HUNTER targets.
-- **Set the retry limit:** Retry each unacknowledged alert up to 100 times. If all retries fail, notify the base station when its link is available and keep the undelivered coordinates. Set and test the ACK timeout.
+- **Check the link every second:** Exchange a handshake every second. If no response is received for 10 seconds, inform the base station when its link is available. Keep undelivered coordinates for resending after reconnection. Test link checks separately from FOD receipt ACKs.
 
 :::
 
@@ -232,9 +238,9 @@ The 100-message benchmark used ROS 2 Jazzy with the publisher and subscriber on 
 
 ::: details 6.1.6 Communication Monitoring Website
 
-Develop a website for operators to view stored FOD coordinates, queue order, receipt acknowledgements, retry counts and error notifications. Connect it to the ARGUS queue, database and ROS 2 messages. Unacknowledged alerts will stay stored for resending after communication loss. Acknowledged records will remain available as delivery history.
+Develop a website for operators to view stored FOD coordinates, queue order, receipt acknowledgements, handshake status and error notifications. Connect it to the ARGUS queue, database and ROS 2 messages. Unacknowledged alerts will stay stored for resending after communication loss. Acknowledged records will remain available as delivery history.
 
-The simulator below shows the proposed interface. It uses example records saved in this browser, not a live database or radio connection. Add a FOD, disconnect and restore the HUNTER link, confirm receipt, or simulate 100 failed retries. The real interface and its backend are future work.
+The simulator below shows the proposed interface. It uses example records saved in this browser, not a live database or radio connection. Add a FOD, disconnect and restore the HUNTER link, confirm receipt, or simulate 10 seconds without a handshake response. The real interface and its backend are future work.
 
 <CommsDashboardDemo />
 
@@ -248,8 +254,8 @@ The final communication device is still to be confirmed. Range, interference and
 
 | Test | Planned method | Check or target | Hardware needed |
 | --- | --- | --- | --- |
-| Alert delivery and ACK timing | Send numbered alerts between two devices and log send, receive and ACK times. | Set the ACK timeout, delivery-rate target and acceptable delay. | Start on Wi-Fi, repeat on the radio. |
-| Communication-loss recovery | Disconnect HUNTER, add FOD alerts and restore the link. Also test missing ACKs. | Retain coordinates, preserve queue order and avoid duplicate targets. Stop after 100 failed retries and notify the base station if reachable. | Start on Wi-Fi. |
+| Alert delivery and ACK timing | Send numbered alerts between two devices and log send, receive and ACK times. | Verify matching FOD receipt ACKs and set the delivery-rate target and acceptable delay. | Start on Wi-Fi, repeat on the radio. |
+| Communication-loss recovery | Disconnect HUNTER, add FOD alerts and restore the link. Also test missing ACKs. | Retain coordinates, preserve queue order and avoid duplicate targets. Check the link every second and notify the base station after 10 seconds without a handshake response, if reachable. Verify that a missing FOD ACK alone does not trigger a link-loss notification. | Start on Wi-Fi. |
 | Record storage and queue capacity | Restart ARGUS with pending alerts and test the storage limit. | Pending records survive restart. Set queue capacity and define what happens when storage is full. | ARGUS storage and application. |
 | Coordinate agreement | Send known coordinates with agreed units, map frame, mission ID and threat ID. | HUNTER receives the same target values and interprets the agreed frame correctly. | Start on Wi-Fi. |
 | Radio power configuration | Check the radio settings, antenna gain and cable losses. | The proposed 2.4 GHz UAV setup stays below 100 mW EIRP. | Candidate radio and antenna setup. |

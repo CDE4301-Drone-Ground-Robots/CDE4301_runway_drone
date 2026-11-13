@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 680" width="1200" height="680" role="img" aria-labelledby="title desc">
 <title id="title">ARGUS to HUNTER communication</title>
-<desc id="desc">Vision sends detected FOD coordinates to the ARGUS queue. ARGUS sends one stored target to HUNTER over ROS 2 and Wi-Fi. HUNTER stores the target without duplicates and returns a receipt acknowledgement. ARGUS then sends the next target. Alerts without an acknowledgement remain stored for retry. Live acknowledgements, retries and target navigation integration are proposed.</desc>
+<desc id="desc">Vision sends detected FOD coordinates to the ARGUS queue. ARGUS sends one stored target to HUNTER over ROS 2 and Wi-Fi. HUNTER stores the target without duplicates and returns a receipt acknowledgement. ARGUS then sends the next target. Alerts without an acknowledgement remain stored for retry. Link checks are planned every second, with a base notification after 10 seconds without a handshake response. Live integration and link checks will be implemented and tested after the interim assessment.</desc>
 <defs>
 <marker id="send" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" orient="auto-start-reverse"><path d="M0 0L10 5L0 10Z" fill="#d7aa94"/></marker>
 <marker id="ack" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" orient="auto"><path d="M0 0L10 5L0 10Z" fill="#a8d4bc"/></marker>
@@ -8,7 +8,7 @@
 </defs>
 <rect width="1200" height="680" rx="18" fill="#0d131d"/>
 <text class="title" x="600" y="49">ARGUS-HUNTER Communication</text>
-<text class="note" x="600" y="87">Stage 2 demonstrates the ARGUS queue. Live ACK and retry are planned.</text>
+<text class="note" x="600" y="87">Stage 2 demonstrates the queue. Live integration and link checks will be done after interim.</text>
 <rect x="30" y="125" width="570" height="365" rx="16" fill="#12202b" stroke="#40596b"/>
 <rect x="640" y="125" width="530" height="365" rx="16" fill="#12202b" stroke="#40596b"/>
 <text class="heading" x="315" y="168">ARGUS</text>
@@ -39,6 +39,6 @@
 <text x="612" y="443" font-size="17" fill="#a8d4bc">ARGUS sends the next target</text>
 <rect x="55" y="525" width="1090" height="94" rx="12" fill="#20212f" stroke="#708b9e"/>
 <text class="label" x="600" y="558">No ACK or connection lost: keep the target in the ARGUS queue.</text>
-<text class="body" x="600" y="592">Retry up to 100 times, then notify the base station if reachable. Keep undelivered targets.</text>
+<text class="body" x="600" y="592">Handshake every second. No response for 10 seconds: notify the base station if reachable.</text>
 <text class="note" x="600" y="653">ACK confirms receipt. It does not mean HUNTER has collected the FOD.</text>
 </svg>

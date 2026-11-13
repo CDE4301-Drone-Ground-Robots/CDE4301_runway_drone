@@ -49,7 +49,7 @@ The scope is to develop the vision system for runway inspection and the communic
 - **Datasets and model validation:** Collect suitable test-ground images, control similarity leakage between dataset splits and improve crack detection on rough surfaces. Measure detection performance, false alarms, processing time and memory use.
 - **Coordinate extraction:** Combine image detections with navigation position and orientation to calculate FOD ground coordinates. Validate camera calibration, gimbal alignment and coordinate error.
 - **Thermal safety:** Develop thermal detection of people and birds, the proposed stop response and the live feed for operator override at night.
-- **FOD communication:** Define ROS 2 alert messages and integrate the selected radio link. Maintain the ARGUS-side coordinate queue, receipt acknowledgements, up to 100 retries and base-station error notifications. Test range, interference, video transmission and the proposed security measures.
+- **FOD communication:** Define ROS 2 alert messages and integrate the selected radio link. Maintain the ARGUS-side coordinate queue, receipt acknowledgements, one-second link handshakes and base-station notifications after 10 seconds without a handshake response. Test range, interference, video transmission and the proposed security measures.
 - **Onboard integration:** Deploy and benchmark the vision and communication systems on Jetson with the other subsystems. Evaluate workload sharing with the Raspberry Pi where needed.
 
 </ScopeDropdown>

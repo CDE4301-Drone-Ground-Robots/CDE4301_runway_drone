@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { onUnmounted, ref } from 'vue'
+import { computed, onUnmounted, ref } from 'vue'
 
 type Fod = 'Battery' | 'Plastic part' | 'Bolt'
 type Alert = { id: number; object: Fod; x: number; y: number }
@@ -7,7 +7,6 @@ const object = ref<Fod>('Battery')
 const generated = ref(0)
 const waiting = ref<Alert[]>([])
 const current = ref<Alert | null>(null)
-const latest = ref<Alert | null>(null)
 const sent = ref(0)
 const received = ref(0)
 const acknowledged = ref(0)
@@ -16,6 +15,7 @@ const lastReceived = ref<Alert | null>(null)
 const lastAck = ref<Alert | null>(null)
 const status = ref('Add an example FOD alert to the ARGUS queue.')
 const inTransit = ref<Alert | null>(null)
+const outbound = computed(() => inTransit.value ?? awaitingAck.value)
 let sequence = 0
 let timer: ReturnType<typeof setTimeout> | undefined
 const objects: Fod[] = ['Battery', 'Plastic part', 'Bolt']
@@ -44,7 +44,6 @@ function send(count = 1) {
    id, object: count === 1 ? object.value : objects[i % objects.length],
    x: 3 + (id - 1) * 1.2, y: 4 + (id - 1) * 0.5
   }
-  latest.value = alert
   waiting.value.push(alert)
   generated.value++
  }
@@ -69,7 +68,6 @@ function reset() {
  inTransit.value = null
  waiting.value = []
  current.value = null
- latest.value = null
  awaitingAck.value = null
  lastReceived.value = null
  lastAck.value = null
@@ -89,17 +87,17 @@ onUnmounted(stop)
    <button type="button" class="com-demo-reset" @click="reset">Reset</button>
   </div>
   <div class="com-demo-flow">
-   <div class="com-demo-node" :class="{ busy: inTransit }">
-    <span class="com-demo-kicker">ARGUS</span><strong>C2 alert</strong>
-    <template v-if="latest"><code>{{ label(latest) }}</code><span>{{ latest.object }}</span><span>{{ coordinates(latest) }}</span></template>
-    <span v-else>No FOD added</span>
-   </div>
-   <div class="com-demo-arrow" :class="{ busy: inTransit }" aria-hidden="true">&#8594;</div>
    <div class="com-demo-node com-demo-queue">
     <span class="com-demo-kicker">ARGUS APPLICATION QUEUE</span><strong>{{ waiting.length }} waiting</strong>
     <ol v-if="waiting.length" aria-label="Waiting FOD targets on ARGUS"><li v-for="alert in waiting" :key="alert.id"><code>{{ label(alert) }}</code><span>{{ alert.object }}</span></li></ol>
     <span v-else>No waiting alerts</span>
     <span v-if="awaitingAck" class="com-demo-held">Retained until ACK:<br><code>{{ label(awaitingAck) }}</code></span>
+   </div>
+   <div class="com-demo-arrow" :class="{ busy: inTransit }" aria-hidden="true">&#8594;</div>
+   <div class="com-demo-node" :class="{ busy: inTransit }">
+    <span class="com-demo-kicker">ARGUS OUTGOING MESSAGE</span><strong>C2 alert</strong>
+    <template v-if="outbound"><code>{{ label(outbound) }}</code><span>{{ outbound.object }}</span><span>{{ coordinates(outbound) }}</span></template>
+    <span v-else>No target awaiting delivery</span>
    </div>
    <div class="com-demo-arrow" :class="{ busy: inTransit }" aria-hidden="true">&#8594;</div>
    <div class="com-demo-node com-demo-link" :class="{ busy: inTransit }">
