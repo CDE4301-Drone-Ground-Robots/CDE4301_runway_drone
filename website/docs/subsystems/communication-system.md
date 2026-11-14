@@ -152,9 +152,11 @@ If the base station cannot be reached, the notification will remain stored until
 
 A local database will be added on ARGUS after the interim assessment to store FOD coordinates for resending and bookkeeping. Each record will contain the mission ID, threat ID, object type, X and Y coordinates, detection time and delivery status. The mission ID will distinguish records from different days when the threat ID sequence resets.
 
-Each FOD record will be saved before it enters the transmission queue. The queue controls which target is sent next, while the database keeps the stored records. If communication is lost, unacknowledged records will remain stored and be resent with the same mission and threat IDs when the link returns. HUNTER will use these IDs to avoid creating duplicate targets. After a restart, ARGUS will reload unacknowledged records into the queue.
+Each FOD record will be saved before it enters the transmission queue. The queue controls which target is sent next, while the database keeps the stored records. If communication is lost, unacknowledged records will remain stored and be resent with the same mission and threat IDs when the link returns. If an ACK is lost, ARGUS sends the target again. HUNTER checks the mission and threat IDs to avoid adding the same target twice.
 
-When HUNTER returns a matching receipt ACK, the database will mark the record as acknowledged and save the acknowledgement time. The record will remain available for bookkeeping instead of being deleted. This history will show which FOD coordinates were detected, sent and acknowledged. An acknowledged record confirms delivery, not completed FOD collection. Database storage, restart recovery and integration with ROS 2 will be implemented and tested after the interim assessment.
+When HUNTER returns a matching receipt ACK, the database will mark the record as acknowledged and save the acknowledgement time. The record will remain available for bookkeeping instead of being deleted. This history will show which FOD coordinates were detected, sent and acknowledged. An acknowledged record confirms delivery, not completed FOD collection. Database storage and integration with ROS 2 will be implemented and tested after the interim assessment.
+
+The database will be connected to the user interface (UI) described in [Future Works: Communication Monitoring Website](#communication-monitoring-interface).
 
 ## 5.4 Communication Testing {#a4-testing}
 
@@ -176,7 +178,7 @@ In this simulation below, ARGUS detects the FOD and, at the backend, asks the Na
 
 The C2 alert transmission test is shown below. A Python script (DemoComs_C2.py) served as a ROS 2 publisher, sending FOD detection information to the Raspberry Pi 5(simulated HUNTER) through the `/c2/target_alert` communication channel. It sends the FOD detection data in JSON format.
 
-On the Raspberry Pi 5, the receiver successfully receives and decodes the messages. It then displays the FOD classification, confidence score and the target coordinates in the terminal. In the background, it converts the received coordinates into a ROS 2 PoseStamped navigation goal and publishes it to the `/goal_pose` topic.
+On the Raspberry Pi 5, the receiver successfully receives and decodes the messages. It then displays the FOD classification, confidence score and the target coordinates in the terminal. In the background, it converts the received coordinates into a ROS 2 PoseStamped navigation goal and publishes it to the `/goal_pose` topic. This will be explained further in the HUNTER team’s report.
 
 <CommunicationFigure number="121" src="/report-assets/communication-system/argus-publisher-test.png" :width="1252" :height="223" caption="Original ARGUS publisher screenshot from the laptop test." />
 
@@ -202,7 +204,7 @@ These tests were successful (shown in the figure above), proving that the ARGUS 
 | Duplicate messages | 0 |
 | Nominal benchmark transmission rate | 10 Hz |
 
-The 100-message benchmark used ROS 2 Jazzy with the publisher and subscriber on the same device (0 m separation). The C2 alert payload size was measured at 588 bytes, and the estimated application-level bandwidth was 9.408 kbps at two alerts per second. This covers alert payloads only, excluding video and network overhead. The live-video target is at least 1080p (1920 × 1080). Camera support, frame rate, bandwidth and delay still need to be confirmed and tested. Additionally, a ROS 2 test was conducted using 100 consecutive alerts simulating the C2 alerts at a nominal rate of 10Hz sent from publisher to subscriber. All 100 messages were received successfully hence attaining the 100% delivery rate with no missing or duplicate messages. This checks local ROS 2 message delivery; it does not measure wireless range or performance between separate devices.
+The 100-message benchmark used ROS 2 Jazzy with the publisher and subscriber on the same device (0 m separation). The C2 alert payload size was measured at 588 bytes, and the estimated application-level bandwidth was 9.408 kbps at two alerts per second. This covers alert payloads only, excluding video and network overhead. Although each alert is only 588 bytes, the link needs extra capacity for network overhead, handshakes, ACKs and resending messages. The live-video target is at least 1080p (1920 × 1080). Video transmission, camera support, frame rate, bandwidth and delay will all be tested after the interim phase. Additionally, a ROS 2 test was conducted using 100 consecutive alerts simulating the C2 alerts at a nominal rate of 10Hz sent from publisher to subscriber. All 100 messages were received successfully hence attaining the 100% delivery rate with no missing or duplicate messages. This checks local ROS 2 message delivery; it does not measure wireless range or performance between separate devices.
 
 ## 5.6 Discussion of Future Works {#a6-problems-project-plan}
 
@@ -234,7 +236,7 @@ The 100-message benchmark used ROS 2 Jazzy with the publisher and subscriber on 
 
 ::: details 5.6.1.4 Thermal Live-Feed Testing
 
-- **Set and test the video settings:** The live-video target is at least 1080p (1920 × 1080). Camera support, frame rate, bandwidth and delay still need to be confirmed and tested.
+- **Set and test the video settings:** The live-video target is at least 1080p (1920 × 1080). Video transmission, camera support, frame rate, bandwidth and delay will all be tested after the interim phase.
 
 :::
 
