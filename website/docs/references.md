@@ -116,7 +116,7 @@ References are numbered in order of first citation in the full report. The same 
 <div class="ieee-reference" id="md-ref-3">
 <span class="ieee-reference-number">[16]</span>
 <div class="ieee-reference-body">
-<p>N. Hooli, B. Yelamali, G. R. Chalageri, S. Billur, and G. U. Raju, ?Performance evaluation of pusher or puller configuration for quadcopter ? CFD analysis,? <i>AIP Conference Proceedings</i>, vol. 3325, no. 1, Art. no. 050013, Oct. 2025. doi: <a href="https://doi.org/10.1063/5.0291733">10.1063/5.0291733</a>.</p>
+<p>N. Hooli, B. Yelamali, G. R. Chalageri, S. Billur, and G. U. Raju, &quot;Performance evaluation of pusher or puller configuration for quadcopter - CFD analysis,&quot; <i>AIP Conference Proceedings</i>, vol. 3325, no. 1, Art. no. 050013, Oct. 2025. doi: <a href="https://doi.org/10.1063/5.0291733">10.1063/5.0291733</a>.</p>
 </div>
 </div>
 
@@ -201,7 +201,7 @@ References are numbered in order of first citation in the full report. The same 
 <div class="ieee-reference" id="md-ref-9">
 <span class="ieee-reference-number">[28]</span>
 <div class="ieee-reference-body">
-<p>Bambu Lab, ?Filament guide.? [Online]. Available: <a href="https://bambulab.com/en/filament/guide">https://bambulab.com/en/filament/guide</a>.</p>
+<p>Bambu Lab, &quot;Filament guide.&quot; [Online]. Available: <a href="https://bambulab.com/en/filament/guide">https://bambulab.com/en/filament/guide</a>.</p>
 </div>
 </div>
 
@@ -348,60 +348,60 @@ References are numbered in order of first citation in the full report. The same 
 </div>
 </div>
 
-<div class="ieee-reference" id="nav-ref-4">
+<div class="ieee-reference" id="nav-ref-10">
 <span class="ieee-reference-number">[49]</span>
+<div class="ieee-reference-body">
+<p>R. E. Kalman, &quot;A new approach to linear filtering and prediction problems,&quot; <em>Journal of Basic Engineering</em>, vol. 82, no. 1, 1960, doi: 10.1115/1.3662552. [Online]. Available: <a href="https://doi.org/10.1115/1.3662552">https://doi.org/10.1115/1.3662552</a>.</p>
+</div>
+</div>
+
+<div class="ieee-reference" id="nav-ref-4">
+<span class="ieee-reference-number">[50]</span>
 <div class="ieee-reference-body">
 <p>P. E. Hart, N. J. Nilsson, and B. Raphael, &quot;A formal basis for the heuristic determination of minimum cost paths,&quot; <em>IEEE Transactions on Systems Science and Cybernetics</em>, vol. 4, no. 2, 1968, doi: 10.1109/TSSC.1968.300136. [Online]. Available: <a href="https://doi.org/10.1109/TSSC.1968.300136">https://doi.org/10.1109/TSSC.1968.300136</a>.</p>
 </div>
 </div>
 
 <div class="ieee-reference" id="nav-ref-5">
-<span class="ieee-reference-number">[50]</span>
+<span class="ieee-reference-number">[51]</span>
 <div class="ieee-reference-body">
 <p>S. M. LaValle, <em>Planning Algorithms</em>. Cambridge University Press, 2006. [Online]. Available: <a href="https://lavalle.pl/planning/">https://lavalle.pl/planning/</a>.</p>
 </div>
 </div>
 
 <div class="ieee-reference" id="nav-ref-6">
-<span class="ieee-reference-number">[51]</span>
+<span class="ieee-reference-number">[52]</span>
 <div class="ieee-reference-body">
 <p>R. C. Coulter, &quot;Implementation of the pure pursuit path tracking algorithm,&quot; Carnegie Mellon University Robotics Institute, Tech. Rep. CMU-RI-TR-92-01, 1992. [Online]. Available: <a href="https://www.ri.cmu.edu/publications/implementation-of-the-pure-pursuit-path-tracking-algorithm/">https://www.ri.cmu.edu/publications/implementation-of-the-pure-pursuit-path-tracking-algorithm/</a>.</p>
 </div>
 </div>
 
 <div class="ieee-reference" id="nav-ref-7">
-<span class="ieee-reference-number">[52]</span>
+<span class="ieee-reference-number">[53]</span>
 <div class="ieee-reference-body">
 <p>J. M. Snider, &quot;Automatic steering methods for autonomous automobile path tracking,&quot; Carnegie Mellon University Robotics Institute, Tech. Rep. CMU-RI-TR-09-08, 2009. [Online]. Available: <a href="https://www.ri.cmu.edu/publications/automatic-steering-methods-for-autonomous-automobile-path-tracking">https://www.ri.cmu.edu/publications/automatic-steering-methods-for-autonomous-automobile-path-tracking</a>.</p>
 </div>
 </div>
 
 <div class="ieee-reference" id="nav-ref-8">
-<span class="ieee-reference-number">[53]</span>
+<span class="ieee-reference-number">[54]</span>
 <div class="ieee-reference-body">
 <p>PX4 Autopilot, &quot;PX4 user guide: Offboard mode, EKF2 tuning and safety.&quot; [Online]. Available: <a href="https://docs.px4.io/main/en/flight_modes/offboard">https://docs.px4.io/main/en/flight_modes/offboard</a>; <a href="https://docs.px4.io/main/en/advanced_config/tuning_the_ecl_ekf">https://docs.px4.io/main/en/advanced_config/tuning_the_ecl_ekf</a>; <a href="https://docs.px4.io/main/en/config/safety">https://docs.px4.io/main/en/config/safety</a>.</p>
 </div>
 </div>
 
 <div class="ieee-reference" id="nav-ref-9">
-<span class="ieee-reference-number">[54]</span>
-<div class="ieee-reference-body">
-<p>D. Fox, W. Burgard, and S. Thrun, &quot;The dynamic window approach to collision avoidance,&quot; <em>IEEE Robotics &amp; Automation Magazine</em>, vol. 4, no. 1, 1997, doi: 10.1109/100.580977. [Online]. Available: <a href="https://doi.org/10.1109/100.580977">https://doi.org/10.1109/100.580977</a>.</p>
-</div>
-</div>
-
-<div class="ieee-reference" id="nav-ref-10">
 <span class="ieee-reference-number">[55]</span>
 <div class="ieee-reference-body">
-<p>R. E. Kalman, &quot;A new approach to linear filtering and prediction problems,&quot; <em>Journal of Basic Engineering</em>, vol. 82, no. 1, 1960, doi: 10.1115/1.3662552. [Online]. Available: <a href="https://doi.org/10.1115/1.3662552">https://doi.org/10.1115/1.3662552</a>.</p>
+<p>D. Fox, W. Burgard, and S. Thrun, &quot;The dynamic window approach to collision avoidance,&quot; <em>IEEE Robotics &amp; Automation Magazine</em>, vol. 4, no. 1, 1997, doi: 10.1109/100.580977. [Online]. Available: <a href="https://doi.org/10.1109/100.580977">https://doi.org/10.1109/100.580977</a>.</p>
 </div>
 </div>
 
 <div class="ieee-reference" id="nav-ref-11">
 <span class="ieee-reference-number">[56]</span>
 <div class="ieee-reference-body">
-<p>U.S. Department of Defense, <em>Flying Qualities of Piloted Aircraft</em>, MIL-HDBK-1797. [Online]. Available: <a href="https://en.wikipedia.org/wiki/Dryden_Wind_Turbulence_Model">https://en.wikipedia.org/wiki/Dryden_Wind_Turbulence_Model</a>.</p>
-<p class="reference-note">The original report linked a secondary Dryden-model overview. The primary handbook edition and direct source link still need confirmation.</p>
+<p>U.S. Department of Defense, <em>Flying Qualities of Piloted Aircraft</em>, MIL-HDBK-1797, Dec. 19, 1997. Accessed: Nov. 14, 2026. [Online]. Available: <a href="https://quicksearch.dla.mil/qsDocDetails.aspx?ident_number=208700">Official DLA ASSIST document record</a>.</p>
+<p class="reference-note">Historical handbook cited as background for the simulation turbulence model. The official record lists it as superseded by MIL-STD-1797.</p>
 </div>
 </div>
 

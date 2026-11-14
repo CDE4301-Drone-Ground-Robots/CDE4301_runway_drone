@@ -337,7 +337,7 @@ The results show increasing pitch and thrust requirements with headwind speed an
 
 Cruise and acceleration calculations considered only pitch, while lateral manoeuvres due to wind disturbances also require roll. A conservative maximum combined tilt of 45° was therefore adopted, using the comparable DJI Matrice 350 RTK's 30° maximum pitch as a reference [\[23\]](../references#md-ref-16).
 
-<MechanicalFigure number="25" n="30" src="/report-assets/mechanical-design/dji-matrice-350-rtk-tilt-reference.png" :width="547" :height="412" caption="DJI Matrice 350 RTK. Maximum pitch angle reference reproduced from the supplied report [16]." />
+<MechanicalFigure number="25" n="30" src="/report-assets/mechanical-design/dji-matrice-350-rtk-tilt-reference.png" :width="547" :height="412" caption="DJI Matrice 350 RTK. Maximum pitch angle reference reproduced from the supplied report [23]." />
 
 The combined tilt angle, $\beta$, accounts for both pitch ($\theta$) and roll ($\phi$) of the UAV:
 
@@ -1156,7 +1156,7 @@ The SolidWorks assembly places the UAV's CG approximately 40 mm below the propel
 
 The thesis cited in the source report [\[33\]](../references#md-ref-10) describes how positioning the CG below the propellers can contribute to stability during forward flight and wind disturbances. Aerodynamic drag acting above the CG can generate a stabilising moment opposing an attitude disturbance, as illustrated below.
 
-<MechanicalFigure number="52" n="16" src="/report-assets/mechanical-design/vertical-cg-stability-reference.png" :width="1040" :height="378" caption="Influence of vertical CG positioning on multicopter stability. External thesis illustration reproduced in the supplied report [10]; bibliographic details were not supplied." />
+<MechanicalFigure number="52" n="16" src="/report-assets/mechanical-design/vertical-cg-stability-reference.png" :width="1040" :height="378" caption="Influence of vertical CG positioning on multicopter stability. External thesis illustration reproduced in the supplied report [33]." />
 
 FOD ARGUS incorporates a lower CG through the arrangement of its onboard components, particularly the battery. This configuration may contribute to a stabilising aerodynamic response if the resultant aerodynamic forces act above the CG. Overall stability remains dependent on the flight control system, and flight testing is required to evaluate the effectiveness of this arrangement.
 

@@ -65,10 +65,10 @@ The simulation models the following sensors. The numbers are taken from the manu
 
 | Sensor | What was modelled | What the drone uses it for |
 | --- | --- | --- |
-| Leishen N10 2D LiDAR [\[38\]](../references#nav-ref-14) | A 360° scan with 450 beams at 10 Hz. Range is 12 m on a target that reflects 70% of the light, 7.9 m at 30% and 4.7 m in strong sunlight. Accuracy is ±3 cm, and the scan is in one flat plane | The main avoidance sensor. It detects birds (moving) and trees and poles (static), and its range sets the maximum flight speed |
-| TFmini Plus single-point LiDAR [\[39\]](../references#nav-ref-15) | 12 m range on a target that reflects 90%, a 3.6° beam pointed 3° above the nose, ±3 cm accuracy | A forward look-ahead that sees above the flat N10 scan. Its benefit is not yet shown in simulation |
+| Leishen N10 2D LiDAR [\[37\]](../references#nav-ref-14) | A 360° scan with 450 beams at 10 Hz. Range is 12 m on a target that reflects 70% of the light, 7.9 m at 30% and 4.7 m in strong sunlight. Accuracy is ±3 cm, and the scan is in one flat plane | The main avoidance sensor. It detects birds (moving) and trees and poles (static), and its range sets the maximum flight speed |
+| TFmini Plus single-point LiDAR [\[41\]](../references#nav-ref-15) | 12 m range on a target that reflects 90%, a 3.6° beam pointed 3° above the nose, ±3 cm accuracy | A forward look-ahead that sees above the flat N10 scan. Its benefit is not yet shown in simulation |
 | RGB camera e-CAM56_CUONX (looking straight down) | Sony IMX568 sensor with a global shutter, 2472 × 2064 pixels and a fixed M12 lens. In the simulation it is modelled as 640 × 640 pixels with a 22.6° horizontal field of view, which covers 2 m × 2 m on the ground at 5 m, processed at 5 Hz with 90% detection (50% at the edge of the image) | The main FOD detector, looking straight down the lane. The global shutter avoids image skew at the 4.2 m/s survey speed |
-| Thermal camera BNW2T256T04010ASSWC [\[41\]](../references#nav-ref-17) | 256 × 192 pixels, 4.0 mm lens, 45.5° × 33.5° field of view, tilted 45° to the side so that it sees a strip from 2.7 m to 9.3 m beside the track | Verifies each FOD with a second, independent view taken from the side |
+| Thermal camera BNW2T256T04010ASSWC [\[42\]](../references#nav-ref-17) | 256 × 192 pixels, 4.0 mm lens, 45.5° × 33.5° field of view, tilted 45° to the side so that it sees a strip from 2.7 m to 9.3 m beside the track | Verifies each FOD with a second, independent view taken from the side |
 | Unicore UM980 GNSS receiver [\[40\]](../references#nav-ref-16) | RTK positioning, 2 cm horizontal and 3 cm vertical accuracy at 10 Hz, fused with the other sensors in the PX4 EKF2 estimator | The position of the drone, which gives centimetre-level lane keeping and the coordinates of each FOD |
 
 #### 3.1.1.3 Simulation Software Used {#software-used}
@@ -100,7 +100,7 @@ The **lane pitch** is the sideways distance between the centre lines of two neig
 <details class="custom-block details">
 <summary>Sources for the survey criteria</summary>
 
-Sources: runway dimensions follow FAA AC 150/5300-13B [\[44\]](../references#nav-ref-3) and ICAO Annex 14 Vol. I [\[45\]](../references#nav-ref-13). The RGB footprint is calculated from the e-CAM56_CUONX sensor and M12 lens, and the thermal footprint from the BNW2T256T04010ASSWC datasheet [\[41\]](../references#nav-ref-17).
+Sources: runway dimensions follow FAA AC 150/5300-13B [\[44\]](../references#nav-ref-3) and ICAO Annex 14 Vol. I [\[45\]](../references#nav-ref-13). The RGB footprint is calculated from the e-CAM56_CUONX sensor and M12 lens, and the thermal footprint from the BNW2T256T04010ASSWC datasheet [\[42\]](../references#nav-ref-17).
 
 </details>
 
@@ -209,7 +209,7 @@ Obstacle avoidance runs in the EVADE and HOLD states of the mission state machin
 | AVOID | The drone and an object would meet within 2.5 s | Steers to the best safe velocity |
 | EMERGENCY | The meeting would be within 0.8 s, or the object is already too close | Escapes with the largest possible clearance |
 
-**Moving objects (birds).** The LiDAR scan is clustered into objects. A track is confirmed after 3 hits and dropped after 1 s without a hit, so a single noisy return does not cause a manoeuvre. Each track carries an uncertainty radius that grows with time, so a bird that has not been seen recently is treated more cautiously. A linear Kalman filter [\[55\]](../references#nav-ref-10) is run for each confirmed track. It estimates the position and the velocity of the bird from the LiDAR hits and predicts where the bird will be at the next scan. Between hits the filter has nothing to correct its prediction, so its uncertainty grows, and this growing uncertainty is the uncertainty radius mentioned above. The predicted position and its uncertainty are what the avoidance planner uses to decide whether a path is safe. How the planner uses them, with velocity sampling and collision cones, is explained in [Local Planning: Reactive Avoidance](#local-planning-reactive-avoidance).
+**Moving objects (birds).** The LiDAR scan is clustered into objects. A track is confirmed after 3 hits and dropped after 1 s without a hit, so a single noisy return does not cause a manoeuvre. Each track carries an uncertainty radius that grows with time, so a bird that has not been seen recently is treated more cautiously. A linear Kalman filter [\[49\]](../references#nav-ref-10) is run for each confirmed track. It estimates the position and the velocity of the bird from the LiDAR hits and predicts where the bird will be at the next scan. Between hits the filter has nothing to correct its prediction, so its uncertainty grows, and this growing uncertainty is the uncertainty radius mentioned above. The predicted position and its uncertainty are what the avoidance planner uses to decide whether a path is safe. How the planner uses them, with velocity sampling and collision cones, is explained in [Local Planning: Reactive Avoidance](#local-planning-reactive-avoidance).
 
 **Static objects (trees, poles).** A cell that keeps returning for 1 s becomes static and leaves the mover tracker. The route planner then inserts a bypass or truncates the lane.
 
@@ -226,7 +226,7 @@ The sequence of events when an obstacle stays on the lane is as follows. The obs
 <details class="custom-block details">
 <summary>Rerouting details: transits, obstacle map and methods</summary>
 
-Take-off, return and revisit transits are flown as straight lines between known coordinates, and the revisits are ordered nearest-first. The same bypass is applied around any mapped obstacle. The obstacle map is an occupancy grid with 0.4 m cells, and a cell becomes static after 1.0 s. The methods follow: Hart, Nilsson & Raphael (1968) [\[49\]](../references#nav-ref-4); LaValle, *Planning Algorithms* [\[50\]](../references#nav-ref-5).
+Take-off, return and revisit transits are flown as straight lines between known coordinates, and the revisits are ordered nearest-first. The same bypass is applied around any mapped obstacle. The obstacle map is an occupancy grid with 0.4 m cells, and a cell becomes static after 1.0 s. The methods follow: Hart, Nilsson & Raphael (1968) [\[50\]](../references#nav-ref-4); LaValle, *Planning Algorithms* [\[51\]](../references#nav-ref-5).
 
 </details>
 
@@ -256,7 +256,7 @@ The cross-track error decays exponentially, so a 3 m detour is recovered in abou
 <details class="custom-block details">
 <summary>Why this controller</summary>
 
-Pure pursuit [\[51\]](../references#nav-ref-6) was considered first, but at cruise it looks about 4 m ahead, and the lane pitch is only 1.76 m, so it would be expected to cut the lane ends. A cross-track term corrects onto the line itself [\[52\]](../references#nav-ref-7), which suits a narrow lane. Because PX4 already handles attitude and rate [\[53\]](../references#nav-ref-8), the outer loop can be a simple first-order pull.
+Pure pursuit [\[52\]](../references#nav-ref-6) was considered first, but at cruise it looks about 4 m ahead, and the lane pitch is only 1.76 m, so it would be expected to cut the lane ends. A cross-track term corrects onto the line itself [\[53\]](../references#nav-ref-7), which suits a narrow lane. Because PX4 already handles attitude and rate [\[54\]](../references#nav-ref-8), the outer loop can be a simple first-order pull.
 
 </details>
 
@@ -282,7 +282,7 @@ Figure NAV-11 shows one cycle. The orange dot is the bird and the dashed circle 
 | AVOID | The drone flies the best safe sample, which is the sampled velocity that keeps the path clear of the collision cones and stays closest to the lane |
 | ESCAPE | The threat is too close for a normal manoeuvre, so the drone flies the sample with the largest predicted clearance |
 
-The method follows the dynamic window approach of Fox, Burgard and Thrun (1997) [\[54\]](../references#nav-ref-9), and the per-bird tracks come from the Kalman filter [\[55\]](../references#nav-ref-10).
+The method follows the dynamic window approach of Fox, Burgard and Thrun (1997) [\[55\]](../references#nav-ref-9), and the per-bird tracks come from the Kalman filter [\[49\]](../references#nav-ref-10).
 
 #### 3.2.2.5 Flight Control Kinematics {#flight-control-kinematics}
 
@@ -346,7 +346,7 @@ The failsafes are the red arrows of the state machine (Figure NAV-12), and the t
 <details class="custom-block details">
 <summary>Sources for Table 41</summary>
 
-Sources: wind force $F = \tfrac{1}{2}\rho\,C_dA\,v^{2}$ with $C_dA = 0.0794\ \text{m}^2$ and $m = 4.7\ \text{kg}$; gust time constant $\tau = 37\ \text{m}/v$ (Dryden, MIL-HDBK-1797 [\[56\]](../references#nav-ref-11)); PX4 User Guide, Safety configuration (battery failsafes staged as warning, return, land, emergency land) [\[53\]](../references#nav-ref-8); Unicore UM980 datasheet [\[40\]](../references#nav-ref-16); simulation stress tests (10 seeds per wind case, 8 per bird case); battery from the offline sim, lanes along, 266 Wh pack, worst of 3 seeds.
+Sources: wind force $F = \tfrac{1}{2}\rho\,C_dA\,v^{2}$ with $C_dA = 0.0794\ \text{m}^2$ and $m = 4.7\ \text{kg}$; gust time constant $\tau = 37\ \text{m}/v$ (Dryden, MIL-HDBK-1797 [\[56\]](../references#nav-ref-11)); PX4 User Guide, Safety configuration (battery failsafes staged as warning, return, land, emergency land) [\[54\]](../references#nav-ref-8); Unicore UM980 datasheet [\[40\]](../references#nav-ref-16); simulation stress tests (10 seeds per wind case, 8 per bird case); battery from the offline sim, lanes along, 266 Wh pack, worst of 3 seeds.
 
 </details>
 
