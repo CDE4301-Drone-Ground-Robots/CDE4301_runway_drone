@@ -4,6 +4,6 @@ import { withBase } from 'vitepress'
 <template>
  <span class="header-identity">
   <span class="header-nus-tile"><img :src="withBase('/nus-logo.png')" alt="National University of Singapore" width="32" height="16"></span>
-  <span class="header-project-badge">AIS-407</span>
+  <span class="header-project-badge">ASI-407</span>
  </span>
 </template>
