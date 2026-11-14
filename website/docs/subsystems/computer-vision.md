@@ -400,7 +400,7 @@ The thermal detection layer is proposed as an additional safety feature alongsid
 
 The thermal camera is planned to be mounted below the drone at about 45 degrees to view the road ahead. It will be used to detect people and birds. If a target is detected, the proposed response is to stop and hold until the obstacle clears. The thermal pipeline is intended to run separately from RGB inspection. The stop-and-hold response is simulated in the current prototype. Linking it to the flight controller is future work.
 
-The thermal camera is also planned to provide a live feed for manual override. If the drone encounters a problem at night, the operator can use this view to guide ARGUS back. Live-feed integration and testing are future work.
+The thermal camera is also planned to provide a live feed for manual override. The 1080p live-video requirement applies to the RGB feed. The thermal feed will use the camera’s native resolution. If the drone encounters a problem at night, the operator can use this view to guide ARGUS back. Live-feed integration and testing are future work.
 
 <CvFigure number="94" n="38" />
 
@@ -426,7 +426,7 @@ These are some of the software tools used in this subsystem to train the model a
 
 ### 4.3.2 PatchCore in the Project {#patchcore-in-the-project}
 
-PatchCore produces an image-level anomaly score and a heatmap showing the unusual areas. Heatmap images are produced and stored in every run for visual inspection if necessary. A bounding box is then generated to identify the anomaly. The image is then cropped and resized to the normal model input size before passing it to YOLO and U-Net.
+For the interim implementation, PatchCore was developed using the Anomalib framework with a WideResNet50-2 backbone to extract features. The model was trained using normal runway surface images, with a coreset sampling ratio of 10% to build a representative memory bank of normal features. During inference, input images were resized to 256 × 256 pixels before being processed by PatchCore. The model generates an anomaly score and an anomaly heatmap. The heatmap is resized and overlaid on the original image for visualisation, as shown in Figs. 98-100. Bounding-box generation and cropping are handled by the integration code for all three architectures.
 
 <div class="cv-figure-grid">
 <CvFigure number="98" n="9" />
@@ -570,7 +570,7 @@ The model was performing very poorly, and the test object was detected inconsist
 
 <CvFigure number="114" n="27" />
 
-In ground testing, YOLO detected the battery in 3/10 tests and the plastic part in 7/10 tests. Further investigation of the dataset was conducted, as discussed in [Section 4.5.4](#dataset-investigation).
+The ground tests used a plastic part, a battery and a pen. The 10 tests used different object placements at different locations along the test ground. YOLO detected the battery in 3/10 tests and the plastic part in 7/10 tests. Further investigation of the dataset was conducted, as discussed in [Section 4.5.4](#dataset-investigation).
 
 ### 4.4.5 U-Net On-the-Ground Results {#on-the-ground-results}
 
@@ -686,6 +686,8 @@ $$
 The original splits contained 51,361 strongly similar image pairs across the training, validation and test sets. The dataset was re-split so that similar images stayed in the same set. This split was named Strict to reduce data leakage and give a fairer test of the model.
 
 ### 4.5.6 YOLO Results and Discussion {#results-and-discussion}
+
+Both Kaggle dataset results below used YOLOv8L: the original random split and the Strict similarity-aware split.
 
 <p class="report-table-caption" id="table-56"><strong>Table 56.</strong> YOLO Results and Discussion</p>
 
