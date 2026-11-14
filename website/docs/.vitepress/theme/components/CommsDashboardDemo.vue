@@ -2,10 +2,11 @@
 import { computed, onMounted, ref, watch } from 'vue'
 
 type DeliveryState = 'queued' | 'awaiting' | 'acknowledged' | 'failed'
-type FodRecord = { id: number; object: string; x: number; y: number; state: DeliveryState; received: boolean; created: string; sent: string | null; ack: string | null }
-type Notice = { id: number; target: string; sent: boolean }
+type FodRecord = { id: number; object: string; x: number; y: number; state: DeliveryState; retries: number; received: boolean; created: string; sent: string | null; ack: string | null }
+type Notice = { id: number; target: string; sent: boolean; reason: string }
 type Event = { id: number; time: string; text: string }
-const storageKey = 'argus-comms-monitor-demo-v2'
+const storageKey = 'argus-comms-monitor-demo-v3'
+const paused = ref(false)
 const linkSilence = ref(0)
 const records = ref<FodRecord[]>([])
 const notices = ref<Notice[]>([])
@@ -25,8 +26,9 @@ const acknowledged = computed(() => records.value.filter(r => r.state === 'ackno
 const failed = computed(() => notices.value.length)
 const visible = computed(() => records.value.filter(r => filter.value === 'all' || (filter.value === 'pending' ? r.state !== 'acknowledged' : r.state === 'acknowledged')))
 const validInput = computed(() => x.value !== '' && y.value !== '' && Number.isFinite(Number(x.value)) && Number.isFinite(Number(y.value)))
-const canAck = computed(() => !!current.value?.received && hunterOnline.value)
-const names: Record<DeliveryState, string> = { queued: 'Queued', awaiting: 'Awaiting ACK', acknowledged: 'Acknowledged', failed: 'Link lost' }
+const canAck = computed(() => !!current.value?.received && hunterOnline.value && !paused.value && current.value.state === 'awaiting')
+const canResend = computed(() => hunterOnline.value && !paused.value && current.value?.state === 'awaiting')
+const names: Record<DeliveryState, string> = { queued: 'Queued', awaiting: 'Awaiting ACK', acknowledged: 'Acknowledged', failed: 'ACK limit reached' }
 const targetId = (r: FodRecord) => 'FOD_THREAT_' + String(r.id).padStart(3, '0')
 const coords = (r: FodRecord) => `(${r.x.toFixed(2)}, ${r.y.toFixed(2)}) m`
 const clock = (iso: string) => new Date(iso).toLocaleTimeString('en-GB', { hour12: false })
@@ -43,13 +45,13 @@ function deliver(record: FodRecord) {
 }
 function sendNext() {
  const record = current.value
- if (!record || record.state !== 'queued' || !hunterOnline.value) return
+ if (!record || record.state !== 'queued' || !hunterOnline.value || paused.value) return
  record.state = 'awaiting'
  deliver(record)
 }
 function addFod() {
  if (!validInput.value) return
- const record: FodRecord = { id: nextId.value++, object: object.value, x: Number(x.value), y: Number(y.value), state: 'queued', received: false, created: new Date().toISOString(), sent: null, ack: null }
+ const record: FodRecord = { id: nextId.value++, object: object.value, x: Number(x.value), y: Number(y.value), state: 'queued', retries: 0, received: false, created: new Date().toISOString(), sent: null, ack: null }
  records.value.push(record)
  log(`${targetId(record)} saved to the ARGUS records and added to the queue.`)
  x.value = Number((record.x + 1.2).toFixed(2)); y.value = Number((record.y + 0.5).toFixed(2))
@@ -63,6 +65,33 @@ function acknowledge() {
  log(`Receipt ACK matched ${targetId(record)}. Next alert released. Collection is not confirmed.`)
  sendNext()
 }
+function notifyBase(target: string, reason: string) {
+ paused.value = true
+ notices.value.unshift({ id: (notices.value[0]?.id ?? 0) + 1, target, sent: baseOnline.value, reason })
+ log(`${reason} ${baseOnline.value ? 'Error sent to base. Waiting for instructions.' : 'Error stored until the base link returns.'}`)
+}
+function resendMissingAck() {
+ const record = current.value
+ if (!record || !canResend.value) return
+ record.retries++
+ deliver(record)
+ log(`${targetId(record)}: resend ${record.retries}/50 has no matching receipt ACK. Link checks still respond.`)
+ if (record.retries === 50) {
+  record.state = 'failed'
+  notifyBase(targetId(record), 'No receipt ACK after 50 resends with an active link.')
+ }
+}
+function simulateAckLimit() {
+ while (canResend.value) resendMissingAck()
+}
+function resumeAfterInstruction() {
+ if (!paused.value || !baseOnline.value || !hunterOnline.value) return
+ paused.value = false
+ linkSilence.value = 0
+ if (current.value) { current.value.retries = 0; current.value.state = 'queued' }
+ log('Simulated base instruction: resume queued transmissions.')
+ sendNext()
+}
 function handshake() {
  if (hunterOnline.value) {
   linkSilence.value = 0
@@ -73,8 +102,7 @@ function handshake() {
  linkSilence.value++
  log(`No handshake response for ${linkSilence.value} second(s). Coordinates remain stored.`)
  if (linkSilence.value === 10) {
-  notices.value.unshift({ id: (notices.value[0]?.id ?? 0) + 1, target: 'HUNTER link', sent: baseOnline.value })
-  log(`No handshake response for 10 seconds. ${baseOnline.value ? 'Error sent to the base station.' : 'Base notification stored until its link returns.'}`)
+  notifyBase('HUNTER link', 'No handshake response for 10 seconds.')
  }
 }
 function simulateLoss() {
@@ -85,7 +113,7 @@ function toggleHunter() {
  hunterOnline.value = !hunterOnline.value
  linkSilence.value = 0
  log(hunterOnline.value ? 'HUNTER link restored. Handshake response received.' : 'HUNTER link unavailable. Checking for a handshake response every second.')
- if (hunterOnline.value) {
+ if (hunterOnline.value && !paused.value) {
   if (current.value?.state === 'awaiting') deliver(current.value)
   else sendNext()
  }
@@ -100,7 +128,7 @@ function toggleBase() {
 }
 function reset() {
  records.value = []; notices.value = []; events.value = []
- linkSilence.value = 0; nextId.value = 1; hunterOnline.value = true; baseOnline.value = true; filter.value = 'all'
+ paused.value = false; linkSilence.value = 0; nextId.value = 1; hunterOnline.value = true; baseOnline.value = true; filter.value = 'all'
  object.value = 'Battery'; x.value = 3; y.value = 4
  for (const sample of ['Battery', 'Plastic part', 'Bolt']) { object.value = sample; addFod() }
  object.value = 'Battery'
@@ -110,27 +138,29 @@ function isFod(value: unknown): value is FodRecord {
  if (!value || typeof value !== 'object') return false
  const r = value as FodRecord
  return Number.isInteger(r.id) && r.id > 0 && typeof r.object === 'string' && Number.isFinite(r.x) && Number.isFinite(r.y)
-  && Object.hasOwn(names, r.state)
+  && Object.hasOwn(names, r.state) && Number.isInteger(r.retries) && r.retries >= 0 && r.retries <= 50
   && typeof r.received === 'boolean' && typeof r.created === 'string' && Number.isFinite(Date.parse(r.created))
   && (r.sent === null || typeof r.sent === 'string') && (r.ack === null || typeof r.ack === 'string')
 }
 function save() {
  if (!ready.value) return
- try { localStorage.setItem(storageKey, JSON.stringify({ records: records.value, notices: notices.value, events: events.value, nextId: nextId.value, hunterOnline: hunterOnline.value, baseOnline: baseOnline.value, linkSilence: linkSilence.value })) }
+ try { localStorage.setItem(storageKey, JSON.stringify({ records: records.value, notices: notices.value, events: events.value, nextId: nextId.value, hunterOnline: hunterOnline.value, baseOnline: baseOnline.value, paused: paused.value, linkSilence: linkSilence.value })) }
  catch { browserStorage.value = false }
 }
 onMounted(() => {
  let restored = false
  try {
-  const raw = localStorage.getItem(storageKey)
+  const raw = localStorage.getItem(storageKey) || localStorage.getItem('argus-comms-monitor-demo-v2')
   if (raw) {
    const saved = JSON.parse(raw)
+   if (Array.isArray(saved.records)) saved.records = saved.records.map((r: FodRecord) => r && typeof r === 'object' ? { ...r, retries: r.retries ?? 0 } : r)
    if (Array.isArray(saved.records) && saved.records.every(isFod) && new Set(saved.records.map((r: FodRecord) => r.id)).size === saved.records.length) {
     records.value = saved.records
+    paused.value = saved.paused === true || saved.hunterOnline === false && saved.linkSilence >= 10
     linkSilence.value = Number.isInteger(saved.linkSilence) ? Math.max(0, Math.min(10, saved.linkSilence)) : 0
     nextId.value = Math.max(0, ...records.value.map(r => r.id)) + 1
     hunterOnline.value = saved.hunterOnline !== false; baseOnline.value = saved.baseOnline !== false
-    notices.value = Array.isArray(saved.notices) ? saved.notices.filter((n: Notice) => Number.isInteger(n?.id) && typeof n.target === 'string' && typeof n.sent === 'boolean') : []
+    notices.value = Array.isArray(saved.notices) ? saved.notices.filter((n: Notice) => Number.isInteger(n?.id) && typeof n.target === 'string' && typeof n.sent === 'boolean').map((n: Notice) => ({ ...n, reason: n.reason || 'No handshake response for 10 seconds.' })) : []
     events.value = Array.isArray(saved.events) ? saved.events.filter((e: Event) => Number.isInteger(e?.id) && typeof e.text === 'string' && typeof e.time === 'string').slice(0, 6) : []
     restored = true
    }
@@ -140,7 +170,7 @@ onMounted(() => {
  ready.value = true
  sendNext(); save()
 })
-watch([records, notices, events, nextId, hunterOnline, baseOnline, linkSilence], save, { deep: true })
+watch([records, notices, events, nextId, hunterOnline, baseOnline, linkSilence, paused], save, { deep: true })
 </script>
 
 <template>
@@ -155,7 +185,7 @@ watch([records, notices, events, nextId, hunterOnline, baseOnline, linkSilence],
     <div><span>Stored FODs</span><strong data-monitor-stat="stored">{{ records.length }}</strong></div>
     <div><span>Pending delivery</span><strong data-monitor-stat="pending">{{ pending }}</strong></div>
     <div><span>Receipt ACKs</span><strong data-monitor-stat="acknowledged">{{ acknowledged }}</strong></div>
-    <div><span>Link-loss notifications</span><strong data-monitor-stat="failed">{{ failed }}</strong></div>
+    <div><span>Error notifications</span><strong data-monitor-stat="failed">{{ failed }}</strong></div>
    </div>
    <div class="monitor-connections">
     <span><i :class="{ offline: !hunterOnline }"></i>HUNTER {{ hunterOnline ? 'connected' : 'disconnected' }}</span>
@@ -167,6 +197,10 @@ watch([records, notices, events, nextId, hunterOnline, baseOnline, linkSilence],
     <span>Handshake interval: 1 s. No response: {{ linkSilence }} / 10 s</span>
     <button type="button" @click="handshake">Advance 1 second</button>
     <button type="button" :disabled="hunterOnline || linkSilence >= 10" @click="simulateLoss">Simulate 10 seconds without response</button>
+   </div>
+   <div v-if="paused" class="monitor-connections" role="status">
+    <span>Proposed response: descend and land at a clear location, then wait for base instructions. Targets remain stored.</span>
+    <button type="button" :disabled="!baseOnline || !hunterOnline" @click="resumeAfterInstruction">Simulate base instruction: resume</button>
    </div>
    <form class="monitor-form" @submit.prevent="addFod">
     <label>FOD object<select v-model="object"><option>Battery</option><option>Plastic part</option><option>Bolt</option></select></label>
@@ -181,13 +215,14 @@ watch([records, notices, events, nextId, hunterOnline, baseOnline, linkSilence],
       <button v-for="option in ['all', 'pending', 'acknowledged']" :key="option" type="button" :aria-pressed="filter === option" @click="filter = option">{{ option === 'all' ? 'All records' : option === 'pending' ? 'Pending' : 'Acknowledged' }}</button>
      </div>
      <div class="monitor-table-scroll" tabindex="0" aria-label="FOD delivery records. Scroll horizontally on small screens.">
-      <table><thead><tr><th>Threat ID</th><th>Object / coordinates</th><th>Status</th><th>HUNTER receipt</th></tr></thead>
+      <table><thead><tr><th>Threat ID</th><th>Object / coordinates</th><th>Status</th><th>HUNTER receipt</th><th>ACK resends</th></tr></thead>
        <tbody><tr v-for="record in visible" :key="record.id" :class="{ selected: current?.id === record.id }">
         <td><code>{{ targetId(record) }}</code><small>{{ clock(record.created) }}</small></td>
         <td>{{ record.object }}<small>{{ coords(record) }}</small></td>
         <td><span class="monitor-state" :class="record.state">{{ names[record.state] }}</span></td>
         <td>{{ record.received ? 'Received' : 'Not received' }}</td>
-       </tr><tr v-if="!visible.length"><td colspan="4">No records in this view.</td></tr></tbody>
+        <td>{{ record.retries }} / 50</td>
+       </tr><tr v-if="!visible.length"><td colspan="5">No records in this view.</td></tr></tbody>
       </table>
      </div>
      <p class="monitor-record-note">Unacknowledged coordinates stay on ARGUS. Acknowledged records remain in the delivery history.</p>
@@ -198,20 +233,23 @@ watch([records, notices, events, nextId, hunterOnline, baseOnline, linkSilence],
       <template v-if="current">
        <code class="monitor-current-id">{{ targetId(current) }}</code>
        <p class="monitor-current-object">{{ current.object }} <span>{{ coords(current) }}</span></p>
-       <p class="monitor-current-status" role="status">{{ current.state === 'failed' ? 'Link lost. Coordinates retained.' : current.state === 'queued' ? 'Stored on ARGUS. Waiting for the HUNTER link.' : current.received ? 'Received by HUNTER. Waiting for its receipt ACK.' : 'No response from HUNTER. Alert retained on ARGUS.' }}</p>
+       <p class="monitor-current-status" role="status">{{ paused ? 'Coordinates retained. Proposed response: land at a clear location and wait for base instructions.' : current.state === 'queued' ? 'Stored on ARGUS. Waiting for the HUNTER link.' : current.received ? 'Received by HUNTER. Waiting for its receipt ACK.' : 'No response from HUNTER. Alert retained on ARGUS.' }}</p>
 
+       <p class="monitor-help">ACK resends: {{ current.retries }} / 50</p>
        <div class="monitor-actions">
-        <button type="button" class="monitor-primary" :disabled="!canAck" @click="acknowledge">Acknowledge receipt</button>
+        <button type="button" class="monitor-primary receipt-ack-hint" :disabled="!canAck" @click="acknowledge">Acknowledge receipt</button>
+        <button type="button" :disabled="!canResend" @click="resendMissingAck">Simulate 1 unacknowledged resend</button>
+        <button type="button" :disabled="!canResend" @click="simulateAckLimit">Simulate 50 unacknowledged resends</button>
 
        </div>
       </template>
       <p v-else>All stored alerts have been acknowledged.</p>
-      <p class="monitor-help">A receipt ACK releases the next coordinate. It does not confirm FOD collection. Handshake controls advance simulated seconds, not real time.</p>
+      <p class="monitor-help">A receipt ACK releases the next coordinate. It does not confirm FOD collection. Handshake controls advance simulated seconds. Resend controls simulate failed attempts. Timing is illustrative.</p>
      </section>
      <section class="monitor-panel" aria-label="Base station notifications">
       <div class="monitor-panel-title"><strong>Base station notifications</strong><span>{{ notices.length }}</span></div>
-      <ul v-if="notices.length" class="monitor-notices"><li v-for="notice in notices" :key="notice.id"><strong>{{ notice.target }}</strong><span>No handshake response for 10 seconds.</span><small>{{ notice.sent ? 'Error notification sent to base.' : 'Stored error. Waiting for the base link.' }}</small></li></ul>
-      <p v-else class="monitor-empty">No link-loss notifications.</p>
+      <ul v-if="notices.length" class="monitor-notices"><li v-for="notice in notices" :key="notice.id"><strong>{{ notice.target }}</strong><span>{{ notice.reason }}</span><small>{{ notice.sent ? 'Error notification sent to base.' : 'Stored error. Waiting for the base link.' }}</small></li></ul>
+      <p v-else class="monitor-empty">No communication errors.</p>
      </section>
     </div>
    </div>
@@ -294,4 +332,8 @@ watch([records, notices, events, nextId, hunterOnline, baseOnline, linkSilence],
 .monitor-log time{color:var(--vp-c-text-2);font-size:10px;flex-shrink:0;font-variant-numeric:tabular-nums}
 @media(max-width:1100px){.monitor-grid{grid-template-columns:1fr}.monitor-side{grid-template-columns:1fr 1fr}.monitor-stats{gap:8px}.monitor-stats>div{padding:12px}.monitor-form{grid-template-columns:1fr 1fr}.monitor-connections>span:nth-of-type(2){margin-left:0}}
 @media(max-width:600px){.monitor-header{padding:18px;align-items:flex-start;flex-direction:column;gap:10px}.comms-monitor h4{font-size:23px}.monitor-banner{padding:12px 18px}.monitor-stats{grid-template-columns:1fr 1fr;padding:16px 18px}.monitor-connections{margin:0 18px;display:grid;grid-template-columns:1fr auto}.monitor-form{padding:18px;gap:10px}.monitor-form label:first-child{grid-column:1 / -1}.monitor-grid{padding:0 18px 16px}.monitor-side{grid-template-columns:1fr}.monitor-log{margin:0 18px 18px}.monitor-log li{gap:9px}.monitor-preview{font-size:10px}}
+
+.comms-monitor .receipt-ack-hint:not(:disabled){border-color:#c99a8d;animation:receipt-ack-pulse 2.4s ease-in-out infinite}
+@keyframes receipt-ack-pulse{0%,100%{box-shadow:0 0 0 0 #c99a8d00}50%{box-shadow:0 0 0 4px #c99a8d33,0 0 14px #c99a8d33}}
+@media(prefers-reduced-motion:reduce){.comms-monitor .receipt-ack-hint:not(:disabled){animation:none}}
 </style>

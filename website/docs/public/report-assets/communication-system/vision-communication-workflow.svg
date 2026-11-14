@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 900" width="1200" height="900" role="img" aria-labelledby="title desc">
 <title id="title">Vision to HUNTER: FOD delivery and separate link checks</title>
-<desc id="desc">Vision uses navigation data to calculate FOD coordinates. ARGUS stores the coordinates, sends one target, and waits for HUNTER to confirm receipt before sending the next. A separate handshake checks the link every second. No response for 10 seconds triggers a base-station notification if reachable. Unacknowledged coordinates remain stored for resending after reconnection. Live integration will be implemented and tested after interim.</desc>
+<desc id="desc">Vision uses navigation data to calculate FOD coordinates. ARGUS stores the coordinates, sends one target, and waits for HUNTER to confirm receipt before sending the next. A separate handshake checks the link every second. No response for 10 seconds triggers a base-station notification if reachable. Missing target ACKs with an active link allow 50 resends before a separate delivery error. After either error, retain targets. ARGUS is proposed to descend and land at a clear location before waiting for base instructions. Landing behaviour will be tested after interim. Unacknowledged coordinates remain stored for resending after reconnection. Live integration will be implemented and tested after interim.</desc>
 <defs>
 <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto"><path d="M0 0L10 5L0 10Z" fill="#d7aa94"/></marker>
 <marker id="ack" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto"><path d="M0 0L10 5L0 10Z" fill="#a8d4bc"/></marker>
@@ -32,22 +32,23 @@
 <text class="body" x="415" y="769">Then sends the next queued target</text>
 <path class="return" d="M90 730H40V325H85"/>
 <path d="M785 140V800" stroke="#40596b" stroke-dasharray="5 8"/>
-<text class="heading" x="995" y="125" fill="#e5c1ae">Separate link check</text>
+<text class="heading" x="995" y="125" fill="#e5c1ae">Link and delivery checks</text>
 <rect x="830" y="150" width="330" height="640" rx="14" fill="#12202b" stroke="#40596b"/>
-<text class="heading" x="995" y="193">Every 1 second</text>
+<text class="heading" x="995" y="193">Check the link every second</text>
 <text class="body" x="995" y="230">ARGUS sends a link check</text>
 <text class="body" x="995" y="260">HUNTER replies</text>
-<path class="flow" d="M995 282V320"/>
-<text class="heading" x="995" y="358">No reply for 10 seconds?</text>
-<text class="body" x="995" y="397">Inform the base station</text>
-<text class="body" x="995" y="427">if reachable, then wait</text>
-<text class="body" x="995" y="457">for further commands</text>
-<path d="M855 493H1135" stroke="#40596b"/>
-<text class="heading" x="995" y="537">Keep undelivered targets</text>
-<text class="body" x="995" y="576">Coordinates stay on ARGUS</text>
-<text class="body" x="995" y="606">Resend when the link returns</text>
-<text class="note" x="995" y="682">The handshake checks the link.</text>
-<text class="note" x="995" y="712">It does not acknowledge</text>
-<text class="note" x="995" y="742">a FOD target.</text>
+<text class="heading" x="995" y="313">No reply for 10 seconds?</text>
+<text class="body" x="995" y="348">Report link loss to base</text>
+<path d="M855 383H1135" stroke="#40596b"/>
+<text class="heading" x="995" y="424">Link active, no FOD ACK?</text>
+<text class="body" x="995" y="459">Resend the same target</text>
+<text class="body" x="995" y="489">up to 50 times</text>
+<text class="body" x="995" y="527">Still no ACK? Report an error</text>
+<path d="M855 560H1135" stroke="#40596b"/>
+<text class="heading" x="995" y="598">After either error</text>
+<text class="body" x="995" y="634">ARGUS lands at a clear site</text>
+<text class="body" x="995" y="664">Then waits for base instructions</text>
+<text class="note" x="995" y="710">Keep undelivered targets.</text>
+<text class="note" x="995" y="740">Landing tests after interim.</text>
 <text class="note" x="600" y="850">Receipt ACK confirms delivery. HUNTER handles navigation and collection separately.</text>
 </svg>

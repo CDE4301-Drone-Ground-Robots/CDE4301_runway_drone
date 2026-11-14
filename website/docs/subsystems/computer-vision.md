@@ -26,7 +26,7 @@ import { data as integrationDemo } from '../cv-integration-demo.data'
 
 The computer vision system was developed to enable the UAV to autonomously inspect runway surfaces for FOD (Foreign Object Debris), water puddles, surface cracks, and other common objects. A key challenge in this system is the impracticality of obtaining every possible object that can appear on the runway for the training dataset. A supervised object detector can identify its trained classes, but may not recognise unseen objects.
 
-To address the limitation of detecting only objects seen in the training dataset, we adopted a multi-stage computer vision architecture. The RGB camera is used for primary runway inspection. Interim testing used the UGREEN webcam and a laptop. The final cameras, 5 m setup, Jetson deployment and live navigation link are proposed work.
+To address the limitation of detecting only objects seen in the training dataset, I adopted a multi-stage computer vision architecture. The RGB camera is used for primary runway inspection. Interim testing used the UGREEN webcam and a laptop. Work on the final cameras, 5 m setup, Jetson deployment and live navigation link will be done after interim.
 
 <span id="subsystem-overview" class="report-anchor" aria-hidden="true"></span>
 
@@ -40,7 +40,7 @@ To address the limitation of detecting only objects seen in the training dataset
 - Suitable camera selection.
 - Day and night operations.
 
-Although the earlier research mentioned a 3 cm FOD target, I set a stricter requirement of detecting objects as small as 1 cm. This provides a safety margin when detecting 3 cm FOD. Since missed FOD can endanger aircraft and people, I chose this requirement to reduce the risk of missed detections. Detection at both sizes will need to be verified under the intended operating conditions.
+Although the earlier research mentioned a 2 cm FOD target, I set a stricter requirement of detecting objects as small as 1 cm. This provides a safety margin when detecting 2 cm FOD. Since missed FOD can endanger aircraft and people, I chose this requirement to reduce the risk of missed detections. Detection at both sizes will need to be verified under the intended operating conditions.
 
 ## 4.2 Vision Methodology and Architecture Development {#a2-methodology-concept-development}
 
@@ -48,13 +48,13 @@ Although the earlier research mentioned a 3 cm FOD target, I set a stricter requ
 
 <CvFigure number="81" n="2" />
 
-In the proposed setup, the RGB camera will face down and be centred on ARGUS. The intended camera view covers a 2 m × 2 m area at a height of 5 m. A suitable lens is needed to achieve this coverage. A gimbal is planned for the RGB inspection camera, using attitude data from the flight controller to compensate for drone roll and pitch and keep the camera pointing straight down (nadir). Adding and testing this gimbal is future work. This setup is intended to simplify training-data collection and FOD coordinate extraction.
+I have explored two different camera angles, as shown in Fig. 81 above. In the proposed setup, the RGB camera will face down and be centred on ARGUS. This view was chosen because it simplifies data collection and coordinate extraction. The intended camera view covers a 2 m × 2 m area at a height of 5 m. A suitable lens is needed to achieve this coverage. A gimbal is planned for the RGB inspection camera, using attitude data from the flight controller to compensate for drone roll and pitch and keep the camera pointing straight down (nadir). Adding and testing this gimbal is future work.
 
 ### 4.2.2 RGB Cameras {#rgb-cameras}
 
 <CvFigure number="82" n="3" />
 
-The RGB camera proposed for the final drone is the e-con e-CAM56_CUONX as shown in the figure above. The camera is a global-shutter camera that runs at 79 fps. The selection is not final and may change once the RSAF budget is approved. It may be changed to an IDS camera which has a higher resolution and a global shutter as well. In the interim, we used the UGREEN-CM831 webcam for model testing and evaluation.
+I have explored three different cameras for my system. The RGB camera proposed for the final drone is the e-con e-CAM56_CUONX, as shown in the figure above. The camera is a global-shutter camera that runs at 79 fps. The selection is not final and may change once the RSAF budget is approved. It may be changed to an IDS camera which has a higher resolution and a global shutter as well. During interim testing, I used the UGREEN CM831 at a height of 1 m, with a view covering 0.5 m × 0.5 m.
 
 Manufacturer product page: [e-con Systems e-CAM56_CUONX - Sony IMX568 global-shutter camera](https://www.e-consystems.com/nvidia-cameras/jetson-orin-nx-cameras/5mp-imx568-global-shutter-camera.asp). See [\[57\]](../references#cv-h01). IDS alternative: [U3-31L1ACP Rev.1.2](https://en.ids-imaging.com/store/u3-31l1acp-rev-1-2.html), [\[58\]](../references#cv-h02).
 
@@ -199,15 +199,15 @@ At 5 m, a 1 cm x 1 cm object spans about **15 x 15 pixels** with this camera and
 
 ### 4.2.4 Proposed Night Operation Lighting {#night-operation-lighting}
 
-The proposed setup includes a light below the drone, near the RGB camera, that will turn on automatically during night operation to illuminate the inspection surface.
+The proposed setup includes adding a light source below the drone, near the RGB camera, that will turn on automatically during night operation to illuminate the inspection surface.
 
 <CvFigure number="83" n="43" />
 
 ### 4.2.5 Computer Vision System Architecture - Parallel {#computer-vision-system-architecture-parallel}
 
-The following describes the proposed onboard flow. The model pipeline was tested on a laptop using simulated navigation coordinates and local messages. Live navigation and communication links are pending.
+The following describes the proposed onboard flow. The model pipeline was tested on a laptop using simulated navigation coordinates and local messages. Live navigation and communication links will be implemented after interim.
 
-The RGB camera captures images continuously, which then pass through the system. The captured images first enter a PatchCore anomaly detection model. For each captured frame, the system requests the drone's X and Y coordinates and orientation (quaternion) from navigation. Coordinate extraction finds the object's ground offset from the image. Heading from the quaternion aligns this offset with the map before adding the drone's X and Y. If there is no anomaly on the road, it continues the inspection. If an anomalous region is identified, the model produces a bounding box and crops it. The system then sends it to the second layer. The second layer consists of 2 models: a YOLO object detector and a U-Net segmentation model for runway cracks. Both run in parallel. The cropped image is then resized to each model's input size and fed into that model. If any cracks are detected, the system sends them to the base. On the YOLO side, if it detects a FOD object, it performs more localised coordinate extraction and sends the coordinates to the UGV for extraction. If neither the crack detection model nor YOLO identifies it, the system sends it to the base station as it is an anomaly that neither model identifies. The models will be explained in more depth in the later sections. The quaternion-to-heading conversion, 2D rotation and precise FOD coordinate calculations are explained in [FOD & Crack Coordinate Retrieval](#coordinate-retrieval).
+The RGB camera captures images continuously, which then pass through the system. The captured images first enter a PatchCore anomaly detection model. For each captured frame, the system requests the drone's X and Y coordinates and orientation (quaternion) from navigation. Coordinate extraction finds the object's ground offset from the image. Heading from the quaternion aligns this offset with the map before adding the drone's X and Y. If there is no anomaly on the road, it continues the inspection. If an anomalous region is identified, the model produces a bounding box and crops it. The system then sends it to the second layer. The second layer consists of 2 models: a YOLO object detector and a U-Net segmentation model for runway cracks. Both models run in parallel. The cropped image is then resized to each model's input size and fed into that model. If any cracks are detected, the system sends them to the base. On the YOLO side, if it detects a FOD object, it performs more localised coordinate extraction and sends the coordinates to the UGV for extraction. If neither the crack detection model nor YOLO identifies it, the system sends it to the base station as it is an anomaly that neither model identifies. The models will be explained in more depth in the later sections. The quaternion-to-heading conversion, 2D rotation and precise FOD coordinate calculations are explained in [FOD & Crack Coordinate Retrieval](#coordinate-retrieval).
 
 The base station is the control room where operators can receive updates from ARGUS or HUNTER and take the necessary actions if required. In the proposed vision system, crack detections and unknown anomalies will be sent there for operator review. The base-station communication link is planned for the final setup.
 
@@ -244,7 +244,7 @@ Sequential 2 is an extra architecture that was tested where YOLO runs first. If 
 
 #### 4.2.9.1 What Is PatchCore? {#what-is-patchcore}
 
-PatchCore is used as the first stage because it identifies anomalies such as cracks and objects. We use it instead of running YOLO and the crack model continuously on each frame, which is computationally heavy. It allows these models to be skipped when no anomaly is found. The overall resource use still needs testing on Jetson.
+PatchCore is used as the first stage because it identifies anomalies such as cracks and objects. I use it instead of running YOLO and the crack model continuously on each frame, which is computationally heavy. It allows these models to be skipped when no anomaly is found. The overall resource use still needs testing on Jetson. PatchCore is also used to detect unknown objects that YOLO and the crack model may not identify, as they are trained for specific object classes and cracks.
 
 PatchCore learns visual characteristics of a normal runway or road surface. It doesn't need to learn any specific FOD categories. During operation, if the obtained image region differs from the learned normal appearance, it generates high anomaly scores accordingly. The essential overview of this model is shown in the figure below.
 
@@ -256,9 +256,7 @@ PatchCore learns visual characteristics of a normal runway or road surface. It d
 
 The crack dataset is obtained from [Mendeley Data: CrackAirport, version 1](https://data.mendeley.com/datasets/3v5r2fxf89/1). See [\[60\]](../references#cv-d01) for the crack dataset citation.
 
-Runway and road cracks are essentially different from the normal FOD objects. Cracks are usually thin, long and irregular, so segmentation is used to identify their shape at pixel level.
-
-Therefore, we use a U-Net segmentation model with a ResNet34 encoder. The cropped anomaly region is resized to 512 x 512 and fed into the U-Net, as this is the input size used in this implementation. The model then produces a pixel-level crack mask.
+Runway and road cracks are essentially different from the normal FOD objects. Cracks are usually thin, long and irregular, so segmentation is used to identify their shape at pixel level. Therefore, I use a U-Net segmentation model with a ResNet34 encoder. The cropped anomaly region is resized to 512 x 512 and fed into the U-Net, as this is the input size used in this implementation. The model then produces a pixel-level crack mask.
 
 ::: details 4.2.10.1.1 How U-Net Uses ResNet34
 
@@ -305,7 +303,7 @@ The drone's starting coordinates are therefore **X = 3 m and Y = 4 m**, at a hei
 
 ##### 4.2.11.1.2 Step 2: Convert the quaternion to heading {#step-3-calculate-heading-from-the-quaternion}
 
-Using ROS quaternion ordering $(q_x,q_y,q_z,q_w)$, assume:
+Assume the navigation system sends the following sample quaternion in ROS ordering $(q_x,q_y,q_z,q_w)$:
 
 $$
 q=\left(0,0,\frac{1}{\sqrt{2}},\frac{1}{\sqrt{2}}\right)
@@ -335,11 +333,15 @@ The calculation below maps the bounding box back to the original image, finds it
 
 <CvFigure number="92" n="36" />
 
-Use Steps 1-5 in the image to obtain the ground offset: approximately **-0.172 m along image-right and -0.056 m along image-down**. For the rotated-camera example here, replace Step 6 in the image with Steps 4 and 5 below. These apply the heading correction before adding the drone position.
+The calculation in Fig. 92 gives a ground offset of approximately **-0.172 m along image-right and -0.056 m along image-down**. The following steps rotate this offset into the map frame and add the drone’s position.
 
 <div class="cv-supporting-evidence pose-worked-example">
 
 ##### 4.2.11.2.2 Step 4: Align the ground offset with the map {#step-4-use-heading-when-locating-fod}
+
+<CvFigure number="93" n="47" />
+
+Fig. 93 shows ARGUS facing map +Y at a heading of 90°, with the FOD to its left and slightly ahead.
 
 For this example, assume the camera is mounted so that image-top points forward and image-right points to the drone's right. ROS body axes are X forward, Y left and Z up ([\[64\]](../references#cv-n02)). The offset from Step 3 becomes:
 
@@ -390,50 +392,60 @@ This combines the image-based extraction with navigation data in one calculation
 
 ### 4.2.12 ARGUS's Additional Vision Safety Feature {#thermal-safety}
 
-A separate thermal detection pipeline is proposed to monitor potential obstacles. YOLO11s with the `Thermal_yolo11s.pt` weights was tested separately on thermal images of people and birds. Live thermal integration is pending.
+A separate thermal detection pipeline is proposed to monitor potential obstacles. YOLO11s with the `Thermal_yolo11s.pt` weights was tested separately on thermal images of people and birds. Live thermal integration will be done after interim.
 
 #### 4.2.12.1 Thermal Detection for Safety {#thermal-detection-for-safety}
 
 The thermal detection layer is proposed as an additional safety feature alongside obstacle avoidance. The LIDAR mounted can only detect obstacles at the height the drone is flying, leaving the road below outside its scanning plane. The thermal camera is used instead of a secondary RGB camera as it can operate in poor lighting.
 
-<CvFigure number="93" n="37" />
+There are cases of UAV collisions happening around the world, as shown in the figure below.
+
+<CvFigure number="94" n="37" />
+
+The sources for the three statistics are:
+
+- The 2019 study reported attacks in 62.1% of its 66 selected bird videos. This is not the rate across all drone flights ([\[65\]](../references#cv-safety-01)).
+- The 2026 raptor study recorded 14 attacks, with drone damage in three cases ([\[66\]](../references#cv-safety-02)).
+- The University of Florida publication reports more than 3,700 US emergency-department patients with drone-related injuries. These include blade injuries and retrieval accidents, as well as collisions ([\[67\]](../references#cv-safety-03)).
 
 The thermal camera is planned to be mounted below the drone at about 45 degrees to view the road ahead. It will be used to detect people and birds. If a target is detected, the proposed response is to stop and hold until the obstacle clears. The thermal pipeline is intended to run separately from RGB inspection. The stop-and-hold response is simulated in the current prototype. Linking it to the flight controller is future work.
 
-The thermal camera is also planned to provide a live feed for manual override. If the drone encounters a problem at night, the operator can use this view to guide ARGUS back. Live-feed integration and testing are future work.
+The thermal camera is also planned to provide a live feed for manual override. The 1080p live-video requirement applies to the RGB feed. The thermal feed will use the camera’s native resolution. If the drone encounters a problem at night, the operator can use this view to guide ARGUS back. Live-feed integration and testing are future work.
 
-<CvFigure number="94" n="38" />
+<CvFigure number="95" n="38" />
 
 #### 4.2.12.2 Thermal Camera Selection {#thermal-camera-selection}
 
-The proposed thermal camera has a wide field of view for forward safety monitoring and is compact and lightweight. The camera uses a 256 x 196 thermal sensor with a 4 mm F/1.1 lens and a 45.5 degrees x 33.5 degrees field of view. Its coverage and detection performance still need testing on the drone. The module operates at 25 Hz and supports interfaces such as MIPI and USB 2.0. It has a low power consumption, making it suitable for drone use.
+The proposed BNW2T256T04010ASSWC thermal camera also has radiometric capability, allowing it to measure temperature as well as produce thermal images ([\[42\]](../references#nav-ref-17), pp. 3, 6).
 
-<CvFigure number="95" n="40" />
+The proposed thermal camera has a wide field of view for forward safety monitoring and is compact and lightweight. The camera uses a 256 x 192 thermal sensor with a 4 mm F/1.1 lens and a 45.5 degrees x 33.5 degrees field of view. Its coverage and detection performance still need testing on the drone. The module operates at 25 Hz and supports MIPI. The selected C variant requires an expansion board for USB output. It has a low power consumption, making it suitable for drone use.
+
+<CvFigure number="96" n="40" />
 
 ### 4.2.13 Proposed Overall Onboard Architecture {#overall-onboard-architecture}
 
 This is the overall proposed architecture for the Jetson NX. It may change after the hardware is obtained and the appropriate benchmarks are tested. If the Jetson cannot handle all the systems, a Raspberry Pi will also be used to share the workload.
 
-<CvFigure number="96" n="41" />
+<CvFigure number="97" n="41" />
 
 ## 4.3 Vision Model and Pipeline Implementation {#a3-prototype-development}
 
 ### 4.3.1 Software {#software}
 
-These are some of the software tools used in this subsystem to train the model and generate and edit the dataset.
+These are some of the software tools used in this subsystem to train the model, generate and edit the dataset.
 
-<CvFigure number="97" n="1" />
+<CvFigure number="98" n="1" />
 
 ### 4.3.2 PatchCore in the Project {#patchcore-in-the-project}
 
-PatchCore produces an image-level anomaly score and a heatmap showing the unusual areas. Heatmap images are produced and stored in every run for visual inspection if necessary. A bounding box is then generated to identify the anomaly. The image is then cropped and resized to the normal model input size before passing it to YOLO and U-Net.
+For the interim implementation, PatchCore was developed using the Anomalib framework with a WideResNet50-2 backbone to extract features. The model was trained using normal runway surface images, with a coreset sampling ratio of 10% to build a representative memory bank of normal features. During inference, input images were resized to 256 × 256 pixels before being processed by PatchCore. The model generates an anomaly score and an anomaly heatmap. The heatmap is resized and overlaid on the original image for visualisation, as shown in Figs. 99-101. Bounding-box generation and cropping are handled by the integration code for all three architectures.
 
 <div class="cv-figure-grid">
-<CvFigure number="98" n="9" />
+<CvFigure number="99" n="9" />
 
-<CvFigure number="99" n="10" />
+<CvFigure number="100" n="10" />
 
-<CvFigure number="100" n="11" />
+<CvFigure number="101" n="11" />
 </div>
 
 PatchCore also flags previously unseen objects. If neither YOLO nor U-Net identifies a detected anomaly, it is stored as an unknown anomaly. In the proposed onboard system, it will be sent to the base station for inspection. Current transmission is simulated using local messages.
@@ -442,30 +454,43 @@ PatchCore also flags previously unseen objects. If neither YOLO nor U-Net identi
 
 #### 4.3.3.1 FOD Classes and Dataset {#fod-classes-and-dataset}
 
-The YOLO object detector is trained on 32 classes: 31 objects and a water puddle, as shown in the figure below. Data preparation is one of the most challenging parts of this system. We sourced the FOD dataset from Kaggle online. It included more than 31 classes, and we added the water puddle class to meet our requirements. The dataset has 33,793 images but lacks weather variations such as cloudy, rainy, or hazy conditions. The FOD background also appears to be a very light surface that doesn't resemble the dark road surface we require.
+The YOLO object detector is trained on 32 classes: 31 objects and a water puddle, as shown in the figure below. Data preparation is one of the most challenging parts of this system. I sourced the FOD dataset from Kaggle online. It included more than 31 classes, and I added the water puddle class to meet my requirements. The dataset has 33,793 images but lacks weather variations such as cloudy, rainy, or hazy conditions. The FOD background also appears to be a very light surface that doesn't resemble the dark road surface I require.
 
-Dataset source: [Foreign Object Debris in Airports (FOD-A), Kaggle](https://www.kaggle.com/datasets/kilogrand/foreign-object-debris-in-airports-fod-a-dataset/code). See [\[65\]](../references#cv-d02).
+Dataset source: [Foreign Object Debris in Airports (FOD-A), Kaggle](https://www.kaggle.com/datasets/kilogrand/foreign-object-debris-in-airports-fod-a-dataset). See [\[68\]](../references#cv-d02).
 
-<CvFigure number="101" n="14" />
+<CvFigure number="102" n="14" />
 
-<CvFigure number="102" n="15" />
+<CvFigure number="103" n="15" />
 
 #### 4.3.3.2 Synthetic Compositing Method {#synthetic-compositing-method}
 
-Therefore, we implemented synthetic compositing to address the issues above. This method can place FODs artificially on any surface. We synthetically added the FODs to different road surfaces to create a new dataset. We also synthetically generated rain and fog with corresponding YOLO bounding-box annotations. I made them look as realistic as possible by tuning them, as shown in the figure below. This reduces the need to collect many real-world samples.
+Therefore, I implemented synthetic compositing to address the issues above. This method can place FODs artificially on any surface. I synthetically added the FODs to different road surfaces to create a new dataset. I also synthetically generated rain and fog with corresponding YOLO bounding-box annotations. I made them look as realistic as possible by tuning them, as shown in the figure below. This reduces the need to collect many real-world samples.
+
+::: details How Synthetic Compositing Works
+
+1. **Extract the FOD.** The script reads the original YOLO bounding boxes and uses them to guide SAM2, which produces a mask separating each object from its background.
+2. **Clean the mask.** Small isolated pixels are removed, and the mask edge is slightly reduced to remove traces of the original background.
+3. **Prepare the road background.** A road image is selected, resized and cropped to match the original image dimensions.
+4. **Blend the edges.** A Gaussian blur softens the mask edge. Alpha blending combines the object and road image using `output = alpha * original + (1 - alpha) * road background`. An alpha value of 1 keeps the object, 0 keeps the road, and values between them soften the boundary.
+5. **Keep the labels.** In this background-replacement script, the FOD stays at its original size and position, so the original YOLO labels are copied to the new image.
+6. **Add weather variations.** A separate script creates rain and fog versions while keeping the corresponding labels.
+
+These steps change the background and weather appearance, but the generated images still need checking against real test-ground images.
+
+:::
 
 <div class="cv-figure-grid">
-<CvFigure number="103" n="16" />
+<CvFigure number="104" n="16" />
 
-<CvFigure number="104" n="17" />
+<CvFigure number="105" n="17" />
 
-<CvFigure number="105" n="18" />
+<CvFigure number="106" n="18" />
 
-<CvFigure number="106" n="19" />
+<CvFigure number="107" n="19" />
 
-<CvFigure number="107" n="20" />
+<CvFigure number="108" n="20" />
 
-<CvFigure number="108" n="21" />
+<CvFigure number="109" n="21" />
 </div>
 
 For this dataset, synthetic compositing helped with the background surface and automatic labelling after creating new artificial data to reduce time consumption. The table below shows the different challenges that the synthetic compositing method can solve.
@@ -485,9 +510,9 @@ For this dataset, synthetic compositing helped with the background surface and a
 YOLO is responsible for identifying known FOD categories from the classes above. For each detected object, it returns the object class, confidence score and bounding-box coordinates. The cropped anomaly is resized so that small objects like nuts and nails are identified easily.
 
 <div class="cv-figure-grid">
-<CvFigure number="109" n="23" />
+<CvFigure number="110" n="23" />
 
-<CvFigure number="110" n="24" />
+<CvFigure number="111" n="24" />
 </div>
 
 #### 4.3.3.4 YOLO Training Settings {#yolo-training-settings}
@@ -508,8 +533,8 @@ Training was performed on HPC. The YOLO FOD models were trained using the follow
 
 The thermal detection models used the following datasets:
 
-- [Thermal Bird, version 6, Roboflow Universe](https://universe.roboflow.com/arc-ejbpg/thermal-bird/dataset/6) - [\[66\]](../references#cv-d03).
-- [Thermal Images for Human Detection, Kaggle](https://www.kaggle.com/datasets/sikdermdsaiful/thermal-images-for-human-detection/data?select=dataset) - [\[67\]](../references#cv-d04).
+- [Thermal Bird, version 6, Roboflow Universe](https://universe.roboflow.com/arc-ejbpg/thermal-bird/dataset/6) - [\[69\]](../references#cv-d03).
+- [Thermal Images for Human Detection, Kaggle](https://www.kaggle.com/datasets/sikdermdsaiful/thermal-images-for-human-detection) - [\[70\]](../references#cv-d04).
 
 The thermal models used the [same training settings as the YOLO FOD models](#yolo-training-settings).
 
@@ -523,7 +548,7 @@ The thermal models used the [same training settings as the YOLO FOD models](#yol
 
 #### 4.4.1.1 Overall Integrated System {#overall-integrated-system}
 
-The first integrated system used the sequential fallback architecture. It ran on the laptop but showed visible lag, as seen in the video below. All three architectures were later benchmarked. Further testing will be done on the Jetson NX.
+The first integrated system used the sequential fallback architecture. It ran on the laptop but showed visible lag, as seen in the video below. All three architectures were later benchmarked, with the results shown in Section 4.5. Further testing will be done on the Jetson NX.
 
 These were preliminary functional checks using sample objects, including a battery. Formal testing against the subsystem requirements has not yet been conducted.
 
@@ -541,15 +566,15 @@ These were preliminary functional checks using sample objects, including a batte
 
 The dataset was collected at the NUS test ground outside Techno, at the roundabout.
 
-<CvFigure number="111" n="12" />
+<CvFigure number="112" n="12" />
 
 At 1 m height, PatchCore detected anomalies in 10/10 tests. Testing at 5 m is pending. The system used the bounding boxes to crop the regions and send them to YOLO and the crack model.
 
-<CvFigure number="112" n="13" />
+<CvFigure number="113" n="13" />
 
 ### 4.4.3 YOLO Model Comparison {#model-comparison}
 
-We tested different YOLO versions, as shown in the table below. All achieved very high detection performance, with only small differences. These results were suspiciously high, so we also tested them on the ground.
+I tested different YOLO versions, as shown in the table below. All achieved very high detection performance, with only small differences. These results were suspiciously high, so I also tested them on the ground.
 
 <p class="report-table-caption" id="table-51"><strong>Table 51.</strong> YOLO Model Comparison</p>
 
@@ -564,17 +589,17 @@ We tested different YOLO versions, as shown in the table below. All achieved ver
 
 ### 4.4.4 YOLO Ground Testing and Second Iteration {#ground-testing-and-second-iteration}
 
-<CvFigure number="113" n="26" />
+<CvFigure number="114" n="26" />
 
 The model was performing very poorly, and the test object was detected inconsistently. In a 2nd iteration, instead of using different road surface images to generalise, I used only test-ground road surface for the synthetic compositing. The performance improved as shown below in the figure, but it was still not up to standard.
 
-<CvFigure number="114" n="27" />
+<CvFigure number="115" n="27" />
 
-In ground testing, YOLO detected the battery in 3/10 tests and the plastic part in 7/10 tests. Further investigation of the dataset was conducted, as discussed in [Section 4.5.4](#dataset-investigation).
+The ground tests used a plastic part, a battery and a pen. The 10 tests used different object placements at different locations along the test ground. YOLO detected the battery in 3/10 tests and the plastic part in 7/10 tests. Further investigation of the dataset was conducted, as discussed in [Section 4.5.4](#dataset-investigation).
 
 ### 4.4.5 U-Net On-the-Ground Results {#on-the-ground-results}
 
-<CvFigure number="115" n="35" />
+<CvFigure number="116" n="35" />
 
 On smooth roads, U-Net detected cracks in 10/10 tests. On the rough road, it made 2/10 correct crack/no-crack decisions. It often mistook the rough texture for cracks. Training data from similar rough surfaces is needed. A synthetic method may be used by adding artificial cracks to images of the test ground in the training dataset, but mimicking real-world cracks remains a challenge.
 
@@ -613,7 +638,7 @@ This is the setup used for the laptop benchmarks below. Ground-detection tests a
 | Repetitions | Three passes over the same RGB inputs: 90 frame observations per architecture, 84 YOLO calls, 84 U-Net calls for Parallel and Sequential 1, and 30 for Sequential 2 |
 | Timing boundary | Already-loaded images, excludes model loading, live capture, GUI display and result-file writing |
 
-All three used the same inputs, weights and settings. Sequential 1 was tested later. Background activity and different message routing may affect the comparison.
+All three used the same inputs, weights and settings. Background activity and different message routing may affect the comparison.
 
 ### 4.5.2 Architecture Comparison and Memory Use {#architecture-comparison-and-memory-use}
 
@@ -639,23 +664,25 @@ All three architectures used the [laptop setup above](#laptop-setup-and-test-con
  <p>Sequential 1 used 140.78 MiB less peak allocated GPU memory than Parallel.</p>
 </div>
 
-Running YOLO and U-Net in Sequential 1 used about 26.4% less GPU memory, while running them in parallel reduced processing time by about 11.9%. This gives us a reason to keep the sequential fallback when less memory is available. We still need to test it on the Jetson alongside navigation and communication.
+Running YOLO and U-Net in Sequential 1 used about 26.4% less GPU memory, while running them in parallel reduced processing time by about 11.9%. This gives me a reason to keep the sequential fallback when less memory is available. I still need to test it on the Jetson alongside navigation and communication.
 
-Memory figures show peak PyTorch allocation, not total GPU memory. Coordinates were simulated and messages were local JSON. Camera, GPS, network and Jetson performance were not measured.
+Memory figures show peak PyTorch allocation, not total GPU memory. Coordinates were simulated and messages were local JSON. Camera, GPS, network and Jetson performance were not measured for interim.
 
 Source data: [CSV](/report-assets/computer-vision/architecture_comparison.csv) and <a :href="withBase('/report-assets/computer-vision/architecture_comparison.md')" download>benchmark notes</a>.
 
 ### 4.5.3 Why Sequential 2 Is Not Selected {#why-sequential-2-is-not-selected}
 
-Sequential 2 was the fastest of the three architectures in the laptop benchmark, averaging 72.87 ms per frame (13.72 frames/s). It was not selected because it skips U-Net when YOLO detects FOD and can miss a crack in the same crop.
+Sequential 2 was the fastest of the three architectures in the laptop benchmark, averaging 72.87 ms per frame (13.72 frames/s). It was not selected because it skips U-Net when YOLO detects FOD and can miss a crack in the same crop, as shown in Fig. 117.
 
-FAA guidance explains that concrete corner cracks can begin as hairline cracks and deteriorate until pieces come loose. Minor cracks may also need sealing to limit water entry ([\[68\]](../references#cv-s02), pp. 8-9). FAA research links crack-related spalling to loose pieces that can become FOD ([\[69\]](../references#cv-s01)).
+FAA guidance explains that concrete corner cracks can begin as hairline cracks and deteriorate until pieces come loose. Minor cracks may also need sealing to limit water entry ([\[71\]](../references#cv-s02), pp. 8-9). FAA research links crack-related spalling to loose pieces that can become FOD ([\[72\]](../references#cv-s01)).
 
 This supports keeping the crack check for every anomalous crop in Parallel and Sequential 1. It does not mean every tiny crack is an immediate hazard. Small-crack detection at the intended 5 m flight height still needs testing.
 
-<CvFigure number="116" n="7" />
+<CvFigure number="117" n="7" />
 
 ### 4.5.4 YOLO Dataset Investigation {#dataset-investigation}
+
+This investigation follows the YOLO training results in [Section 4.4.3](#model-comparison) and the ground tests in [Section 4.4.4](#ground-testing-and-second-iteration).
 
 Since the YOLO models that gave very high results performed poorly on the test ground, a dataset investigation was conducted.
 
@@ -687,14 +714,16 @@ The original splits contained 51,361 strongly similar image pairs across the tra
 
 ### 4.5.6 YOLO Results and Discussion {#results-and-discussion}
 
+Both Kaggle dataset results below used YOLOv8L: the original random split and the Strict split.
+
 <p class="report-table-caption" id="table-56"><strong>Table 56.</strong> YOLO Results and Discussion</p>
 
 | Dataset | Reported mAP@50-95 | Interpretation |
 | --- | ---: | --- |
-| Original Kaggle dataset (random split) | 93.39% | Best result from the six YOLO models tested (YOLOv8L) |
-| Strict (Original Kaggle dataset) | 88.10% | All images retained, with similar images kept in the same split |
+| Random split | 93.39% | Best result from the six YOLO models tested (YOLOv8L) |
+| Strict | 88.10% | All images retained, with similar images kept in the same split |
 
-The lower mAP after Strict splitting supports the concern about data leakage. However, re-splitting does not fix the other dataset limitations. The images were taken at a low height, while we require images at 5 m. Synthetic images can also differ from real images in lighting, scale, shadows and blur. The current FOD dataset will therefore be replaced with a new dataset collected at the intended height and test ground.
+The lower mAP after Strict splitting supports the concern about data leakage. However, re-splitting does not fix the other dataset limitations. The images were taken at a low height, while I require images at 5 m. Synthetic images can also differ from real images in lighting, scale, shadows and blur. The current FOD dataset will therefore be replaced with a new dataset collected at the intended height and test ground.
 
 ### 4.5.7 Measured Processing and Inference Results {#measured-processing-and-inference-results}
 
@@ -764,9 +793,9 @@ These are laptop processing rates, not camera capture rates. Live capture, displ
 
 ::: details 4.6.1.2 PatchCore for 1 cm FOD at 5 m (Proposed)
 
-The workflow below is planned for PatchCore inspection at **5 m height** using the IDS camera. The 3008 x 3008 image is a square crop from the full 4128 x 3008 frame. Each tile keeps the original pixel scale.
+The workflow below is planned for PatchCore inspection at **5 m height** using the IDS camera. The 3008 x 3008 image is a square crop from the full 4128 x 3008 frame. Each tile keeps the original pixel scale. This preserves small-object detail to help PatchCore detect anomalies.
 
-<CvFigure number="117" n="46" />
+<CvFigure number="118" n="46" />
 
 For the proposed final setup at 5 m, a 1 cm object spans only about 10 or 15 pixels with the e-CAM or IDS camera and lens setups. The proposed change is to divide the inspection image into overlapping 512 x 512 pixel tiles, each processed individually by PatchCore for anomaly detection. Each tile's anomaly heatmap will then be mapped back to the inspection image using its tile coordinate offsets. The heatmaps will be combined to identify anomalous regions. These regions will be marked and cropped directly from the original camera image, accounting for any inspection-crop offset, before continuing through the remaining stages of the selected architecture.
 
@@ -808,7 +837,7 @@ Compare the current model with a dual-branch model using different feature layer
 ::: details 4.6.1.7 Navigation and FOD Coordinate Transmission
 
 - **Link navigation data:** Send current drone coordinates from ROS 2 navigation to the vision system.
-- **Prevent repeated coordinates:** Set up a program to prevent repeated FOD coordinates from being sent (work with the UGV side).
+- **Prevent repeated coordinates:** I will develop a program to identify the same FOD across consecutive camera frames and prevent its coordinates from being sent as a new target multiple times. It will account for small coordinate differences between frames and be tested with the UGV side.
 
 :::
 

@@ -5,6 +5,10 @@ pageClass: research-report-page
 aside: false
 ---
 
+<script setup>
+import { withBase } from 'vitepress'
+</script>
+
 <p class="chapter-kicker">FOD ARGUS / PROJECT REPORT</p>
 
 # Research
@@ -161,3 +165,103 @@ A multi-robot approach was adopted to overcome the limitations of using a single
 This approach is further supported by research conducted by Öztürk and Kuzucuoğlu [\[3\]](../references#research-ref-24), which demonstrated the potential efficiency of multi-robot systems, with coordinated robots completing FOD collection faster than a conventional manual vehicle in simulation. However, the cost benefits depend on operational conditions, particularly runway closure costs and usage frequency.
 
 A more detailed analysis of multi-robot coordination, operational efficiency and cost considerations is presented in the [FOD Hunter report – Why a Multi-Robot Approach](https://cde4301-drone-ground-robots.github.io/CDE4301_runway_patrol/report#sec-multirobot).
+
+### User Journey and Demonstration
+
+<figure class="research-figure research-journey-illustration">
+
+![Six-panel operational journey showing runway debris, FOD Argus scanning, data transmission, FOD Hunter navigation and pickup, and both robots returning to base](/report-assets/research/user-journey.png)
+
+<figcaption>FOD Argus and FOD Hunter operational journey.</figcaption>
+</figure>
+
+<div class="research-journey-flow" role="group" aria-label="Six-step operational flowchart">
+  <div class="research-journey-step">
+    <h4>Step 1: FOD on the runway</h4>
+    <p>Bolts, nuts, screws, stones and dead birds lie on the runway, posing a risk to aircraft.</p>
+  </div>
+  <div class="research-journey-arrow" aria-hidden="true">↓</div>
+  <div class="research-journey-step">
+    <h4>Step 2: Aerial scanning</h4>
+    <p>FOD Argus flies a pre-planned path during a scheduled inspection or closure window and flags candidate FOD with its location.</p>
+  </div>
+  <div class="research-journey-arrow" aria-hidden="true">↓</div>
+  <div class="research-journey-step">
+    <h4>Step 3: Data transmission</h4>
+    <p>FOD Argus sends the detected locations to the ground station, where the operator confirms each flag and filters false positives.</p>
+  </div>
+  <div class="research-journey-arrow" aria-hidden="true">↓</div>
+  <div class="research-journey-step">
+    <h4>Step 4: Ground navigation</h4>
+    <p>FOD Hunter travels to each confirmed location and verifies the target using its onboard sensors.</p>
+  </div>
+  <div class="research-journey-arrow" aria-hidden="true">↓</div>
+  <div class="research-journey-step">
+    <h4>Step 5: Pickup</h4>
+    <p>FOD Hunter removes the item using the sweep box and vacuum.</p>
+  </div>
+  <div class="research-journey-arrow" aria-hidden="true">↓</div>
+  <div class="research-journey-step">
+    <h4>Step 6: Return to home</h4>
+    <p>FOD Hunter returns to base, and FOD Argus lands on top. Each item is logged with its location and time.</p>
+  </div>
+</div>
+
+The video below is a simulation demonstrating the coordination between the FOD Argus and FOD Hunter.
+
+<figure class="research-figure research-journey-video">
+  <video controls playsinline preload="metadata" :src="withBase('/report-assets/research/user-journey-simulation.mp4')" aria-label="Simulation of FOD Argus and FOD Hunter coordination">
+    Your browser does not support embedded video. <a :href="withBase('/report-assets/research/user-journey-simulation.mp4')">Open the simulation video</a>.
+  </video>
+  <figcaption>Simulation of coordination between FOD Argus and FOD Hunter.</figcaption>
+</figure>
+
+### Value Proposition {#value-proposition}
+
+The value proposition of FOD Argus and FOD Hunter lies in their ability to support a more efficient and systematic approach to runway FOD detection. Based on the findings from primary and secondary research, several key stakeholder needs were identified, including reducing manual inspection requirements, improving FOD detection and ensuring repeatable runway coverage.
+
+By integrating AI-assisted aerial detection using FOD Argus with autonomous ground-based collection through FOD Hunter, the proposed system aims to address these needs while reducing reliance on conventional manual inspection and removal processes. The relationship between the identified stakeholder needs, existing challenges and proposed capabilities of FOD Argus and FOD Hunter is summarised in the following table.
+
+#### Stakeholder Needs–Solution Matrix
+
+<div class="research-value-table research-needs-table" role="region" aria-label="Stakeholder Needs–Solution Matrix" tabindex="0">
+<table>
+<caption>Table 4: Stakeholder Needs–Solution Matrix</caption>
+<colgroup><col style="width:17%"><col style="width:23%"><col style="width:20%"><col style="width:22%"><col style="width:18%"></colgroup>
+<thead><tr><th scope="col">Stakeholder need</th><th scope="col">Existing challenge</th><th scope="col">FOD Argus contribution</th><th scope="col">FOD Hunter contribution</th><th scope="col">Expected benefit</th></tr></thead>
+<tbody>
+<tr><th scope="row">Reduce manpower requirements</th><td>Current FOD inspection and clearance processes are labour-intensive</td><td>Conducts autonomous aerial runway scanning</td><td>Performs autonomous debris collection at identified locations</td><td>Reduced manpower required for runway FOD operations</td></tr>
+<tr><th scope="row">Improve FOD detection</th><td>Small FOD items may be overlooked during manual or conventional inspection</td><td>Detects candidate FOD using AI-assisted aerial sensing</td><td>Verifies the detected object at close range prior to removal</td><td>Improved likelihood of identifying and addressing FOD</td></tr>
+<tr><th scope="row">Ensure repeatable inspections</th><td>Manual inspection patterns may vary between runs</td><td>Follows pre-planned flight paths for consistent coverage</td><td>Navigates to confirmed locations based on transmitted coordinates</td><td>More repeatable and systematic inspection coverage</td></tr>
+<tr><th scope="row">Improve inspection efficiency</th><td>Ground-based inspection and search can be time-consuming</td><td>Rapid aerial scanning and localisation of candidate FOD</td><td>Targeted travel to confirmed locations and direct removal</td><td>Faster and more focused inspection and collection workflow</td></tr>
+<tr><th scope="row">Support safe runway operations</th><td>Runway debris creates hazards to aircraft during take-off and landing</td><td>Identifies potential hazards on the runway surface</td><td>Removes debris from the runway environment</td><td>Enhanced runway safety</td></tr>
+</tbody>
+</table>
+</div>
+
+#### Quality Function Deployment (QFD)
+
+This simplified QFD relationship matrix maps the five stakeholder needs to the proposed technical capabilities of FOD Argus and FOD Hunter.
+
+<div class="research-value-table research-qfd-table" role="region" aria-label="Quality Function Deployment relationship matrix" tabindex="0">
+<table aria-describedby="qfd-legend qfd-note">
+<caption>Table 5: Quality Function Deployment (QFD) Relationship Matrix</caption>
+<colgroup><col style="width:23%"><col style="width:16%"><col style="width:14%"><col style="width:14%"><col style="width:18%"><col style="width:15%"></colgroup>
+<thead><tr><th scope="col">Stakeholder requirement</th><th scope="col">AI FOD Detection from Argus</th><th scope="col">Pre-planned flight</th><th scope="col">FOD geolocation</th><th scope="col">Argus–Hunter Communication</th><th scope="col">FOD Hunter Integration</th></tr></thead>
+<tbody>
+<tr><th scope="row">Reduce manual inspection</th><td class="qfd-strong"><span role="img" aria-label="Strong relationship">●</span></td><td class="qfd-strong"><span role="img" aria-label="Strong relationship">●</span></td><td class="qfd-supporting"><span role="img" aria-label="Supporting relationship">○</span></td><td class="qfd-supporting"><span role="img" aria-label="Supporting relationship">○</span></td><td class="qfd-strong"><span role="img" aria-label="Strong relationship">●</span></td></tr>
+<tr><th scope="row">Improve detection capability</th><td class="qfd-strong"><span role="img" aria-label="Strong relationship">●</span></td><td class="qfd-supporting"><span role="img" aria-label="Supporting relationship">○</span></td><td class="qfd-supporting"><span role="img" aria-label="Supporting relationship">○</span></td><td class="qfd-supporting"><span role="img" aria-label="Supporting relationship">○</span></td><td class="qfd-supporting"><span role="img" aria-label="Supporting relationship">○</span></td></tr>
+<tr><th scope="row">Repeatable runway coverage</th><td class="qfd-supporting"><span role="img" aria-label="Supporting relationship">○</span></td><td class="qfd-strong"><span role="img" aria-label="Strong relationship">●</span></td><td class="qfd-none"><span role="img" aria-label="No direct relationship">—</span></td><td class="qfd-none"><span role="img" aria-label="No direct relationship">—</span></td><td class="qfd-none"><span role="img" aria-label="No direct relationship">—</span></td></tr>
+<tr><th scope="row">Faster targeted collection</th><td class="qfd-supporting"><span role="img" aria-label="Supporting relationship">○</span></td><td class="qfd-supporting"><span role="img" aria-label="Supporting relationship">○</span></td><td class="qfd-strong"><span role="img" aria-label="Strong relationship">●</span></td><td class="qfd-strong"><span role="img" aria-label="Strong relationship">●</span></td><td class="qfd-strong"><span role="img" aria-label="Strong relationship">●</span></td></tr>
+<tr><th scope="row">Traceable detection records</th><td class="qfd-supporting"><span role="img" aria-label="Supporting relationship">○</span></td><td class="qfd-supporting"><span role="img" aria-label="Supporting relationship">○</span></td><td class="qfd-strong"><span role="img" aria-label="Strong relationship">●</span></td><td class="qfd-supporting"><span role="img" aria-label="Supporting relationship">○</span></td><td class="qfd-supporting"><span role="img" aria-label="Supporting relationship">○</span></td></tr>
+</tbody>
+</table>
+</div>
+
+<ul id="qfd-legend" class="research-qfd-legend" aria-label="QFD relationship legend">
+<li><span class="qfd-strong" aria-hidden="true">●</span> Strong relationship</li>
+<li><span class="qfd-supporting" aria-hidden="true">○</span> Supporting relationship</li>
+<li><span class="qfd-none" aria-hidden="true">—</span> No direct relationship</li>
+</ul>
+
+<p id="qfd-note" class="research-qfd-note">The relationships represent qualitative assessments and have not been validated through quantitative QFD scoring.</p>

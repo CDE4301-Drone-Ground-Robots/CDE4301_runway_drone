@@ -1,44 +1,47 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 680" width="1200" height="680" role="img" aria-labelledby="title desc">
-<title id="title">ARGUS to HUNTER communication</title>
-<desc id="desc">Vision sends detected FOD coordinates to the ARGUS queue. ARGUS sends one stored target to HUNTER over ROS 2 and Wi-Fi. HUNTER stores the target without duplicates and returns a receipt acknowledgement. ARGUS then sends the next target. Alerts without an acknowledgement remain stored for retry. Link checks are planned every second, with a base notification after 10 seconds without a handshake response. Live integration and link checks will be implemented and tested after the interim assessment.</desc>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 900" width="1200" height="900" role="img" aria-labelledby="title desc">
+<title id="title">ARGUS, HUNTER and base-station communication paths</title>
+<desc id="desc">ARGUS sends FOD coordinates to HUNTER, which returns a receipt acknowledgement. Both vehicles send video and coordinates to the base station. The base sends control commands and link checks to both vehicles. ARGUS can still reach the base when HUNTER is disconnected only if its base connection remains available. After a communication error, ARGUS retains targets and is proposed to descend and land at a clear location before waiting for instructions. Full communication and landing behaviour will be tested after interim.</desc>
 <defs>
-<marker id="send" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" orient="auto-start-reverse"><path d="M0 0L10 5L0 10Z" fill="#d7aa94"/></marker>
-<marker id="ack" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" orient="auto"><path d="M0 0L10 5L0 10Z" fill="#a8d4bc"/></marker>
-<style>text{font-family:Arial,sans-serif;fill:#eef1f6;text-anchor:middle} .title{font-size:28px;font-weight:600}.heading{font-size:22px;font-weight:600;fill:#e5c1ae}.label{font-size:20px;font-weight:600}.body{font-size:18px}.note{font-size:18px;fill:#bec7d1}.box{fill:#1b2b39;stroke:#708b9e;stroke-width:1.5}.flow{fill:none;stroke:#d7aa94;stroke-width:2;marker-end:url(#send)}.ack{fill:none;stroke:#a8d4bc;stroke-width:2;stroke-dasharray:8 6;marker-end:url(#ack)}</style>
+<marker id="data" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto"><path d="M0 0L10 5L0 10Z" fill="#d7aa94"/></marker>
+<marker id="control" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto"><path d="M0 0L10 5L0 10Z" fill="#a8d4bc"/></marker>
+<style>text{font-family:Arial,sans-serif;fill:#eef1f6;text-anchor:middle}.title{font-size:28px;font-weight:600}.heading{font-size:23px;font-weight:600;fill:#e5c1ae}.body{font-size:20px}.note{font-size:18px;fill:#bec7d1}.box{fill:#1b2b39;stroke:#708b9e;stroke-width:1.5}.data{fill:none;stroke:#d7aa94;stroke-width:2;marker-end:url(#data)}.control{fill:none;stroke:#a8d4bc;stroke-width:2;stroke-dasharray:8 6;marker-end:url(#control)}</style>
 </defs>
-<rect width="1200" height="680" rx="18" fill="#0d131d"/>
-<text class="title" x="600" y="49">ARGUS-HUNTER Communication</text>
-<text class="note" x="600" y="87">Stage 2 demonstrates the queue. Live integration and link checks will be done after interim.</text>
-<rect x="30" y="125" width="570" height="365" rx="16" fill="#12202b" stroke="#40596b"/>
-<rect x="640" y="125" width="530" height="365" rx="16" fill="#12202b" stroke="#40596b"/>
-<text class="heading" x="315" y="168">ARGUS</text>
-<text class="heading" x="905" y="168">HUNTER</text>
-<rect class="box" x="55" y="230" width="230" height="130" rx="12"/>
-<text class="label" x="170" y="270">Vision system</text>
-<text class="body" x="170" y="306">Extract FOD</text>
-<text class="body" x="170" y="332">coordinates</text>
-<rect class="box" x="320" y="230" width="255" height="130" rx="12"/>
-<text class="label" x="447" y="270">Sender queue</text>
-<text class="body" x="447" y="306">Store FOD coordinates</text>
-<text class="body" x="447" y="332">Send one target at a time</text>
-<rect class="box" x="665" y="230" width="225" height="130" rx="12"/>
-<text class="label" x="777" y="270">Receive and store</text>
-<text class="body" x="777" y="306">Check target ID</text>
-<text class="body" x="777" y="332">Avoid duplicate targets</text>
-<rect class="box" x="930" y="230" width="215" height="130" rx="12"/>
-<text class="label" x="1037" y="270">Navigation</text>
-<text class="body" x="1037" y="306">Use the received</text>
-<text class="body" x="1037" y="332">FOD coordinates</text>
-<path class="flow" d="M285 294H315"/>
-<path class="flow" d="M575 294H660"/>
-<path class="flow" d="M890 294H925"/>
-<text class="note" x="620" y="203">ROS 2 / Wi-Fi</text>
-<path class="ack" d="M777 360V425H447V365"/>
-<rect x="475" y="398" width="275" height="53" rx="8" fill="#12202b"/>
-<text x="612" y="418" font-size="18" fill="#a8d4bc">Receipt ACK returned</text>
-<text x="612" y="443" font-size="17" fill="#a8d4bc">ARGUS sends the next target</text>
-<rect x="55" y="525" width="1090" height="94" rx="12" fill="#20212f" stroke="#708b9e"/>
-<text class="label" x="600" y="558">No ACK or connection lost: keep the target in the ARGUS queue.</text>
-<text class="body" x="600" y="592">Handshake every second. No response for 10 seconds: notify the base station if reachable.</text>
-<text class="note" x="600" y="653">ACK confirms receipt. It does not mean HUNTER has collected the FOD.</text>
+<rect width="1200" height="900" rx="18" fill="#0d131d"/>
+<text class="title" x="600" y="46">ARGUS, HUNTER and Base Station</text>
+<text class="note" x="600" y="83">Proposed final communication paths. Full integration will be done after interim.</text>
+<rect class="box" x="350" y="130" width="500" height="140" rx="14"/>
+<text class="heading" x="600" y="166">BASE STATION</text>
+<text class="body" x="600" y="205">Receives video and coordinates</text>
+<text class="note" x="600" y="238">Sends commands and checks both vehicle links</text>
+<path class="data" d="M175 500V200H345"/>
+<path class="data" d="M1025 500V200H855"/>
+<rect x="65" y="314" width="220" height="80" rx="8" fill="#0d131d"/>
+<text class="body" x="175" y="345">Video + coordinates</text>
+<text class="note" x="175" y="376">Handshake replies</text>
+<rect x="915" y="314" width="220" height="80" rx="8" fill="#0d131d"/>
+<text class="body" x="1025" y="345">Video + coordinates</text>
+<text class="note" x="1025" y="376">Handshake replies</text>
+<path d="M600 270V380" fill="none" stroke="#a8d4bc" stroke-width="2" stroke-dasharray="8 6"/>
+<path class="control" d="M600 380H370V495"/>
+<path class="control" d="M600 380H830V495"/>
+<rect x="470" y="295" width="260" height="62" rx="8" fill="#0d131d"/>
+<text class="body" x="600" y="318">Control commands</text>
+<text class="note" x="600" y="347">and link checks</text>
+<rect class="box" x="70" y="500" width="420" height="160" rx="14"/>
+<text class="heading" x="280" y="539">ARGUS</text>
+<text class="body" x="280" y="578">FOD queue and database</text>
+<text class="note" x="280" y="615">RGB and thermal video</text>
+<rect class="box" x="710" y="500" width="420" height="160" rx="14"/>
+<text class="heading" x="920" y="539">HUNTER</text>
+<text class="body" x="920" y="578">Receives FOD targets</text>
+<text class="note" x="920" y="615">Video and coordinates</text>
+<path class="data" d="M490 555H705"/>
+<text class="note" x="600" y="527">FOD coordinates</text>
+<path class="control" d="M710 607H495"/>
+<text class="note" x="600" y="638">Receipt ACK</text>
+<rect x="55" y="710" width="1090" height="130" rx="12" fill="#20212f" stroke="#708b9e"/>
+<text class="body" x="600" y="744">After a link or delivery error: keep targets stored and inform the base if reachable.</text>
+<text class="body" x="600" y="780">ARGUS descends and lands at a clear location, then waits for further commands.</text>
+<text class="note" x="600" y="815">Landing and communication procedures will be tested after the interim assessment.</text>
+<text class="note" x="600" y="877">Base reachability depends on the remaining radio/network connection.</text>
 </svg>
