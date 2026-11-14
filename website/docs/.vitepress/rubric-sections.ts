@@ -1,3 +1,4 @@
+import reportSectionTitles from './report-section-titles.json'
 export const rubricSections = [
   {
     "slug": "a1-objective-scope-context",
@@ -77,6 +78,6 @@ const subsystemRubricTitles = {
 export function subsystemRubricSections(subsystem: keyof typeof subsystemRubricTitles) {
  return rubricSections.map((section, index) => ({
   ...section,
-  title: subsystemRubricTitles[subsystem][index]
+  title: reportSectionTitles[subsystem][section.slug]
  }))
 }

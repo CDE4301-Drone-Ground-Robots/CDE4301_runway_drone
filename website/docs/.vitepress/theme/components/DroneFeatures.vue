@@ -23,7 +23,8 @@ const features: Feature[] = [
   details: [
    'The endurance objective is approximately 15 minutes per flight, giving the UAV time to carry out an inspection mission before returning for recharging.',
    'The mechanical report identifies low structural mass as a way to reduce thrust and propulsion power requirements. Battery selection, payload and propulsion must be considered together to assess achievable endurance.',
-   'The 15-minute value is a design target from the feature brief. A measured flight-endurance result is not yet documented.'
+   'The 15-minute value is a design target from the feature brief. A measured flight-endurance result is not yet documented.',
+   'The navigation simulation tested a 30 m runway sector in a 15 m/s crosswind with 25% turbulence. The worst of three simulation runs took 13.2 minutes and used 68.9% of the battery.'
   ],
   links: [{ label: 'Mechanical design', href: '/subsystems/mechanical-design#overview-of-mechanical-design-of-the-uav' }, { label: 'Electrical design', href: '/subsystems/electrical-design' }]
  },

@@ -20,8 +20,8 @@ const reportSidebar = [
   ] },
   { text: 'System architecture', link: '/report/system-architecture' }
  ] },
- { text: 'SUBSYSTEM REPORTS', items: subsystems.map(subsystem => ({
-  text: subsystem.title,
+ { text: 'SUBSYSTEM REPORTS', items: subsystems.map((subsystem, index) => ({
+  text: (index + 1) + '. ' + subsystem.title,
   link: '/subsystems/' + subsystem.slug,
   ...(subsystem.slug === 'computer-vision' ? {
    collapsed: false,
