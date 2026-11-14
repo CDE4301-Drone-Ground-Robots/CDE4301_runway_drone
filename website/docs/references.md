@@ -11,28 +11,28 @@ References are numbered in order of first citation in the full report. The same 
 <div class="ieee-reference" id="research-ref-23">
 <span class="ieee-reference-number">[1]</span>
 <div class="ieee-reference-body">
-<p>&ldquo;El-Sayed estimate of FOD costs&rdquo;. <strong>Incomplete reference:</strong> the original source and bibliographic details were not supplied.</p>
+<p>A. F. El-Sayed, <i>Foreign Object Debris and Damage in Aviation</i>. CRC Press, 2022. doi: <a href="https://doi.org/10.1201/9781003133087">10.1201/9781003133087</a>.</p>
 </div>
 </div>
 
 <div class="ieee-reference" id="research-ref-22">
 <span class="ieee-reference-number">[2]</span>
 <div class="ieee-reference-body">
-<p>&ldquo;FAA estimate of FOD costs&rdquo;. <strong>Incomplete reference:</strong> the original source and bibliographic details were not supplied.</p>
+<p>B. G. Hilburn and B. S. Pesmen, “Foreign object debris detection system cost-benefit analysis,” Federal Aviation Administration, William J. Hughes Technical Center, Rep. DOT/FAA/TC-22/47, May 2023. doi: <a href="https://doi.org/10.21949/1528220">10.21949/1528220</a>. [Online]. Available: <a href="https://rosap.ntl.bts.gov/view/dot/67541">https://rosap.ntl.bts.gov/view/dot/67541</a>.</p>
 </div>
 </div>
 
 <div class="ieee-reference" id="research-ref-24">
 <span class="ieee-reference-number">[3]</span>
 <div class="ieee-reference-body">
-<p>&ldquo;Runway FOD damage, detection and removal&rdquo;. <strong>Incomplete reference:</strong> the original source and bibliographic details were not supplied.</p>
+<p>S. Öztürk and A. E. Kuzucuoğlu, “A multi-robot coordination approach for autonomous runway Foreign Object Debris (FOD) clearance,” <i>Robotics and Autonomous Systems</i>, vol. 75, pt. B, pp. 244–259, Jan. 2016. doi: <a href="https://doi.org/10.1016/j.robot.2015.09.022">10.1016/j.robot.2015.09.022</a>.</p>
 </div>
 </div>
 
 <div class="ieee-reference" id="research-ref-25">
 <span class="ieee-reference-number">[4]</span>
 <div class="ieee-reference-body">
-<p>&ldquo;Air France Flight 4590 accident&rdquo;. <strong>Incomplete reference:</strong> the original source and bibliographic details were not supplied.</p>
+<p>Bureau d’Enquêtes et d’Analyses pour la sécurité de l’aviation civile, “Accident on 25 July 2000 at La Patte d’Oie in Gonesse (95) to the Concorde registered F-BTSC operated by Air France,” Final Rep. f-sc000725a, Jan. 2002. [Online]. Available: <a href="https://www.faa.gov/sites/faa.gov/files/2022-11/Concorde_Accident_Report.pdf">https://www.faa.gov/sites/faa.gov/files/2022-11/Concorde_Accident_Report.pdf</a>.</p>
 </div>
 </div>
 
@@ -46,28 +46,28 @@ References are numbered in order of first citation in the full report. The same 
 <div class="ieee-reference" id="research-ref-27">
 <span class="ieee-reference-number">[6]</span>
 <div class="ieee-reference-body">
-<p>&ldquo;Runway FOD safety and manual clearance&rdquo;. <strong>Incomplete reference:</strong> the original source and bibliographic details were not supplied.</p>
+<p>Y. L. S. Vidal, C. A. D. Arapa, Á. De Jesús Huamaní Mejía, E. Supo, J. L. A. Gutierrez, and P. E. P. Salas, “A systematic review of methods for cleaning FOD on runways,” in <i>Proc. 2023 17th International Conference on Engineering of Modern Electric Systems (EMES)</i>, 2023, pp. 1–4. doi: <a href="https://doi.org/10.1109/EMES58375.2023.10171778">10.1109/EMES58375.2023.10171778</a>.</p>
 </div>
 </div>
 
 <div class="ieee-reference" id="research-ref-28">
 <span class="ieee-reference-number">[7]</span>
 <div class="ieee-reference-body">
-<p>&ldquo;Singapore manpower and manpower optimisation&rdquo;. <strong>Incomplete reference:</strong> the original source and bibliographic details were not supplied.</p>
+<p>Ministry of Defence, Singapore, “Written reply by Minister for Defence Dr Ng Eng Hen to Parliamentary Question on the SAF’s use of technological advancement amid falling total fertility rate,” Jan. 11, 2022. Accessed: Nov. 14, 2026. [Online]. Available: <a href="https://www.mindef.gov.sg/news-and-events/latest-releases/11jan22_pq/">https://www.mindef.gov.sg/news-and-events/latest-releases/11jan22_pq/</a>.</p>
 </div>
 </div>
 
 <div class="ieee-reference" id="research-ref-29">
 <span class="ieee-reference-number">[8]</span>
 <div class="ieee-reference-body">
-<p>&ldquo;SAF automated vehicles and AI-enabled drones&rdquo;. <strong>Incomplete reference:</strong> the original source and bibliographic details were not supplied.</p>
+<p>J. C. Tay, “Smaller NS pool due to S’pore’s low fertility rates will not compromise national defence: Ng Eng Hen,” <i>Mothership</i>, Jan. 12, 2022. Accessed: Nov. 14, 2026. [Online]. Available: <a href="https://mothership.sg/2022/01/ng-eng-hen-low-fertility-rates-national-defence">https://mothership.sg/2022/01/ng-eng-hen-low-fertility-rates-national-defence</a>.</p>
 </div>
 </div>
 
 <div class="ieee-reference" id="research-ref-30">
 <span class="ieee-reference-number">[9]</span>
 <div class="ieee-reference-body">
-<p>&ldquo;Projected SAF manpower reduction&rdquo;. <strong>Incomplete reference:</strong> the original source and bibliographic details were not supplied.</p>
+<p>E. B. Koh, “Preparing a stout defence for generations to come,” <i>PIONEER</i>, Aug. 1, 2019. Accessed: Nov. 14, 2026. [Online]. Available: <a href="https://defencepioneer.sg/pioneer-articles/preparing-a-stout-defence-for-generations-to-come">https://defencepioneer.sg/pioneer-articles/preparing-a-stout-defence-for-generations-to-come</a>.</p>
 </div>
 </div>
 
@@ -81,70 +81,70 @@ References are numbered in order of first citation in the full report. The same 
 <div class="ieee-reference" id="research-ref-31">
 <span class="ieee-reference-number">[11]</span>
 <div class="ieee-reference-body">
-<p>&ldquo;Comparison of existing FOD detection technologies&rdquo;. <strong>Incomplete reference:</strong> the original source and bibliographic details were not supplied.</p>
+<p>S. Jain, M. S. Prasad, and R. Gutpa, “A comparison of manual and automotive FOD detection systems at airport runways,” in <i>Proc. 2022 10th International Conference on Reliability, Infocom Technologies and Optimization (Trends and Future Directions) (ICRITO)</i>, 2022, pp. 1–5. doi: <a href="https://doi.org/10.1109/ICRITO56286.2022.9964557">10.1109/ICRITO56286.2022.9964557</a>.</p>
 </div>
 </div>
 
 <div class="ieee-reference" id="research-ref-32">
 <span class="ieee-reference-number">[12]</span>
 <div class="ieee-reference-body">
-<p>&ldquo;Roboxi trial at Berlin Brandenburg Airport&rdquo;. <strong>Incomplete reference:</strong> the original source and bibliographic details were not supplied.</p>
+<p>“Berlin Brandenburg tests Roboxi for automated airside inspections,” <i>AviationPros</i>, Sep. 23, 2026. Accessed: Nov. 14, 2026. [Online]. Available: <a href="https://www.aviationpros.com/ground-support-worldwide/news/55404449/berlin-brandenburg-tests-roboxi-for-automated-airside-inspections">https://www.aviationpros.com/ground-support-worldwide/news/55404449/berlin-brandenburg-tests-roboxi-for-automated-airside-inspections</a>.</p>
 </div>
 </div>
 
 <div class="ieee-reference" id="research-ref-33">
 <span class="ieee-reference-number">[13]</span>
 <div class="ieee-reference-body">
-<p>&ldquo;Roboxi trial at Berlin Brandenburg Airport: additional source&rdquo;. <strong>Incomplete reference:</strong> the original source and bibliographic details were not supplied.</p>
+<p>Roboxi, “Roboxi: Autonomous runway solutions,” Accessed: Nov. 14, 2026. [Online]. Available: <a href="https://www.roboxi.com/">https://www.roboxi.com/</a>.</p>
 </div>
 </div>
 
 <div class="ieee-reference" id="md-ref-1">
 <span class="ieee-reference-number">[14]</span>
 <div class="ieee-reference-body">
-<p>&ldquo;CAAS UA Pilot Licence requirement&rdquo;. <strong>Incomplete reference:</strong> the original source and bibliographic details were not supplied.</p>
+<p>Civil Aviation Authority of Singapore, “Requirements for flying unmanned aircraft,” May 8, 2026. Accessed: Nov. 14, 2026. [Online]. Available: <a href="https://www.caas.gov.sg/unmanned-aircraft/requirements-for-flying-ua/">https://www.caas.gov.sg/unmanned-aircraft/requirements-for-flying-ua/</a>.</p>
 </div>
 </div>
 
 <div class="ieee-reference" id="md-ref-2">
 <span class="ieee-reference-number">[15]</span>
 <div class="ieee-reference-body">
-<p>&ldquo;Plus and cross quadcopter configuration comparison&rdquo;. <strong>Incomplete reference:</strong> the original source and bibliographic details were not supplied.</p>
+<p>R. Niemiec and F. Gandhi, “Multirotor controls, trim, and autonomous flight dynamics of plus- and cross-quadcopters,” <i>Journal of Aircraft</i>, vol. 54, no. 5, pp. 1910–1920, Sep. 2017. doi: <a href="https://doi.org/10.2514/1.C034165">10.2514/1.C034165</a>.</p>
 </div>
 </div>
 
 <div class="ieee-reference" id="md-ref-3">
 <span class="ieee-reference-number">[16]</span>
 <div class="ieee-reference-body">
-<p>&ldquo;Pusher and puller configuration CFD comparison&rdquo;. <strong>Incomplete reference:</strong> the original source and bibliographic details were not supplied.</p>
+<p>N. Hooli, B. Yelamali, G. R. Chalageri, S. Billur, and G. U. Raju, ?Performance evaluation of pusher or puller configuration for quadcopter ? CFD analysis,? <i>AIP Conference Proceedings</i>, vol. 3325, no. 1, Art. no. 050013, Oct. 2025. doi: <a href="https://doi.org/10.1063/5.0291733">10.1063/5.0291733</a>.</p>
 </div>
 </div>
 
 <div class="ieee-reference" id="md-ref-4">
 <span class="ieee-reference-number">[17]</span>
 <div class="ieee-reference-body">
-<p>&ldquo;CFRP structural properties&rdquo;. <strong>Incomplete reference:</strong> the original source and bibliographic details were not supplied.</p>
+<p>FPVDroneFrame.com, “CNC drone frames vs. 3D printed drone frames: The ultimate showdown (2026),” Accessed: Nov. 14, 2026. [Online]. Available: <a href="https://fpvdroneframe.com/cnc-drone-frames-vs-3d-printed-drone-frames/">https://fpvdroneframe.com/cnc-drone-frames-vs-3d-printed-drone-frames/</a>.</p>
 </div>
 </div>
 
 <div class="ieee-reference" id="md-ref-5">
 <span class="ieee-reference-number">[18]</span>
 <div class="ieee-reference-body">
-<p>&ldquo;CFRP structural properties&rdquo;. <strong>Incomplete reference:</strong> the original source and bibliographic details were not supplied.</p>
+<p>Uchida, “Characteristics of carbon fiber reinforced plastic (CFRP),” Accessed: Nov. 14, 2026. [Online]. Available: <a href="https://uchida-japan.com/uchidanews/cfrp/characteristics-of-carbon-fiber-reinforced-plastic-cfrp/">https://uchida-japan.com/uchidanews/cfrp/characteristics-of-carbon-fiber-reinforced-plastic-cfrp/</a>.</p>
 </div>
 </div>
 
 <div class="ieee-reference" id="md-ref-8">
 <span class="ieee-reference-number">[19]</span>
 <div class="ieee-reference-body">
-<p>&ldquo;CFRP structural properties&rdquo;. <strong>Incomplete reference:</strong> the original source and bibliographic details were not supplied.</p>
+<p>C. Jarka, A. Komorek, J. Janiszewski, R. Bąbel, J. Komorek, and P. Żeglarski, “Carbon fiber reinforced polymer and polyethylene terephthalate glycol carbon comparison for quadcopter frame application,” <i>Advances in Science and Technology Research Journal</i>, vol. 20, no. 11, pp. 253–262, 2026. doi: <a href="https://doi.org/10.12913/22998624/225597">10.12913/22998624/225597</a>.</p>
 </div>
 </div>
 
 <div class="ieee-reference" id="md-ref-7">
 <span class="ieee-reference-number">[20]</span>
 <div class="ieee-reference-body">
-<p>&ldquo;CFRP and aluminium-alloy motor-frame vibration experiment&rdquo;. <strong>Incomplete reference:</strong> the original source and bibliographic details were not supplied.</p>
+<p>J. Zhang, H. Yang, X. Li, and W. Ye, “A method of reducing motor vibration: Natural frequency, damping ratio, and vibration analysis of CFRP motor frame,” <i>Shock and Vibration</i>, vol. 2020, Art. no. 6021640, pp. 1–12, Jan. 2020. doi: <a href="https://doi.org/10.1155/2020/6021640">10.1155/2020/6021640</a>.</p>
 </div>
 </div>
 
@@ -159,84 +159,84 @@ References are numbered in order of first citation in the full report. The same 
 <div class="ieee-reference" id="md-ref-15">
 <span class="ieee-reference-number">[22]</span>
 <div class="ieee-reference-body">
-<p>&ldquo;Beaufort Wind Scale&rdquo;. <strong>Incomplete reference:</strong> the original source and bibliographic details were not supplied.</p>
+<p>National Weather Service, “Beaufort wind scale,” Accessed: Nov. 14, 2026. [Online]. Available: <a href="https://www.weather.gov/mfl/beaufort">https://www.weather.gov/mfl/beaufort</a>.</p>
 </div>
 </div>
 
 <div class="ieee-reference" id="md-ref-16">
 <span class="ieee-reference-number">[23]</span>
 <div class="ieee-reference-body">
-<p>&ldquo;DJI Matrice 350 RTK maximum pitch angle&rdquo;. <strong>Incomplete reference:</strong> the original source and bibliographic details were not supplied.</p>
+<p>DJI, “Matrice 350 RTK: Specs,” Accessed: Nov. 14, 2026. [Online]. Available: <a href="https://enterprise.dji.com/matrice-350-rtk/specs">https://enterprise.dji.com/matrice-350-rtk/specs</a>.</p>
 </div>
 </div>
 
 <div class="ieee-reference" id="md-ref-17">
 <span class="ieee-reference-number">[24]</span>
 <div class="ieee-reference-body">
-<p>&ldquo;T-Motor MN501-S KV360 performance data&rdquo;. <strong>Incomplete reference:</strong> the original source and bibliographic details were not supplied.</p>
+<p>T-Motor, “MN501-S KV360 UAV / drone motor,” Accessed: Nov. 14, 2026. [Online]. Available: <a href="https://store.tmotor.com/product/mn501-s-kv360-motor-navigator-type.html">https://store.tmotor.com/product/mn501-s-kv360-motor-navigator-type.html</a>.</p>
 </div>
 </div>
 
 <div class="ieee-reference" id="md-ref-18">
 <span class="ieee-reference-number">[25]</span>
 <div class="ieee-reference-body">
-<p>&ldquo;MAD 5005 IPE KV440 performance data&rdquo;. <strong>Incomplete reference:</strong> the original source and bibliographic details were not supplied.</p>
+<p>MAD Motor Components Co., Ltd., “MAD 5005 IPE Drone Motor.” Accessed: Nov. 14, 2026. [Online]. Available: <a href="https://mad-motor.com/products/mad-components-5005-ipe?VariantsId=10440">Original manufacturer link</a>; <a href="https://store.mad-motor.com/products/mad-5005-ipe-brushless-motor-for-the-long-range-inspection-drone-mapping-drone-surveying-drone-quadcopter-hexcopter-mulitirotor">current manufacturer product page</a>.</p>
 </div>
 </div>
 
 <div class="ieee-reference" id="md-ref-19">
 <span class="ieee-reference-number">[26]</span>
 <div class="ieee-reference-body">
-<p>&ldquo;Toray T300 carbon fibre datasheet&rdquo;. <strong>Incomplete reference:</strong> the original source and bibliographic details were not supplied.</p>
+<p>Toray Composite Materials America, Inc., “TORAYCA T300 standard modulus carbon fiber data sheet,” Accessed: Nov. 14, 2026. [Online]. Available: <a href="https://www.toraycma.com/wp-content/uploads/T300-Data-Sheet.pdf">https://www.toraycma.com/wp-content/uploads/T300-Data-Sheet.pdf</a>.</p>
 </div>
 </div>
 
 <div class="ieee-reference" id="md-ref-20">
 <span class="ieee-reference-number">[27]</span>
 <div class="ieee-reference-body">
-<p>&ldquo;ArduPilot vibration documentation&rdquo;. <strong>Incomplete reference:</strong> the original source and bibliographic details were not supplied.</p>
+<p>ArduPilot, “Managing gyro noise with the dynamic harmonic notch filters,” Accessed: Nov. 14, 2026. [Online]. Available: <a href="https://ardupilot.org/copter/docs/common-imu-notch-filtering.html">https://ardupilot.org/copter/docs/common-imu-notch-filtering.html</a>.</p>
 </div>
 </div>
 
 <div class="ieee-reference" id="md-ref-9">
 <span class="ieee-reference-number">[28]</span>
 <div class="ieee-reference-body">
-<p>&ldquo;PETG CF compared with PETG and PLA&rdquo;. <strong>Incomplete reference:</strong> the original source and bibliographic details were not supplied.</p>
+<p>Bambu Lab, ?Filament guide.? [Online]. Available: <a href="https://bambulab.com/en/filament/guide">https://bambulab.com/en/filament/guide</a>.</p>
 </div>
 </div>
 
 <div class="ieee-reference" id="md-ref-11">
 <span class="ieee-reference-number">[29]</span>
 <div class="ieee-reference-body">
-<p>&ldquo;Direct georeferencing and sensor lever-arm transformation&rdquo;. <strong>Incomplete reference:</strong> the original source and bibliographic details were not supplied.</p>
+<p>M. Bagherbandi, A. Jouybari, F. Nilfouroushan, and J. Ågren, “Deflection of vertical effect on direct georeferencing in aerial mobile mapping systems: A case study in Sweden,” <i>The Photogrammetric Record</i>, vol. 37, no. 179, pp. 285–305, 2022. doi: <a href="https://doi.org/10.1111/phor.12421">10.1111/phor.12421</a>.</p>
 </div>
 </div>
 
 <div class="ieee-reference" id="md-ref-12">
 <span class="ieee-reference-number">[30]</span>
 <div class="ieee-reference-body">
-<p>&ldquo;PX4 flight controller mounting documentation&rdquo;. <strong>Incomplete reference:</strong> the original source and bibliographic details were not supplied.</p>
+<p>PX4 Development Team, “Mounting the flight controller,” Accessed: Nov. 14, 2026. [Online]. Available: <a href="https://docs.px4.io/main/en/assembly/mount_and_orient_controller">https://docs.px4.io/main/en/assembly/mount_and_orient_controller</a>.</p>
 </div>
 </div>
 
 <div class="ieee-reference" id="md-ref-13">
 <span class="ieee-reference-number">[31]</span>
 <div class="ieee-reference-body">
-<p>&ldquo;ArduPilot flight controller placement and IMU offsets&rdquo;. <strong>Incomplete reference:</strong> the original source and bibliographic details were not supplied.</p>
+<p>ArduPilot, “Mounting the autopilot,” Accessed: Nov. 14, 2026. [Online]. Available: <a href="https://ardupilot.org/copter/docs/common-mounting-the-flight-controller.html">https://ardupilot.org/copter/docs/common-mounting-the-flight-controller.html</a>.</p>
 </div>
 </div>
 
 <div class="ieee-reference" id="md-ref-21">
 <span class="ieee-reference-number">[32]</span>
 <div class="ieee-reference-body">
-<p>&ldquo;PETG toughness and impact resistance&rdquo;. <strong>Incomplete reference:</strong> the original source and bibliographic details were not supplied.</p>
+<p>Xometry, “PETG 3D printing filament: Materials, properties, and uses,” Sep. 19, 2022. Accessed: Nov. 14, 2026. [Online]. Available: <a href="https://www.xometry.com/resources/3d-printing/petg-3d-printing-filament/">https://www.xometry.com/resources/3d-printing/petg-3d-printing-filament/</a>.</p>
 </div>
 </div>
 
 <div class="ieee-reference" id="md-ref-10">
 <span class="ieee-reference-number">[33]</span>
 <div class="ieee-reference-body">
-<p>&ldquo;Vertical CG positioning and multicopter stability thesis&rdquo;. <strong>Incomplete reference:</strong> the original source and bibliographic details were not supplied.</p>
+<p>M. Polčák, “Urban Air Mobility VTOL personal vehicle design,” Master's thesis, Institute of Aerospace Engineering, Faculty of Mechanical Engineering, Brno University of Technology, Brno, Czech Republic, 2022. [Online]. Available: <a href="https://www.vut.cz/en/students/final-thesis/detail/137148?zp_id=137148">https://www.vut.cz/en/students/final-thesis/detail/137148?zp_id=137148</a>.</p>
 </div>
 </div>
 
