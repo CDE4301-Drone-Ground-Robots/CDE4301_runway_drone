@@ -10,6 +10,8 @@ The project is organised into five subsystems, described in the chapters below. 
 
 ## Subsystem Responsibilities
 
+<p class="report-table-caption" id="table-3"><strong>Table 3.</strong> Subsystem Responsibilities</p>
+
 | Subsystem | Lead |
 | --- | --- |
 | [Mechanical Design](../subsystems/mechanical-design) | Muruganantham Arun |
@@ -17,9 +19,3 @@ The project is organised into five subsystems, described in the chapters below. 
 | [Navigation & Obstacle Avoidance](../subsystems/navigation-obstacle-avoidance) | Kummarikunta Talitha |
 | [Computer Vision Based Inspection and Safety System](../subsystems/computer-vision) | Charansagar Ramanujam |
 | [Communication System](../subsystems/communication-system) | Charansagar Ramanujam |
-
-## Integrated Architecture and Interfaces
-
-::: info Documentation pending
-The system architecture diagram and interface descriptions will be added with the approved engineering documentation.
-:::

@@ -299,7 +299,7 @@ html:not(.dark) .hero h1 .hero-wordmark{--argus-rose-glow:rgba(226,160,140,.32);
 /* Large section openings make the continuous CV report easy to scan. */
 .cv-report{counter-reset:cv-report-section}
 .vp-doc .cv-report>h2{counter-increment:cv-report-section;position:relative;font-family:Manrope,var(--vp-font-family-base);font-size:clamp(38px,4.4vw,62px);font-weight:750;line-height:1.12;letter-spacing:-1.8px;color:var(--vp-c-text-1);margin:112px 0 36px;padding:40px 0 0;border-top:2px solid rgba(189,146,124,.5);overflow-wrap:break-word;scroll-margin-top:0}
-.vp-doc .cv-report>h2::before{content:"SECTION " counter(cv-report-section,decimal-leading-zero);display:block;font-family:var(--vp-font-family-base);font-size:11px;font-weight:600;line-height:1.5;letter-spacing:2.4px;color:#a77154;margin-bottom:18px}
+.vp-doc .cv-report>h2::before{content:"SECTION " var(--report-chapter) "." counter(cv-report-section);display:block;font-family:var(--vp-font-family-base);font-size:11px;font-weight:600;line-height:1.5;letter-spacing:2.4px;color:#a77154;margin-bottom:18px}
 .dark .vp-doc .cv-report>h2::before{color:#e6b9a2}
 .vp-doc .cv-report>h3{font-size:25px;line-height:1.35;margin-top:42px;letter-spacing:-.5px}
 @media(max-width:767px){.vp-doc .cv-report>h2{font-size:38px;letter-spacing:-1.2px;margin-top:80px;padding-top:30px;margin-bottom:28px}.vp-doc .cv-report>h2::before{font-size:10px;margin-bottom:14px}.vp-doc .cv-report>h3{font-size:22px}}
@@ -426,3 +426,24 @@ html:has(.report-image-viewer[open]){overflow:hidden}
 
 /* Increase standard report prose by one pixel. */
 .vp-doc{font-size:17px}
+
+/* Small hints make report dropdowns easier to discover. */
+.vp-doc details>summary{position:relative;padding-inline-end:160px!important}
+.vp-doc details>summary::after{content:"Press to open dropdown";position:absolute;inset-inline-end:0;top:50%;transform:translateY(-50%);width:148px;text-align:right;font-size:11px;font-weight:400;line-height:1.4;letter-spacing:0;color:var(--vp-c-text-2);pointer-events:none}
+.vp-doc details[open]>summary::after{content:"Press to close dropdown"}
+@media(max-width:600px){
+ .vp-doc details>summary{padding-inline-end:0!important;padding-bottom:26px!important}
+ .vp-doc details>summary::after{top:auto;bottom:5px;transform:none;font-size:10px}
+}
+@media print{.vp-doc details>summary{padding-inline-end:0!important}.vp-doc details>summary::after{display:none}}
+
+/* Shared report caption and IEEE reference presentation. */
+.vp-doc .report-table-caption{font-size:14px;line-height:1.6;margin:28px 0 8px;color:var(--vp-c-text-2);text-align:left;caption-side:top}
+.vp-doc table>.report-table-caption{padding:0 0 12px}
+.vp-doc .report-figure-caption{font-size:14px;line-height:1.65;margin:8px 0 28px;color:var(--vp-c-text-2)}
+.vp-doc :is(.report-table-caption,.report-figure-caption) strong{color:var(--vp-c-text-1)}
+.ieee-reference{display:grid;grid-template-columns:48px minmax(0,1fr);gap:10px;margin:22px 0;scroll-margin-top:100px}
+.ieee-reference-number{font-weight:600;color:var(--vp-c-text-1)}
+.ieee-reference p{margin:0;font-size:15px;line-height:1.75;overflow-wrap:anywhere}
+.ieee-reference .reference-note{margin-top:6px;color:var(--vp-c-text-2);font-size:13px}
+@media(max-width:600px){.ieee-reference{grid-template-columns:36px minmax(0,1fr);gap:6px}}

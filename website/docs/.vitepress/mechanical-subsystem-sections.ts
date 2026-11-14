@@ -1,3 +1,4 @@
+import reportSectionTitles from './report-section-titles.json'
 import { subsystemRubricSections } from './rubric-sections'
 
 export type MechanicalSection = {
@@ -245,7 +246,7 @@ type MechanicalSidebarItem = { text: string; link: string; collapsed?: boolean; 
 
 export function numberedMechanicalSections(sections = mechanicalSubsystemSections): MechanicalSidebarItem[] {
  return sections.map(section => ({
-  text: section.title,
+  text: reportSectionTitles['mechanical-design'][section.slug] || section.title,
   link: '/subsystems/mechanical-design#' + section.slug,
   ...(section.sections?.length ? { collapsed: true, items: numberedMechanicalSections(section.sections) } : {})
  }))

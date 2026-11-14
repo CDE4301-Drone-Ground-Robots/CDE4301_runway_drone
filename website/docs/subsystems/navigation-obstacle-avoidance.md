@@ -7,7 +7,7 @@ aside: false
 pageClass: subsystem-report-page
 ---
 
-<div class="cv-report rubric-report">
+<div class="cv-report rubric-report" style="--report-chapter: '3'">
 
 <p class="chapter-kicker">FOD ARGUS / NAVIGATION &amp; OBSTACLE AVOIDANCE</p>
 
@@ -15,7 +15,7 @@ pageClass: subsystem-report-page
 import SectorPlanner from '../.vitepress/theme/components/SectorPlanner.vue' 
 </script>
 
-# Navigation & Obstacle Avoidance
+# 3. Navigation & Obstacle Avoidance {#navigation-obstacle-avoidance}
 
 <SubsystemLead class="cv-report-byline" name="Kummarikunta Talitha" matric="A0286653R" portrait="/team/Talitha.jpg" />
 
@@ -27,15 +27,17 @@ and replace the <div class="cv-video-pending"> line with the pattern used in com
 This also needs a script-setup block at the top of the page that imports withBase from 'vitepress'.
 -->
 
-## 1. Objective and Requirements {#a1-objective-scope-context}
+## 3.1 Objective and Requirements {#a1-objective-scope-context}
 
 The objective is to survey the runway, avoid obstacles and return within the available flight time.
 
-### Design Concerns and Sensor Models {#design-concerns}
+### 3.1.1 Design Concerns and Sensor Models {#design-concerns}
 
-#### Initial Concerns and Solutions {#initial-concerns-and-solutions}
+#### 3.1.1.1 Initial Concerns and Solutions {#initial-concerns-and-solutions}
 
 Before simulating, we listed the concerns that would most affect a runway survey, and designed a response to each. The table records the concern and the response that was built into the simulation, and the later sections test whether those responses held.
+
+<p class="report-table-caption" id="table-32"><strong>Table 32.</strong> Initial Concerns and Solutions</p>
 
 | Concern | Solution in the simulation |
 | --- | --- |
@@ -47,7 +49,9 @@ Before simulating, we listed the concerns that would most affect a runway survey
 | FOD coverage criteria | RGB (2 × 2 m footprint) resolves small objects, thermal adds dual coverage |
 | Hand-off position to Hunter | Alert format defined; queued and sent at each lane start on a ROS topic (log-only), matching FOD Hunter's message format |
 
-#### Sensor Specifications Used {#sensor-specifications-used}
+#### 3.1.1.2 Sensor Specifications Used {#sensor-specifications-used}
+
+<p class="report-table-caption" id="table-33"><strong>Table 33.</strong> Sensor Specifications Used</p>
 
 | Sensor | Specification modelled | Role |
 | --- | --- | --- |
@@ -57,29 +61,31 @@ Before simulating, we listed the concerns that would most affect a runway survey
 | Thermal BNW2T256T04010ASSWC | 256 × 192, 4.0 mm, 45.5° × 33.5°, 45° side tilt: strip 2.7 to 9.3 m beside the track | FOD verification: a second, independent view to the side |
 | GNSS Unicore UM980 | RTK: 2 cm horizontal, 3 cm vertical, 10 Hz, fused in PX4 EKF2 | Position: cm-level lane keeping and FOD coordinates |
 
-### Survey Criteria {#survey-criteria}
+### 3.1.2 Survey Criteria {#survey-criteria}
 
 The survey criteria were set before the path was designed, because they decide how many lanes are needed. The runway is split into sectors, and one sortie surveys one sector. A runway of 300 m to 2.5 km is longer than one 15 min flight, so a 2.5 km runway is about 84 sectors and a 300 m runway is 10 sectors. A cell counts as surveyed only when **both** cameras have covered it.
 
 ![Runway split into sectors, with lanes along (36 lanes) and lanes across (about 17 lanes) as the two ways to fly one sector](/report-assets/navigation-obstacle-avoidance/survey-sectors-split.png)
 
-*Figure 5. Runway sectors (30 m × 60 m, not to scale) and the two ways to fly one sector: lanes along (36 lanes) and lanes across (about 17 lanes).*
+<p class="report-figure-caption"><strong>Fig. 59.</strong> Runway sectors (30 m × 60 m, not to scale) and the two ways to fly one sector: lanes along (36 lanes) and lanes across (about 17 lanes).</p>
 
 The two cameras play different roles. The nadir RGB camera detects, and the side-tilted thermal camera independently verifies, so a cell needs both to count. The RGB footprint is 2.0 × 2.0 m, and the thermal footprint is 6.62 × 5.93 m, covering 2.7 to 9.3 m beside the track. The lane pitch of 1.76 m follows from the narrower RGB strip: the 2 m strip with 10% overlap, shifted so that the thermal strip also covers every cell. Cells that still miss one camera after the lanes are revisited, up to 6 passes.
 
 ![What each camera covers on one lane, seen from behind, with the next lane's RGB strip 1.76 m over](/report-assets/navigation-obstacle-avoidance/survey-sectors-lane.png)
 
-*Figure 6. Coverage of one lane seen from behind (to scale). Green is RGB and cyan is thermal only in the simulation overlay.*
+<p class="report-figure-caption"><strong>Fig. 60.</strong> Coverage of one lane seen from behind (to scale). Green is RGB and cyan is thermal only in the simulation overlay.</p>
 
-Sources: runway dimensions follow FAA AC 150/5300-13B [\[3\]](../references#nav-ref-3) and ICAO Annex 14 Vol. I [\[13\]](../references#nav-ref-13); RGB footprint (e-CAM56_CUONX, M12 lens); thermal footprint (BNW2T256T04010ASSWC).
+Sources: runway dimensions follow FAA AC 150/5300-13B [\[41\]](../references#nav-ref-3) and ICAO Annex 14 Vol. I [\[42\]](../references#nav-ref-13); RGB footprint (e-CAM56_CUONX, M12 lens); thermal footprint (BNW2T256T04010ASSWC).
 
-## 2. Navigation Methodology and Concept Development {#a2-methodology-concept-development}
+## 3.2 Navigation Methodology and Concept Development {#a2-methodology-concept-development}
 
-### Survey Planning {#survey-planning}
+### 3.2.1 Survey Planning {#survey-planning}
 
-#### Camera Footprint vs. Sector Size {#camera-footprint-vs-sector-size}
+#### 3.2.1.1 Camera Footprint vs. Sector Size {#camera-footprint-vs-sector-size}
 
 The camera footprint was the largest change to the plan between the first and second design iteration. For the same navigation and power model, a narrower camera swath means more lanes, and so a smaller sector per sortie.
+
+<p class="report-table-caption" id="table-34"><strong>Table 34.</strong> Camera Footprint vs. Sector Size</p>
 
 | | Previous RGB (5.77 × 4.33 m) | Current RGB (2 × 2 m) |
 | --- | ---: | ---: |
@@ -90,7 +96,7 @@ The camera footprint was the largest change to the plan between the first and se
 | Area surveyed per flight | 3,600 m² | 1,800 m² |
 | Sorties, 2.5 km runway | 42 | 84 |
 
-The previous camera was a placeholder using the SDFormat default horizontal field of view of 1.047 rad (60°) [\[12\]](../references#nav-ref-12). The footprint is $2h\tan(\mathrm{HFOV}/2)$ with $h = 5\ \text{m}$, giving 5.77 m across and 4.33 m along for a general 640 × 480 image (resolution generalised; the SDFormat default is 320 × 240).
+The previous camera was a placeholder using the SDFormat default horizontal field of view of 1.047 rad (60°) [\[43\]](../references#nav-ref-12). The footprint is $2h\tan(\mathrm{HFOV}/2)$ with $h = 5\ \text{m}$, giving 5.77 m across and 4.33 m along for a general 640 × 480 image (resolution generalised; the SDFormat default is 320 × 240).
 
 The same relationship can be explored for other cameras with the planner below. It takes an RGB footprint and returns the largest sector that one sortie can cover. Sectors are always sized for the worst simulated condition, a 15 m/s crosswind on the lanes, inside the 70% battery window between the 95% launch and 25% return levels. This keeps every sortie within the battery budget in the least favourable wind tested. Wind costs time mostly at the lane ends, so a wider footprint needs fewer lanes and gains more sector length than the shorter lane spacing alone would suggest. The lanes-across option is a model estimate, because that pattern has not yet been simulated at 15 m/s.
 
@@ -102,18 +108,20 @@ Source: planner calibrated on the offline kinematic simulation (2 m RGB footprin
 
 The smaller sector raises the number of sorties for a full runway, and three measures could recover this without changing the navigation: quick battery swaps or UGV on-the-go charging, multiple UAVs flying different sectors, and a higher-range RGB camera specification that restores a wider footprint.
 
-#### Global Planning: Survey Method {#global-planning-survey-method}
+#### 3.2.1.2 Global Planning: Survey Method {#global-planning-survey-method}
 
-Two parallel-sweep patterns were compared for a 30 × 60 m sector: lanes along the runway (36 lanes, 35 turns) and lanes across it (17 lanes, 16 turns). Both give complete coverage because both are exhaustive parallel sweeps [\[1\]](../references#nav-ref-1) [\[2\]](../references#nav-ref-2), so the choice rests on four criteria:
+Two parallel-sweep patterns were compared for a 30 × 60 m sector: lanes along the runway (36 lanes, 35 turns) and lanes across it (17 lanes, 16 turns). Both give complete coverage because both are exhaustive parallel sweeps [\[44\]](../references#nav-ref-1) [\[45\]](../references#nav-ref-2), so the choice rests on four criteria:
 
 1. Time and energy in the prevailing wind, not only in calm air.
 2. Safe landing anywhere: a lane is at most 30 m from a runway edge.
 3. Simple resume after a hold or failsafe, as "covered up to lane N".
 4. Verification in Gazebo and PX4 with the real controller.
 
-Lanes along the runway has been flown in Gazebo and PX4. Lanes across is being implemented, and its cost in the usual wind along the runway [\[3\]](../references#nav-ref-3), which is a crosswind on every lane, is not yet simulated.
+Lanes along the runway has been flown in Gazebo and PX4. Lanes across is being implemented, and its cost in the usual wind along the runway [\[41\]](../references#nav-ref-3), which is a crosswind on every lane, is not yet simulated.
 
-#### Alternatives Evaluated {#alternatives-evaluated}
+#### 3.2.1.3 Alternatives Evaluated {#alternatives-evaluated}
+
+<p class="report-table-caption" id="table-35"><strong>Table 35.</strong> Alternatives Evaluated</p>
 
 | Pattern | Calm | 10 m/s, wind along runway | 10 m/s, wind across runway | Worst lane error | Verdict |
 | --- | --- | --- | --- | --- | --- |
@@ -122,23 +130,25 @@ Lanes along the runway has been flown in Gazebo and PX4. Lanes across is being i
 | Lanes along, rounded turns | 581 s, 48.0% | 672 s, 56.5% | 732 s, 61.6% | 1.2 to 1.4 m | Slower (arc 1.3 m/s); needs tuning |
 | Lanes across, sharp turns | 403 s, 33.2% | 455 s, 37.9% | 428 s, 35.7% | 0.6 to 0.7 m | Candidate: fastest; needs to be tested further |
 
-Source: offline kinematic sim, 30 × 60 m sector, 2 m RGB footprint, turbulence 25%, worst of 3 seeds shown plus calm 1 seed. Coverage patterns: Choset (2001) [\[1\]](../references#nav-ref-1); Galceran & Carreras (2013) [\[2\]](../references#nav-ref-2).
+Source: offline kinematic sim, 30 × 60 m sector, 2 m RGB footprint, turbulence 25%, worst of 3 seeds shown plus calm 1 seed. Coverage patterns: Choset (2001) [\[44\]](../references#nav-ref-1); Galceran & Carreras (2013) [\[45\]](../references#nav-ref-2).
 
 The two methods are still being compared on time and energy in calm air and in wind, over several seeds, to decide which is more efficient for a 30 × 60 m sector.
 
-### Obstacle Avoidance {#obstacle-avoidance}
+### 3.2.2 Obstacle Avoidance {#obstacle-avoidance}
 
-#### Obstacle Avoidance States {#obstacle-avoidance-states}
+#### 3.2.2.1 Obstacle Avoidance States {#obstacle-avoidance-states}
 
-Obstacle avoidance runs in EVADE and HOLD (Figure 9). The threat assessor grades every tracked object on five levels (Figure 10), and the levels act as the transition triggers. CAUTION moves the machine from SURVEY to EVADE, where the avoider steers around the bird, and AWARE or clear returns it to SURVEY. An obstacle that keeps blocking the lane for 1.0 s moves the machine to HOLD, which ends after 0.5 s of clear air, or the strip is skipped after 10 s in total.
+Obstacle avoidance runs in EVADE and HOLD (Fig. 61). The threat assessor grades every tracked object on five levels (Fig. 62), and the levels act as the transition triggers. CAUTION moves the machine from SURVEY to EVADE, where the avoider steers around the bird, and AWARE or clear returns it to SURVEY. An obstacle that keeps blocking the lane for 1.0 s moves the machine to HOLD, which ends after 0.5 s of clear air, or the strip is skipped after 10 s in total.
 
 ![EVADE and HOLD states and their transitions, highlighted](/report-assets/navigation-obstacle-avoidance/fsm-avoid.png)
 
-*Figure 9. Avoidance states and their transitions (highlighted).*
+<p class="report-figure-caption"><strong>Fig. 61.</strong> Avoidance states and their transitions (highlighted).</p>
 
 ![Five threat levels: clear, aware, caution, avoid, emergency](/report-assets/navigation-obstacle-avoidance/obstacle-avoidance-states.png)
 
-*Figure 10. The five threat levels used by the threat assessor.*
+<p class="report-figure-caption"><strong>Fig. 62.</strong> The five threat levels used by the threat assessor.</p>
+
+<p class="report-table-caption" id="table-36"><strong>Table 36.</strong> Obstacle Avoidance States</p>
 
 | Level | Trigger |
 | --- | --- |
@@ -152,17 +162,17 @@ Obstacle avoidance runs in EVADE and HOLD (Figure 9). The threat assessor grades
 
 **Static objects (trees, poles).** A cell that keeps returning for 1 s becomes static and leaves the mover tracker. The route planner then inserts a bypass or truncates the lane.
 
-#### Global Planning: Rerouting {#global-planning-rerouting}
+#### 3.2.2.2 Global Planning: Rerouting {#global-planning-rerouting}
 
-A static obstacle that has been mapped for 1.0 s moves the machine from SURVEY to REROUTE (Figure 11), which edits the global route before the machine returns to SURVEY. The planner makes one of three edits (Figure 12).
+A static obstacle that has been mapped for 1.0 s moves the machine from SURVEY to REROUTE (Fig. 63), which edits the global route before the machine returns to SURVEY. The planner makes one of three edits (Fig. 64).
 
 ![REROUTE state and its transitions, highlighted](/report-assets/navigation-obstacle-avoidance/fsm-reroute.png)
 
-*Figure 11. Rerouting in the state machine (highlighted): a bypass or a truncated lane returns the machine to SURVEY.*
+<p class="report-figure-caption"><strong>Fig. 63.</strong> Rerouting in the state machine (highlighted): a bypass or a truncated lane returns the machine to SURVEY.</p>
 
 ![Three rerouting cases: bypass, truncate, skip and revisit](/report-assets/navigation-obstacle-avoidance/global-rerouting.png)
 
-*Figure 12. The three rerouting cases: (1) obstacle on the lane, bypass; (2) lane end blocked, truncate; (3) strip blocked, skip and revisit.*
+<p class="report-figure-caption"><strong>Fig. 64.</strong> The three rerouting cases: (1) obstacle on the lane, bypass; (2) lane end blocked, truncate; (3) strip blocked, skip and revisit.</p>
 
 1. **Obstacle on the lane: bypass.** A keep-out circle is placed around the mapped obstacle, with two waypoints beside it on each side. The shorter side is chosen, always inside the geofence.
 2. **Lane end blocked: truncate.** If the lane end falls inside a keep-out, the lane is cut short before it.
@@ -170,15 +180,15 @@ A static obstacle that has been mapped for 1.0 s moves the machine from SURVEY t
 
 Timeline: first hit → +1.0 s mapped as static → bypass inserted → blocked for 1.0 s → HOLD → 10 s cumulative → strip skipped → revisit pass.
 
-Take-off, return and revisit transits are straight lines from known coordinates (revisits ordered nearest-first), with the same bypass around any mapped obstacle. The obstacle map is an occupancy grid with 0.4 m cells, static after 1.0 s. References: Hart, Nilsson & Raphael (1968) [\[4\]](../references#nav-ref-4); LaValle, *Planning Algorithms* [\[5\]](../references#nav-ref-5).
+Take-off, return and revisit transits are straight lines from known coordinates (revisits ordered nearest-first), with the same bypass around any mapped obstacle. The obstacle map is an occupancy grid with 0.4 m cells, static after 1.0 s. References: Hart, Nilsson & Raphael (1968) [\[46\]](../references#nav-ref-4); LaValle, *Planning Algorithms* [\[47\]](../references#nav-ref-5).
 
-#### Localisation and Path Following {#localisation-and-path-following}
+#### 3.2.2.3 Localisation and Path Following {#localisation-and-path-following}
 
 The lane is only 1.76 m wide, so the drone must hold its path closely while wind and avoidance moves push it off. The drone is pulled back onto the lane by a feedback loop, using the EKF position as the measurement. EKF2 position (RTK-GNSS + IMU + baro + mag) is compared with the lane every cycle, and the cross-track error $e$ produces a velocity pull that is sent to PX4.
 
 ![Path-following feedback loop: lane, error, pull, PX4, drone and EKF2](/report-assets/navigation-obstacle-avoidance/path-loop.png)
 
-*Figure 13. Path-following feedback loop: lane, error, pull, PX4, drone and EKF2.*
+<p class="report-figure-caption"><strong>Fig. 65.</strong> Path-following feedback loop: lane, error, pull, PX4, drone and EKF2.</p>
 
 $$
 \vec{v}_{\text{cmd}} = v_{\text{along}}\,\hat{t} + \operatorname{sat}\!\left(K_p\,e + K_i\!\int e\,dt,\ 1.5\ \text{m/s}\right)\hat{n}
@@ -190,11 +200,11 @@ For the return after a 3 m detour, $e(t) = 3\ \text{m}\times e^{-0.4t}$, which i
 
 ![Cross-track error decaying from 3 m after a detour, about 7 s to return to the lane](/report-assets/navigation-obstacle-avoidance/path-detour.png)
 
-*Figure 14. Return to the lane after a 3 m detour (about 7 s).*
+<p class="report-figure-caption"><strong>Fig. 66.</strong> Return to the lane after a 3 m detour (about 7 s).</p>
 
-**Why this controller.** Pure pursuit [\[6\]](../references#nav-ref-6) was considered first, but at cruise it looks about 4 m ahead, and the lane pitch is only 1.76 m, so it would be expected to cut the lane ends. A cross-track term corrects onto the line itself [\[7\]](../references#nav-ref-7), which suits a narrow lane. Because PX4 already handles attitude and rate [\[8\]](../references#nav-ref-8), the outer loop can be a simple first-order pull.
+**Why this controller.** Pure pursuit [\[48\]](../references#nav-ref-6) was considered first, but at cruise it looks about 4 m ahead, and the lane pitch is only 1.76 m, so it would be expected to cut the lane ends. A cross-track term corrects onto the line itself [\[49\]](../references#nav-ref-7), which suits a narrow lane. Because PX4 already handles attitude and rate [\[50\]](../references#nav-ref-8), the outer loop can be a simple first-order pull.
 
-#### Local Planning: Reactive Avoidance {#local-planning-reactive-avoidance}
+#### 3.2.2.4 Local Planning: Reactive Avoidance {#local-planning-reactive-avoidance}
 
 1. **Sample.** 24 headings × speeds of 25, 50, 75 and 100% (up to 6 m/s).
 2. **Reject.** Any path that enters a collision cone is rejected. The cone grows with track uncertainty.
@@ -202,9 +212,11 @@ For the return after a 3 m detour, $e(t) = 3\ \text{m}\times e^{-0.4t}$, which i
 
 ![Velocity sampling around a moving obstacle](/report-assets/navigation-obstacle-avoidance/velocity-sampling.png)
 
-*Figure 15. Velocity sampling around a moving obstacle. Red: inside the collision cone, rejected. Yellow: chosen safe velocity.*
+<p class="report-figure-caption"><strong>Fig. 67.</strong> Velocity sampling around a moving obstacle. Red: inside the collision cone, rejected. Yellow: chosen safe velocity.</p>
 
 **Objective.** Keep the predicted path at least 1.3 m (UAV radius 0.5 m + 0.8 m margin) from every tracked bird, and otherwise stay on the lane. Safe means no candidate path enters the cone.
+
+<p class="report-table-caption" id="table-37"><strong>Table 37.</strong> Local Planning: Reactive Avoidance</p>
 
 | Mode | Behaviour |
 | --- | --- |
@@ -212,11 +224,13 @@ For the return after a 3 m detour, $e(t) = 3\ \text{m}\times e^{-0.4t}$, which i
 | AVOID | Use the best safe sample |
 | ESCAPE | Maximum predicted clearance |
 
-References: Fox, Burgard & Thrun (1997) [\[9\]](../references#nav-ref-9); Kalman (1960) [\[10\]](../references#nav-ref-10) for the per-bird tracks.
+References: Fox, Burgard & Thrun (1997) [\[51\]](../references#nav-ref-9); Kalman (1960) [\[52\]](../references#nav-ref-10) for the per-bird tracks.
 
-#### Flight Control Kinematics {#flight-control-kinematics}
+#### 3.2.2.5 Flight Control Kinematics {#flight-control-kinematics}
 
 The navigator streams velocity $(v_x, v_y, v_z)$ and yaw setpoints in the runway frame at about 20 Hz. The offboard_bridge converts the runway frame to NED, PX4 handles attitude, rate and thrust control, and the four ESCs and motors act on the result.
+
+<p class="report-table-caption" id="table-38"><strong>Table 38.</strong> Flight Control Kinematics</p>
 
 | Parameter | Value |
 | --- | --- |
@@ -241,15 +255,17 @@ Here $a_{\max}$ is the maximum deceleration (3.0 m/s²), $d_{\text{brake}}$ is t
 
 Basis: $s = v^{2}/2a$ (constant deceleration). A yaw rate of 40°/s is below the PX4 automatic yaw limit (about 45°/s). The acceleration limits keep lean inside the 35° tilt limit (T/W 2.03 / 2.00).
 
-### Failsafes {#failsafes}
+### 3.2.3 Failsafes {#failsafes}
 
-#### Failsafe Triggers and Actions {#failsafe-triggers-and-actions}
+#### 3.2.3.1 Failsafe Triggers and Actions {#failsafe-triggers-and-actions}
 
-The failsafes are the red arrows of the state machine (Figure 17), and the table gives the trigger, threshold and basis for each. Mild faults (wind, battery or GNSS degradation) lead to RETURN or a normal landing, and faults that leave no time (motor failure, GNSS loss, 6% battery) lead to an immediate landing.
+The failsafes are the red arrows of the state machine (Fig. 68), and the table gives the trigger, threshold and basis for each. Mild faults (wind, battery or GNSS degradation) lead to RETURN or a normal landing, and faults that leave no time (motor failure, GNSS loss, 6% battery) lead to an immediate landing.
 
 ![Failsafe transitions into RETURN, LAND and DONE, highlighted](/report-assets/navigation-obstacle-avoidance/fsm-failsafe.png)
 
-*Figure 17. Failsafe transitions of the state machine (highlighted). Red arrows end in LAND or DONE, and the blue RETURN arrow is used for the battery and degraded-GNSS cases.*
+<p class="report-figure-caption"><strong>Fig. 68.</strong> Failsafe transitions of the state machine (highlighted). Red arrows end in LAND or DONE, and the blue RETURN arrow is used for the battery and degraded-GNSS cases.</p>
+
+<p class="report-table-caption" id="table-39"><strong>Table 39.</strong> Failsafe Triggers and Actions</p>
 
 | Trigger | Threshold | Action | Basis |
 | --- | --- | --- | --- |
@@ -264,15 +280,17 @@ The failsafes are the red arrows of the state machine (Figure 17), and the table
 | Battery: return | About 25% (20% reserve + return cost 3%) | Return home | Safety net: with a 95% launch the pack never reaches 25% |
 | Battery: critical / emergency | Remaining 12% / 6% | Land beside runway edge / straight down | Edge landing 10.8 s (about 1% of the pack); 5 m descent 6 s (about 0.5%) |
 
-Sources: wind force $F = \tfrac{1}{2}\rho\,C_dA\,v^{2}$ with $C_dA = 0.0794\ \text{m}^2$ and $m = 4.7\ \text{kg}$; gust time constant $\tau = 37\ \text{m}/v$ (Dryden, MIL-HDBK-1797 [\[11\]](../references#nav-ref-11)); PX4 User Guide, Safety configuration (battery failsafes staged as warning, return, land, emergency land) [\[8\]](../references#nav-ref-8); Unicore UM980 datasheet [\[16\]](../references#nav-ref-16); simulation stress tests (10 seeds per wind case, 8 per bird case); battery from the offline sim, lanes along, 266 Wh pack, worst of 3 seeds.
+Sources: wind force $F = \tfrac{1}{2}\rho\,C_dA\,v^{2}$ with $C_dA = 0.0794\ \text{m}^2$ and $m = 4.7\ \text{kg}$; gust time constant $\tau = 37\ \text{m}/v$ (Dryden, MIL-HDBK-1797 [\[53\]](../references#nav-ref-11)); PX4 User Guide, Safety configuration (battery failsafes staged as warning, return, land, emergency land) [\[50\]](../references#nav-ref-8); Unicore UM980 datasheet [\[37\]](../references#nav-ref-16); simulation stress tests (10 seeds per wind case, 8 per bird case); battery from the offline sim, lanes along, 266 Wh pack, worst of 3 seeds.
 
-### Wind Kinematics {#wind-kinematics}
+### 3.2.4 Wind Kinematics {#wind-kinematics}
 
-#### Wind Kinematics Calculations {#wind-kinematics-calculations}
+#### 3.2.4.1 Wind Kinematics Calculations {#wind-kinematics-calculations}
 
 **Approach.** The wind loads on the airframe were not derived again for the navigation work. The Mechanical team's sizing was adopted as the basis: the wind force on the airframe follows the standard drag law on the CAD frontal area, the drone leans until the horizontal component of thrust balances that force, and the thrust per motor then follows from the lean angle. The simulation reuses the same drag area, so the wind loads seen by the navigator are the loads that the airframe was sized for. Only the values that had to differ for a simulation are changed, and each change is justified below.
 
 **Values taken from the Mechanical calculations**
+
+<p class="report-table-caption" id="table-40"><strong>Table 40.</strong> Wind Model Parameters</p>
 
 | Parameter | Value | Basis |
 | --- | --- | --- |
@@ -285,6 +303,8 @@ Sources: wind force $F = \tfrac{1}{2}\rho\,C_dA\,v^{2}$ with $C_dA = 0.0794\ \te
 
 **Values changed for the simulation, and why**
 
+<p class="report-table-caption" id="table-41"><strong>Table 41.</strong> Mechanical and Simulation Wind Assumptions</p>
+
 | Parameter | Mechanical | Simulation | Justification |
 | --- | --- | --- | --- |
 | Mass | 5.0 kg | 4.7 kg | The simulation model uses 4.7 kg (take-off mass of the modelled airframe) [confirm source]. A lighter drone leans further for the same drag, so the simulation is the harder case: at 15 m/s the lean is 13° at 4.7 kg against 12.5° at 5.0 kg |
@@ -296,7 +316,7 @@ The comparison with the Mechanical sizing is direct. At 15 m/s the wind force is
 
 **Turbulence model (Dryden-like gusts)**
 
-Steady wind alone would only test whether the drone can lean far enough. The real difficulty on a survey is that wind changes while the drone is flying a 1.76 m wide lane, so the simulation adds gusts on top of the mean wind. The gust model follows the Dryden turbulence form of MIL-HDBK-1797 [\[11\]](../references#nav-ref-11), which describes turbulence as a random velocity with two parameters: an intensity $\sigma$ and a length scale $L$.
+Steady wind alone would only test whether the drone can lean far enough. The real difficulty on a survey is that wind changes while the drone is flying a 1.76 m wide lane, so the simulation adds gusts on top of the mean wind. The gust model follows the Dryden turbulence form of MIL-HDBK-1797 [\[53\]](../references#nav-ref-11), which describes turbulence as a random velocity with two parameters: an intensity $\sigma$ and a length scale $L$.
 
 $$
 \sigma = 0.25\,v, \qquad \tau = \frac{L}{v} = \frac{37\ \text{m}}{v}
@@ -320,27 +340,27 @@ This model matters to the navigation in three places:
 - **Failsafe timing.** The wind abort requires the lean to stay above 33° for 6 s, which is 2.4 gust time constants at 15 m/s. A single gust is therefore unlikely to trigger a landing, and a sustained increase in wind is needed.
 - **Peak lean.** The steady lean is about 13° at 15 m/s, but gusts take the peak lean to 35°. The wind guard at 14° slows the lanes before gusts can drive the lean to the limit.
 
-Sources: Mechanical calculations (take-off mass, CAD frontal area, assumed $C_d$ 1.28, results across flight scenarios); Dryden turbulence (MIL-HDBK-1797) [\[11\]](../references#nav-ref-11).
+Sources: Mechanical calculations (take-off mass, CAD frontal area, assumed $C_d$ 1.28, results across flight scenarios); Dryden turbulence (MIL-HDBK-1797) [\[53\]](../references#nav-ref-11).
 
-**Wind guard in the state machine.** The guard is the only place where wind changes the mission state (Figure 19). At a smoothed lean of 14° the machine moves from SURVEY to LANES SLOWED and returns when the lean falls back under 14°. At 33° for 6 s it lands.
+**Wind guard in the state machine.** The guard is the only place where wind changes the mission state (Fig. 69). At a smoothed lean of 14° the machine moves from SURVEY to LANES SLOWED and returns when the lean falls back under 14°. At 33° for 6 s it lands.
 
 ![LANES SLOWED state and its transitions, highlighted](/report-assets/navigation-obstacle-avoidance/fsm-wind.png)
 
-*Figure 19. Wind guard (highlighted): slow the lanes at a lean of 14° or more, resume under 14°, and land at 33° or more for 6 s (red arrow).*
+<p class="report-figure-caption"><strong>Fig. 69.</strong> Wind guard (highlighted): slow the lanes at a lean of 14° or more, resume under 14°, and land at 33° or more for 6 s (red arrow).</p>
 
-## 3. Navigation Prototype Implementation {#a3-prototype-development}
+## 3.3 Navigation Prototype Implementation {#a3-prototype-development}
 
-### Navigation Architecture {#navigation-architecture}
+### 3.3.1 Navigation Architecture {#navigation-architecture}
 
 The navigation system was developed and tested in simulation, using a Gazebo model of the survey drone flown with the PX4 autopilot. The navigator is a closed loop of five stages: **sense, localise, plan, command and act**. PX4's EKF2 fuses the sensors and outputs position, velocity and attitude, which the navigator reuses and never re-fuses. The planner runs in ROS 2 and sends a velocity and yaw set-point to PX4, and the new pose and obstacles re-enter the loop through the sensors.
 
 <!-- TODO: closed-loop diagram (sense, localise, plan, command, act) for the flight control explanation. -->
 
-The mission logic is a finite state machine, shown in Figure 4. Circles are states, arrows are transitions labelled with their trigger, and red arrows are failsafes.
+The mission logic is a finite state machine, shown in Fig. 70. Circles are states, arrows are transitions labelled with their trigger, and red arrows are failsafes.
 
 ![State transition diagram of the navigation architecture](/report-assets/navigation-obstacle-avoidance/fsm-full.png)
 
-*Figure 4. Navigation state machine. One flight covers one sector (at most 15 min of battery).*
+<p class="report-figure-caption"><strong>Fig. 70.</strong> Navigation state machine. One flight covers one sector (at most 15 min of battery).</p>
 
 The architecture has the following features:
 
@@ -350,15 +370,17 @@ The architecture has the following features:
 - **Localisation:** the EKF2 pose (RTK-GNSS, IMU, barometer and magnetometer) is the input to every transition, and GNSS quality drives three of the failsafes.
 - **One sector per flight:** each sortie surveys one sector, then returns and lands.
 
-### Mission States and Timing {#mission-states-and-timing}
+### 3.3.2 Mission States and Timing {#mission-states-and-timing}
 
-Figure 8 highlights the path of a normal sortie through the state machine. The drone launches only with the battery at 95% or above, and otherwise the machine goes straight to DONE without taking off. It climbs to 5 m and enters SURVEY. After the last lane, any cell still missing one of the two cameras is flown again in REVISIT, up to six passes, and the machine then enters RETURN. RETURN can also be entered directly from SURVEY when the battery reaches about 25% or the GNSS stays degraded for 60 s. Every sortie ends in LAND and then DONE.
+Fig. 71 highlights the path of a normal sortie through the state machine. The drone launches only with the battery at 95% or above, and otherwise the machine goes straight to DONE without taking off. It climbs to 5 m and enters SURVEY. After the last lane, any cell still missing one of the two cameras is flown again in REVISIT, up to six passes, and the machine then enters RETURN. RETURN can also be entered directly from SURVEY when the battery reaches about 25% or the GNSS stays degraded for 60 s. Every sortie ends in LAND and then DONE.
 
 ![Normal sortie path through the state machine: take-off, survey, revisit, return, land and done](/report-assets/navigation-obstacle-avoidance/fsm-mission.png)
 
-*Figure 8. Normal sortie path through the state machine (highlighted).*
+<p class="report-figure-caption"><strong>Fig. 71.</strong> Normal sortie path through the state machine (highlighted).</p>
 
 The typical duration of each state for a 30 m sector in calm air is given below.
+
+<p class="report-table-caption" id="table-42"><strong>Table 42.</strong> Mission States and Timing</p>
 
 | State | What happens | Typical time |
 | --- | --- | ---: |
@@ -372,9 +394,9 @@ The total is 476 s (7.9 min) in calm air and 533 s (8.9 min) at 10 m/s wind. The
 
 Source: offline kinematic sim, lanes along the runway, 30 m sector, seed 1 (calm) and mean of 3 seeds (10 m/s). Climb energy from the Power Calculations in the [Electrical Design](./electrical-design#power-calculations) report (climb 1.3× hover, 236 W per motor).
 
-## 4. Navigation Simulation Testing {#a4-testing}
+## 3.4 Navigation Simulation Testing {#a4-testing}
 
-### Software Used {#software-used}
+### 3.4.1 Software Used {#software-used}
 
 Functionalities were verified and rendered through simulation software as follows:
 
@@ -386,11 +408,11 @@ Functionalities were verified and rendered through simulation software as follow
 
 All results for analysis are from offline simulations, run with various seeds per scenario. The Gazebo and PX4 runs confirm that the real controller behaves as the offline model predicts.
 
-### Simulation Demonstrations {#simulation-demonstrations}
+### 3.4.2 Simulation Demonstrations {#simulation-demonstrations}
 
 In every simulation video the overlay legend is: **RGB covered**, **thermal only**, **planned route** and **flown path**.
 
-#### Baseline Survey {#baseline-survey}
+#### 3.4.2.1 Baseline Survey {#baseline-survey}
 
 <figure class="cv-video-panel">
  <div class="cv-video-pending" role="status"><span>BASELINE DEMONSTRATION</span><p>Video will be added here.</p></div>
@@ -402,11 +424,11 @@ In every simulation video the overlay legend is: **RGB covered**, **thermal only
  <figcaption><strong>Video NAV-02</strong><span>Baseline survey with rounded turns. This option needs tuning (see Alternatives Evaluated).</span></figcaption>
 </figure>
 
-#### Obstacle Avoidance {#obstacle-avoidance-1}
+#### 3.4.2.2 Obstacle Avoidance {#obstacle-avoidance-1}
 
 ![Simulation view of the coverage overlay and flown path](/report-assets/navigation-obstacle-avoidance/obstacle-avoidance-view.png)
 
-*Figure 16. Simulation view used in the obstacle avoidance demonstrations: coverage overlay (green RGB, cyan thermal only) and the flown path (yellow).*
+<p class="report-figure-caption"><strong>Fig. 72.</strong> Simulation view used in the obstacle avoidance demonstrations: coverage overlay (green RGB, cyan thermal only) and the flown path (yellow).</p>
 
 <figure class="cv-video-panel">
  <div class="cv-video-pending" role="status"><span>OBSTACLE AVOIDANCE DEMO</span><p>Video will be added here.</p></div>
@@ -418,11 +440,11 @@ In every simulation video the overlay legend is: **RGB covered**, **thermal only
  <figcaption><strong>Video NAV-04</strong><span>Revisiting a skipped lane.</span></figcaption>
 </figure>
 
-### Emergency Failsafe Demonstrations {#emergency-failsafe-demonstrations}
+### 3.4.3 Emergency Failsafe Demonstrations {#emergency-failsafe-demonstrations}
 
 ![Terminal log showing the starting wind speed in the take-off wind failsafe test](/report-assets/navigation-obstacle-avoidance/wind-failsafe-takeoff.png)
 
-*Figure 18. Wind failsafe during take-off: simulation log showing the starting wind speed.*
+<p class="report-figure-caption"><strong>Fig. 73.</strong> Wind failsafe during take-off: simulation log showing the starting wind speed.</p>
 
 <figure class="cv-video-panel">
  <div class="cv-video-pending" role="status"><span>WIND FAILSAFE DURING TAKE-OFF</span><p>Video will be added here.</p></div>
@@ -444,11 +466,11 @@ In every simulation video the overlay legend is: **RGB covered**, **thermal only
  <figcaption><strong>Video NAV-08</strong><span>Total loss of GNSS failsafe.</span></figcaption>
 </figure>
 
-### Wind Kinematics Demonstrations {#wind-kinematics-demonstrations}
+### 3.4.4 Wind Kinematics Demonstrations {#wind-kinematics-demonstrations}
 
 ![Drone body axes: roll forward axis, pitch side axis, yaw vertical axis](/report-assets/navigation-obstacle-avoidance/drone-axes.png)
 
-*Figure 20. Axes used in the wind demonstrations: roll (forward axis), pitch (side axis) and yaw (vertical axis).*
+<p class="report-figure-caption"><strong>Fig. 74.</strong> Axes used in the wind demonstrations: roll (forward axis), pitch (side axis) and yaw (vertical axis).</p>
 
 <figure class="cv-video-panel">
  <div class="cv-video-pending" role="status"><span>WIND KINEMATICS DEMO: +X</span><p>Video will be added here.</p></div>
@@ -465,15 +487,17 @@ In every simulation video the overlay legend is: **RGB covered**, **thermal only
  <figcaption><strong>Video NAV-11</strong><span>Turbulent winds from 6 to 12 m/s in the +y direction (90°): revisit pass after the baseline survey finishes.</span></figcaption>
 </figure>
 
-## 5. Navigation Performance Analysis {#a5-analysis}
+## 3.5 Navigation Performance Analysis {#a5-analysis}
 
-### Endurance vs. Mission Time {#endurance-vs-mission-time}
+### 3.5.1 Endurance vs. Mission Time {#endurance-vs-mission-time}
 
 The longest flight time we expect (15 m/s crosswind) takes 13.2 min, inside the 13.9 min between launch and return.
 
 ![Battery budget bar: 95% launch, sector budget of 70% of the pack, 25% return, 12% critical, 6% emergency](/report-assets/navigation-obstacle-avoidance/endurance-budget.png)
 
-*Figure 7. Sector budget: 70% of the pack, 13.9 min of flight, between the 95% launch and 25% return levels, followed by the 12% critical and 6% emergency levels.*
+<p class="report-figure-caption"><strong>Fig. 75.</strong> Sector budget: 70% of the pack, 13.9 min of flight, between the 95% launch and 25% return levels, followed by the 12% critical and 6% emergency levels.</p>
+
+<p class="report-table-caption" id="table-43"><strong>Table 43.</strong> Endurance vs. Mission Time</p>
 
 | Wind (30 m sector) | Flight time | Pack used | Left from 95% |
 | --- | ---: | ---: | ---: |
@@ -488,7 +512,9 @@ Worst of 3 seeds, lanes along the runway, turbulence 25%.
 
 **Why 15 min?** The pack holds 266 Wh and the drone draws about 805 W, so a full drain lasts 19.8 min, or 15.9 min when use is limited to 80% of the pack. A sortie spends only the window from the 95% launch to the 25% return, which is 70% of the pack or 13.9 min. The worst case flown, a 15 m/s crosswind over a 30 m sector, takes 13.2 min and 69% of the pack, so it fits. At 15 m/s the longest sector that fits is 30 m (35 m needs 73%, 40 m needs 83% and 60 m needs 103%).
 
-### Wind Testing Overall Results {#wind-testing-overall-results}
+### 3.5.2 Wind Testing Overall Results {#wind-testing-overall-results}
+
+<p class="report-table-caption" id="table-44"><strong>Table 44.</strong> Wind Testing Overall Results</p>
 
 | Wind (turbulence 25%) | Completed | Worst off-lane | Wind abort fired |
 | --- | :---: | ---: | :---: |
@@ -508,13 +534,15 @@ Results unchanged across camera and coverage changes:
 
 Source: offline kinematic sim, lanes along the runway, wind blowing across (90°) or along (0°) the runway, seeds 1 to 3, 25% turbulence. The Gazebo demonstrations use a 60 m sector.
 
-## 6. Discussion of Future Works {#a6-problems-project-plan}
+## 3.6 Discussion of Future Works {#a6-problems-project-plan}
 
-### Further Concerns and Solutions {#nav-future-works}
+### 3.6.1 Further Concerns and Solutions {#nav-future-works}
 
-#### Further Concerns and Solutions {#further-concerns-and-solutions}
+#### 3.6.1.1 Further Concerns and Solutions {#further-concerns-and-solutions}
 
 The simulation also exposed concerns that were not foreseen in the design stage. The table records each one with the evidence found and the mitigation we propose, and the mitigations feed the Semester 2 plan.
+
+<p class="report-table-caption" id="table-45"><strong>Table 45.</strong> Further Concerns and Solutions</p>
 
 | Concern found | Evidence from simulation | Proposed mitigation |
 | --- | --- | --- |
@@ -525,9 +553,9 @@ The simulation also exposed concerns that were not foreseen in the design stage.
 | GNSS degraded or lost | Degraded: off-lane rms 0.7 to 1.4 m. Lost: drift 3 to 10 m at 8 m/s | Return home after 60 s; land at once on loss; add optical flow or a second RTK source |
 | Motor failure | Quad cannot recover: impact 8.8 to 9.6 m/s (183 to 218 J) | Motor health monitoring, propulsion redundancy or a parachute; keep clear of people |
 
-### Semester 2 Development Plan {#nav-semester-2-plan}
+### 3.6.2 Semester 2 Development Plan {#nav-semester-2-plan}
 
-#### Navigation Future Works {#navigation-future-works}
+#### 3.6.2.1 Navigation Future Works {#navigation-future-works}
 
 Semester 2 moves from simulation to hardware. The plan has three steps, ordered so that nothing is flown live until the simulation has predicted it.
 

@@ -6,396 +6,528 @@ title: References
 
 # References
 
-## Secondary Research Sources
-
-### SR-01 - CNA video on Changi Airport FOD detection {#research-cna-01}
-
-CNA. **Video about FOD detection and the iFerret system at Changi Airport**. YouTube, video ID YigBVMgCgVA.
-
-[Watch the CNA video](https://www.youtube.com/watch?v=YigBVMgCgVA). Source for the secondary research findings on FOD types, detection capability, AI-based detection, operational efficiency and human verification.
-
-## Mechanical Design Sources
-
-The numbers below preserve the citations in Section 10 of the supplied *Interim Report.docx*. The supplied document contains no bibliography. Full bibliographic details must be completed manually; these entries do not identify verified sources.
-
-### [1] - CAAS UA Pilot Licence requirement {#md-ref-1}
-
-**Bibliographic details missing; manual completion required.** Referenced in the Mechanical Design report.
-
-### [2] - Plus and cross quadcopter configuration comparison {#md-ref-2}
-
-**Bibliographic details missing; manual completion required.** Referenced in the Mechanical Design report.
-
-### [3] - Pusher and puller configuration CFD comparison {#md-ref-3}
-
-**Bibliographic details missing; manual completion required.** Referenced in the Mechanical Design report.
-
-### [4] - CFRP structural properties {#md-ref-4}
-
-**Bibliographic details missing; manual completion required.** Referenced in the Mechanical Design report.
-
-### [5] - CFRP structural properties {#md-ref-5}
-
-**Bibliographic details missing; manual completion required.** Referenced in the Mechanical Design report.
-
-### [7] - CFRP and aluminium-alloy motor-frame vibration experiment {#md-ref-7}
-
-**Bibliographic details missing; manual completion required.** Referenced in the Mechanical Design report.
-
-### [8] - CFRP structural properties {#md-ref-8}
-
-**Bibliographic details missing; manual completion required.** Referenced in the Mechanical Design report.
-
-### [9] - PETG CF compared with PETG and PLA {#md-ref-9}
-
-**Bibliographic details missing; manual completion required.** Referenced in the Mechanical Design report.
-
-### [10] - Vertical CG positioning and multicopter stability thesis {#md-ref-10}
-
-**Bibliographic details missing; manual completion required.** Citation preserved from Sections 10.3-10.4 of the supplied *Interim Report.docx*.
-
-### [11] - Direct georeferencing and sensor lever-arm transformation {#md-ref-11}
-
-**Bibliographic details missing; manual completion required.** Citation preserved from Sections 10.3-10.4 of the supplied *Interim Report.docx*.
-
-### [12] - PX4 flight controller mounting documentation {#md-ref-12}
-
-**Bibliographic details missing; manual completion required.** Citation preserved from Sections 10.3-10.4 of the supplied *Interim Report.docx*.
-
-### [13] - ArduPilot flight controller placement and IMU offsets {#md-ref-13}
-
-**Bibliographic details missing; manual completion required.** Citation preserved from Sections 10.3-10.4 of the supplied *Interim Report.docx*.
-
-### [14] - Singapore annual mean wind speed {#md-ref-14}
-
-The Straits Times. **ST Explains: Why is February the windiest month in Singapore?** Accessed 10 November 2026.
-
-[Open the Straits Times article](https://www.straitstimes.com/singapore/st-explains-why-is-february-the-windiest-month-in-singapore). Supports the approximately 2 m/s annual mean used for preliminary headwind sizing. The source report supplied the publisher and citation number but no article title or URL; this matching article was located during integration. The [Meteorological Service Singapore climate overview](https://www.weather.gov.sg/climate-climate-of-singapore) independently reports mean surface winds of around 2 m/s. This mean does not define a maximum operating wind or gust limit.
-
-### [15] - Beaufort Wind Scale {#md-ref-15}
-
-**Bibliographic details missing; manual completion required.** Citation preserved from “Results across Different Flight Scenarios” in the supplied interim report.
-
-### [16] - DJI Matrice 350 RTK maximum pitch angle {#md-ref-16}
-
-**Bibliographic details missing; manual completion required.** Citation and reference figure preserved from “Setting Conservative Thrust Estimate” in the supplied interim report.
-
-### [17] - T-Motor MN501-S KV360 performance data {#md-ref-17}
-
-**Bibliographic details missing; manual completion required.** Manufacturer performance data citation preserved from “T-Motor MN501-S KV360 with 17-inch Propellers” in the supplied interim report.
-
-### [18] - MAD 5005 IPE KV440 performance data {#md-ref-18}
-
-**Bibliographic details missing; manual completion required.** Manufacturer performance data citation preserved from “MAD 5005 IPE KV440 with 14-inch Propellers” in the supplied interim report.
-
-### [19] - Toray T300 carbon fibre datasheet {#md-ref-19}
-
-**Bibliographic details missing; manual completion required.** Datasheet citation preserved from “Beam Deflection Calculation” in the supplied interim report, which adopts a Young's modulus of 123 GPa.
-
-### [20] - ArduPilot vibration documentation {#md-ref-20}
-
-**Bibliographic details missing; manual completion required.** Documentation citation preserved from “Natural Bending Frequency Calculation” in the supplied interim report, identifying motor rotational frequency as a common source of multirotor vibration.
-
-### [21] - PETG toughness and impact resistance {#md-ref-21}
-
-**Bibliographic details missing; manual completion required.** Citation preserved from “3D-Printed Carbon Fiber Tube Clamps” in the supplied *Interim Report.docx*. The document cites [21] but does not include the corresponding bibliography entry.
-
-## Primary Research Sources
-
-The numbers below preserve the citations in the supplied *Interim Report.docx*. The document contains no corresponding bibliography. Full bibliographic details must be completed manually; these entries do not identify verified sources.
-
-### [22] - FAA estimate of FOD costs {#research-ref-22}
-
-**Bibliographic details missing; manual completion required.** Referenced in Primary Research for the cost estimate in 2020 dollars.
-
-### [23] - El-Sayed estimate of FOD costs {#research-ref-23}
-
-**Bibliographic details missing; manual completion required.** Referenced in Primary Research for annual global direct and indirect FOD costs.
-
-### [24] - Runway FOD damage, detection and removal {#research-ref-24}
-
-**Bibliographic details missing; manual completion required.** Referenced in Primary Research for runway FOD damage, research, and manual detection and removal.
-
-### [25] - Air France Flight 4590 accident {#research-ref-25}
-
-**Bibliographic details missing; manual completion required.** Referenced in Primary Research for the Concorde accident.
-
-### [26] - Postponed runway inspection {#research-ref-26}
-
-**Bibliographic details missing; manual completion required.** Referenced in Primary Research for the runway inspection postponed due to a fire drill.
-
-### [27] - Runway FOD safety and manual clearance {#research-ref-27}
-
-**Bibliographic details missing; manual completion required.** Referenced in Primary Research for aviation safety concerns and manual FOD detection and removal.
-
-### [28] - Singapore manpower and manpower optimisation {#research-ref-28}
-
-**Bibliographic details missing; manual completion required.** Referenced in Primary Research for Singapore's fertility rate and MINDEF's manpower concerns.
-
-### [29] - SAF automated vehicles and AI-enabled drones {#research-ref-29}
-
-**Bibliographic details missing; manual completion required.** Referenced in Primary Research for automation trials at SAF air bases and runway damage assessment.
-
-### [30] - Projected SAF manpower reduction {#research-ref-30}
-
-**Bibliographic details missing; manual completion required.** Referenced in Primary Research for the projected manpower reduction by 2030.
-
-## Electrical Design Sources
-
-Shared hardware datasheets are listed under Navigation & Obstacle Avoidance Sources: [N10 LiDAR](#nav-ref-14), [TFmini Plus](#nav-ref-15), [UM980 GNSS](#nav-ref-16) and [thermal camera](#nav-ref-17).
-
-### ED-H01 - Flight Controller {#ed-h01}
-
-[Pixhawk (3DR)](https://docs.px4.io/v1.16/en/flight_controller/pixhawk). **3DR Pixhawk 1 Flight Controller (Discontinued), PX4 User Guide v1.16, PX4 Dev Team.**  Lists the flight controller's processor, sensors, serial ports, PWM outputs and power input specifications.
-
-### ED-H02 - Jetson NX Orin {#ed-h02}
-
-[Jetson Orin NX](/report-assets/datasheets/Jetson_Orin_NX_DS-10712-001_v0.5.pdf). **NVIDIA Jetson Orin NX Series Data Sheet, DS-10712-001 v0.5, NVIDIA Corporation (undated).**  Lists AI performance (100 TOPS sparse INT8, 1024 CUDA cores, 32 Tensor cores, 2 DLAs), CPU and memory (8× Cortex-A78AE, 16 GB LPDDR5), 10/15/25 W power modes, and interfaces (UART, USB 3.2, CSI, Gigabit Ethernet).
-
-### ED-H03 - Raspberry Pi 5 {#ed-h03}
-
-[Raspberry Pi 5](https://pip-assets.raspberrypi.com/categories/892-raspberry-pi-5/documents/RP-008348-DS-10-raspberry-pi-5-product-brief.pdf). **Raspberry Pi 5 Product Brief, RP-008348-DS-10, Raspberry Pi Ltd, 2026.**  Lists CPU and memory (4× Cortex-A76 at 2.4 GHz, LPDDR4X), stated 2–3× CPU performance increase over the Raspberry Pi 4, interfaces (Gigabit Ethernet, USB 3.0, 40-pin GPIO header), and the 5 V / 5 A power input requirement.
-
-### ED-H04 - Battery Specifications {#ed-h04}
-
-[HRB 6S 12000mAh LiPo](https://hrb-power.com/products/hrb-6s-22-2v-12000mah-lipo-battery-xt90s-as150-xt150-for-plane-drone-boat?variant=43721861103808) (accessed 10 November 2026). **HRB 6S 22.2V 12000mAh LiPo Battery (XT90S/AS150/XT150) Product Specifications, HRB-POWER, undated.**  Lists battery capacity and energy, continuous discharge rating, weight, recommended charge rate, and per-cell voltage limits (4.2 V maximum, 3.7 V minimum). The specifications are listed on the manufacturer's product page.
-
-[View HRB 6S 12000mAh LiPo Battery Product Page]
-
-### ED-H05 - Motor Specifications {#ed-h05}
-
-[MAD 5005 IPE 440KV](/report-assets/datasheets/MAD_Motor_datasheet.png). **MAD 5005 IPE 440KV Motor Thrust Test Data (FLUXER PRO 14x4.8 MATT propeller, AMPX 40A PRO ESC, 6S), MAD Components, undated.**  Lists motor thrust and power performance, including throttle-to-thrust response, current draw, input and output power, efficiency, and RPM at 6S (24 V nominal). The test data was captured from the manufacturer's product page.
-
-[View MAD 5005 IPE Product Page](https://mad-motor.com/products/mad-components-5005-ipe?VariantsId=10440) (accessed 10 November 2026)
-
-### ED-H06 - Power Distribution Board {#ed-h06}
-
-[Matek PDB-HEX](/report-assets/datasheets/PDB-HEX_Manual.pdf). **MATEKSYS PDB-HEX Quick Start Guide, Matek Systems.**  Lists the input voltage range, current rating, the 1/21 battery voltage divider, the current-sense signal, and the 5 V regulated output.
-
-## Navigation & Obstacle Avoidance Sources
-
-### [1] - Coverage for robotics survey {#nav-ref-1}
-
-Choset, H. (2001). Coverage for robotics - A survey of recent results. *Annals of Mathematics and Artificial Intelligence*, 31.  
-[Springer (DOI 10.1023/A:1016639210559)](https://doi.org/10.1023/A:1016639210559)  
-**Used for:** Background on coverage path planning and parallel-lane (back-and-forth) sweeps.
-
-### [2] - Coverage path planning survey {#nav-ref-2}
-
-Galceran, E.; Carreras, M. (2013). A survey of coverage path planning for robotics. *Robotics and Autonomous Systems*, 61(12).  
-[ScienceDirect (DOI 10.1016/j.robot.2013.09.004)](https://doi.org/10.1016/j.robot.2013.09.004)  
-**Used for:** Choosing the lane-by-lane survey pattern and comparing coverage strategies.
-
-### [3] - FAA runway design and orientation {#nav-ref-3}
-
-Federal Aviation Administration. **Advisory Circular AC 150/5300-13B, Airport Design.**  
-[AC 150/5300-13B (Change 1), FAA](https://www.faa.gov/documentLibrary/media/Advisory_Circular/AC-150-5300-13B-Airport-Design-Chg1-w-errata.pdf)  
-**Used for:** Runway dimensions and runway orientation (95% wind coverage).
-
-### [4] - A* path search {#nav-ref-4}
-
-Hart, P. E.; Nilsson, N. J.; Raphael, B. (1968). A formal basis for the heuristic determination of minimum cost paths. *IEEE Transactions on Systems Science and Cybernetics*, 4(2).  
-[IEEE (DOI 10.1109/TSSC.1968.300136)](https://doi.org/10.1109/TSSC.1968.300136)  
-**Used for:** The grid search behind the global rerouting around mapped obstacles.
-
-### [5] - Planning Algorithms {#nav-ref-5}
-
-LaValle, S. M. (2006). *Planning Algorithms*. Cambridge University Press.  
-[Free online edition](https://lavalle.pl/planning/)  
-**Used for:** General reference for grid-based planning and replanning.
-
-### [6] - Pure pursuit path tracking {#nav-ref-6}
-
-Coulter, R. C. (1992). Implementation of the pure pursuit path tracking algorithm. Carnegie Mellon University Robotics Institute, CMU-RI-TR-92-01.  
-[CMU Robotics Institute](https://www.ri.cmu.edu/publications/implementation-of-the-pure-pursuit-path-tracking-algorithm/)  
-**Used for:** The alternative that was considered and not used, because its look-ahead is larger than the lane pitch.
-
-### [7] - Cross-track path tracking {#nav-ref-7}
-
-Snider, J. M. (2009). Automatic steering methods for autonomous automobile path tracking. Carnegie Mellon University Robotics Institute, CMU-RI-TR-09-08.  
-[CMU Robotics Institute](https://www.ri.cmu.edu/publications/automatic-steering-methods-for-autonomous-automobile-path-tracking)  
-**Used for:** The cross-track error correction used to hold the narrow lane.
-
-### [8] - PX4 User Guide {#nav-ref-8}
-
-PX4 Autopilot. **PX4 User Guide.**  
-[Offboard mode](https://docs.px4.io/main/en/flight_modes/offboard) · [EKF2 tuning](https://docs.px4.io/main/en/advanced_config/tuning_the_ecl_ekf) · [Safety (battery failsafes)](https://docs.px4.io/main/en/config/safety)  
-**Used for:** Offboard velocity commands, EKF2 position estimate, and the battery failsafe levels.
-
-### [9] - Dynamic window approach {#nav-ref-9}
-
-Fox, D.; Burgard, W.; Thrun, S. (1997). The dynamic window approach to collision avoidance. *IEEE Robotics & Automation Magazine*, 4(1).  
-[IEEE (DOI 10.1109/100.580977)](https://doi.org/10.1109/100.580977)  
-**Used for:** The velocity-sampling idea behind the reactive avoider.
-
-### [10] - Kalman filter {#nav-ref-10}
-
-Kalman, R. E. (1960). A new approach to linear filtering and prediction problems. *Journal of Basic Engineering*, 82(1).  
-[ASME (DOI 10.1115/1.3662552)](https://doi.org/10.1115/1.3662552)  
-**Used for:** Per-bird tracks (position and velocity estimates) used by the threat assessor.
-
-### [11] - Dryden turbulence model {#nav-ref-11}
-
-U.S. Department of Defense. **MIL-HDBK-1797, Flying Qualities of Piloted Aircraft.**  
-[Dryden model overview, Wikipedia (cites MIL-HDBK-1797)](https://en.wikipedia.org/wiki/Dryden_Wind_Turbulence_Model)  
-**Used for:** Basis of the gust model in the wind simulation (σ and τ scaling).
-
-### [12] - SDFormat camera specification {#nav-ref-12}
-
-SDFormat specification, version 1.9, camera element (default horizontal_fov 1.047 rad).  
-[SDFormat 1.9 specification](http://sdformat.org/spec?ver=1.9&elem=sensor)  
-**Used for:** Default camera field of view in the simulation.
-
-### [13] - ICAO runway standards {#nav-ref-13}
-
-International Civil Aviation Organization. **Annex 14, Volume I: Aerodrome Design and Operations.**  
-[ICAO Store](https://store.icao.int/en/annex-14-aerodromes)  
-**Used for:** International runway standards that the FAA values are checked against.
-
-### [14] - Leishen N10 LiDAR datasheet {#nav-ref-14}
-
-[N10 2D 360° LiDAR](/report-assets/datasheets/Leishen_N10_360_LiDAR.pdf). **Leishen Intelligent N10 LiDAR User Manual, WitMotion Shenzhen Co., Ltd (undated).**  Lists 360° 2D scanning LiDAR specifications (5 V supply, about 60 g, 12 m range, ±3 cm accuracy, 4.5 kHz measurement rate), UART interface (230400 baud) and USB adapter wiring, optical window and mounting dimensions, and ROS driver setup. The manual gives no supply current, so the current used in the power budget is an assumption.
-
-### [15] - Benewake TFmini Plus datasheet and user manual {#nav-ref-15}
-
-[TFmini Plus (Datasheet)](/report-assets/datasheets/TFmini_Plus_Datasheet.pdf). **TFmini Plus LiDAR Datasheet, Document PD-TFmini-Plus-Datasheet-A07, Benewake (Beijing) Co., Ltd, 2024.**  Lists single-point ToF LiDAR specifications, operating range and accuracy, field of view, electrical parameters (5 V supply, ≤ 110 mA average, 140 mA peak) and weight.
-
-[TFmini Plus (Manual)](/report-assets/datasheets/TFmini_Plus_User_Manual.pdf). **TFmini Plus User Manual, REV 01/04/2024, Benewake (Beijing) Co., Ltd.**  Lists wiring and pin definitions, serial data output format, configuration command frames, repeatability characteristics, and troubleshooting.
-
-### [16] - Unicore UM980 datasheet {#nav-ref-16}
-
-[UM980 GNSS Module Datasheet](/report-assets/datasheets/UM980_User_Manual_EN_R1.10.pdf). **UM980 GPS/BDS/GLONASS/Galileo/QZSS All-constellation Multi-frequency High-Precision RTK Positioning Module Installation and Operation User Manual, R1.10, Unicore Communications, Inc., June 2026.**  Lists GNSS constellation and frequency support, RTK/PPP positioning accuracy, pin definitions, electrical specifications, antenna feed design, and PCB footprint and soldering requirements.
-
-### [17] - Thermal camera datasheet {#nav-ref-17}
-
-[BNW2T Series Thermal Camera](/report-assets/datasheets/BNW2T_Series_Uncooled_Infrared_Thermal_Module_Product_Manual_V1.pdf). **BNW2T Series Uncooled Infrared Thermal Module Product Manual, Version V1.2, January 9, 2026.**  Lists thermal camera specifications, model selection, lens characteristics, temperature measurement performance, supply voltage and power consumption (5 V, under 0.35 W typical), and interface connections of the BNW2T256T04010ASSWC module. The “C” in the model code indicates no USB, so a USB accessory is required.
-
-## Computer Vision Dataset Sources
-
-### CV-D01 - CrackAirport {#cv-d01}
-
-Lyu, Zefeng; Yu, Andrew; Starr, Christopher (2026). **CrackAirport: A Dataset for Segmentation of Cracks in Airport Pavements**. Mendeley Data, version 1. Published 16 February 2026. DOI: [10.17632/3v5r2fxf89.1](https://doi.org/10.17632/3v5r2fxf89.1). Licence: CC BY 4.0.
-
-[Open dataset](https://data.mendeley.com/datasets/3v5r2fxf89/1). Used for the U-Net crack-segmentation work.
-
-### CV-D02 - Foreign Object Debris in Airports (FOD-A) {#cv-d02}
-
-**Foreign Object Debris in Airports (FOD-A) Dataset**. Kaggle, dataset page under `kilogrand`.
-
-[Open dataset page supplied by the author](https://www.kaggle.com/datasets/kilogrand/foreign-object-debris-in-airports-fod-a-dataset/code). Used as the source FOD dataset for YOLO development.
-
-### CV-D03 - Thermal Bird, Version 6 {#cv-d03}
-
-**Thermal Bird**, dataset version 6. Roboflow Universe, workspace `arc-ejbpg`.
-
-[Open dataset](https://universe.roboflow.com/arc-ejbpg/thermal-bird/dataset/6). Used for thermal bird detection.
-
-### CV-D04 - Thermal Images for Human Detection {#cv-d04}
-
-**Thermal Images for Human Detection**. Kaggle, dataset page under `sikdermdsaiful`.
-
-[Open dataset page supplied by the author](https://www.kaggle.com/datasets/sikdermdsaiful/thermal-images-for-human-detection/data?select=dataset). Used for thermal human detection.
-
-## Computer Vision Model Sources
-
-### CV-M01 - U-Net Encoder and Decoder {#cv-m01}
-
-Segmentation Models PyTorch. **Unet model documentation**.
-
-[Official documentation](https://smp.readthedocs.io/en/latest/models.html#unet). Describes the encoder, decoder, encoder-to-decoder skip connections, pretrained encoder options and segmentation outputs. Implementation settings in the report were checked against the project's crack training and inference scripts.
-
-### CV-M02 - ResNet Residual Learning {#cv-m02}
-
-He, Kaiming; Zhang, Xiangyu; Ren, Shaoqing; Sun, Jian (2015). **Deep Residual Learning for Image Recognition**. arXiv:1512.03385.
-
-[Original paper](https://arxiv.org/abs/1512.03385). Explains residual learning and shortcut connections used in the ResNet family.
-
-## Computer Vision Hardware Sources
-
-### CV-H01 - RGB Camera: e-CAM56_CUONX {#cv-h01}
-
-e-con Systems. **5MP Sony Pregius S IMX568 Global Shutter Camera for NVIDIA Jetson Orin NX / Nano (e-CAM56_CUONX)**. Manufacturer product page.
-
-[Open manufacturer specifications](https://www.e-consystems.com/nvidia-cameras/jetson-orin-nx-cameras/5mp-imx568-global-shutter-camera.asp). Referenced for the proposed RGB camera; final procurement remains subject to the project's hardware and budget decisions.
-
-### CV-H02 - IDS RGB Camera Alternative: U3-31L1ACP Rev.1.2 {#cv-h02}
-
-IDS Imaging Development Systems. **U3-31L1ACP Rev.1.2**. Manufacturer product page; accessed 8 November 2026.
-
-[Manufacturer specifications](https://en.ids-imaging.com/store/u3-31l1acp-rev-1-2.html). Lists the Sony IMX545 sensor, 4128 x 3008 resolution (12.42 MP), global shutter, 32.4 fps at full resolution, USB 3 interface and 2.74 micrometre pixels. The camera remains an alternative under consideration.
-
-### CV-H03 - UGREEN CM831 Webcam {#cv-h03}
-
-UGREEN. **USB HD Webcam, Model CM831, P/N 65381. User manual, revision A02 (16 April 2025)**. Accessed 12 November 2026.
-
-[Manufacturer manual (hosted copy)](https://ae01.alicdn.com/kf/S2fac459d61de409f98cf576a8f84b3c1w.pdf). Reference for the webcam model and specifications. The interim integration script requests 1280 x 720 capture, rather than the maximum 3840 x 2160 resolution. The interim pixel calculation uses the stated 0.5 m x 0.5 m whole-image ground coverage, rather than a viewing-angle estimate.
-
-## Computer Vision Safety Sources
-
-### CV-S01 - Pavement Cracking and FOD Risk {#cv-s01}
-
-Federal Aviation Administration. **Reflective Cracking Program**. Airport Technology Research and Development. Accessed 31 October 2026.
-
-[Open FAA research overview](https://www.airporttech.tc.faa.gov/Airport-Pavement/Pavement-Design/Reflective-Cracking-Program). Explains that reflective cracks can lead to spalling and loose pavement pieces that become FOD. Used to support retaining crack inspection alongside FOD detection.
-
-### CV-S02 - Hairline Cracks, Deterioration and Water Entry {#cv-s02}
-
-Federal Aviation Administration. **AC 150/5320-17A, Appendix B: Concrete Airfield Pavement Surface Evaluation and Rating Manual**. 10 September 2014, pp. 8-9: Corner cracks and Meander cracks. Accessed 8 November 2026.
-
-[Open FAA manual at the corner-crack discussion](https://www.faa.gov/documentlibrary/media/advisory_circular/150-5320-17a-appendix-b.pdf#page=10). Describes concrete corner cracks that may begin as hairline cracks and deteriorate until pieces come loose. The next page notes that minor cracks may benefit from sealing to limit water intrusion. These statements support inspection and assessment; they do not establish that every hairline crack is an immediate operational hazard.
-
-### CV-N01 - ROS 2 Position, Orientation and Quaternion Heading {#cv-n01}
-
-Open Robotics. **ROS 2 Jazzy common_interfaces and tf2**. Accessed 8 November 2026.
-
-The [Pose message definition](https://github.com/ros2/common_interfaces/blob/jazzy/geometry_msgs/msg/Pose.msg) separates position from orientation. The [Quaternion message definition](https://github.com/ros2/common_interfaces/blob/jazzy/geometry_msgs/msg/Quaternion.msg) defines orientation using x, y, z and w. The [tf2 yaw implementation](https://github.com/ros2/geometry2/blob/jazzy/tf2/include/tf2/impl/utils.hpp) provides quaternion-to-heading calculation. These do not define a quaternion-to-position conversion.
-
-### CV-N02 - ROS Coordinate Conventions {#cv-n02}
-
-Foote, Tully and Purvis, Mike. **REP 103: Standard Units of Measure and Coordinate Conventions**. Open Robotics. Accessed 8 November 2026.
-
-[Official REP 103 source](https://github.com/ros-infrastructure/rep/blob/master/rep-0103.rst). Defines right-handed frames, metre units, body axes, camera optical axes, ENU/NED conventions and positive yaw direction.
-
-## Communication System Sources
-
-### COM-H01 - Microhard pMDDL2450 {#com-h01}
-
-Microhard. **pMDDL2450 - Wireless MIMO (2X2) OEM Digital Data Link**. Manufacturer product page; accessed 1 November 2026.
-
-[Manufacturer product page](https://www.microhardcorp.com/pMDDL2450.php) and [manufacturer brochure, revision 1.3.0](https://www.microhardcorp.com/brochures/pMDDL2450.Brochure.Rev.1.3.0.pdf), checked 12 November 2026. List 2.402-2.478 GHz operation, up to 25 Mbps advertised throughput, adjustable total RF output up to 1 W, Ethernet/serial/USB interfaces and wireless video support. These specifications do not establish a tested 5 km range at Singapore's permitted operating power.
-
-### COM-H02 - Microhard P900 V2 Serial Radio {#com-h02}
-
-Holybro. **Microhard Telemetry Radio V2: P900 V2**. Manufacturer specifications. Accessed 12 November 2026.
-
-[Holybro product specifications](https://holybro.com/products/microhard-telemetry-radio-v2) and [radio overview](https://docs.holybro.com/radio/microhard-radio/overview). List the 902-928 MHz band, up to 276 kbps link rate, serial interfaces and adjustable RF output from 100 mW to 1 W. Singapore frequency and power compliance must be checked separately.
-
-### COM-R01 - IMDA Short Range Devices Specification {#com-r01}
-
-Infocomm Media Development Authority. **Technical Specification for Short Range Devices (IMDA TS SRD), September 2023**. Accessed 1 November 2026.
-
-[Official technical specification](https://www.imda.gov.sg/-/media/imda/files/regulation-licensing-and-consultations/ict-standards/telecommunication-standards/radio-comms/imdatssrd.pdf). Lists band-specific device categories and operating conditions. A listed band alone does not establish approval for the proposed radio configuration.
-
-### COM-R02 - IMDA Unmanned Aircraft Radio Guidance {#com-r02}
-
-Infocomm Media Development Authority. **Operation of Unmanned Aircraft Systems (UAS)**. Accessed 1 November 2026.
-
-[Official UAS guidance](https://www.imda.gov.sg/regulations-and-licensing-listing/spectrum-management/frequency-allocation-and-assignment/operation-of-unmanned-aircraft-systems-uas). Lists the commonly used 2.4000-2.4835 GHz UAV band with a maximum power of 100 mW EIRP under the published licence-exemption conditions.
-
-### COM-R03 - Shared Spectrum and Interference Conditions {#com-r03}
-
-Infocomm Media Development Authority. **Spectrum Management Handbook, Chapter 7: Short Range Devices**. Accessed 12 November 2026.
-
-[IMDA handbook](https://www.imda.gov.sg/-/media/imda/files/regulation-licensing-and-consultations/frameworks-and-policies/spectrum-management-and-coordination/spectrummgmthb.pdf). Explains shared use and operation on a non-interference and non-protection basis. Used for the shared-band interference discussion.
-
-### COM-T01 - Interference Between Shared-Band Devices {#com-t01}
-
-Marcel, Jason (2020). **How Bluetooth technology uses adaptive frequency hopping to overcome packet interference**. Bluetooth SIG, 15 November 2020. Accessed 12 November 2026.
-
-[Bluetooth SIG explanation](https://www.bluetooth.com/blog/how-bluetooth-technology-uses-adaptive-frequency-hopping-to-overcome-packet-interference/). Explains how overlapping transmissions from Bluetooth, Wi-Fi and other devices can corrupt or lose packets. Cited for coexistence risks, not as evidence that the proposed Microhard link implements Bluetooth frequency hopping.
-
-### COM-S01 - ROS 2 Communication Security {#com-s01}
-
-Open Robotics. **ROS 2 Jazzy: ROS 2 Security, Setting Up Security and Setting Access Controls**. Accessed 12 November 2026.
-
-[Security overview](https://github.com/ros2/ros2_documentation/blob/jazzy/source/Concepts/Intermediate/About-Security.rst), [SROS2 setup](https://github.com/ros2/ros2_documentation/blob/jazzy/source/Tutorials/Advanced/Security/Introducing-ros2-security.rst) and [topic access controls](https://github.com/ros2/ros2_documentation/blob/jazzy/source/Tutorials/Advanced/Security/Access-Controls.rst). Official documentation for DDS-based encryption, participant authentication, data integrity, certificate and key files, enforced security and publish/subscribe permissions. The application's stale-alert and duplicate-target checks are proposed project work.
+References are numbered in order of first citation in the full report. The same source keeps the same number on individual subsystem pages.
+
+<div class="ieee-reference" id="research-ref-23">
+<span class="ieee-reference-number">[1]</span>
+<div class="ieee-reference-body">
+<p>&ldquo;El-Sayed estimate of FOD costs&rdquo;. <strong>Incomplete reference:</strong> the original source and bibliographic details were not supplied.</p>
+</div>
+</div>
+
+<div class="ieee-reference" id="research-ref-22">
+<span class="ieee-reference-number">[2]</span>
+<div class="ieee-reference-body">
+<p>&ldquo;FAA estimate of FOD costs&rdquo;. <strong>Incomplete reference:</strong> the original source and bibliographic details were not supplied.</p>
+</div>
+</div>
+
+<div class="ieee-reference" id="research-ref-24">
+<span class="ieee-reference-number">[3]</span>
+<div class="ieee-reference-body">
+<p>&ldquo;Runway FOD damage, detection and removal&rdquo;. <strong>Incomplete reference:</strong> the original source and bibliographic details were not supplied.</p>
+</div>
+</div>
+
+<div class="ieee-reference" id="research-ref-25">
+<span class="ieee-reference-number">[4]</span>
+<div class="ieee-reference-body">
+<p>&ldquo;Air France Flight 4590 accident&rdquo;. <strong>Incomplete reference:</strong> the original source and bibliographic details were not supplied.</p>
+</div>
+</div>
+
+<div class="ieee-reference" id="research-ref-26">
+<span class="ieee-reference-number">[5]</span>
+<div class="ieee-reference-body">
+<p>&ldquo;Postponed runway inspection&rdquo;. <strong>Incomplete reference:</strong> the original source and bibliographic details were not supplied.</p>
+</div>
+</div>
+
+<div class="ieee-reference" id="research-ref-27">
+<span class="ieee-reference-number">[6]</span>
+<div class="ieee-reference-body">
+<p>&ldquo;Runway FOD safety and manual clearance&rdquo;. <strong>Incomplete reference:</strong> the original source and bibliographic details were not supplied.</p>
+</div>
+</div>
+
+<div class="ieee-reference" id="research-ref-28">
+<span class="ieee-reference-number">[7]</span>
+<div class="ieee-reference-body">
+<p>&ldquo;Singapore manpower and manpower optimisation&rdquo;. <strong>Incomplete reference:</strong> the original source and bibliographic details were not supplied.</p>
+</div>
+</div>
+
+<div class="ieee-reference" id="research-ref-29">
+<span class="ieee-reference-number">[8]</span>
+<div class="ieee-reference-body">
+<p>&ldquo;SAF automated vehicles and AI-enabled drones&rdquo;. <strong>Incomplete reference:</strong> the original source and bibliographic details were not supplied.</p>
+</div>
+</div>
+
+<div class="ieee-reference" id="research-ref-30">
+<span class="ieee-reference-number">[9]</span>
+<div class="ieee-reference-body">
+<p>&ldquo;Projected SAF manpower reduction&rdquo;. <strong>Incomplete reference:</strong> the original source and bibliographic details were not supplied.</p>
+</div>
+</div>
+
+<div class="ieee-reference" id="research-cna-01">
+<span class="ieee-reference-number">[10]</span>
+<div class="ieee-reference-body">
+<p>CNA, &quot;Video about FOD detection and the iFerret system at Changi Airport,&quot; YouTube video, YigBVMgCgVA. [Online]. Available: <a href="https://www.youtube.com/watch?v=YigBVMgCgVA">https://www.youtube.com/watch?v=YigBVMgCgVA</a>.</p>
+</div>
+</div>
+
+<div class="ieee-reference" id="md-ref-1">
+<span class="ieee-reference-number">[11]</span>
+<div class="ieee-reference-body">
+<p>&ldquo;CAAS UA Pilot Licence requirement&rdquo;. <strong>Incomplete reference:</strong> the original source and bibliographic details were not supplied.</p>
+</div>
+</div>
+
+<div class="ieee-reference" id="md-ref-2">
+<span class="ieee-reference-number">[12]</span>
+<div class="ieee-reference-body">
+<p>&ldquo;Plus and cross quadcopter configuration comparison&rdquo;. <strong>Incomplete reference:</strong> the original source and bibliographic details were not supplied.</p>
+</div>
+</div>
+
+<div class="ieee-reference" id="md-ref-3">
+<span class="ieee-reference-number">[13]</span>
+<div class="ieee-reference-body">
+<p>&ldquo;Pusher and puller configuration CFD comparison&rdquo;. <strong>Incomplete reference:</strong> the original source and bibliographic details were not supplied.</p>
+</div>
+</div>
+
+<div class="ieee-reference" id="md-ref-4">
+<span class="ieee-reference-number">[14]</span>
+<div class="ieee-reference-body">
+<p>&ldquo;CFRP structural properties&rdquo;. <strong>Incomplete reference:</strong> the original source and bibliographic details were not supplied.</p>
+</div>
+</div>
+
+<div class="ieee-reference" id="md-ref-5">
+<span class="ieee-reference-number">[15]</span>
+<div class="ieee-reference-body">
+<p>&ldquo;CFRP structural properties&rdquo;. <strong>Incomplete reference:</strong> the original source and bibliographic details were not supplied.</p>
+</div>
+</div>
+
+<div class="ieee-reference" id="md-ref-8">
+<span class="ieee-reference-number">[16]</span>
+<div class="ieee-reference-body">
+<p>&ldquo;CFRP structural properties&rdquo;. <strong>Incomplete reference:</strong> the original source and bibliographic details were not supplied.</p>
+</div>
+</div>
+
+<div class="ieee-reference" id="md-ref-7">
+<span class="ieee-reference-number">[17]</span>
+<div class="ieee-reference-body">
+<p>&ldquo;CFRP and aluminium-alloy motor-frame vibration experiment&rdquo;. <strong>Incomplete reference:</strong> the original source and bibliographic details were not supplied.</p>
+</div>
+</div>
+
+<div class="ieee-reference" id="md-ref-14">
+<span class="ieee-reference-number">[18]</span>
+<div class="ieee-reference-body">
+<p>The Straits Times, &quot;ST Explains: Why is February the windiest month in Singapore?&quot; Accessed: Nov. 10, 2026. [Online]. Available: <a href="https://www.straitstimes.com/singapore/st-explains-why-is-february-the-windiest-month-in-singapore">https://www.straitstimes.com/singapore/st-explains-why-is-february-the-windiest-month-in-singapore</a>; <a href="https://www.weather.gov.sg/climate-climate-of-singapore">https://www.weather.gov.sg/climate-climate-of-singapore</a>.</p>
+<p class="reference-note">Used for preliminary mean-wind sizing. Mean wind is not a maximum operating wind or gust limit.</p>
+</div>
+</div>
+
+<div class="ieee-reference" id="md-ref-15">
+<span class="ieee-reference-number">[19]</span>
+<div class="ieee-reference-body">
+<p>&ldquo;Beaufort Wind Scale&rdquo;. <strong>Incomplete reference:</strong> the original source and bibliographic details were not supplied.</p>
+</div>
+</div>
+
+<div class="ieee-reference" id="md-ref-16">
+<span class="ieee-reference-number">[20]</span>
+<div class="ieee-reference-body">
+<p>&ldquo;DJI Matrice 350 RTK maximum pitch angle&rdquo;. <strong>Incomplete reference:</strong> the original source and bibliographic details were not supplied.</p>
+</div>
+</div>
+
+<div class="ieee-reference" id="md-ref-17">
+<span class="ieee-reference-number">[21]</span>
+<div class="ieee-reference-body">
+<p>&ldquo;T-Motor MN501-S KV360 performance data&rdquo;. <strong>Incomplete reference:</strong> the original source and bibliographic details were not supplied.</p>
+</div>
+</div>
+
+<div class="ieee-reference" id="md-ref-18">
+<span class="ieee-reference-number">[22]</span>
+<div class="ieee-reference-body">
+<p>&ldquo;MAD 5005 IPE KV440 performance data&rdquo;. <strong>Incomplete reference:</strong> the original source and bibliographic details were not supplied.</p>
+</div>
+</div>
+
+<div class="ieee-reference" id="md-ref-19">
+<span class="ieee-reference-number">[23]</span>
+<div class="ieee-reference-body">
+<p>&ldquo;Toray T300 carbon fibre datasheet&rdquo;. <strong>Incomplete reference:</strong> the original source and bibliographic details were not supplied.</p>
+</div>
+</div>
+
+<div class="ieee-reference" id="md-ref-20">
+<span class="ieee-reference-number">[24]</span>
+<div class="ieee-reference-body">
+<p>&ldquo;ArduPilot vibration documentation&rdquo;. <strong>Incomplete reference:</strong> the original source and bibliographic details were not supplied.</p>
+</div>
+</div>
+
+<div class="ieee-reference" id="md-ref-9">
+<span class="ieee-reference-number">[25]</span>
+<div class="ieee-reference-body">
+<p>&ldquo;PETG CF compared with PETG and PLA&rdquo;. <strong>Incomplete reference:</strong> the original source and bibliographic details were not supplied.</p>
+</div>
+</div>
+
+<div class="ieee-reference" id="md-ref-11">
+<span class="ieee-reference-number">[26]</span>
+<div class="ieee-reference-body">
+<p>&ldquo;Direct georeferencing and sensor lever-arm transformation&rdquo;. <strong>Incomplete reference:</strong> the original source and bibliographic details were not supplied.</p>
+</div>
+</div>
+
+<div class="ieee-reference" id="md-ref-12">
+<span class="ieee-reference-number">[27]</span>
+<div class="ieee-reference-body">
+<p>&ldquo;PX4 flight controller mounting documentation&rdquo;. <strong>Incomplete reference:</strong> the original source and bibliographic details were not supplied.</p>
+</div>
+</div>
+
+<div class="ieee-reference" id="md-ref-13">
+<span class="ieee-reference-number">[28]</span>
+<div class="ieee-reference-body">
+<p>&ldquo;ArduPilot flight controller placement and IMU offsets&rdquo;. <strong>Incomplete reference:</strong> the original source and bibliographic details were not supplied.</p>
+</div>
+</div>
+
+<div class="ieee-reference" id="md-ref-21">
+<span class="ieee-reference-number">[29]</span>
+<div class="ieee-reference-body">
+<p>&ldquo;PETG toughness and impact resistance&rdquo;. <strong>Incomplete reference:</strong> the original source and bibliographic details were not supplied.</p>
+</div>
+</div>
+
+<div class="ieee-reference" id="md-ref-10">
+<span class="ieee-reference-number">[30]</span>
+<div class="ieee-reference-body">
+<p>&ldquo;Vertical CG positioning and multicopter stability thesis&rdquo;. <strong>Incomplete reference:</strong> the original source and bibliographic details were not supplied.</p>
+</div>
+</div>
+
+<div class="ieee-reference" id="ed-h01">
+<span class="ieee-reference-number">[31]</span>
+<div class="ieee-reference-body">
+<p>PX4 Dev Team, &quot;3DR Pixhawk 1 flight controller (discontinued),&quot; PX4 User Guide, ver. 1.16. [Online]. Available: <a href="https://docs.px4.io/v1.16/en/flight_controller/pixhawk">https://docs.px4.io/v1.16/en/flight_controller/pixhawk</a>.</p>
+</div>
+</div>
+
+<div class="ieee-reference" id="ed-h02">
+<span class="ieee-reference-number">[32]</span>
+<div class="ieee-reference-body">
+<p>NVIDIA Corp., &quot;NVIDIA Jetson Orin NX series data sheet,&quot; DS-10712-001, ver. 0.5. [Online]. Available: <a href="/report-assets/datasheets/Jetson_Orin_NX_DS-10712-001_v0.5.pdf">Project copy: Jetson Orin NX</a>.</p>
+</div>
+</div>
+
+<div class="ieee-reference" id="ed-h03">
+<span class="ieee-reference-number">[33]</span>
+<div class="ieee-reference-body">
+<p>Raspberry Pi Ltd., &quot;Raspberry Pi 5 product brief,&quot; RP-008348-DS-10, 2026. [Online]. Available: <a href="https://pip-assets.raspberrypi.com/categories/892-raspberry-pi-5/documents/RP-008348-DS-10-raspberry-pi-5-product-brief.pdf">https://pip-assets.raspberrypi.com/categories/892-raspberry-pi-5/documents/RP-008348-DS-10-raspberry-pi-5-product-brief.pdf</a>.</p>
+</div>
+</div>
+
+<div class="ieee-reference" id="nav-ref-14">
+<span class="ieee-reference-number">[34]</span>
+<div class="ieee-reference-body">
+<p>WitMotion Shenzhen Co., Ltd., &quot;Leishen Intelligent N10 LiDAR user manual.&quot; [Online]. Available: <a href="/report-assets/datasheets/Leishen_N10_360_LiDAR.pdf">Project copy: N10 2D 360° LiDAR</a>.</p>
+<p class="reference-note">The manual does not state supply current. The report uses an assumed current.</p>
+</div>
+</div>
+
+<div class="ieee-reference" id="ed-h04">
+<span class="ieee-reference-number">[35]</span>
+<div class="ieee-reference-body">
+<p>HRB-POWER, &quot;HRB 6S 22.2 V 12000 mAh LiPo battery (XT90S/AS150/XT150),&quot; product specifications. Accessed: Nov. 10, 2026. [Online]. Available: <a href="https://hrb-power.com/products/hrb-6s-22-2v-12000mah-lipo-battery-xt90s-as150-xt150-for-plane-drone-boat?variant=43721861103808">https://hrb-power.com/products/hrb-6s-22-2v-12000mah-lipo-battery-xt90s-as150-xt150-for-plane-drone-boat?variant=43721861103808</a>.</p>
+</div>
+</div>
+
+<div class="ieee-reference" id="ed-h06">
+<span class="ieee-reference-number">[36]</span>
+<div class="ieee-reference-body">
+<p>Matek Systems, &quot;PDB-HEX quick start guide.&quot; [Online]. Available: <a href="/report-assets/datasheets/PDB-HEX_Manual.pdf">Project copy: Matek PDB-HEX</a>.</p>
+</div>
+</div>
+
+<div class="ieee-reference" id="nav-ref-16">
+<span class="ieee-reference-number">[37]</span>
+<div class="ieee-reference-body">
+<p>Unicore Communications, Inc., &quot;UM980 GPS/BDS/GLONASS/Galileo/QZSS all-constellation multi-frequency high-precision RTK positioning module installation and operation user manual,&quot; rev. 1.10, Jun. 2026. [Online]. Available: <a href="/report-assets/datasheets/UM980_User_Manual_EN_R1.10.pdf">Project copy: UM980 GNSS Module Datasheet</a>.</p>
+</div>
+</div>
+
+<div class="ieee-reference" id="nav-ref-15">
+<span class="ieee-reference-number">[38]</span>
+<div class="ieee-reference-body">
+<p>Benewake (Beijing) Co., Ltd., &quot;TFmini Plus LiDAR datasheet,&quot; PD-TFmini-Plus-Datasheet-A07, 2024; &quot;TFmini Plus user manual,&quot; rev. 01/04/2024. [Online]. Available: <a href="/report-assets/datasheets/TFmini_Plus_Datasheet.pdf">Project copy: TFmini Plus (Datasheet)</a>; <a href="/report-assets/datasheets/TFmini_Plus_User_Manual.pdf">Project copy: TFmini Plus (Manual)</a>.</p>
+</div>
+</div>
+
+<div class="ieee-reference" id="nav-ref-17">
+<span class="ieee-reference-number">[39]</span>
+<div class="ieee-reference-body">
+<p>&quot;BNW2T series uncooled infrared thermal module product manual,&quot; ver. 1.2, Jan. 9, 2026. [Online]. Available: <a href="/report-assets/datasheets/BNW2T_Series_Uncooled_Infrared_Thermal_Module_Product_Manual_V1.pdf">Project copy: BNW2T Series Thermal Camera</a>.</p>
+<p class="reference-note">The selected module requires a USB accessory for the proposed USB connection.</p>
+</div>
+</div>
+
+<div class="ieee-reference" id="ed-h05">
+<span class="ieee-reference-number">[40]</span>
+<div class="ieee-reference-body">
+<p>MAD Components, &quot;MAD 5005 IPE 440KV motor thrust test data,&quot; FLUXER PRO 14x4.8 MATT propeller, AMPX 40A PRO ESC, 6S. Accessed: Nov. 10, 2026. [Online]. Available: <a href="/report-assets/datasheets/MAD_Motor_datasheet.png">Project copy: MAD 5005 IPE 440KV</a>; <a href="https://mad-motor.com/products/mad-components-5005-ipe?VariantsId=10440">https://mad-motor.com/products/mad-components-5005-ipe?VariantsId=10440</a>.</p>
+<p class="reference-note">Manufacturer test data, not measured ARGUS flight performance.</p>
+</div>
+</div>
+
+<div class="ieee-reference" id="nav-ref-3">
+<span class="ieee-reference-number">[41]</span>
+<div class="ieee-reference-body">
+<p>Federal Aviation Administration, <em>Airport Design</em>, Advisory Circular AC 150/5300-13B, Change 1. [Online]. Available: <a href="https://www.faa.gov/documentLibrary/media/Advisory_Circular/AC-150-5300-13B-Airport-Design-Chg1-w-errata.pdf">https://www.faa.gov/documentLibrary/media/Advisory_Circular/AC-150-5300-13B-Airport-Design-Chg1-w-errata.pdf</a>.</p>
+</div>
+</div>
+
+<div class="ieee-reference" id="nav-ref-13">
+<span class="ieee-reference-number">[42]</span>
+<div class="ieee-reference-body">
+<p>International Civil Aviation Organization, <em>Aerodrome Design and Operations</em>, Annex 14, vol. I. [Online]. Available: <a href="https://store.icao.int/en/annex-14-aerodromes">https://store.icao.int/en/annex-14-aerodromes</a>.</p>
+</div>
+</div>
+
+<div class="ieee-reference" id="nav-ref-12">
+<span class="ieee-reference-number">[43]</span>
+<div class="ieee-reference-body">
+<p>SDFormat, &quot;Camera element,&quot; SDFormat specification, ver. 1.9. [Online]. Available: <a href="http://sdformat.org/spec?ver=1.9&amp;elem=sensor">http://sdformat.org/spec?ver=1.9&amp;elem=sensor</a>.</p>
+</div>
+</div>
+
+<div class="ieee-reference" id="nav-ref-1">
+<span class="ieee-reference-number">[44]</span>
+<div class="ieee-reference-body">
+<p>H. Choset, &quot;Coverage for robotics: A survey of recent results,&quot; <em>Annals of Mathematics and Artificial Intelligence</em>, vol. 31, 2001, doi: 10.1023/A:1016639210559. [Online]. Available: <a href="https://doi.org/10.1023/A:1016639210559">https://doi.org/10.1023/A:1016639210559</a>.</p>
+</div>
+</div>
+
+<div class="ieee-reference" id="nav-ref-2">
+<span class="ieee-reference-number">[45]</span>
+<div class="ieee-reference-body">
+<p>E. Galceran and M. Carreras, &quot;A survey of coverage path planning for robotics,&quot; <em>Robotics and Autonomous Systems</em>, vol. 61, no. 12, 2013, doi: 10.1016/j.robot.2013.09.004. [Online]. Available: <a href="https://doi.org/10.1016/j.robot.2013.09.004">https://doi.org/10.1016/j.robot.2013.09.004</a>.</p>
+</div>
+</div>
+
+<div class="ieee-reference" id="nav-ref-4">
+<span class="ieee-reference-number">[46]</span>
+<div class="ieee-reference-body">
+<p>P. E. Hart, N. J. Nilsson, and B. Raphael, &quot;A formal basis for the heuristic determination of minimum cost paths,&quot; <em>IEEE Transactions on Systems Science and Cybernetics</em>, vol. 4, no. 2, 1968, doi: 10.1109/TSSC.1968.300136. [Online]. Available: <a href="https://doi.org/10.1109/TSSC.1968.300136">https://doi.org/10.1109/TSSC.1968.300136</a>.</p>
+</div>
+</div>
+
+<div class="ieee-reference" id="nav-ref-5">
+<span class="ieee-reference-number">[47]</span>
+<div class="ieee-reference-body">
+<p>S. M. LaValle, <em>Planning Algorithms</em>. Cambridge University Press, 2006. [Online]. Available: <a href="https://lavalle.pl/planning/">https://lavalle.pl/planning/</a>.</p>
+</div>
+</div>
+
+<div class="ieee-reference" id="nav-ref-6">
+<span class="ieee-reference-number">[48]</span>
+<div class="ieee-reference-body">
+<p>R. C. Coulter, &quot;Implementation of the pure pursuit path tracking algorithm,&quot; Carnegie Mellon University Robotics Institute, Tech. Rep. CMU-RI-TR-92-01, 1992. [Online]. Available: <a href="https://www.ri.cmu.edu/publications/implementation-of-the-pure-pursuit-path-tracking-algorithm/">https://www.ri.cmu.edu/publications/implementation-of-the-pure-pursuit-path-tracking-algorithm/</a>.</p>
+</div>
+</div>
+
+<div class="ieee-reference" id="nav-ref-7">
+<span class="ieee-reference-number">[49]</span>
+<div class="ieee-reference-body">
+<p>J. M. Snider, &quot;Automatic steering methods for autonomous automobile path tracking,&quot; Carnegie Mellon University Robotics Institute, Tech. Rep. CMU-RI-TR-09-08, 2009. [Online]. Available: <a href="https://www.ri.cmu.edu/publications/automatic-steering-methods-for-autonomous-automobile-path-tracking">https://www.ri.cmu.edu/publications/automatic-steering-methods-for-autonomous-automobile-path-tracking</a>.</p>
+</div>
+</div>
+
+<div class="ieee-reference" id="nav-ref-8">
+<span class="ieee-reference-number">[50]</span>
+<div class="ieee-reference-body">
+<p>PX4 Autopilot, &quot;PX4 user guide: Offboard mode, EKF2 tuning and safety.&quot; [Online]. Available: <a href="https://docs.px4.io/main/en/flight_modes/offboard">https://docs.px4.io/main/en/flight_modes/offboard</a>; <a href="https://docs.px4.io/main/en/advanced_config/tuning_the_ecl_ekf">https://docs.px4.io/main/en/advanced_config/tuning_the_ecl_ekf</a>; <a href="https://docs.px4.io/main/en/config/safety">https://docs.px4.io/main/en/config/safety</a>.</p>
+</div>
+</div>
+
+<div class="ieee-reference" id="nav-ref-9">
+<span class="ieee-reference-number">[51]</span>
+<div class="ieee-reference-body">
+<p>D. Fox, W. Burgard, and S. Thrun, &quot;The dynamic window approach to collision avoidance,&quot; <em>IEEE Robotics &amp; Automation Magazine</em>, vol. 4, no. 1, 1997, doi: 10.1109/100.580977. [Online]. Available: <a href="https://doi.org/10.1109/100.580977">https://doi.org/10.1109/100.580977</a>.</p>
+</div>
+</div>
+
+<div class="ieee-reference" id="nav-ref-10">
+<span class="ieee-reference-number">[52]</span>
+<div class="ieee-reference-body">
+<p>R. E. Kalman, &quot;A new approach to linear filtering and prediction problems,&quot; <em>Journal of Basic Engineering</em>, vol. 82, no. 1, 1960, doi: 10.1115/1.3662552. [Online]. Available: <a href="https://doi.org/10.1115/1.3662552">https://doi.org/10.1115/1.3662552</a>.</p>
+</div>
+</div>
+
+<div class="ieee-reference" id="nav-ref-11">
+<span class="ieee-reference-number">[53]</span>
+<div class="ieee-reference-body">
+<p>U.S. Department of Defense, <em>Flying Qualities of Piloted Aircraft</em>, MIL-HDBK-1797. [Online]. Available: <a href="https://en.wikipedia.org/wiki/Dryden_Wind_Turbulence_Model">https://en.wikipedia.org/wiki/Dryden_Wind_Turbulence_Model</a>.</p>
+<p class="reference-note">The original report linked a secondary Dryden-model overview. The primary handbook edition and direct source link still need confirmation.</p>
+</div>
+</div>
+
+<div class="ieee-reference" id="cv-h01">
+<span class="ieee-reference-number">[54]</span>
+<div class="ieee-reference-body">
+<p>e-con Systems, &quot;5MP Sony Pregius S IMX568 global shutter camera for NVIDIA Jetson Orin NX / Nano (e-CAM56_CUONX),&quot; product specifications. [Online]. Available: <a href="https://www.e-consystems.com/nvidia-cameras/jetson-orin-nx-cameras/5mp-imx568-global-shutter-camera.asp">https://www.e-consystems.com/nvidia-cameras/jetson-orin-nx-cameras/5mp-imx568-global-shutter-camera.asp</a>.</p>
+</div>
+</div>
+
+<div class="ieee-reference" id="cv-h02">
+<span class="ieee-reference-number">[55]</span>
+<div class="ieee-reference-body">
+<p>IDS Imaging Development Systems, &quot;U3-31L1ACP Rev.1.2,&quot; product specifications. Accessed: Nov. 8, 2026. [Online]. Available: <a href="https://en.ids-imaging.com/store/u3-31l1acp-rev-1-2.html">https://en.ids-imaging.com/store/u3-31l1acp-rev-1-2.html</a>.</p>
+</div>
+</div>
+
+<div class="ieee-reference" id="cv-h03">
+<span class="ieee-reference-number">[56]</span>
+<div class="ieee-reference-body">
+<p>UGREEN, &quot;USB HD webcam, model CM831, P/N 65381,&quot; user manual, rev. A02, Apr. 16, 2025. Accessed: Nov. 12, 2026. [Online]. Available: <a href="https://ae01.alicdn.com/kf/S2fac459d61de409f98cf576a8f84b3c1w.pdf">https://ae01.alicdn.com/kf/S2fac459d61de409f98cf576a8f84b3c1w.pdf</a>.</p>
+<p class="reference-note">The interim script requests 1280 x 720 capture. Ground coverage is the stated 0.5 m x 0.5 m, to be checked by measurement.</p>
+</div>
+</div>
+
+<div class="ieee-reference" id="cv-d01">
+<span class="ieee-reference-number">[57]</span>
+<div class="ieee-reference-body">
+<p>Z. Lyu, A. Yu, and C. Starr, &quot;CrackAirport: A dataset for segmentation of cracks in airport pavements,&quot; Mendeley Data, ver. 1, Feb. 16, 2026, doi: 10.17632/3v5r2fxf89.1. [Online]. Available: <a href="https://doi.org/10.17632/3v5r2fxf89.1">https://doi.org/10.17632/3v5r2fxf89.1</a>; <a href="https://data.mendeley.com/datasets/3v5r2fxf89/1">https://data.mendeley.com/datasets/3v5r2fxf89/1</a>.</p>
+</div>
+</div>
+
+<div class="ieee-reference" id="cv-m02">
+<span class="ieee-reference-number">[58]</span>
+<div class="ieee-reference-body">
+<p>K. He, X. Zhang, S. Ren, and J. Sun, &quot;Deep residual learning for image recognition,&quot; arXiv:1512.03385, 2015. [Online]. Available: <a href="https://arxiv.org/abs/1512.03385">https://arxiv.org/abs/1512.03385</a>.</p>
+</div>
+</div>
+
+<div class="ieee-reference" id="cv-m01">
+<span class="ieee-reference-number">[59]</span>
+<div class="ieee-reference-body">
+<p>Segmentation Models PyTorch, &quot;Unet model documentation.&quot; [Online]. Available: <a href="https://smp.readthedocs.io/en/latest/models.html#unet">https://smp.readthedocs.io/en/latest/models.html#unet</a>.</p>
+</div>
+</div>
+
+<div class="ieee-reference" id="cv-n01">
+<span class="ieee-reference-number">[60]</span>
+<div class="ieee-reference-body">
+<p>Open Robotics, &quot;ROS 2 Jazzy common_interfaces and tf2,&quot; message definitions and heading implementation. Accessed: Nov. 8, 2026. [Online]. Available: <a href="https://github.com/ros2/common_interfaces/blob/jazzy/geometry_msgs/msg/Pose.msg">https://github.com/ros2/common_interfaces/blob/jazzy/geometry_msgs/msg/Pose.msg</a>; <a href="https://github.com/ros2/common_interfaces/blob/jazzy/geometry_msgs/msg/Quaternion.msg">https://github.com/ros2/common_interfaces/blob/jazzy/geometry_msgs/msg/Quaternion.msg</a>; <a href="https://github.com/ros2/geometry2/blob/jazzy/tf2/include/tf2/impl/utils.hpp">https://github.com/ros2/geometry2/blob/jazzy/tf2/include/tf2/impl/utils.hpp</a>.</p>
+<p class="reference-note">Position and orientation are separate. A quaternion does not provide drone position.</p>
+</div>
+</div>
+
+<div class="ieee-reference" id="cv-n02">
+<span class="ieee-reference-number">[61]</span>
+<div class="ieee-reference-body">
+<p>T. Foote and M. Purvis, &quot;Standard units of measure and coordinate conventions,&quot; Open Robotics, REP 103. Accessed: Nov. 8, 2026. [Online]. Available: <a href="https://github.com/ros-infrastructure/rep/blob/master/rep-0103.rst">https://github.com/ros-infrastructure/rep/blob/master/rep-0103.rst</a>.</p>
+</div>
+</div>
+
+<div class="ieee-reference" id="cv-d02">
+<span class="ieee-reference-number">[62]</span>
+<div class="ieee-reference-body">
+<p>kilogrand, &quot;Foreign object debris in airports (FOD-A) dataset,&quot; Kaggle. [Online]. Available: <a href="https://www.kaggle.com/datasets/kilogrand/foreign-object-debris-in-airports-fod-a-dataset/code">https://www.kaggle.com/datasets/kilogrand/foreign-object-debris-in-airports-fod-a-dataset/code</a>.</p>
+</div>
+</div>
+
+<div class="ieee-reference" id="cv-d03">
+<span class="ieee-reference-number">[63]</span>
+<div class="ieee-reference-body">
+<p>arc-ejbpg, &quot;Thermal Bird,&quot; Roboflow Universe, dataset ver. 6. [Online]. Available: <a href="https://universe.roboflow.com/arc-ejbpg/thermal-bird/dataset/6">https://universe.roboflow.com/arc-ejbpg/thermal-bird/dataset/6</a>.</p>
+</div>
+</div>
+
+<div class="ieee-reference" id="cv-d04">
+<span class="ieee-reference-number">[64]</span>
+<div class="ieee-reference-body">
+<p>sikdermdsaiful, &quot;Thermal images for human detection,&quot; Kaggle. [Online]. Available: <a href="https://www.kaggle.com/datasets/sikdermdsaiful/thermal-images-for-human-detection/data?select=dataset">https://www.kaggle.com/datasets/sikdermdsaiful/thermal-images-for-human-detection/data?select=dataset</a>.</p>
+</div>
+</div>
+
+<div class="ieee-reference" id="cv-s02">
+<span class="ieee-reference-number">[65]</span>
+<div class="ieee-reference-body">
+<p>Federal Aviation Administration, <em>Concrete Airfield Pavement Surface Evaluation and Rating Manual</em>, AC 150/5320-17A, app. B, Sep. 10, 2014, pp. 8-9. Accessed: Nov. 8, 2026. [Online]. Available: <a href="https://www.faa.gov/documentlibrary/media/advisory_circular/150-5320-17a-appendix-b.pdf#page=10">https://www.faa.gov/documentlibrary/media/advisory_circular/150-5320-17a-appendix-b.pdf#page=10</a>.</p>
+<p class="reference-note">Supports inspection and assessment of cracks. It does not establish that every hairline crack is an immediate operational hazard.</p>
+</div>
+</div>
+
+<div class="ieee-reference" id="cv-s01">
+<span class="ieee-reference-number">[66]</span>
+<div class="ieee-reference-body">
+<p>Federal Aviation Administration, &quot;Reflective cracking program,&quot; Airport Technology Research and Development. Accessed: Oct. 31, 2026. [Online]. Available: <a href="https://www.airporttech.tc.faa.gov/Airport-Pavement/Pavement-Design/Reflective-Cracking-Program">https://www.airporttech.tc.faa.gov/Airport-Pavement/Pavement-Design/Reflective-Cracking-Program</a>.</p>
+</div>
+</div>
+
+<div class="ieee-reference" id="com-h02">
+<span class="ieee-reference-number">[67]</span>
+<div class="ieee-reference-body">
+<p>Holybro, &quot;Microhard telemetry radio V2: P900 V2,&quot; product specifications and radio overview. Accessed: Nov. 12, 2026. [Online]. Available: <a href="https://holybro.com/products/microhard-telemetry-radio-v2">https://holybro.com/products/microhard-telemetry-radio-v2</a>; <a href="https://docs.holybro.com/radio/microhard-radio/overview">https://docs.holybro.com/radio/microhard-radio/overview</a>.</p>
+<p class="reference-note">Singapore frequency and power compliance must be checked separately.</p>
+</div>
+</div>
+
+<div class="ieee-reference" id="com-h01">
+<span class="ieee-reference-number">[68]</span>
+<div class="ieee-reference-body">
+<p>Microhard, &quot;pMDDL2450: Wireless MIMO (2X2) OEM digital data link,&quot; product page and brochure, rev. 1.3.0. Accessed: Nov. 12, 2026. [Online]. Available: <a href="https://www.microhardcorp.com/pMDDL2450.php">https://www.microhardcorp.com/pMDDL2450.php</a>; <a href="https://www.microhardcorp.com/brochures/pMDDL2450.Brochure.Rev.1.3.0.pdf">https://www.microhardcorp.com/brochures/pMDDL2450.Brochure.Rev.1.3.0.pdf</a>.</p>
+<p class="reference-note">Advertised specifications do not establish a tested 5 km range at the permitted operating power.</p>
+</div>
+</div>
+
+<div class="ieee-reference" id="com-r02">
+<span class="ieee-reference-number">[69]</span>
+<div class="ieee-reference-body">
+<p>Infocomm Media Development Authority, &quot;Operation of unmanned aircraft systems (UAS).&quot; Accessed: Nov. 1, 2026. [Online]. Available: <a href="https://www.imda.gov.sg/regulations-and-licensing-listing/spectrum-management/frequency-allocation-and-assignment/operation-of-unmanned-aircraft-systems-uas">https://www.imda.gov.sg/regulations-and-licensing-listing/spectrum-management/frequency-allocation-and-assignment/operation-of-unmanned-aircraft-systems-uas</a>.</p>
+</div>
+</div>
+
+<div class="ieee-reference" id="com-t01">
+<span class="ieee-reference-number">[70]</span>
+<div class="ieee-reference-body">
+<p>J. Marcel, &quot;How Bluetooth technology uses adaptive frequency hopping to overcome packet interference,&quot; Bluetooth SIG, Nov. 15, 2020. Accessed: Nov. 12, 2026. [Online]. Available: <a href="https://www.bluetooth.com/blog/how-bluetooth-technology-uses-adaptive-frequency-hopping-to-overcome-packet-interference/">https://www.bluetooth.com/blog/how-bluetooth-technology-uses-adaptive-frequency-hopping-to-overcome-packet-interference/</a>.</p>
+<p class="reference-note">Used for shared-band interference risks, not evidence that the selected radio implements Bluetooth frequency hopping.</p>
+</div>
+</div>
+
+<div class="ieee-reference" id="com-r03">
+<span class="ieee-reference-number">[71]</span>
+<div class="ieee-reference-body">
+<p>Infocomm Media Development Authority, &quot;Short range devices,&quot; <em>Spectrum Management Handbook</em>, ch. 7. Accessed: Nov. 12, 2026. [Online]. Available: <a href="https://www.imda.gov.sg/-/media/imda/files/regulation-licensing-and-consultations/frameworks-and-policies/spectrum-management-and-coordination/spectrummgmthb.pdf">https://www.imda.gov.sg/-/media/imda/files/regulation-licensing-and-consultations/frameworks-and-policies/spectrum-management-and-coordination/spectrummgmthb.pdf</a>.</p>
+</div>
+</div>
+
+<div class="ieee-reference" id="com-s01">
+<span class="ieee-reference-number">[72]</span>
+<div class="ieee-reference-body">
+<p>Open Robotics, &quot;ROS 2 Jazzy: Security, setting up security and setting access controls.&quot; Accessed: Nov. 12, 2026. [Online]. Available: <a href="https://github.com/ros2/ros2_documentation/blob/jazzy/source/Concepts/Intermediate/About-Security.rst">https://github.com/ros2/ros2_documentation/blob/jazzy/source/Concepts/Intermediate/About-Security.rst</a>; <a href="https://github.com/ros2/ros2_documentation/blob/jazzy/source/Tutorials/Advanced/Security/Introducing-ros2-security.rst">https://github.com/ros2/ros2_documentation/blob/jazzy/source/Tutorials/Advanced/Security/Introducing-ros2-security.rst</a>; <a href="https://github.com/ros2/ros2_documentation/blob/jazzy/source/Tutorials/Advanced/Security/Access-Controls.rst">https://github.com/ros2/ros2_documentation/blob/jazzy/source/Tutorials/Advanced/Security/Access-Controls.rst</a>.</p>
+<p class="reference-note">Stale-alert and duplicate-target checks remain proposed project work.</p>
+</div>
+</div>
+
+<div class="ieee-reference" id="com-r01">
+<span class="ieee-reference-number">[73]</span>
+<div class="ieee-reference-body">
+<p>Infocomm Media Development Authority, <em>Technical Specification for Short Range Devices</em>, IMDA TS SRD, Sep. 2023. Accessed: Nov. 1, 2026. [Online]. Available: <a href="https://www.imda.gov.sg/-/media/imda/files/regulation-licensing-and-consultations/ict-standards/telecommunication-standards/radio-comms/imdatssrd.pdf">https://www.imda.gov.sg/-/media/imda/files/regulation-licensing-and-consultations/ict-standards/telecommunication-standards/radio-comms/imdatssrd.pdf</a>.</p>
+<p class="reference-note">A listed frequency band alone does not establish approval for the proposed radio configuration.</p>
+</div>
+</div>

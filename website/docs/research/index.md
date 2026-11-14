@@ -13,22 +13,22 @@ aside: false
 
 ### The Problem
 
-Foreign Object Debris (FOD) poses significant safety and financial risks to the aviation industry, as debris on runways can damage aircraft and disrupt operations. El-Sayed estimates the annual global cost of FOD at US$1.26 billion in direct damage and US$13.9 billion when indirect costs, such as delays and cancellations, are included [\[23\]](../references#research-ref-23). An FAA study estimates costs of up to US$22.7 billion in 2020 dollars [\[22\]](../references#research-ref-22). Although only 15% of FOD is found on runways, it accounts for up to half of all FOD-related damage [\[24\]](../references#research-ref-24).
+Foreign Object Debris (FOD) poses significant safety and financial risks to the aviation industry, as debris on runways can damage aircraft and disrupt operations. El-Sayed estimates the annual global cost of FOD at US$1.26 billion in direct damage and US$13.9 billion when indirect costs, such as delays and cancellations, are included [\[1\]](../references#research-ref-23). An FAA study estimates costs of up to US$22.7 billion in 2020 dollars [\[2\]](../references#research-ref-22). Although only 15% of FOD is found on runways, it accounts for up to half of all FOD-related damage [\[3\]](../references#research-ref-24).
 
-A notable example is the Air France Flight 4590 accident on 25 July 2000, when a Concorde struck a 435 mm titanium strip left on the runway by a departing Continental Airlines DC-10. The impact caused tyre debris to rupture a fuel tank, resulting in a fire and subsequent crash that killed 113 people [\[25\]](../references#research-ref-25). A scheduled runway inspection had been postponed due to a fire drill [\[26\]](../references#research-ref-26).
+A notable example is the Air France Flight 4590 accident on 25 July 2000, when a Concorde struck a 435 mm titanium strip left on the runway by a departing Continental Airlines DC-10. The impact caused tyre debris to rupture a fuel tank, resulting in a fire and subsequent crash that killed 113 people [\[4\]](../references#research-ref-25). A scheduled runway inspection had been postponed due to a fire drill [\[5\]](../references#research-ref-26).
 
 <figure class="research-figure">
 
 ![Concorde with flames trailing during the Air France Flight 4590 accident](/report-assets/research/concorde-accident.jpeg)
 
-<figcaption>Air France Flight 4590 Concorde accident.</figcaption>
+<figcaption><strong>Fig. 1.</strong> Air France Flight 4590 Concorde accident.</figcaption>
 </figure>
 
-The accident prompted greater research into FOD detection and prevention [\[24\]](../references#research-ref-24), establishing runway FOD as a critical aviation safety concern [\[27\]](../references#research-ref-27). However, FOD detection and removal remain largely manual, requiring runway closures while personnel locate and retrieve debris [\[24\]](../references#research-ref-24)[\[27\]](../references#research-ref-27). This labour-intensive process can lead to operational disruptions.
+The accident prompted greater research into FOD detection and prevention [\[3\]](../references#research-ref-24), establishing runway FOD as a critical aviation safety concern [\[6\]](../references#research-ref-27). However, FOD detection and removal remain largely manual, requiring runway closures while personnel locate and retrieve debris [\[3\]](../references#research-ref-24), [\[6\]](../references#research-ref-27). This labour-intensive process can lead to operational disruptions.
 
-In Singapore, declining manpower poses an additional challenge to labour-intensive operations. With the total fertility rate falling to 1.1 in 2020, MINDEF has identified manpower shortages as a significant concern and emphasised the need for manpower optimisation [\[28\]](../references#research-ref-28).
+In Singapore, declining manpower poses an additional challenge to labour-intensive operations. With the total fertility rate falling to 1.1 in 2020, MINDEF has identified manpower shortages as a significant concern and emphasised the need for manpower optimisation [\[7\]](../references#research-ref-28).
 
-To address this, MINDEF has begun trialling automated vehicles at SAF air bases and AI-enabled drones for runway damage assessment [\[29\]](../references#research-ref-29). With the SAF projecting a one-third reduction in manpower by 2030 [\[30\]](../references#research-ref-30), automation is becoming increasingly important in maintaining operational efficiency while reducing manpower requirements.
+To address this, MINDEF has begun trialling automated vehicles at SAF air bases and AI-enabled drones for runway damage assessment [\[8\]](../references#research-ref-29). With the SAF projecting a one-third reduction in manpower by 2030 [\[9\]](../references#research-ref-30), automation is becoming increasingly important in maintaining operational efficiency while reducing manpower requirements.
 
 ### The Stakeholders Affected by the Problem
 
@@ -40,7 +40,7 @@ As shown in the Stakeholder power–interest map, the RSAF holds high power and 
 
 ![Stakeholder power–interest map showing RSAF, CAAS, industry partners, insurance companies and RSAF servicemen](/report-assets/research/stakeholder-power-interest-map.png)
 
-<figcaption>Stakeholder power–interest map.</figcaption>
+<figcaption><strong>Fig. 2.</strong> Stakeholder power–interest map.</figcaption>
 </figure>
 
 Based on interviews conducted by the [FOD Hunter Team](https://cde4301-drone-ground-robots.github.io/CDE4301_runway_patrol/report#sec-affected) with various stakeholders, the FOD Argus Team identified some key insights that could help develop our FOD Argus solution.
@@ -60,6 +60,7 @@ Based on the stakeholder interviews conducted by the FOD Hunter Team, the FOD Ar
 
 <div class="research-interview-table" role="region" aria-label="Stakeholder interview findings relevant to UAV detection" tabindex="0">
 <table>
+<caption class="report-table-caption"><strong>Table 1.</strong> Stakeholder Interview Findings Relevant to UAV Detection</caption>
 <thead><tr><th scope="col">Stakeholder</th><th scope="col">What They Said</th><th scope="col">Key Insight</th></tr></thead>
 <tbody>
 <tr class="insight-fod"><th scope="rowgroup" rowspan="3"><a href="../appendices#appendix-a">Industry partner</a><span class="interview-date">10 September 2026</span></th><td class="interview-quote"><q>On that day, it's a small metal piece, about 2 cm.</q></td><td><span class="insight-category">Types and characteristics of FOD</span>The UAV should be capable of detecting small FOD, such as metal debris approximately 2 cm in size.</td></tr>
@@ -103,12 +104,13 @@ The team also came across a CNA video which provides further insight into FOD de
 
 <figure class="cv-video-panel research-cna-video">
  <iframe class="cv-integration-video" src="https://www.youtube.com/embed/YigBVMgCgVA" title="CNA video about FOD detection and the iFerret system at Changi Airport" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
- <figcaption><span>CNA video about FOD detection and the iFerret system at Changi Airport. <a href="../references#research-cna-01">[SR-01]</a></span><a href="https://www.youtube.com/watch?v=YigBVMgCgVA" target="_blank" rel="noopener noreferrer">Watch the CNA video on YouTube</a></figcaption>
+ <figcaption><span>CNA video about FOD detection and the iFerret system at Changi Airport. <a href="../references#research-cna-01">[10]</a></span><a href="https://www.youtube.com/watch?v=YigBVMgCgVA" target="_blank" rel="noopener noreferrer">Watch the CNA video on YouTube</a></figcaption>
 </figure>
 
-**Table: Key Insights from CNA Video**
 
 <div class="research-secondary-table" role="region" aria-label="Key insights from CNA video" tabindex="0">
+
+<p class="report-table-caption" id="table-2"><strong>Table 2.</strong> Key Insights from the CNA Video</p>
 
 | Area | Findings from the Video |
 | --- | --- |
