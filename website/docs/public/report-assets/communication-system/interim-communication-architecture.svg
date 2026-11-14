@@ -1,22 +1,44 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 480" width="1000" height="480" preserveAspectRatio="xMidYMid meet" role="img">
-<title>Interim ARGUS to HUNTER communication architecture</title>
-<defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="12" markerHeight="12" markerUnits="userSpaceOnUse" orient="auto"><path d="M0 0L10 5L0 10Z" fill="#d6b19c"/></marker></defs>
-<rect width="1000" height="480" rx="18" fill="#0d131d"/>
-<rect x="50" y="40" width="300" height="100" rx="12" fill="#20374a" stroke="#8fabbc" stroke-width="2"/>
-<text x="200.0" y="75.0" text-anchor="middle" dominant-baseline="middle" fill="#f1f4f7" font-family="Arial,sans-serif" font-size="24">ARGUS - Laptop</text>
-<text x="200.0" y="105.0" text-anchor="middle" dominant-baseline="middle" fill="#f1f4f7" font-family="Arial,sans-serif" font-size="24">Python C2 publisher</text>
-<rect x="50" y="200" width="300" height="80" rx="12" fill="#1d3b35" stroke="#8fabbc" stroke-width="2"/>
-<text x="200.0" y="240.0" text-anchor="middle" dominant-baseline="middle" fill="#f1f4f7" font-family="Arial,sans-serif" font-size="24">ROS 2 Jazzy / DDS</text>
-<rect x="365" y="350" width="270" height="90" rx="12" fill="#3b2c49" stroke="#8fabbc" stroke-width="2"/>
-<text x="500.0" y="380.0" text-anchor="middle" dominant-baseline="middle" fill="#f1f4f7" font-family="Arial,sans-serif" font-size="24">UDP/IP</text>
-<text x="500.0" y="410.0" text-anchor="middle" dominant-baseline="middle" fill="#f1f4f7" font-family="Arial,sans-serif" font-size="24">Local Wi-Fi</text>
-<rect x="650" y="200" width="300" height="80" rx="12" fill="#1d3b35" stroke="#8fabbc" stroke-width="2"/>
-<text x="800.0" y="240.0" text-anchor="middle" dominant-baseline="middle" fill="#f1f4f7" font-family="Arial,sans-serif" font-size="24">ROS 2 Jazzy / DDS</text>
-<rect x="650" y="40" width="300" height="100" rx="12" fill="#20374a" stroke="#8fabbc" stroke-width="2"/>
-<text x="800.0" y="75.0" text-anchor="middle" dominant-baseline="middle" fill="#f1f4f7" font-family="Arial,sans-serif" font-size="24">HUNTER - Pi 5</text>
-<text x="800.0" y="105.0" text-anchor="middle" dominant-baseline="middle" fill="#f1f4f7" font-family="Arial,sans-serif" font-size="24">Python C2 subscriber</text>
-<polyline points="200,140 200,200" fill="none" stroke="#d6b19c" stroke-width="3" stroke-linejoin="round" marker-end="url(#arrow)"/>
-<polyline points="200,280 200,395 365,395" fill="none" stroke="#d6b19c" stroke-width="3" stroke-linejoin="round" marker-end="url(#arrow)"/>
-<polyline points="635,395 800,395 800,280" fill="none" stroke="#d6b19c" stroke-width="3" stroke-linejoin="round" marker-end="url(#arrow)"/>
-<polyline points="800,200 800,140" fill="none" stroke="#d6b19c" stroke-width="3" stroke-linejoin="round" marker-end="url(#arrow)"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 680" width="1200" height="680" role="img" aria-labelledby="title desc">
+<title id="title">ARGUS to HUNTER communication</title>
+<desc id="desc">Vision sends detected FOD coordinates to the ARGUS queue. ARGUS sends one stored target to HUNTER over ROS 2 and Wi-Fi. HUNTER stores the target without duplicates and returns a receipt acknowledgement. ARGUS then sends the next target. Alerts without an acknowledgement remain stored for retry. Link checks are planned every second, with a base notification after 10 seconds without a handshake response. Live integration and link checks will be implemented and tested after the interim assessment.</desc>
+<defs>
+<marker id="send" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" orient="auto-start-reverse"><path d="M0 0L10 5L0 10Z" fill="#d7aa94"/></marker>
+<marker id="ack" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" orient="auto"><path d="M0 0L10 5L0 10Z" fill="#a8d4bc"/></marker>
+<style>text{font-family:Arial,sans-serif;fill:#eef1f6;text-anchor:middle} .title{font-size:28px;font-weight:600}.heading{font-size:22px;font-weight:600;fill:#e5c1ae}.label{font-size:20px;font-weight:600}.body{font-size:18px}.note{font-size:18px;fill:#bec7d1}.box{fill:#1b2b39;stroke:#708b9e;stroke-width:1.5}.flow{fill:none;stroke:#d7aa94;stroke-width:2;marker-end:url(#send)}.ack{fill:none;stroke:#a8d4bc;stroke-width:2;stroke-dasharray:8 6;marker-end:url(#ack)}</style>
+</defs>
+<rect width="1200" height="680" rx="18" fill="#0d131d"/>
+<text class="title" x="600" y="49">ARGUS-HUNTER Communication</text>
+<text class="note" x="600" y="87">Stage 2 demonstrates the queue. Live integration and link checks will be done after interim.</text>
+<rect x="30" y="125" width="570" height="365" rx="16" fill="#12202b" stroke="#40596b"/>
+<rect x="640" y="125" width="530" height="365" rx="16" fill="#12202b" stroke="#40596b"/>
+<text class="heading" x="315" y="168">ARGUS</text>
+<text class="heading" x="905" y="168">HUNTER</text>
+<rect class="box" x="55" y="230" width="230" height="130" rx="12"/>
+<text class="label" x="170" y="270">Vision system</text>
+<text class="body" x="170" y="306">Extract FOD</text>
+<text class="body" x="170" y="332">coordinates</text>
+<rect class="box" x="320" y="230" width="255" height="130" rx="12"/>
+<text class="label" x="447" y="270">Sender queue</text>
+<text class="body" x="447" y="306">Store FOD coordinates</text>
+<text class="body" x="447" y="332">Send one target at a time</text>
+<rect class="box" x="665" y="230" width="225" height="130" rx="12"/>
+<text class="label" x="777" y="270">Receive and store</text>
+<text class="body" x="777" y="306">Check target ID</text>
+<text class="body" x="777" y="332">Avoid duplicate targets</text>
+<rect class="box" x="930" y="230" width="215" height="130" rx="12"/>
+<text class="label" x="1037" y="270">Navigation</text>
+<text class="body" x="1037" y="306">Use the received</text>
+<text class="body" x="1037" y="332">FOD coordinates</text>
+<path class="flow" d="M285 294H315"/>
+<path class="flow" d="M575 294H660"/>
+<path class="flow" d="M890 294H925"/>
+<text class="note" x="620" y="203">ROS 2 / Wi-Fi</text>
+<path class="ack" d="M777 360V425H447V365"/>
+<rect x="475" y="398" width="275" height="53" rx="8" fill="#12202b"/>
+<text x="612" y="418" font-size="18" fill="#a8d4bc">Receipt ACK returned</text>
+<text x="612" y="443" font-size="17" fill="#a8d4bc">ARGUS sends the next target</text>
+<rect x="55" y="525" width="1090" height="94" rx="12" fill="#20212f" stroke="#708b9e"/>
+<text class="label" x="600" y="558">No ACK or connection lost: keep the target in the ARGUS queue.</text>
+<text class="body" x="600" y="592">Handshake every second. No response for 10 seconds: notify the base station if reachable.</text>
+<text class="note" x="600" y="653">ACK confirms receipt. It does not mean HUNTER has collected the FOD.</text>
 </svg>

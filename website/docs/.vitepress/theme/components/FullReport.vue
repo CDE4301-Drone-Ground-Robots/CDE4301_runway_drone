@@ -2,8 +2,7 @@
 import { nextTick, onMounted, ref } from 'vue'
 import { withBase } from 'vitepress'
 import ProjectScope from '../../../scopes.md'
-import PrimaryResearch from '../../../research/primary.md'
-import SecondaryResearch from '../../../research/secondary.md'
+import Research from '../../../research/index.md'
 import SystemArchitecture from '../../../report/system-architecture.md'
 import MechanicalDesign from '../../../subsystems/mechanical-design.md'
 import ElectricalDesign from '../../../subsystems/electrical-design.md'
@@ -12,10 +11,11 @@ import ComputerVision from '../../../subsystems/computer-vision.md'
 import Communication from '../../../subsystems/communication-system.md'
 import Timeline from '../../../timeline.md'
 import References from '../../../references.md'
+import Appendices from '../../../appendices.md'
 import { continuousReportLink, reportAnchor, reportChapters } from '../../report-chapters'
 
-const components = [ProjectScope, PrimaryResearch, SecondaryResearch, SystemArchitecture,
- MechanicalDesign, ElectricalDesign, Navigation, ComputerVision, Communication, Timeline, References]
+const components = [ProjectScope, Research, SystemArchitecture,
+ MechanicalDesign, ElectricalDesign, Navigation, ComputerVision, Communication, Timeline, References, Appendices]
 const report = ref<HTMLElement>()
 
 onMounted(async () => {
@@ -25,7 +25,7 @@ onMounted(async () => {
   const section = document.getElementById(reportAnchor(chapter.id))
   if (!section) continue
   // Each chapter keeps its own heading namespace when assembled on one page.
-  for (const heading of section.querySelectorAll<HTMLElement>('h1[id], h2[id], h3[id], h4[id], h5[id], h6[id], .mechanical-equation[id]')) {
+  for (const heading of section.querySelectorAll<HTMLElement>('h1[id], h2[id], h3[id], h4[id], h5[id], h6[id], .mechanical-equation[id], details[id], .report-anchor[id], .ieee-reference[id], .report-table-caption[id]')) {
    heading.id = reportAnchor(chapter.id, heading.id)
   }
   for (const anchor of section.querySelectorAll<HTMLAnchorElement>('a[href]')) {
@@ -44,7 +44,12 @@ onMounted(async () => {
  document.dispatchEvent(new Event('full-report-ready'))
  // Direct subsection links can arrive before the imported chapters mount.
  if (window.location.hash) {
-  const id = decodeURIComponent(window.location.hash.slice(1))
+  let id = decodeURIComponent(window.location.hash.slice(1))
+  const legacyResearch = id.match(/^report-(primary|secondary)-research(?:--(.+))?$/)
+  if (legacyResearch) {
+   id = reportAnchor('research', legacyResearch[2] || legacyResearch[1] + '-research')
+   window.history.replaceState(window.history.state, '', '#' + encodeURIComponent(id))
+  }
   requestAnimationFrame(() => document.getElementById(id)?.scrollIntoView())
  }
 })

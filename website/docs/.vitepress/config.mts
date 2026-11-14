@@ -10,17 +10,23 @@ const reportSidebar = [
  { text: 'PROJECT REPORT', items: [
   { text: 'Report overview', link: '/report/' },
   { text: 'Project scope', link: '/scopes' },
-  { text: 'Primary Research', link: '/research/primary' },
-  { text: 'Secondary Research', link: '/research/secondary' },
+  { text: 'Research', link: '/research/', collapsed: false, items: [
+   { text: 'Primary Research', link: '/research/#primary-research' },
+   { text: 'Secondary Research', link: '/research/#secondary-research', collapsed: false, items: [
+    { text: 'Existing Detection Technologies', link: '/research/#existing-detection-technologies' },
+    { text: 'Problem Statement and Scope', link: '/research/#problem-statement-and-scope' },
+    { text: 'Multi-Robot Approach', link: '/research/#multi-robot-approach' }
+   ] }
+  ] },
   { text: 'System architecture', link: '/report/system-architecture' }
  ] },
- { text: 'SUBSYSTEM REPORTS', items: subsystems.map(subsystem => ({
-  text: subsystem.title,
+ { text: 'SUBSYSTEM REPORTS', items: subsystems.map((subsystem, index) => ({
+  text: (index + 1) + '. ' + subsystem.title,
   link: '/subsystems/' + subsystem.slug,
   ...(subsystem.slug === 'computer-vision' ? {
    collapsed: false,
-   items: cvSubsystemSections.map((section, index) => ({
-    text: (index + 1) + '. ' + section.title,
+   items: cvSubsystemSections.map(section => ({
+    text: section.title,
     link: '/subsystems/computer-vision#' + section.slug
    }))
   } : subsystem.slug === 'mechanical-design' ? {
@@ -28,27 +34,33 @@ const reportSidebar = [
    items: numberedMechanicalSections()
   } : subsystem.slug === 'communication-system' ? {
    collapsed: false,
-   items: communicationSubsystemSections.map((section, index) => ({
-    text: (index + 1) + '. ' + section.title,
+   items: communicationSubsystemSections.map(section => ({
+    text: section.title,
     link: '/subsystems/communication-system#' + section.slug
    }))
   } : subsystem.slug === 'electrical-design' ? {
    collapsed: false,
-   items: electricalSubsystemSections.map((section, index) => ({
-    text: (index + 1) + '. ' + section.title,
+   items: electricalSubsystemSections.map(section => ({
+    text: section.title,
     link: '/subsystems/electrical-design#' + section.slug
    }))
   } : subsystem.slug === 'navigation-obstacle-avoidance' ? {
    collapsed: false,
-   items: navigationSubsystemSections.map((section, index) => ({
-    text: (index + 1) + '. ' + section.title,
+   items: navigationSubsystemSections.map(section => ({
+    text: section.title,
     link: '/subsystems/navigation-obstacle-avoidance#' + section.slug
    }))
   } : {})
  })) },
  { text: 'DEVELOPMENT & SOURCES', items: [
   { text: 'Timeline', link: '/timeline' },
-  { text: 'References', link: '/references' }
+  { text: 'References', link: '/references' },
+  { text: 'Appendices', link: '/appendices', collapsed: false, items: [
+   { text: 'Appendix A: Industry Partner', link: '/appendices#appendix-a' },
+   { text: 'Appendix B: RSAF Technician', link: '/appendices#appendix-b' },
+   { text: 'Appendix C: RSAF Air Traffic Controller', link: '/appendices#appendix-c' },
+   { text: 'Appendix D: CAAS Officer', link: '/appendices#appendix-d' }
+  ] }
  ] }
 ]
 type ReportSidebarItem = { text: string; link?: string; items?: ReportSidebarItem[]; collapsed?: boolean }
@@ -68,7 +80,7 @@ export default defineConfig({
  markdown: {
   math: true, lineNumbers: true,
   config(md) {
-   // Use MathJax's semantic MathML for selectable, numbered report equations.
+   // Use the same semantic MathML for numbered equations and unnumbered calculations.
    const renderMath = md.renderer.rules.math_block!
    md.renderer.rules.math_block = (tokens, index, options, env, renderer) => {
     if (env.relativePath !== 'subsystems/mechanical-design.md') {
@@ -76,14 +88,13 @@ export default defineConfig({
     }
     const source = tokens[index].content
     const number = source.match(/\\tag\{(\d+)\}/)?.[1]
-    if (!number) return renderMath(tokens, index, options, env, renderer)
     tokens[index].content = source.replace(/\\tag\{\d+\}/, '')
     let rendered: string
     try { rendered = renderMath(tokens, index, options, env, renderer) }
     finally { tokens[index].content = source }
     const math = rendered.match(/<math[\s\S]*?<\/math>/)?.[0]
-    if (!math) throw new Error('Missing MathML for mechanical report equation ' + number)
-    return '<div class="mechanical-equation" id="equation-md-' + number + '"><div class="mechanical-equation-math">' + math + '</div><span class="mechanical-equation-number">(' + number + ')</span></div>'
+    if (!math) throw new Error('Missing MathML for mechanical report equation')
+    return '<div class="mechanical-equation"' + (number ? ' id="equation-md-' + number + '"' : '') + '><div class="mechanical-equation-math">' + math + '</div>' + (number ? '<span class="mechanical-equation-number">(' + number + ')</span>' : '') + '</div>'
    }
   }
  },
@@ -94,17 +105,13 @@ export default defineConfig({
   nav: [
    { text: 'Overview', link: '/' },
    { text: 'Meet the Team', link: '/team' },
-   { text: 'Research', activeMatch: '/research/', items: [
-    { text: 'Primary Research', link: '/research/primary' },
-    { text: 'Secondary Research', link: '/research/secondary' }
-   ] },
+   { text: 'Research', link: '/research/', activeMatch: '/research/' },
    { text: 'Drone Specification', link: '/engineering/drone-specification' },
    { component: 'SubsystemNav' },
    { text: 'Report', link: '/report/', activeMatch: '/(report/|scopes)' },
-   { text: 'Timeline', link: '/timeline' },
-   { text: 'References', link: '/references' }
+   { text: 'Timeline', link: '/timeline' }
   ],
-  sidebar: Object.fromEntries(['/report/', '/subsystems/', '/research/', '/scopes', '/timeline', '/references'].map(path => [path, path === '/report/' ? continuousSidebar(reportSidebar) : reportSidebar])),
+  sidebar: Object.fromEntries(['/report/', '/subsystems/', '/research/', '/scopes', '/timeline', '/references', '/appendices'].map(path => [path, path === '/report/' ? continuousSidebar(reportSidebar) : reportSidebar])),
   docFooter: { prev: false, next: false },
   search: {
    provider: 'local',

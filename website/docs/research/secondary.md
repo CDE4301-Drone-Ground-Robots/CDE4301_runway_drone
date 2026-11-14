@@ -1,12 +1,13 @@
 ---
 title: Secondary Research
+search: false
 outline: false
 ---
 
-<p class="chapter-kicker">FOD ARGUS / PROJECT REPORT</p>
+<script setup>
+import { onMounted } from 'vue'
+import { withBase } from 'vitepress'
+onMounted(() => window.location.replace(withBase('/research/') + (window.location.hash || '#secondary-research')))
+</script>
 
-# Secondary Research
-
-::: info Documentation pending
-Secondary research and supporting sources will be added here.
-:::
+[Open Secondary Research](/research/#secondary-research).

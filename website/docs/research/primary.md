@@ -1,12 +1,13 @@
 ---
 title: Primary Research
+search: false
 outline: false
 ---
 
-<p class="chapter-kicker">FOD ARGUS / PROJECT REPORT</p>
+<script setup>
+import { onMounted } from 'vue'
+import { withBase } from 'vitepress'
+onMounted(() => window.location.replace(withBase('/research/') + (window.location.hash || '#primary-research')))
+</script>
 
-# Primary Research
-
-::: info Documentation pending
-Primary research for FOD ARGUS will be added here.
-:::
+[Open Primary Research](/research/#primary-research).

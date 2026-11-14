@@ -299,21 +299,21 @@ html:not(.dark) .hero h1 .hero-wordmark{--argus-rose-glow:rgba(226,160,140,.32);
 /* Large section openings make the continuous CV report easy to scan. */
 .cv-report{counter-reset:cv-report-section}
 .vp-doc .cv-report>h2{counter-increment:cv-report-section;position:relative;font-family:Manrope,var(--vp-font-family-base);font-size:clamp(38px,4.4vw,62px);font-weight:750;line-height:1.12;letter-spacing:-1.8px;color:var(--vp-c-text-1);margin:112px 0 36px;padding:40px 0 0;border-top:2px solid rgba(189,146,124,.5);overflow-wrap:break-word;scroll-margin-top:0}
-.vp-doc .cv-report>h2::before{content:"SECTION " counter(cv-report-section,decimal-leading-zero);display:block;font-family:var(--vp-font-family-base);font-size:11px;font-weight:600;line-height:1.5;letter-spacing:2.4px;color:#a77154;margin-bottom:18px}
+.vp-doc .cv-report>h2::before{content:"SECTION " var(--report-chapter) "." counter(cv-report-section);display:block;font-family:var(--vp-font-family-base);font-size:11px;font-weight:600;line-height:1.5;letter-spacing:2.4px;color:#a77154;margin-bottom:18px}
 .dark .vp-doc .cv-report>h2::before{color:#e6b9a2}
 .vp-doc .cv-report>h3{font-size:25px;line-height:1.35;margin-top:42px;letter-spacing:-.5px}
 @media(max-width:767px){.vp-doc .cv-report>h2{font-size:38px;letter-spacing:-1.2px;margin-top:80px;padding-top:30px;margin-bottom:28px}.vp-doc .cv-report>h2::before{font-size:10px;margin-bottom:14px}.vp-doc .cv-report>h3{font-size:22px}}
 @media print{.vp-doc .cv-report>h2{font-size:26pt;margin-top:40px;break-after:avoid}}
 /* Larger report copy keeps long technical sections readable. */
-.vp-doc .cv-report{font-size:18px;line-height:1.85}
-.vp-doc .cv-report p,.vp-doc .cv-report li{font-size:18px;line-height:1.85}
+.vp-doc .cv-report{font-size:19px;line-height:1.85}
+.vp-doc .cv-report p,.vp-doc .cv-report li{font-size:19px;line-height:1.85}
 .vp-doc .cv-report .chapter-kicker{font-size:12px}
 .vp-doc .cv-report .cv-report-byline{font-size:13px}
 .vp-doc .cv-report table{font-size:15px;line-height:1.7}
 .vp-doc .cv-report table th,.vp-doc .cv-report table td{font-size:15px}
 .vp-doc .cv-report .cv-figure figcaption{font-size:14px;line-height:1.75}
 .vp-doc .cv-report .cv-figure figcaption strong{font-size:12px}
-@media(max-width:767px){.vp-doc .cv-report,.vp-doc .cv-report p,.vp-doc .cv-report li{font-size:17px;line-height:1.8}.vp-doc .cv-report table,.vp-doc .cv-report table th,.vp-doc .cv-report table td{font-size:14px}.vp-doc .cv-report .cv-figure figcaption{font-size:13px}}
+@media(max-width:767px){.vp-doc .cv-report,.vp-doc .cv-report p,.vp-doc .cv-report li{font-size:18px;line-height:1.8}.vp-doc .cv-report table,.vp-doc .cv-report table th,.vp-doc .cv-report table td{font-size:14px}.vp-doc .cv-report .cv-figure figcaption{font-size:13px}}
 .cv-video-panel{margin:28px 0;border:1px solid var(--vp-c-divider);border-radius:16px;overflow:hidden;background:var(--vp-c-bg-soft)}
 .cv-integration-video{display:block;width:100%;aspect-ratio:16/9;background:#080b10;object-fit:contain}
 .cv-video-pending{display:flex;align-items:center;justify-content:center;flex-direction:column;min-height:180px;background:radial-gradient(ellipse,#25334444,transparent 70%),#080b10;color:#eef1f6;padding:28px;text-align:center}
@@ -351,3 +351,109 @@ html:not(.dark) .hero h1 .hero-wordmark{--argus-rose-glow:rgba(226,160,140,.32);
  .VPNavBarMenu>.VPNavBarMenuLink,.VPNavBarMenu>.VPNavBarMenuGroup>.button{padding-left:7px;padding-right:7px}
  .VPNavBarMenu .subsystem-nav{padding-left:7px}
 }
+
+/* Use the same reading width for Research, the continuous report and subsystems. */
+.Layout:is(.full-report-page,.subsystem-report-page,.research-report-page){--vp-layout-max-width:100vw}
+.Layout:is(.full-report-page,.subsystem-report-page,.research-report-page) .VPDoc .container,
+.Layout:is(.full-report-page,.subsystem-report-page,.research-report-page) .VPDoc .content,
+.Layout:is(.full-report-page,.subsystem-report-page,.research-report-page) .VPDoc .content-container{width:100%;max-width:none;min-width:0}
+@media(min-width:960px){
+ .Layout:is(.full-report-page,.subsystem-report-page,.research-report-page) .VPDoc .content{padding-left:0;padding-right:0}
+}
+
+/* Headings include their section numbers; avoid a second automatic number. */
+.vp-doc .cv-report.rubric-report>h2::before{content:none}
+
+/* A small pulse marks closed report dropdowns without moving their contents. */
+@keyframes report-dropdown-pulse{
+ 0%,100%{border-color:rgba(201,154,141,.45);box-shadow:0 0 0 1px rgba(201,154,141,.12)}
+ 50%{border-color:rgba(201,154,141,.85);box-shadow:0 0 0 1px rgba(201,154,141,.3),0 0 9px rgba(201,154,141,.16)}
+}
+.vp-doc details:is(.custom-block,.mechanical-flight-case):not([open]){animation:report-dropdown-pulse 3.5s ease-in-out infinite}
+.vp-doc details:is(.custom-block,.mechanical-flight-case):is(:hover,:focus-within){animation-play-state:paused}
+html:has(.report-image-viewer[open]){overflow:hidden}
+@media(prefers-reduced-motion:reduce){.vp-doc details:is(.custom-block,.mechanical-flight-case):not([open]){animation:none}}
+@media print{.vp-doc details:is(.custom-block,.mechanical-flight-case){animation:none!important;box-shadow:none!important}}
+
+/* Primary Research figures, including the combined report view. */
+.vp-doc .research-figure{margin:28px 0;padding:20px;border:1px solid var(--vp-c-divider);border-radius:12px;background:var(--vp-c-bg-soft);overflow:hidden}
+.vp-doc .research-figure p{margin:0}
+.vp-doc .research-figure img{display:block;max-width:100%;height:auto;margin:0 auto;border-radius:6px}
+.vp-doc .research-stakeholder-map{max-width:640px;margin-left:auto;margin-right:auto}
+
+/* CNA secondary research video and findings. */
+.research-cna-video iframe{border:0;height:auto}
+.vp-doc .research-secondary-table{max-width:100%;overflow-x:auto;margin:20px 0;border:1px solid var(--vp-c-divider);border-radius:10px}
+.vp-doc .research-secondary-table table{display:table;table-layout:fixed;width:100%;min-width:480px;margin:0;line-height:1.7}
+.vp-doc .research-secondary-table th{background:var(--vp-c-bg-soft);color:var(--vp-c-text-1)}
+.vp-doc .research-secondary-table th:first-child{width:28%}
+.vp-doc .research-secondary-table th,.vp-doc .research-secondary-table td{vertical-align:top;overflow-wrap:break-word}
+.vp-doc .research-secondary-table:focus-visible{outline:2px solid var(--vp-c-brand-1);outline-offset:3px}
+.vp-doc .research-detection-table table{min-width:800px}
+.vp-doc .research-detection-table caption{padding:14px 16px;text-align:left;font-weight:600;color:var(--vp-c-text-1);background:var(--vp-c-bg-soft);caption-side:top}
+.vp-doc .research-detection-table thead th:first-child{width:18%}
+.vp-doc .research-detection-table thead th:nth-child(2){width:20%}
+.vp-doc .research-detection-table thead th:nth-child(3){width:29%}
+.vp-doc .research-detection-table tbody th{background:transparent;text-align:left}
+.vp-doc .research-detection-table img{display:block;width:100%;max-width:180px;height:auto;margin:0 auto}
+.vp-doc .research-figure figcaption{margin-top:14px;padding-top:12px;border-top:1px solid var(--vp-c-divider);font-size:13px;line-height:1.6;font-weight:500;text-align:center;color:var(--vp-c-text-2)}
+@media(max-width:600px){.vp-doc .research-figure{padding:12px}}
+
+/* Role-attributed stakeholder interview findings. */
+.research-interview-legend .insight-fod,.research-interview-table .insight-fod{--insight-color:#3b82f6}
+.research-interview-legend .insight-manual,.research-interview-table .insight-manual{--insight-color:#ea580c}
+.research-interview-legend .insight-operations,.research-interview-table .insight-operations{--insight-color:#16a34a}
+.research-interview-legend .insight-vision,.research-interview-table .insight-vision{--insight-color:#a855f7}
+.research-interview-legend .insight-uav,.research-interview-table .insight-uav{--insight-color:#d99b16}
+.research-interview-legend .insight-frequency,.research-interview-table .insight-frequency{--insight-color:#06b6b6}
+.vp-doc .research-interview-legend{display:flex;flex-wrap:wrap;gap:8px 16px;list-style:none;padding:0;margin:20px 0;font-size:12px;line-height:1.6}
+.vp-doc .research-interview-legend li{margin:0;padding:3px 8px;border-left:4px solid var(--insight-color);background:var(--vp-c-bg-soft);border-radius:0 4px 4px 0}
+.vp-doc .research-interview-table{max-width:100%;overflow-x:auto;margin:24px 0;border:1px solid var(--vp-c-divider);border-radius:10px}
+.vp-doc .research-interview-table:focus-visible{outline:2px solid var(--vp-c-brand-1);outline-offset:3px}
+.vp-doc .research-interview-table table{display:table;table-layout:fixed;width:100%;min-width:680px;margin:0;border-collapse:collapse;font-size:14px;line-height:1.7}
+.vp-doc .research-interview-table th,.vp-doc .research-interview-table td{padding:16px;vertical-align:top;overflow-wrap:break-word;border:0;border-bottom:1px solid var(--vp-c-divider);text-align:left;color:var(--vp-c-text-1)}
+.vp-doc .research-interview-table thead th{background:var(--vp-c-bg-soft);font-size:12px;letter-spacing:.03em}
+.vp-doc .research-interview-table thead th:nth-child(1){width:20%}
+.vp-doc .research-interview-table thead th:nth-child(2){width:43%}
+.vp-doc .research-interview-table thead th:nth-child(3){width:37%}
+.vp-doc .research-interview-table tbody tr{background:var(--vp-c-bg)}
+.vp-doc .research-interview-table tbody td{background:var(--vp-c-bg)}
+.vp-doc .research-interview-table tbody td.interview-quote{background:color-mix(in srgb,var(--insight-color) 6%,var(--vp-c-bg));border-left:4px solid var(--insight-color)}
+.vp-doc .research-interview-table tbody th{background:var(--vp-c-bg);color:var(--vp-c-text-1);font-size:13px;font-weight:600;vertical-align:top}
+.vp-doc .research-interview-table .interview-date{display:block;margin-top:8px;font-size:12px;font-weight:400;color:var(--vp-c-text-2)}
+.vp-doc .research-interview-table .insight-category{display:block;margin-bottom:8px;font-size:11px;font-weight:600;color:var(--vp-c-text-2)}
+.vp-doc .research-interview-table tbody+tbody tr:first-child>*{border-top:3px solid var(--vp-c-divider)}
+.vp-doc .research-interview-table tbody:last-child tr:last-child>*{border-bottom:0}
+@media(max-width:600px){.vp-doc .research-interview-table th,.vp-doc .research-interview-table td{padding:12px}.vp-doc .research-interview-table table{font-size:13px}}
+
+/* Research heading hierarchy on its own page and in the continuous report. */
+:is(.research-report-page .vp-doc,#report-research) h2{margin-top:56px;margin-bottom:28px;padding:20px 22px;border-top:0;border-bottom:2px solid var(--vp-c-brand-1);border-radius:8px 8px 0 0;background:var(--vp-c-bg-soft);color:var(--vp-c-text-1);font-size:clamp(27px,2.4vw,34px);font-weight:750;line-height:1.3;letter-spacing:-.6px}
+:is(.research-report-page .vp-doc,#report-research) h3{margin-top:38px;margin-bottom:20px;padding-left:16px;border-left:4px solid var(--vp-c-brand-1);color:var(--vp-c-text-1);font-size:clamp(21px,1.8vw,25px);font-weight:700;line-height:1.4;letter-spacing:-.3px}
+@media(max-width:600px){:is(.research-report-page .vp-doc,#report-research) h2{padding:16px;margin-top:40px}:is(.research-report-page .vp-doc,#report-research) h3{padding-left:12px;margin-top:30px}}
+
+/* Increase standard report prose by one pixel. */
+.vp-doc{font-size:17px}
+
+/* Small hints make report dropdowns easier to discover. */
+.vp-doc details>summary{position:relative;padding-inline-end:160px!important}
+.vp-doc details>summary::after{content:"Press to open dropdown";position:absolute;inset-inline-end:0;top:50%;transform:translateY(-50%);width:148px;text-align:right;font-size:11px;font-weight:400;line-height:1.4;letter-spacing:0;color:var(--vp-c-text-2);pointer-events:none}
+.vp-doc details[open]>summary::after{content:"Press to close dropdown"}
+@media(max-width:600px){
+ .vp-doc details>summary{padding-inline-end:0!important;padding-bottom:26px!important}
+ .vp-doc details>summary::after{top:auto;bottom:5px;transform:none;font-size:10px}
+}
+@media print{.vp-doc details>summary{padding-inline-end:0!important}.vp-doc details>summary::after{display:none}}
+
+/* Shared report caption and IEEE reference presentation. */
+.vp-doc .report-table-caption{font-size:14px;line-height:1.6;margin:28px 0 8px;color:var(--vp-c-text-2);text-align:left;caption-side:top}
+.vp-doc table>.report-table-caption{padding:0 0 12px}
+.vp-doc .report-figure-caption{font-size:14px;line-height:1.65;margin:8px 0 28px;color:var(--vp-c-text-2)}
+.vp-doc :is(.report-table-caption,.report-figure-caption) strong{color:var(--vp-c-text-1)}
+.ieee-reference{display:grid;grid-template-columns:48px minmax(0,1fr);gap:10px;margin:22px 0;scroll-margin-top:100px}
+.ieee-reference-number{font-weight:600;color:var(--vp-c-text-1)}
+.ieee-reference p{margin:0;font-size:15px;line-height:1.75;overflow-wrap:anywhere}
+.ieee-reference .reference-note{margin-top:6px;color:var(--vp-c-text-2);font-size:13px}
+@media(max-width:600px){.ieee-reference{grid-template-columns:36px minmax(0,1fr);gap:6px}}
+
+.vp-doc .research-detection-table .report-inline-figure{margin:0}
+.vp-doc .research-detection-table .report-inline-figure figcaption{font-size:11px;line-height:1.5;margin-top:8px;text-align:center;color:var(--vp-c-text-2)}

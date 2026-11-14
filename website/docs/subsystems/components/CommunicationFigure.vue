@@ -1,11 +1,11 @@
 <script setup lang="ts">
 import { withBase } from 'vitepress'
-defineProps<{ src: string; caption: string; width: number; height: number }>()
+defineProps<{ number?: string; src: string; caption: string; width: number; height: number }>()
 </script>
 <template>
  <figure class="comms-figure">
-  <a :href="withBase(src)" target="_blank" rel="noopener" :aria-label="'Open full-size image: ' + caption"><img :src="withBase(src)" :alt="caption" :width="width" :height="height" loading="lazy" decoding="async"><span>View full size &#8599;</span></a>
-  <figcaption>{{ caption }}</figcaption>
+  <a :href="withBase(src)" :aria-label="'Open full-size image: ' + caption"><img :src="withBase(src)" :alt="caption" :width="width" :height="height" loading="lazy" decoding="async"><span>View full size</span></a>
+  <figcaption><strong v-if="number">Fig. {{ number }}.</strong> {{ caption }}</figcaption>
  </figure>
 </template>
 <style scoped>
