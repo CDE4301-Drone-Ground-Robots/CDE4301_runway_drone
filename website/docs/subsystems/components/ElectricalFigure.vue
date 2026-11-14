@@ -1,11 +1,12 @@
 <script setup lang="ts">
+import { computed } from 'vue'
 import { withBase } from 'vitepress'
 const figure = defineProps<{ n: string; number?: string; src: string; width: number; height: number; caption: string; cropHeight?: number; cardWidth?: number }>()
 </script>
 <template>
  <figure
   v-if="figure"
-  :id="'figure-ed-' + figure.n"
+  :id="'figure-' + label.toLowerCase() + '-' + figure.n"
   class="cv-figure"
   :style="{ maxWidth: figure.cardWidth ? figure.cardWidth + 'px' : '100%' }"
  >
