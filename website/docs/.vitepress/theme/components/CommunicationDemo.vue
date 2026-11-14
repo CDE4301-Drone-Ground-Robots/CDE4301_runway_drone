@@ -110,7 +110,7 @@ onUnmounted(stop)
     <span class="com-demo-kicker">HUNTER</span><strong>{{ current ? 'Confirm receipt' : lastReceived ? 'Receipt confirmed' : 'Ready to receive' }}</strong>
     <template v-if="lastReceived"><code>{{ label(lastReceived) }}</code><span>{{ lastReceived.object }}</span><span>{{ coordinates(lastReceived) }}</span></template>
     <span v-else>No alert received</span>
-    <button type="button" :disabled="!current" @click="acknowledge">Acknowledge receipt</button>
+    <button type="button" class="receipt-ack-hint" :disabled="!current" @click="acknowledge">Acknowledge receipt</button>
    </div>
   </div>
   <div class="com-demo-ack" :class="{ active: lastAck }">ARGUS &#8592; {{ lastAck ? 'ACK: ' + label(lastAck) : 'Receipt ACK' }} &#8592; HUNTER</div>
@@ -166,4 +166,8 @@ onUnmounted(stop)
  .vp-doc .com-demo code{font-size:12px}
  .com-demo-kicker{font-size:10px!important}
 }
+
+.com-demo .receipt-ack-hint:not(:disabled){border-color:#c99a8d;animation:receipt-ack-pulse 2.4s ease-in-out infinite}
+@keyframes receipt-ack-pulse{0%,100%{box-shadow:0 0 0 0 #c99a8d00}50%{box-shadow:0 0 0 4px #c99a8d33,0 0 14px #c99a8d33}}
+@media(prefers-reduced-motion:reduce){.com-demo .receipt-ack-hint:not(:disabled){animation:none}}
 </style>

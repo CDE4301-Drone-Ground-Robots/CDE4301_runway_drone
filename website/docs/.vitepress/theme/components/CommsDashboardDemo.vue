@@ -237,7 +237,7 @@ watch([records, notices, events, nextId, hunterOnline, baseOnline, linkSilence, 
 
        <p class="monitor-help">ACK resends: {{ current.retries }} / 50</p>
        <div class="monitor-actions">
-        <button type="button" class="monitor-primary" :disabled="!canAck" @click="acknowledge">Acknowledge receipt</button>
+        <button type="button" class="monitor-primary receipt-ack-hint" :disabled="!canAck" @click="acknowledge">Acknowledge receipt</button>
         <button type="button" :disabled="!canResend" @click="resendMissingAck">Simulate 1 unacknowledged resend</button>
         <button type="button" :disabled="!canResend" @click="simulateAckLimit">Simulate 50 unacknowledged resends</button>
 
@@ -332,4 +332,8 @@ watch([records, notices, events, nextId, hunterOnline, baseOnline, linkSilence, 
 .monitor-log time{color:var(--vp-c-text-2);font-size:10px;flex-shrink:0;font-variant-numeric:tabular-nums}
 @media(max-width:1100px){.monitor-grid{grid-template-columns:1fr}.monitor-side{grid-template-columns:1fr 1fr}.monitor-stats{gap:8px}.monitor-stats>div{padding:12px}.monitor-form{grid-template-columns:1fr 1fr}.monitor-connections>span:nth-of-type(2){margin-left:0}}
 @media(max-width:600px){.monitor-header{padding:18px;align-items:flex-start;flex-direction:column;gap:10px}.comms-monitor h4{font-size:23px}.monitor-banner{padding:12px 18px}.monitor-stats{grid-template-columns:1fr 1fr;padding:16px 18px}.monitor-connections{margin:0 18px;display:grid;grid-template-columns:1fr auto}.monitor-form{padding:18px;gap:10px}.monitor-form label:first-child{grid-column:1 / -1}.monitor-grid{padding:0 18px 16px}.monitor-side{grid-template-columns:1fr}.monitor-log{margin:0 18px 18px}.monitor-log li{gap:9px}.monitor-preview{font-size:10px}}
+
+.comms-monitor .receipt-ack-hint:not(:disabled){border-color:#c99a8d;animation:receipt-ack-pulse 2.4s ease-in-out infinite}
+@keyframes receipt-ack-pulse{0%,100%{box-shadow:0 0 0 0 #c99a8d00}50%{box-shadow:0 0 0 4px #c99a8d33,0 0 14px #c99a8d33}}
+@media(prefers-reduced-motion:reduce){.comms-monitor .receipt-ack-hint:not(:disabled){animation:none}}
 </style>

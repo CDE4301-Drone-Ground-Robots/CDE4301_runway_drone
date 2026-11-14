@@ -46,6 +46,8 @@ The proposed setup has three communication paths: ARGUS to HUNTER, ARGUS to the 
 
 If HUNTER is disconnected, ARGUS can still contact the base station if the ARGUS-to-base link remains available. A shared radio or network failure could affect more than one link. The final network setup will be confirmed and tested after the interim assessment.
 
+ACK stands for acknowledgement. A receipt ACK is HUNTER’s reply confirming that it received a specific FOD alert. It does not mean the FOD has been collected.
+
 <CommunicationFigure number="119" src="/report-assets/communication-system/interim-communication-architecture.svg" :width="1200" :height="900" caption="Proposed links between ARGUS, HUNTER and the base station. Stage 2 demonstrates the ARGUS queue. Full communication, receipt ACKs and recovery behaviour will be implemented and tested after the interim assessment." />
 
 This architecture enables communication between the two systems without requiring the Python scripts to establish direct network socket connections manually.
@@ -122,7 +124,7 @@ In the proposed workflow, vision uses navigation data to calculate the precise F
 
 ### 5.3.1 Interim Communication {#interim-communication}
 
-For interim communication, I implemented ROS 2 Jazzy to establish communication between ARGUS and HUNTER. ROS 2 provides a publisher-subscriber communication architecture that sends information between systems. I implemented communication using Python 3 and the ROS 2 Python client library.
+For interim communication, I implemented ROS 2 Jazzy to establish communication between ARGUS and HUNTER over a shared local Wi-Fi network. ROS 2 provides a publisher-subscriber communication architecture that sends information between systems. I implemented communication using Python 3 and the ROS 2 Python client library.
 
 <CommunicationFigure number="121" src="/report-assets/communication-system/software-tools.png" :width="1503" :height="733" caption="Software used for the interim communication system." />
 
@@ -142,7 +144,7 @@ The threat ID sequence resets after the ARGUS drone has finished its run for tha
 
 #### 5.3.2.1 Communication Simulator {#communication-simulator}
 
-Add example FOD alerts to the ARGUS queue. Use "Acknowledge receipt" to simulate HUNTER confirming receipt and release the next coordinate.
+Add example FOD alerts to the ARGUS queue. Use "Acknowledge receipt" to simulate HUNTER sending a receipt ACK (acknowledgement), confirming it received the alert and allowing ARGUS to send the next coordinate.
 
 <CommunicationDemo />
 
@@ -158,7 +160,7 @@ If the base station cannot be reached, the notification will remain stored until
 
 ### 5.3.4 FOD Database and Delivery Records {#fod-database-and-delivery-records}
 
-A local database will be added on ARGUS after the interim assessment to store FOD coordinates for resending and bookkeeping. Each record will contain the mission ID, threat ID, object type, X and Y coordinates, detection time and delivery status. The mission ID will distinguish records from different days when the threat ID sequence resets.
+A local database will be added on ARGUS after the interim assessment to store FOD coordinates for resending and bookkeeping. Each record will contain the mission ID, threat ID, object type, X and Y coordinates, detection time and delivery status. After ARGUS finishes its run for the day, the threat ID counter resets, so the next day starts again at `FOD_THREAT_001`. Each day has a different mission ID, allowing the same threat number to be reused without confusing it with an older record. Resetting the counter does not delete stored records or change the IDs of undelivered alerts.
 
 Each FOD record will be saved before it enters the transmission queue. The queue controls which target is sent next, while the database keeps the stored records. If communication is lost, unacknowledged records will remain stored and be resent with the same mission and threat IDs when the link returns. If an ACK is lost while the link remains active, ARGUS resends the target using the 50-resend limit described above. HUNTER checks the mission and threat IDs to avoid adding the same target twice.
 
@@ -192,7 +194,7 @@ On the Raspberry Pi 5, the receiver successfully receives and decodes the messag
 
 <CommunicationFigure number="123" src="/report-assets/communication-system/hunter-receiver-test.png" :width="909" :height="204" caption="Original HUNTER receiver screenshot from Raspberry Pi 5. The log reports Nav2 unavailable, so this shows message reception and goal publication, not completed navigation." />
 
-These tests were successful (shown in the figure above), proving that the ARGUS and HUNTER can exchange structured data over a local wireless network. This served as the baseline foundation for integrating the real-time FOD detection from the vision system with the HUNTER’s autonomous navigation system.
+These tests were successful (shown in the figure above), proving that the ARGUS and HUNTER can exchange structured data over a local wireless network. This served as the baseline foundation for future integration between ARGUS and HUNTER.
 
 ## 5.5 Communication Performance Analysis {#a5-analysis}
 

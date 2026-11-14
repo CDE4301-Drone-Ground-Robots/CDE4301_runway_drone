@@ -40,7 +40,7 @@ To address the limitation of detecting only objects seen in the training dataset
 - Suitable camera selection.
 - Day and night operations.
 
-Although the earlier research mentioned a 3 cm FOD target, I set a stricter requirement of detecting objects as small as 1 cm. This provides a safety margin when detecting 3 cm FOD. Since missed FOD can endanger aircraft and people, I chose this requirement to reduce the risk of missed detections. Detection at both sizes will need to be verified under the intended operating conditions.
+Although the earlier research mentioned a 2 cm FOD target, I set a stricter requirement of detecting objects as small as 1 cm. This provides a safety margin when detecting 2 cm FOD. Since missed FOD can endanger aircraft and people, I chose this requirement to reduce the risk of missed detections. Detection at both sizes will need to be verified under the intended operating conditions.
 
 ## 4.2 Vision Methodology and Architecture Development {#a2-methodology-concept-development}
 
