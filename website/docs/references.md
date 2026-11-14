@@ -39,7 +39,7 @@ References are numbered in order of first citation in the full report. The same 
 <div class="ieee-reference" id="research-ref-26">
 <span class="ieee-reference-number">[5]</span>
 <div class="ieee-reference-body">
-<p>&ldquo;Postponed runway inspection&rdquo;. <strong>Incomplete reference:</strong> the original source and bibliographic details were not supplied.</p>
+<p>CNN, [Concorde news article; title, byline, and publication date unverified]. [Online]. Available: <a href="https://us.cnn.com/2000/WORLD/europe/09/01/concorde.01/index.html">https://us.cnn.com/2000/WORLD/europe/09/01/concorde.01/index.html</a>.</p>
 </div>
 </div>
 

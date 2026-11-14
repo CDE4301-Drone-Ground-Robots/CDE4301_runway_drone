@@ -55,7 +55,7 @@ Initial requirements were established to guide the mechanical design of the UAV.
 
 <MechanicalFigure number="8" n="1" src="/report-assets/mechanical-design/initial-concept-sketch.png" :width="1150" :height="863" caption="Initial Concept Sketch" />
 
-The initial concept sketch established a layered component layout, guiding subsequent iterations without fixing detailed geometry. A quadcopter balanced lifting capability, structural simplicity and a target takeoff mass below 7 kg. Four motors reduced propulsion components and mounting structures compared with six- or eight-rotor configurations; subsequent motor and propeller selection targeted the required thrust and control margin.
+The initial concept sketch established the preliminary component layout, providing a basis for subsequent design iterations. A quadcopter configuration was selected for its balance of lifting capability, structural simplicity and the target takeoff mass of less than 7 kg. Compared with hexacopter and octocopter configurations, the use of four motors reduced the number of propulsion components and associated mounting structures. Motor and propeller selection was subsequently carried out to ensure sufficient thrust and control authority.
 
 ### 1.2.2 UAV Configuration Selection {#uav-configuration-selection}
 
@@ -65,7 +65,7 @@ The initial concept sketch established a layered component layout, guiding subse
 
 The X configuration was selected over plus for greater attitude control authority and reduced pitch/roll–yaw coupling. A comparative study [\[15\]](../references#md-ref-2) found similar hover power requirements and autonomous stability, but up to √2 greater pitch and roll control authority for X because all four rotors contribute to attitude moments, supporting wind disturbance rejection during runway inspection.
 
-Diagonal arms also increase longitudinal and lateral motor spacing to accommodate larger propellers. An H frame would require additional longitudinal extension to prevent propeller overlap, favouring X.
+The X-frame provides greater motor clearance for larger propellers, whereas an H-frame would require additional structural extension to prevent overlap.
 
 #### 1.2.2.2 Pusher vs Puller Configuration {#pusher-vs-puller-configuration}
 
@@ -103,13 +103,11 @@ The first iteration developed the two central layers of the concept sketch; the 
 
 ##### 1.2.3.1.1 Limitations {#limitations}
 
-The first iteration prioritised layout and geometry over materials and manufacturing. Its complex top-layer and arm geometry suited 3D printing. Subsequent research favoured carbon-fibre-reinforced polymer (CFRP) for its stiffness and strength relative to mass [\[17\]](../references#md-ref-4) [\[18\]](../references#md-ref-5) [\[19\]](../references#md-ref-8). Adapting the geometry required custom moulding or redesign for standard sheets and tubes.
+The first iteration focused on component layout and geometry, with complex features suited for 3D printing. Subsequent research done by the team favoured CFRP for its high strength-to-weight and stiffness-to-weight ratios [\[17\]](../references#md-ref-4) [\[18\]](../references#md-ref-5) [\[19\]](../references#md-ref-8), requiring a redesign to accommodate standard CFRP sheets and tubes.
 
 #### 1.2.3.2 CFRP Sheets & Tubes vs 3D-Printed Parts {#cfrp-sheets-tubes-vs-3d-printed-parts}
 
-CFRP's higher strength-to-weight ratio than conventional 3D-printed polymers supports the estimated 4–6 kg takeoff mass and motor-thrust loads while limiting structural mass.
-
-An experiment found lower vibration amplitudes in a CFRP motor frame than an aluminium-alloy frame [\[20\]](../references#md-ref-7). This suggests potential benefits for FOD camera clarity and reduced interference with flight-controller inertial measurements.
+CFRP's high strength-to-weight ratio allows the structure to withstand the estimated 4–6 kg takeoff mass and motor thrust loads while minimising weight. A study also reported lower vibration amplitudes in CFRP motor frames compared with aluminium-alloy frames [\[20\]](../references#md-ref-7), potentially improving camera clarity and reducing interference with flight-controller inertial measurements.
 
 #### 1.2.3.3 Second Design Iteration {#second-iteration}
 
@@ -117,7 +115,7 @@ An experiment found lower vibration amplitudes in a CFRP motor frame than an alu
 
 <MechanicalFigure number="18" n="11" src="/report-assets/mechanical-design/second-iteration-layered-section.png" :width="1066" :height="790" caption="Layered design approach from concept sketch (Sectioned View)" />
 
-The second iteration retained the layered layout but replaced 3D-printed arms with carbon-fibre tubes and simplified the top and bottom structures for CFRP fabrication. These changes targeted stiffness, strength and vibration management at low mass. Custom 3D-printed clamps secured the arms and landing legs to the bottom layer.
+The second iteration retained the layered layout but replaced 3D-printed arms with carbon-fibre tubes and simplified the top and bottom structures for CFRP fabrication.  Custom 3D-printed clamps secured the arms and landing legs to the bottom layer.
 
 ##### 1.2.3.3.1 Limitations {#limitations-1}
 
@@ -131,7 +129,7 @@ The 50 mm overall depth of each top and bottom structure made machining from sol
 
 Motor and propeller selection preceded the final prototype design, requiring a preliminary mass estimate for thrust calculations and propulsion sizing.
 
-Preliminary top and bottom plate layouts used the dimensions and placement requirements of selected components, including the Jetson Orin NX and Pixhawk, to estimate plate dimensions and establish the initial structure.
+Preliminary top and bottom plate layouts were sketched out based on the dimensions and placement requirements of selected components, including the Jetson Orin NX and Pixhawk, to estimate plate dimensions and establish the initial structure.
 
 <div class="cv-figure-grid">
 
@@ -141,7 +139,7 @@ Preliminary top and bottom plate layouts used the dimensions and placement requi
 
 </div>
 
-Structural masses, including CFRP plates, arms and 3D-printed parts, came from SolidWorks mass properties; selected electronics and sensor masses came from manufacturer specifications. Pending battery selection, the highest identified battery mass was adopted conservatively.
+Structural masses, including CFRP plates, arms and 3D-printed components, were estimated using SolidWorks, while electronics and sensor masses were obtained from manufacturer specifications. The highest identified battery mass was conservatively adopted pending final selection.
 
 <p class="report-table-caption" id="table-6"><strong>Table 6.</strong> Preliminary Mass Estimation</p>
 
@@ -158,7 +156,7 @@ Structural masses, including CFRP plates, arms and 3D-printed parts, came from S
 | 3D-printed top plate enclosure | 275 (default SolidWorks mass properties) |
 | 3D-printed camera mount body | 147 (default SolidWorks mass properties) |
 
-Identified components totalled approximately 3.6 kg. Allowing for planned components absent from the preliminary design gave a conservative 5 kg UAV estimate. The 3D-printed masses used SolidWorks' default properties because final material and fabrication specifications were undetermined, reinforcing this allowance.
+The identified components totalled approximately 3.6 kg. Accounting for additional components not included in the preliminary design, a conservative UAV mass of 5 kg was adopted. Default SolidWorks material properties were used for 3D-printed parts, as final material and manufacturing specifications had yet to be determined.
 
 #### 1.2.4.2 Preliminary Thrust Calculations {#_5-2-preliminary-thrust-calculations}
 
@@ -337,7 +335,7 @@ The results show increasing pitch and thrust requirements with headwind speed an
 
 #### 1.2.4.3 Conservative Thrust Estimation {#_5-3-setting-conservative-thrust-estimate}
 
-Longitudinal cruise and acceleration calculations consider pitch, while lateral disturbances and manoeuvres also require roll. Preliminary sizing therefore adopted a conservative maximum combined tilt of 45°. The industrial-grade DJI Matrice 350 RTK, of comparable weight class, provided a 30° maximum-pitch reference [\[23\]](../references#md-ref-16).
+Cruise and acceleration calculations considered only pitch, while lateral manoeuvres due to wind disturbances also require roll. A conservative maximum combined tilt of 45° was therefore adopted, using the comparable DJI Matrice 350 RTK's 30° maximum pitch as a reference [\[23\]](../references#md-ref-16).
 
 <MechanicalFigure number="25" n="30" src="/report-assets/mechanical-design/dji-matrice-350-rtk-tilt-reference.png" :width="547" :height="412" caption="DJI Matrice 350 RTK. Maximum pitch angle reference reproduced from the supplied report [16]." />
 
@@ -402,7 +400,7 @@ This interactive visualisation supports preliminary thrust sizing for an X-confi
 
 #### 1.2.4.4 Motor and Propeller Evaluation {#_5-4-motors-and-propellers-evaluation}
 
-A 2:1 thrust-to-weight target provided reserve for wind disturbance rejection, manoeuvrability, control authority and future payloads. At 5 kg, this requires approximately 2.5 kgf maximum thrust per motor. The T-Motor MN501-S KV360 and MAD 5005 IPE KV440 were shortlisted based on thrust capability and performance.
+A 2:1 thrust-to-weight ratio was adopted to provide sufficient reserve for wind disturbances, manoeuvrability, control authority and future payloads. For a 5 kg UAV, this requires approximately 2.5 kgf maximum thrust per motor. The T-Motor MN501-S KV360 and MAD 5005 IPE KV440 were shortlisted based on their thrust performance.
 
 <div class="cv-figure-grid">
 
@@ -506,7 +504,7 @@ $$
 
 ##### 1.2.4.4.1 Motors Comparison {#_5-4-3-motors-comparison}
 
-The MAD 5005 IPE KV440 was selected despite the T-Motor's slightly lower cruise power consumption. Its 14-inch propellers permit a more compact frame, while lower motor weight and cost favour integration. It meets the 2:1 thrust-to-weight target, and its IP35 rating provides a degree of water-exposure protection for outdoor operation.
+The MAD 5005 IPE KV440 was selected for its lighter weight, lower cost and smaller 14-inch propellers, enabling a more compact frame despite slightly higher cruise power consumption. It also meets the 2:1 thrust-to-weight target and offers IP35-rated protection against water exposure.
 
 <div class="mechanical-motor-comparison">
 
@@ -715,7 +713,7 @@ The calculated thrust requirements during the nose-down angular acceleration pha
 
 ### 1.2.5 Propeller Arm Selection {#propeller-arm-selection}
 
-CFRP arm diameter and wall thickness were selected by comparing strength, stiffness, mass and vibration characteristics to minimise weight while maintaining flight structural integrity.
+CFRP arm dimensions were selected by evaluating strength, stiffness, mass and vibration characteristics to minimise weight while maintaining structural integrity.
 
 <div class="mechanical-propulsion">
 
@@ -828,11 +826,9 @@ $$
 
 #### 1.2.5.3 Natural Bending Frequency Calculation {#natural-bending-frequency-calculation}
 
-<MechanicalFigure number="32" n="37" src="/report-assets/mechanical-design/cantilever-bending-modes.png" :width="546" :height="366" caption="Figure showing the different bending modes, reproduced from the supplied report; the original illustration source was not provided." />
+<MechanicalFigure number="32" n="37" src="/report-assets/mechanical-design/cantilever-bending-modes.png" :width="546" :height="366" caption="Figure showing the different bending modes." />
 
-Natural bending frequencies were evaluated to limit resonance affecting onboard sensors. ArduPilot identifies motor rotational frequency as a common multirotor vibration source [\[27\]](../references#md-ref-20).
-
-Manufacturer data provided motor rotational and blade passing frequency ranges from hover to maximum thrust for arm comparison. Preliminary calculations considered only the first bending mode.
+Natural bending frequencies were evaluated to minimise resonance and sensor vibrations, with motor rotational frequency identified as a common vibration source [\[27\]](../references#md-ref-20). Manufacturer data was used to determine motor rotational and blade-passing frequency ranges from hover to maximum thrust, while preliminary analysis considered only the first bending mode.
 
 **Motor rotational frequency**
 
@@ -945,7 +941,7 @@ Red marks configurations within the motor rotational frequency range (16 × 1.5 
 | Camera & Sensor Assembly | RGB Camera, Thermal Camera and Single-Point LiDAR |
 | Propeller Assembly | Motors and Propellers |
 
-The final design addresses the second iteration's fabrication limitations by combining CFRP base plates, motor mounting plates and propeller arms with 3D-printed components. CFRP suits these relatively simple structural geometries. More complex, customisable enclosures and tube clamps would use PETG CF for its improved mechanical properties over conventional PETG and PLA [\[28\]](../references#md-ref-9).
+The final design addresses previous fabrication limitations by using CFRP for simple structural components, including base plates, motor mounts and arms, while PETG CF is selected for complex enclosures and tube clamps due to its improved mechanical properties over conventional PETG and PLA [\[28\]](../references#md-ref-9).
 
 ### 1.2.7 Placement of Key Onboard Components {#placement-of-key-onboard-components}
 
@@ -955,7 +951,7 @@ Component placement considered mass distribution, accessibility, vibration isola
 
 The RGB camera detects and locates FOD within images; GNSS supplies the UAV's geographical position. Their central X–Y alignment along a common vertical axis simplifies geolocation while retaining vertical separation.
 
-<MechanicalFigure number="35" n="17" src="/report-assets/mechanical-design/gnss-rgb-vertical-alignment.png" :width="702" :height="306" caption="Side view showing the vertical separation of the GNSS antenna and RGB camera (project CAD)." />
+<MechanicalFigure number="35" n="17" src="/report-assets/mechanical-design/gnss-rgb-vertical-alignment.png" :width="702" :height="306" caption="Side view showing the vertical separation of the GNSS antenna and RGB camera." />
 
 The primarily vertical displacement simplifies sensor-to-sensor transformation. From the cited direct georeferencing principles [\[29\]](../references#md-ref-11):
 
@@ -976,19 +972,19 @@ The signed $\Delta z$ runs from GNSS antenna to RGB camera along body Z. Central
 
 #### 1.2.7.2 Placement of the Pixhawk Flight Controller near Centre of Gravity {#placement-of-the-pixhawk-flight-controller-near-centre-of-gravity}
 
-PX4 and ArduPilot recommend positioning the flight controller as close as possible to the CG [\[30\]](../references#md-ref-12) [\[31\]](../references#md-ref-13).
+PX4 and ArduPilot recommend positioning the flight controller as close as possible to the CG [\[30\]](../references#md-ref-12) [\[31\]](../references#md-ref-13). The CG position was identified in [Section 1.5.1](#centre-of-gravity-cg-of-uav).
 
-<MechanicalFigure number="36" n="18" src="/report-assets/mechanical-design/px4-flight-controller-mounting.png" :width="1040" :height="611" caption="Ideal flight controller placement. External PX4 documentation illustration reproduced in the supplied report [12]; the original source URL was not supplied." />
+<MechanicalFigure number="36" n="18" src="/report-assets/mechanical-design/px4-flight-controller-mounting.png" :width="1040" :height="611" caption="Ideal flight controller placement. External PX4 documentation illustration." />
 
-The assembly places the Pixhawk near the CG within available space, as shown below.
+The assembly places the Pixhawk near the CG while accommodating spatial constraints, as shown below.
 
-<MechanicalFigure number="37" n="19" src="/report-assets/mechanical-design/pixhawk-isometric-view.png" :width="872" :height="617" caption="Isometric view of the Pixhawk placement (project CAD)." />
+<MechanicalFigure number="37" n="19" src="/report-assets/mechanical-design/pixhawk-isometric-view.png" :width="872" :height="617" caption="Isometric view of the Pixhawk placement." />
 
 <div class="cv-figure-grid">
 
-<MechanicalFigure number="38" n="20" src="/report-assets/mechanical-design/pixhawk-top-view.png" :width="656" :height="619" caption="Top view of the Pixhawk placement (project CAD)." />
+<MechanicalFigure number="38" n="20" src="/report-assets/mechanical-design/pixhawk-top-view.png" :width="656" :height="619" caption="Top view of the Pixhawk placement." />
 
-<MechanicalFigure number="39" n="21" src="/report-assets/mechanical-design/pixhawk-side-view.png" :width="807" :height="391" caption="Side view of the Pixhawk placement (project CAD)." />
+<MechanicalFigure number="39" n="21" src="/report-assets/mechanical-design/pixhawk-side-view.png" :width="807" :height="391" caption="Side view of the Pixhawk placement." />
 
 </div>
 
@@ -1012,19 +1008,19 @@ d&=\sqrt{(\Delta x)^2+(\Delta y)^2+(\Delta z)^2}\\
 \end{aligned} \tag{4}
 $$
 
-The approximately 45 mm displacement remains within ArduPilot's recommendation of a few centimetres. PX4 and ArduPilot offer offset-compensation parameters, but close placement remains preferable: larger offsets increase IMU accelerations during rotation and may affect measurements and control [\[31\]](../references#md-ref-13).
+The approximately 45 mm displacement remains within ArduPilot's recommendation of a few centimetres. PX4 and ArduPilot offer offset-compensation parameters, but close placement remains preferable as larger offsets increase IMU accelerations during rotation and may affect measurements and control [\[31\]](../references#md-ref-13).
 
 #### 1.2.7.3 Placement of the 360° LiDAR {#placement-of-the-360-lidar}
 
 The 360° LiDAR moved from the top plate's centre to the front because GNSS–RGB alignment took priority. This position aims to minimise surrounding-component obstruction while preserving propeller and structural clearance. Its obstacle-detection role is discussed in the [Computer Vision section](./computer-vision#thermal-safety).
 
-<MechanicalFigure number="40" n="22" src="/report-assets/mechanical-design/lidar-front-isometric-view.png" :width="916" :height="586" caption="Front placement of the 360° LiDAR in the isometric view (project CAD)." />
+<MechanicalFigure number="40" n="22" src="/report-assets/mechanical-design/lidar-front-isometric-view.png" :width="916" :height="586" caption="Front placement of the 360° LiDAR in the isometric view." />
 
 #### 1.2.7.4 45° Placement of the Thermal Camera {#45-degree-placement-of-the-thermal-camera}
 
 The thermal camera is mounted at approximately 45° on a rigid, custom-designed mount that will be 3D-printed, complementing the 360° LiDAR for obstacle detection. Planned integration is discussed in the [Computer Vision section](./computer-vision#thermal-safety).
 
-<MechanicalFigure number="41" n="23" src="/report-assets/mechanical-design/thermal-camera-side-view.png" :width="928" :height="392" caption="Placement of the thermal camera in the side view (project CAD)." />
+<MechanicalFigure number="41" n="23" src="/report-assets/mechanical-design/thermal-camera-side-view.png" :width="928" :height="392" caption="Placement of the thermal camera in the side view." />
 
 #### 1.2.7.5 Placement of Batteries and Other Electrical Components in the Bottom Layer {#placement-of-batteries-and-other-electrical-components-in-the-bottom-layer}
 
@@ -1032,7 +1028,7 @@ The battery and other electronics, particularly ESCs, occupy the bottom layer. A
 
 Unlike external arm-mounted ESC layouts, internal bottom-layer mounting provides additional protection from water and environmental exposure, since the selected AMPX 40A ESCs have no specified waterproof rating.
 
-Raspberry Pi integration may require external ESC relocation if bottom-layer space is insufficient. If necessary, 3D-printed protective enclosures will provide water resistance.
+Raspberry Pi integration may require external ESC relocation if bottom-layer space is insufficient. If necessary, 3D-printed protective enclosures for the ESCs will provide water resistance.
 
 ## 1.3 Mechanical Prototype Development {#a3-prototype-development}
 
@@ -1138,9 +1134,9 @@ The centre of gravity (CG) of the completed UAV prototype assembly was determine
 
 <div class="cv-figure-grid">
 
-<MechanicalFigure number="50" n="14" src="/report-assets/mechanical-design/cg-top-view.png" :width="600" :height="572" caption="CG point in the top view of the SolidWorks assembly (project CAD)." />
+<MechanicalFigure number="50" n="14" src="/report-assets/mechanical-design/cg-top-view.png" :width="600" :height="572" caption="CG point in the top view of the SolidWorks assembly." />
 
-<MechanicalFigure number="51" n="15" src="/report-assets/mechanical-design/cg-front-view.png" :width="1101" :height="502" caption="CG point in the front view of the SolidWorks assembly (project CAD)." />
+<MechanicalFigure number="51" n="15" src="/report-assets/mechanical-design/cg-front-view.png" :width="1101" :height="502" caption="CG point in the front view of the SolidWorks assembly." />
 
 </div>
 
