@@ -6,11 +6,10 @@
     "caption": "Software tools used for training, dataset preparation, and development."
   },
   "2": {
-    "src": "/report-assets/computer-vision/cv-02.webp",
-    "width": 2048,
-    "height": 1637,
-    "caption": "Downward-facing and oblique RGB camera viewing geometry.",
-    "cropHeight": 820
+    "src": "/report-assets/computer-vision/camera-view-selection.png",
+    "width": 1983,
+    "height": 793,
+    "caption": "Nadir view selected for RGB inspection (green tick). The oblique RGB view was not selected for this role (red X)."
   },
   "3": {
     "src": "/report-assets/computer-vision/rgb-cameras-with-ids.png",
@@ -214,16 +213,16 @@
     "caption": "Crack-model comparison between other surfaces and the actual test-ground surface."
   },
   "36": {
-    "src": "/report-assets/computer-vision/cv-36.webp",
+    "src": "/report-assets/computer-vision/coordinate-offset-steps-1-5.png",
     "width": 1536,
     "height": 1024,
-    "caption": "Worked coordinate-retrieval example using crop scaling and image-to-ground offsets."
+    "caption": "Steps 1-5: map the detected box to the original image and calculate the ground offset in image axes. Heading correction follows below."
   },
   "37": {
     "src": "/report-assets/computer-vision/cv-37.webp",
     "width": 826,
     "height": 406,
-    "caption": "Background safety illustration from the source report; underlying statistical citations remain to be supplied."
+    "caption": "Examples of bird attacks and drone-related injuries. Sources and the scope of each statistic are explained below."
   },
   "38": {
     "src": "/report-assets/computer-vision/cv-38.webp",
@@ -273,5 +272,11 @@
     "width": 720,
     "height": 560,
     "caption": "Proposed PatchCore workflow for 1 cm FOD at 5 m using the IDS inspection crop. Tiling preserves the original pixel scale. Testing is pending."
+  },
+  "47": {
+    "src": "/report-assets/computer-vision/argus-heading-fod-example.svg",
+    "width": 1280,
+    "height": 820,
+    "caption": "Top-view example: ARGUS at (3.000, 4.000) m faces map +Y at a heading of 90 degrees. The image-derived offset is rotated into map axes, giving the FOD position (2.828, 4.056) m. Level, nadir camera assumed."
   }
 }

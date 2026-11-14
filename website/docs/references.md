@@ -463,29 +463,53 @@ References are numbered in order of first citation in the full report. The same 
 </div>
 </div>
 
-<div class="ieee-reference" id="cv-d02">
+<div class="ieee-reference" id="cv-safety-01">
 <span class="ieee-reference-number">[65]</span>
 <div class="ieee-reference-body">
-<p>kilogrand, &quot;Foreign object debris in airports (FOD-A) dataset,&quot; Kaggle. [Online]. Available: <a href="https://www.kaggle.com/datasets/kilogrand/foreign-object-debris-in-airports-fod-a-dataset/code">https://www.kaggle.com/datasets/kilogrand/foreign-object-debris-in-airports-fod-a-dataset/code</a>.</p>
+<p>N. Rebolo-Ifrán, M. Graña Grilli, and S. A. Lambertucci, &quot;Drones as a threat to wildlife: YouTube complements science in providing evidence about their effect,&quot; <em>Environmental Conservation</em>, vol. 46, no. 3, pp. 205–210, 2019, doi: 10.1017/S0376892919000080. Accessed: Nov. 14, 2026. [Online]. Available: <a href="https://doi.org/10.1017/S0376892919000080">https://doi.org/10.1017/S0376892919000080</a>.</p>
+<p class="reference-note">The 62.1% attack figure applies to 66 selected bird videos, not to all drone flights.</p>
+</div>
+</div>
+
+<div class="ieee-reference" id="cv-safety-02">
+<span class="ieee-reference-number">[66]</span>
+<div class="ieee-reference-body">
+<p>F. H. Aguiar-Silva <em>et al.</em>, &quot;Behavioural responses of Neotropical raptors to drone approaches to nests,&quot; <em>Scientific Reports</em>, vol. 16, Art. no. 21841, Jul. 13, 2026, doi: 10.1038/s41598-026-47248-5. Accessed: Nov. 14, 2026. [Online]. Available: <a href="https://doi.org/10.1038/s41598-026-47248-5">https://doi.org/10.1038/s41598-026-47248-5</a>.</p>
+<p class="reference-note">The study recorded 14 attack events. Eleven flights were interrupted before contact, and three attacks damaged drones.</p>
+</div>
+</div>
+
+<div class="ieee-reference" id="cv-safety-03">
+<span class="ieee-reference-number">[67]</span>
+<div class="ieee-reference-body">
+<p>S. Gorucu and Y. Ampatzidis, &quot;Drone injuries and safety recommendations,&quot; UF/IFAS Extension, AE560, 2021, doi: 10.32473/edis-ae560-2021. Accessed: Nov. 14, 2026. [Online]. Available: <a href="https://ask.ifas.ufl.edu/publication/AE560">https://ask.ifas.ufl.edu/publication/AE560</a>.</p>
+<p class="reference-note">The summary reports more than 3,700 patients and the methods specify 2015–2019. The current page also gives 4,250 injuries for 2015–2020 in its results. These totals and periods are inconsistent. The injuries include collisions, blade contact and retrieval accidents.</p>
+</div>
+</div>
+
+<div class="ieee-reference" id="cv-d02">
+<span class="ieee-reference-number">[68]</span>
+<div class="ieee-reference-body">
+<p>kilogrand, &quot;Foreign object debris in airports (FOD-A) dataset,&quot; Kaggle. [Online]. Available: <a href="https://www.kaggle.com/datasets/kilogrand/foreign-object-debris-in-airports-fod-a-dataset">https://www.kaggle.com/datasets/kilogrand/foreign-object-debris-in-airports-fod-a-dataset</a>.</p>
 </div>
 </div>
 
 <div class="ieee-reference" id="cv-d03">
-<span class="ieee-reference-number">[66]</span>
+<span class="ieee-reference-number">[69]</span>
 <div class="ieee-reference-body">
 <p>arc-ejbpg, &quot;Thermal Bird,&quot; Roboflow Universe, dataset ver. 6. [Online]. Available: <a href="https://universe.roboflow.com/arc-ejbpg/thermal-bird/dataset/6">https://universe.roboflow.com/arc-ejbpg/thermal-bird/dataset/6</a>.</p>
 </div>
 </div>
 
 <div class="ieee-reference" id="cv-d04">
-<span class="ieee-reference-number">[67]</span>
+<span class="ieee-reference-number">[70]</span>
 <div class="ieee-reference-body">
-<p>sikdermdsaiful, &quot;Thermal images for human detection,&quot; Kaggle. [Online]. Available: <a href="https://www.kaggle.com/datasets/sikdermdsaiful/thermal-images-for-human-detection/data?select=dataset">https://www.kaggle.com/datasets/sikdermdsaiful/thermal-images-for-human-detection/data?select=dataset</a>.</p>
+<p>sikdermdsaiful, &quot;Thermal images for human detection,&quot; Kaggle. [Online]. Available: <a href="https://www.kaggle.com/datasets/sikdermdsaiful/thermal-images-for-human-detection">https://www.kaggle.com/datasets/sikdermdsaiful/thermal-images-for-human-detection</a>.</p>
 </div>
 </div>
 
 <div class="ieee-reference" id="cv-s02">
-<span class="ieee-reference-number">[68]</span>
+<span class="ieee-reference-number">[71]</span>
 <div class="ieee-reference-body">
 <p>Federal Aviation Administration, <em>Concrete Airfield Pavement Surface Evaluation and Rating Manual</em>, AC 150/5320-17A, app. B, Sep. 10, 2014, pp. 8-9. Accessed: Nov. 8, 2026. [Online]. Available: <a href="https://www.faa.gov/documentlibrary/media/advisory_circular/150-5320-17a-appendix-b.pdf#page=10">https://www.faa.gov/documentlibrary/media/advisory_circular/150-5320-17a-appendix-b.pdf#page=10</a>.</p>
 <p class="reference-note">Supports inspection and assessment of cracks. It does not establish that every hairline crack is an immediate operational hazard.</p>
@@ -493,14 +517,14 @@ References are numbered in order of first citation in the full report. The same 
 </div>
 
 <div class="ieee-reference" id="cv-s01">
-<span class="ieee-reference-number">[69]</span>
+<span class="ieee-reference-number">[72]</span>
 <div class="ieee-reference-body">
 <p>Federal Aviation Administration, &quot;Reflective cracking program,&quot; Airport Technology Research and Development. Accessed: Oct. 31, 2026. [Online]. Available: <a href="https://www.airporttech.tc.faa.gov/Airport-Pavement/Pavement-Design/Reflective-Cracking-Program">https://www.airporttech.tc.faa.gov/Airport-Pavement/Pavement-Design/Reflective-Cracking-Program</a>.</p>
 </div>
 </div>
 
 <div class="ieee-reference" id="com-h02">
-<span class="ieee-reference-number">[70]</span>
+<span class="ieee-reference-number">[73]</span>
 <div class="ieee-reference-body">
 <p>Holybro, &quot;Microhard telemetry radio V2: P900 V2,&quot; product specifications and radio overview. Accessed: Nov. 12, 2026. [Online]. Available: <a href="https://holybro.com/products/microhard-telemetry-radio-v2">https://holybro.com/products/microhard-telemetry-radio-v2</a>; <a href="https://docs.holybro.com/radio/microhard-radio/overview">https://docs.holybro.com/radio/microhard-radio/overview</a>.</p>
 <p class="reference-note">Singapore frequency and power compliance must be checked separately.</p>
@@ -508,7 +532,7 @@ References are numbered in order of first citation in the full report. The same 
 </div>
 
 <div class="ieee-reference" id="com-h01">
-<span class="ieee-reference-number">[71]</span>
+<span class="ieee-reference-number">[74]</span>
 <div class="ieee-reference-body">
 <p>Microhard, &quot;pMDDL2450: Wireless MIMO (2X2) OEM digital data link,&quot; product page and brochure, rev. 1.3.0. Accessed: Nov. 12, 2026. [Online]. Available: <a href="https://www.microhardcorp.com/pMDDL2450.php">https://www.microhardcorp.com/pMDDL2450.php</a>; <a href="https://www.microhardcorp.com/brochures/pMDDL2450.Brochure.Rev.1.3.0.pdf">https://www.microhardcorp.com/brochures/pMDDL2450.Brochure.Rev.1.3.0.pdf</a>.</p>
 <p class="reference-note">Advertised specifications do not establish a tested 5 km range at the permitted operating power.</p>
@@ -516,14 +540,14 @@ References are numbered in order of first citation in the full report. The same 
 </div>
 
 <div class="ieee-reference" id="com-r02">
-<span class="ieee-reference-number">[72]</span>
+<span class="ieee-reference-number">[75]</span>
 <div class="ieee-reference-body">
 <p>Infocomm Media Development Authority, &quot;Operation of unmanned aircraft systems (UAS).&quot; Accessed: Nov. 1, 2026. [Online]. Available: <a href="https://www.imda.gov.sg/regulations-and-licensing-listing/spectrum-management/frequency-allocation-and-assignment/operation-of-unmanned-aircraft-systems-uas">https://www.imda.gov.sg/regulations-and-licensing-listing/spectrum-management/frequency-allocation-and-assignment/operation-of-unmanned-aircraft-systems-uas</a>.</p>
 </div>
 </div>
 
 <div class="ieee-reference" id="com-t01">
-<span class="ieee-reference-number">[73]</span>
+<span class="ieee-reference-number">[76]</span>
 <div class="ieee-reference-body">
 <p>J. Marcel, &quot;How Bluetooth technology uses adaptive frequency hopping to overcome packet interference,&quot; Bluetooth SIG, Nov. 15, 2020. Accessed: Nov. 12, 2026. [Online]. Available: <a href="https://www.bluetooth.com/blog/how-bluetooth-technology-uses-adaptive-frequency-hopping-to-overcome-packet-interference/">https://www.bluetooth.com/blog/how-bluetooth-technology-uses-adaptive-frequency-hopping-to-overcome-packet-interference/</a>.</p>
 <p class="reference-note">Used for shared-band interference risks, not evidence that the selected radio implements Bluetooth frequency hopping.</p>
@@ -531,14 +555,14 @@ References are numbered in order of first citation in the full report. The same 
 </div>
 
 <div class="ieee-reference" id="com-r03">
-<span class="ieee-reference-number">[74]</span>
+<span class="ieee-reference-number">[77]</span>
 <div class="ieee-reference-body">
 <p>Infocomm Media Development Authority, &quot;Short range devices,&quot; <em>Spectrum Management Handbook</em>, ch. 7. Accessed: Nov. 12, 2026. [Online]. Available: <a href="https://www.imda.gov.sg/-/media/imda/files/regulation-licensing-and-consultations/frameworks-and-policies/spectrum-management-and-coordination/spectrummgmthb.pdf">https://www.imda.gov.sg/-/media/imda/files/regulation-licensing-and-consultations/frameworks-and-policies/spectrum-management-and-coordination/spectrummgmthb.pdf</a>.</p>
 </div>
 </div>
 
 <div class="ieee-reference" id="com-s01">
-<span class="ieee-reference-number">[75]</span>
+<span class="ieee-reference-number">[78]</span>
 <div class="ieee-reference-body">
 <p>Open Robotics, &quot;ROS 2 Jazzy: Security, setting up security and setting access controls.&quot; Accessed: Nov. 12, 2026. [Online]. Available: <a href="https://github.com/ros2/ros2_documentation/blob/jazzy/source/Concepts/Intermediate/About-Security.rst">https://github.com/ros2/ros2_documentation/blob/jazzy/source/Concepts/Intermediate/About-Security.rst</a>; <a href="https://github.com/ros2/ros2_documentation/blob/jazzy/source/Tutorials/Advanced/Security/Introducing-ros2-security.rst">https://github.com/ros2/ros2_documentation/blob/jazzy/source/Tutorials/Advanced/Security/Introducing-ros2-security.rst</a>; <a href="https://github.com/ros2/ros2_documentation/blob/jazzy/source/Tutorials/Advanced/Security/Access-Controls.rst">https://github.com/ros2/ros2_documentation/blob/jazzy/source/Tutorials/Advanced/Security/Access-Controls.rst</a>.</p>
 <p class="reference-note">Stale-alert and duplicate-target checks remain proposed project work.</p>
@@ -546,7 +570,7 @@ References are numbered in order of first citation in the full report. The same 
 </div>
 
 <div class="ieee-reference" id="com-r01">
-<span class="ieee-reference-number">[76]</span>
+<span class="ieee-reference-number">[79]</span>
 <div class="ieee-reference-body">
 <p>Infocomm Media Development Authority, <em>Technical Specification for Short Range Devices</em>, IMDA TS SRD, Sep. 2023. Accessed: Nov. 1, 2026. [Online]. Available: <a href="https://www.imda.gov.sg/-/media/imda/files/regulation-licensing-and-consultations/ict-standards/telecommunication-standards/radio-comms/imdatssrd.pdf">https://www.imda.gov.sg/-/media/imda/files/regulation-licensing-and-consultations/ict-standards/telecommunication-standards/radio-comms/imdatssrd.pdf</a>.</p>
 <p class="reference-note">A listed frequency band alone does not establish approval for the proposed radio configuration.</p>

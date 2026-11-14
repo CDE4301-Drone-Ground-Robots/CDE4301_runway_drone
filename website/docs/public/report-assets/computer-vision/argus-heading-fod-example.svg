@@ -1,0 +1,64 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 820" width="1280" height="820" role="img" aria-labelledby="title desc">
+<title id="title">ARGUS heading and detected FOD: worked coordinate example</title>
+<desc id="desc">Top view of a level drone with a downward camera. ARGUS is at map position 3,4 metres and faces positive map Y, heading 90 degrees from positive map X. The FOD is left and slightly ahead of ARGUS. The body offset is 0.05556 metres forward and 0.171875 metres left. Rotation gives map offset minus 0.171875 in X and plus 0.05556 in Y. Adding drone position gives FOD coordinates 2.828,4.056 metres.</desc>
+<defs>
+<marker id="map" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto"><path d="M0 0L10 5L0 10Z" fill="#d7aa94"/></marker>
+<marker id="body" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto"><path d="M0 0L10 5L0 10Z" fill="#9bcdb6"/></marker>
+<marker id="offset" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto"><path d="M0 0L10 5L0 10Z" fill="#e8cb79"/></marker>
+<pattern id="grid" width="50" height="50" patternUnits="userSpaceOnUse"><path d="M50 0H0V50" fill="none" stroke="#253241" stroke-width="1"/></pattern>
+<style>text{font-family:Arial,sans-serif;fill:#eef1f6}.title{font-size:28px;font-weight:600;text-anchor:middle}.heading{font-size:21px;font-weight:600}.body{font-size:19px}.note{font-size:17px;fill:#bdc8d3}.map{fill:none;stroke:#d7aa94;stroke-width:2;marker-end:url(#map)}.bodyaxis{fill:none;stroke:#9bcdb6;stroke-width:2.5;marker-end:url(#body)}.offset{fill:none;stroke:#e8cb79;stroke-width:3;marker-end:url(#offset)}</style>
+</defs>
+<rect width="1280" height="820" rx="18" fill="#0d131d"/>
+<text class="title" x="640" y="47">ARGUS Heading and FOD Position</text>
+<text class="note" x="640" y="81" text-anchor="middle">Top view. Level, downward-facing camera. Example values, not flight measurements.</text>
+<rect x="45" y="120" width="730" height="590" rx="14" fill="#12202b" stroke="#40596b"/>
+<rect x="55" y="130" width="710" height="570" rx="10" fill="url(#grid)"/>
+<!-- Map axes and the ninety-degree heading. -->
+<path class="map" d="M510 420H710"/>
+<text class="body" x="643" y="447">Map +X</text>
+<path class="bodyaxis" d="M510 420V210"/>
+<text class="heading" x="510" y="164" text-anchor="middle">ARGUS faces map +Y</text>
+<text class="note" x="510" y="190" text-anchor="middle">Body +X: forward</text>
+<path class="map" d="M615 420A105 105 0 0 0 510 315"/>
+<text class="body" x="615" y="324">&#968; = 90&#176;</text>
+<!-- Image-derived ground offset after heading rotation. -->
+<path d="M510 420H252V337" fill="none" stroke="#8c9cae" stroke-width="2" stroke-dasharray="7 6"/>
+<path class="offset" d="M486 412L264 341"/>
+<text class="body" x="285" y="495">&#916;X = -0.172 m</text>
+<text class="body" x="76" y="390">&#916;Y = +0.056 m</text>
+<path class="bodyaxis" d="M510 420H345"/>
+<text class="note" x="346" y="450">Body +Y: left</text>
+<!-- ARGUS: schematic top-view quadrotor icon, front pointing up. -->
+<g stroke="#b8c7d5" stroke-width="7" stroke-linecap="round"><path d="M510 420L468 378M510 420L552 378M510 420L468 462M510 420L552 462"/></g>
+<g fill="#21384a" stroke="#d9e2ea" stroke-width="2"><ellipse cx="468" cy="378" rx="23" ry="10"/><ellipse cx="552" cy="378" rx="23" ry="10"/><ellipse cx="468" cy="462" rx="23" ry="10"/><ellipse cx="552" cy="462" rx="23" ry="10"/></g>
+<rect x="493" y="396" width="34" height="48" rx="8" fill="#d7aa94" stroke="#f3d6c5" stroke-width="2"/>
+<path d="M510 390L503 401H517Z" fill="#f6f8fa"/>
+<text class="heading" x="537" y="530">ARGUS</text>
+<text class="body" x="494" y="562">(3.000, 4.000) m</text>
+<!-- The FOD is west and slightly north of the drone. -->
+<circle cx="252" cy="337" r="13" fill="#e8cb79" stroke="#fff2bf" stroke-width="2"/>
+<path d="M247 330H257V344H247Z" fill="#313c49"/>
+<text class="heading" x="252" y="269" text-anchor="middle">Detected FOD</text>
+<text class="body" x="252" y="299" text-anchor="middle">(2.828, 4.056) m</text>
+<text class="note" x="410" y="659" text-anchor="middle">The heading rotates the offset into map directions.</text>
+<text class="note" x="410" y="687" text-anchor="middle">It does not change the drone&#8217;s position.</text>
+<!-- Compact numerical guide matches the equations immediately below the figure. -->
+<rect x="805" y="120" width="430" height="590" rx="14" fill="#172431" stroke="#40596b"/>
+<text class="heading" x="835" y="160">Follow the calculation</text>
+<text class="note" x="835" y="205">Drone position from navigation</text>
+<text class="body" x="835" y="235">X = 3.000 m, Y = 4.000 m</text>
+<path d="M835 258H1205" stroke="#40596b"/>
+<text class="note" x="835" y="293">Ground offset in image axes</text>
+<text class="body" x="835" y="323">Right: -0.172 m, down: -0.056 m</text>
+<text class="note" x="835" y="365">Convert to body axes</text>
+<text class="body" x="835" y="395">Forward: +0.05556 m</text>
+<text class="body" x="835" y="425">Left: +0.171875 m</text>
+<text class="note" x="835" y="467">Rotate using heading &#968; = 90&#176;</text>
+<text class="body" x="835" y="497">Map &#916;X = -0.171875 m</text>
+<text class="body" x="835" y="527">Map &#916;Y = +0.05556 m</text>
+<path d="M835 552H1205" stroke="#40596b"/>
+<text class="note" x="835" y="588">Add the drone position</text>
+<text class="heading" x="835" y="622">FOD = (2.828, 4.056) m</text>
+<text class="note" x="835" y="667">Camera mounting assumed as in the text.</text>
+<text class="note" x="640" y="766" text-anchor="middle">Green arrows: drone axes. Rose arrows: map direction and heading. Yellow marker: detected FOD.</text>
+</svg>
