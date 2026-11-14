@@ -11,7 +11,11 @@ const reportSidebar = [
   { text: 'Report overview', link: '/report/' },
   { text: 'Project scope', link: '/scopes' },
   { text: 'Research', link: '/research/', collapsed: false, items: [
-   { text: 'Primary Research', link: '/research/#primary-research' },
+   { text: 'Primary Research', link: '/research/#primary-research', collapsed: false, items: [
+    { text: 'The Problem', link: '/research/#the-problem' },
+    { text: 'The Stakeholders Affected by the Problem', link: '/research/#the-stakeholders-affected-by-the-problem' },
+    { text: 'Stakeholder Interview Findings Relevant to UAV Detection', link: '/research/#stakeholder-interview-findings-relevant-to-uav-detection' }
+   ] },
    { text: 'Secondary Research', link: '/research/#secondary-research', collapsed: false, items: [
     { text: 'Existing Detection Technologies', link: '/research/#existing-detection-technologies' },
     { text: 'Problem Statement and Scope', link: '/research/#problem-statement-and-scope' },
