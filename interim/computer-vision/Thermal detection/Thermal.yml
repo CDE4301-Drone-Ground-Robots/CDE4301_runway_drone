@@ -1,0 +1,9 @@
+path: C:/Users/Chara/OneDrive/Documents/YR4_SEM1/CDE4301/FOD_Detection/CD4301_THERMAL/Total_Dataset
+
+train: train/images
+val: val/images
+test: test/images
+
+names:
+  0: person
+  1: bird

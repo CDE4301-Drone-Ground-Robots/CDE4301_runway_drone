@@ -1,0 +1,338 @@
+[
+  {
+    "file": "Anomaly_model.ckpt",
+    "unchanged": true
+  },
+  {
+    "file": "best_crack_model.pth",
+    "unchanged": true
+  },
+  {
+    "file": "Camera_Selection.py",
+    "unchanged": true
+  },
+  {
+    "file": "Crack_Detection.py",
+    "unchanged": true
+  },
+  {
+    "file": "detections.csv",
+    "unchanged": true
+  },
+  {
+    "file": "FOD_detection.py",
+    "unchanged": true
+  },
+  {
+    "file": "FOD_yolo11s.pt",
+    "unchanged": true
+  },
+  {
+    "file": "Integration.py",
+    "unchanged": true
+  },
+  {
+    "file": "Integration_1.py",
+    "unchanged": true
+  },
+  {
+    "file": "Patchcore_Detection.py",
+    "unchanged": true
+  },
+  {
+    "file": "Thermal_Detection.py",
+    "unchanged": true
+  },
+  {
+    "file": "Thermal_yolo11s.pt",
+    "unchanged": true
+  },
+  {
+    "file": ".vscode\\settings.json",
+    "unchanged": true
+  },
+  {
+    "file": "anomaly_snapshots\\csv_000100_detections.png",
+    "unchanged": true
+  },
+  {
+    "file": "anomaly_snapshots\\csv_000100_rgb.png",
+    "unchanged": true
+  },
+  {
+    "file": "anomaly_snapshots\\csv_000200_detections.png",
+    "unchanged": true
+  },
+  {
+    "file": "anomaly_snapshots\\csv_000200_rgb.png",
+    "unchanged": true
+  },
+  {
+    "file": "anomaly_snapshots\\csv_000300_detections.png",
+    "unchanged": true
+  },
+  {
+    "file": "anomaly_snapshots\\csv_000300_rgb.png",
+    "unchanged": true
+  },
+  {
+    "file": "Benchmark_inputs\\RGB\\000153_fog.jpg",
+    "unchanged": true
+  },
+  {
+    "file": "Benchmark_inputs\\RGB\\000428.jpg",
+    "unchanged": true
+  },
+  {
+    "file": "Benchmark_inputs\\RGB\\002594.jpg",
+    "unchanged": true
+  },
+  {
+    "file": "Benchmark_inputs\\RGB\\004624.jpg",
+    "unchanged": true
+  },
+  {
+    "file": "Benchmark_inputs\\RGB\\004624_fog.jpg",
+    "unchanged": true
+  },
+  {
+    "file": "Benchmark_inputs\\RGB\\019465.jpg",
+    "unchanged": true
+  },
+  {
+    "file": "Benchmark_inputs\\RGB\\020003_rain.jpg",
+    "unchanged": true
+  },
+  {
+    "file": "Benchmark_inputs\\RGB\\020586.jpg",
+    "unchanged": true
+  },
+  {
+    "file": "Benchmark_inputs\\RGB\\020751.jpg",
+    "unchanged": true
+  },
+  {
+    "file": "Benchmark_inputs\\RGB\\024648_rain.jpg",
+    "unchanged": true
+  },
+  {
+    "file": "Benchmark_inputs\\RGB\\DSC01481_t_1_1.jpg",
+    "unchanged": true
+  },
+  {
+    "file": "Benchmark_inputs\\RGB\\DSC01481_t_6_5.jpg",
+    "unchanged": true
+  },
+  {
+    "file": "Benchmark_inputs\\RGB\\DSC01518_t_1_4.jpg",
+    "unchanged": true
+  },
+  {
+    "file": "Benchmark_inputs\\RGB\\DSC01729_t_0_17.jpg",
+    "unchanged": true
+  },
+  {
+    "file": "Benchmark_inputs\\RGB\\DSC01729_t_1_17.jpg",
+    "unchanged": true
+  },
+  {
+    "file": "Benchmark_inputs\\RGB\\DSC01729_t_1_3.jpg",
+    "unchanged": true
+  },
+  {
+    "file": "Benchmark_inputs\\RGB\\DSC01729_t_2_17.jpg",
+    "unchanged": true
+  },
+  {
+    "file": "Benchmark_inputs\\RGB\\DSC01729_t_3_17.jpg",
+    "unchanged": true
+  },
+  {
+    "file": "Benchmark_inputs\\RGB\\DSC01729_t_4_3.jpg",
+    "unchanged": true
+  },
+  {
+    "file": "Benchmark_inputs\\RGB\\DSC01729_t_5_3.jpg",
+    "unchanged": true
+  },
+  {
+    "file": "Benchmark_inputs\\RGB\\IMG_3804.HEIC",
+    "unchanged": true
+  },
+  {
+    "file": "Benchmark_inputs\\RGB\\IMG_3805.HEIC",
+    "unchanged": true
+  },
+  {
+    "file": "Benchmark_inputs\\RGB\\IMG_3806.HEIC",
+    "unchanged": true
+  },
+  {
+    "file": "Benchmark_inputs\\RGB\\IMG_3807.HEIC",
+    "unchanged": true
+  },
+  {
+    "file": "Benchmark_inputs\\RGB\\IMG_3844.HEIC",
+    "unchanged": true
+  },
+  {
+    "file": "Benchmark_inputs\\RGB\\IMG_3845.HEIC",
+    "unchanged": true
+  },
+  {
+    "file": "Benchmark_inputs\\RGB\\IMG_3846.HEIC",
+    "unchanged": true
+  },
+  {
+    "file": "Benchmark_inputs\\RGB\\IMG_3847.HEIC",
+    "unchanged": true
+  },
+  {
+    "file": "Benchmark_inputs\\RGB\\IMG_3848.HEIC",
+    "unchanged": true
+  },
+  {
+    "file": "Benchmark_inputs\\RGB\\IMG_3851.HEIC",
+    "unchanged": true
+  },
+  {
+    "file": "Benchmark_inputs\\Thermal\\010054.jpg",
+    "unchanged": true
+  },
+  {
+    "file": "Benchmark_inputs\\Thermal\\010159.jpg",
+    "unchanged": true
+  },
+  {
+    "file": "Benchmark_inputs\\Thermal\\010389.jpg",
+    "unchanged": true
+  },
+  {
+    "file": "Benchmark_inputs\\Thermal\\010436.jpg",
+    "unchanged": true
+  },
+  {
+    "file": "Benchmark_inputs\\Thermal\\010454.jpg",
+    "unchanged": true
+  },
+  {
+    "file": "Benchmark_inputs\\Thermal\\010592.jpg",
+    "unchanged": true
+  },
+  {
+    "file": "Benchmark_inputs\\Thermal\\080019.jpg",
+    "unchanged": true
+  },
+  {
+    "file": "Benchmark_inputs\\Thermal\\080073.jpg",
+    "unchanged": true
+  },
+  {
+    "file": "Benchmark_inputs\\Thermal\\080246.jpg",
+    "unchanged": true
+  },
+  {
+    "file": "Benchmark_inputs\\Thermal\\081129.jpg",
+    "unchanged": true
+  },
+  {
+    "file": "Benchmark_inputs\\Thermal\\081134.jpg",
+    "unchanged": true
+  },
+  {
+    "file": "Benchmark_inputs\\Thermal\\090045.jpg",
+    "unchanged": true
+  },
+  {
+    "file": "Benchmark_inputs\\Thermal\\100100.jpg",
+    "unchanged": true
+  },
+  {
+    "file": "Benchmark_inputs\\Thermal\\100170.jpg",
+    "unchanged": true
+  },
+  {
+    "file": "Benchmark_inputs\\Thermal\\100271.jpg",
+    "unchanged": true
+  },
+  {
+    "file": "Benchmark_inputs\\Thermal\\Thermal_10_jpg.rf.f38834020551b29145c1903abb98dd2c.jpg",
+    "unchanged": true
+  },
+  {
+    "file": "Benchmark_inputs\\Thermal\\Thermal_3_jpg.rf.851eaf8c3397044a035dbff4019426c3.jpg",
+    "unchanged": true
+  },
+  {
+    "file": "Benchmark_inputs\\Thermal\\Thermal_4_jpg.rf.a5e52dacabc3321791d8844786a404f1.jpg",
+    "unchanged": true
+  },
+  {
+    "file": "Benchmark_inputs\\Thermal\\Thermal_5_jpg.rf.9d231d78671bf2bcd5a193b2447a5d8a.jpg",
+    "unchanged": true
+  },
+  {
+    "file": "Benchmark_inputs\\Thermal\\Ther_12_jpg.rf.4fc881ec700bfce5d7215c4e3d1e4a5e.jpg",
+    "unchanged": true
+  },
+  {
+    "file": "Benchmark_inputs\\Thermal\\Ther_19_jpg.rf.8aedb27be74cbeb9caad191ec54b2f83.jpg",
+    "unchanged": true
+  },
+  {
+    "file": "Benchmark_inputs\\Thermal\\Ther_26_jpg.rf.d8e6b5577d7dd8bac92d0b8e4438d6db.jpg",
+    "unchanged": true
+  },
+  {
+    "file": "Benchmark_inputs\\Thermal\\Ther_37_jpg.rf.7d5b9f33be93f2511a9bdda53fcb3978.jpg",
+    "unchanged": true
+  },
+  {
+    "file": "Benchmark_inputs\\Thermal\\Ther_37_jpg.rf.fc08cbc61bf245c026135dd085808eaa.jpg",
+    "unchanged": true
+  },
+  {
+    "file": "Benchmark_inputs\\Thermal\\Ther_39_jpg.rf.9e677b34dbbeab57ae454799e6fd6fb7.jpg",
+    "unchanged": true
+  },
+  {
+    "file": "Benchmark_inputs\\Thermal\\Ther_45_jpg.rf.3dbcc9142e21300a18cbc6690cea395e.jpg",
+    "unchanged": true
+  },
+  {
+    "file": "Benchmark_inputs\\Thermal\\Ther_66_jpg.rf.6e96e8430b0f2e002037d71900a8564f.jpg",
+    "unchanged": true
+  },
+  {
+    "file": "Benchmark_inputs\\Thermal\\Ther_67_jpg.rf.6dce8f955a6c59d56b867c4a54ad5f32.jpg",
+    "unchanged": true
+  },
+  {
+    "file": "Benchmark_inputs\\Thermal\\Ther_68_jpg.rf.e5cde7036db4313072f878c82d2f10a9.jpg",
+    "unchanged": true
+  },
+  {
+    "file": "Benchmark_inputs\\Thermal\\Ther_69_jpg.rf.e94841bd4d8c7d747198fb2e0757c2a9.jpg",
+    "unchanged": true
+  },
+  {
+    "file": "__pycache__\\Camera_Selection.cpython-310.pyc",
+    "unchanged": true
+  },
+  {
+    "file": "__pycache__\\Crack_Detection.cpython-310.pyc",
+    "unchanged": true
+  },
+  {
+    "file": "__pycache__\\FOD_detection.cpython-310.pyc",
+    "unchanged": true
+  },
+  {
+    "file": "__pycache__\\Patchcore_Detection.cpython-310.pyc",
+    "unchanged": true
+  },
+  {
+    "file": "__pycache__\\Thermal_Detection.cpython-310.pyc",
+    "unchanged": true
+  }
+]

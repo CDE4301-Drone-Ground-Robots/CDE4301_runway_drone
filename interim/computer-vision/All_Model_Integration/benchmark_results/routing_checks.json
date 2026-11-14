@@ -1,0 +1,439 @@
+{
+  "status": "passed",
+  "checks": [
+    {
+      "fod": true,
+      "crack": true,
+      "parallel": false,
+      "anomaly": true,
+      "status": "passed",
+      "routing": {
+        "crop_count": 1,
+        "stages": [
+          "patchcore",
+          "fod",
+          "simulated_coordinate_extraction"
+        ],
+        "crop_resize_host_ms": 26.95579999999609,
+        "output_merge_host_ms": 0.001200009137392044,
+        "coordinate_extraction_ms": 0.039099992136470973,
+        "coordinate_count": 1,
+        "message_preparation_ms": 0.46579999616369605,
+        "fod_calls": 1,
+        "crack_calls": 0,
+        "fod_positive_crops": 1,
+        "crack_positive_crops": 0,
+        "neither_detected_crops": 0,
+        "no_crack_base_crops": 0,
+        "message_count": 1,
+        "ugv_message_count": 1,
+        "base_message_count": 0
+      }
+    },
+    {
+      "fod": true,
+      "crack": false,
+      "parallel": false,
+      "anomaly": true,
+      "status": "passed",
+      "routing": {
+        "crop_count": 1,
+        "stages": [
+          "patchcore",
+          "fod",
+          "simulated_coordinate_extraction"
+        ],
+        "crop_resize_host_ms": 1.000100004603155,
+        "output_merge_host_ms": 0.0010999938240274787,
+        "coordinate_extraction_ms": 0.04719999560620636,
+        "coordinate_count": 1,
+        "message_preparation_ms": 0.06450001092161983,
+        "fod_calls": 1,
+        "crack_calls": 0,
+        "fod_positive_crops": 1,
+        "crack_positive_crops": 0,
+        "neither_detected_crops": 0,
+        "no_crack_base_crops": 0,
+        "message_count": 1,
+        "ugv_message_count": 1,
+        "base_message_count": 0
+      }
+    },
+    {
+      "fod": false,
+      "crack": true,
+      "parallel": false,
+      "anomaly": true,
+      "status": "passed",
+      "routing": {
+        "crop_count": 1,
+        "stages": [
+          "patchcore",
+          "fod",
+          "crack"
+        ],
+        "crop_resize_host_ms": 0.7955000037327409,
+        "output_merge_host_ms": 0.0017999991541728377,
+        "coordinate_extraction_ms": 0.0,
+        "coordinate_count": 0,
+        "message_preparation_ms": 0.07199999527074397,
+        "fod_calls": 1,
+        "crack_calls": 1,
+        "fod_positive_crops": 0,
+        "crack_positive_crops": 1,
+        "neither_detected_crops": 0,
+        "no_crack_base_crops": 0,
+        "message_count": 1,
+        "ugv_message_count": 0,
+        "base_message_count": 1
+      }
+    },
+    {
+      "fod": false,
+      "crack": false,
+      "parallel": false,
+      "anomaly": true,
+      "status": "passed",
+      "routing": {
+        "crop_count": 1,
+        "stages": [
+          "patchcore",
+          "fod",
+          "crack"
+        ],
+        "crop_resize_host_ms": 0.7332999957725406,
+        "output_merge_host_ms": 0.0011999945854768157,
+        "coordinate_extraction_ms": 0.0,
+        "coordinate_count": 0,
+        "message_preparation_ms": 0.03999999898951501,
+        "fod_calls": 1,
+        "crack_calls": 1,
+        "fod_positive_crops": 0,
+        "crack_positive_crops": 0,
+        "neither_detected_crops": 1,
+        "no_crack_base_crops": 0,
+        "message_count": 1,
+        "ugv_message_count": 0,
+        "base_message_count": 1
+      }
+    },
+    {
+      "fod": true,
+      "crack": true,
+      "parallel": true,
+      "anomaly": true,
+      "status": "passed",
+      "routing": {
+        "crop_count": 1,
+        "stages": [
+          "patchcore",
+          "fod",
+          "crack",
+          "simulated_coordinate_extraction"
+        ],
+        "crop_resize_host_ms": 0.6738999945810065,
+        "output_merge_host_ms": 0.0013999961083754897,
+        "coordinate_extraction_ms": 0.026799985789693892,
+        "coordinate_count": 1,
+        "message_preparation_ms": 0.09480000881012529,
+        "fod_calls": 1,
+        "crack_calls": 1,
+        "fod_positive_crops": 1,
+        "crack_positive_crops": 1,
+        "neither_detected_crops": 0,
+        "no_crack_base_crops": 0,
+        "message_count": 2,
+        "ugv_message_count": 1,
+        "base_message_count": 1
+      }
+    },
+    {
+      "fod": true,
+      "crack": false,
+      "parallel": true,
+      "anomaly": true,
+      "status": "passed",
+      "routing": {
+        "crop_count": 1,
+        "stages": [
+          "patchcore",
+          "fod",
+          "crack",
+          "simulated_coordinate_extraction"
+        ],
+        "crop_resize_host_ms": 0.7724000024609268,
+        "output_merge_host_ms": 0.001300009898841381,
+        "coordinate_extraction_ms": 0.023599990527145565,
+        "coordinate_count": 1,
+        "message_preparation_ms": 0.04100000660400838,
+        "fod_calls": 1,
+        "crack_calls": 1,
+        "fod_positive_crops": 1,
+        "crack_positive_crops": 0,
+        "neither_detected_crops": 0,
+        "no_crack_base_crops": 0,
+        "message_count": 1,
+        "ugv_message_count": 1,
+        "base_message_count": 0
+      }
+    },
+    {
+      "fod": false,
+      "crack": true,
+      "parallel": true,
+      "anomaly": true,
+      "status": "passed",
+      "routing": {
+        "crop_count": 1,
+        "stages": [
+          "patchcore",
+          "fod",
+          "crack"
+        ],
+        "crop_resize_host_ms": 0.7637999951839447,
+        "output_merge_host_ms": 0.0009999930625781417,
+        "coordinate_extraction_ms": 0.0,
+        "coordinate_count": 0,
+        "message_preparation_ms": 0.039099992136470973,
+        "fod_calls": 1,
+        "crack_calls": 1,
+        "fod_positive_crops": 0,
+        "crack_positive_crops": 1,
+        "neither_detected_crops": 0,
+        "no_crack_base_crops": 0,
+        "message_count": 1,
+        "ugv_message_count": 0,
+        "base_message_count": 1
+      }
+    },
+    {
+      "fod": false,
+      "crack": false,
+      "parallel": true,
+      "anomaly": true,
+      "status": "passed",
+      "routing": {
+        "crop_count": 1,
+        "stages": [
+          "patchcore",
+          "fod",
+          "crack"
+        ],
+        "crop_resize_host_ms": 0.7951999868964776,
+        "output_merge_host_ms": 0.00100000761449337,
+        "coordinate_extraction_ms": 0.0,
+        "coordinate_count": 0,
+        "message_preparation_ms": 0.029999995604157448,
+        "fod_calls": 1,
+        "crack_calls": 1,
+        "fod_positive_crops": 0,
+        "crack_positive_crops": 0,
+        "neither_detected_crops": 1,
+        "no_crack_base_crops": 0,
+        "message_count": 1,
+        "ugv_message_count": 0,
+        "base_message_count": 1
+      }
+    },
+    {
+      "fod": false,
+      "crack": false,
+      "parallel": false,
+      "anomaly": false,
+      "status": "passed",
+      "routing": {
+        "crop_count": 0,
+        "stages": [
+          "patchcore"
+        ],
+        "crop_resize_host_ms": 0.0,
+        "output_merge_host_ms": 0.0,
+        "coordinate_extraction_ms": 0.0,
+        "coordinate_count": 0,
+        "message_preparation_ms": 0.0,
+        "fod_calls": 0,
+        "crack_calls": 0,
+        "fod_positive_crops": 0,
+        "crack_positive_crops": 0,
+        "neither_detected_crops": 0,
+        "no_crack_base_crops": 0,
+        "message_count": 0,
+        "ugv_message_count": 0,
+        "base_message_count": 0
+      }
+    },
+    {
+      "fod": false,
+      "crack": false,
+      "parallel": true,
+      "anomaly": false,
+      "status": "passed",
+      "routing": {
+        "crop_count": 0,
+        "stages": [
+          "patchcore"
+        ],
+        "crop_resize_host_ms": 0.0,
+        "output_merge_host_ms": 0.0,
+        "coordinate_extraction_ms": 0.0,
+        "coordinate_count": 0,
+        "message_preparation_ms": 0.0,
+        "fod_calls": 0,
+        "crack_calls": 0,
+        "fod_positive_crops": 0,
+        "crack_positive_crops": 0,
+        "neither_detected_crops": 0,
+        "no_crack_base_crops": 0,
+        "message_count": 0,
+        "ugv_message_count": 0,
+        "base_message_count": 0
+      }
+    },
+    {
+      "mode": "sequential2",
+      "fod": true,
+      "crack": true,
+      "anomaly": true,
+      "status": "passed",
+      "routing": {
+        "crop_count": 1,
+        "stages": [
+          "patchcore",
+          "fod",
+          "crack",
+          "simulated_coordinate_extraction"
+        ],
+        "crop_resize_host_ms": 0.6756999937351793,
+        "output_merge_host_ms": 0.0008999923011288047,
+        "coordinate_extraction_ms": 0.03029999788850546,
+        "coordinate_count": 1,
+        "message_preparation_ms": 0.08379999781027436,
+        "fod_calls": 1,
+        "crack_calls": 1,
+        "fod_positive_crops": 1,
+        "crack_positive_crops": 1,
+        "neither_detected_crops": 0,
+        "no_crack_base_crops": 0,
+        "message_count": 2,
+        "ugv_message_count": 1,
+        "base_message_count": 1
+      }
+    },
+    {
+      "mode": "sequential2",
+      "fod": true,
+      "crack": false,
+      "anomaly": true,
+      "status": "passed",
+      "routing": {
+        "crop_count": 1,
+        "stages": [
+          "patchcore",
+          "fod",
+          "crack",
+          "simulated_coordinate_extraction"
+        ],
+        "crop_resize_host_ms": 0.680199998896569,
+        "output_merge_host_ms": 0.0006999907782301307,
+        "coordinate_extraction_ms": 0.022099993657320738,
+        "coordinate_count": 1,
+        "message_preparation_ms": 0.07170000753831118,
+        "fod_calls": 1,
+        "crack_calls": 1,
+        "fod_positive_crops": 1,
+        "crack_positive_crops": 0,
+        "neither_detected_crops": 0,
+        "no_crack_base_crops": 1,
+        "message_count": 2,
+        "ugv_message_count": 1,
+        "base_message_count": 1
+      }
+    },
+    {
+      "mode": "sequential2",
+      "fod": false,
+      "crack": true,
+      "anomaly": true,
+      "status": "passed",
+      "routing": {
+        "crop_count": 1,
+        "stages": [
+          "patchcore",
+          "fod",
+          "crack"
+        ],
+        "crop_resize_host_ms": 0.730699990526773,
+        "output_merge_host_ms": 0.000600004568696022,
+        "coordinate_extraction_ms": 0.0,
+        "coordinate_count": 0,
+        "message_preparation_ms": 0.045500011765398085,
+        "fod_calls": 1,
+        "crack_calls": 1,
+        "fod_positive_crops": 0,
+        "crack_positive_crops": 1,
+        "neither_detected_crops": 0,
+        "no_crack_base_crops": 0,
+        "message_count": 1,
+        "ugv_message_count": 0,
+        "base_message_count": 1
+      }
+    },
+    {
+      "mode": "sequential2",
+      "fod": false,
+      "crack": false,
+      "anomaly": true,
+      "status": "passed",
+      "routing": {
+        "crop_count": 1,
+        "stages": [
+          "patchcore",
+          "fod",
+          "crack"
+        ],
+        "crop_resize_host_ms": 0.7253999938257039,
+        "output_merge_host_ms": 0.000800006091594696,
+        "coordinate_extraction_ms": 0.0,
+        "coordinate_count": 0,
+        "message_preparation_ms": 0.03090000245720148,
+        "fod_calls": 1,
+        "crack_calls": 1,
+        "fod_positive_crops": 0,
+        "crack_positive_crops": 0,
+        "neither_detected_crops": 1,
+        "no_crack_base_crops": 1,
+        "message_count": 1,
+        "ugv_message_count": 0,
+        "base_message_count": 1
+      }
+    },
+    {
+      "mode": "sequential2",
+      "fod": false,
+      "crack": false,
+      "anomaly": false,
+      "status": "passed",
+      "routing": {
+        "crop_count": 0,
+        "stages": [
+          "patchcore"
+        ],
+        "crop_resize_host_ms": 0.0,
+        "output_merge_host_ms": 0.0,
+        "coordinate_extraction_ms": 0.0,
+        "coordinate_count": 0,
+        "message_preparation_ms": 0.0,
+        "fod_calls": 0,
+        "crack_calls": 0,
+        "fod_positive_crops": 0,
+        "crack_positive_crops": 0,
+        "neither_detected_crops": 0,
+        "no_crack_base_crops": 0,
+        "message_count": 0,
+        "ugv_message_count": 0,
+        "base_message_count": 0
+      }
+    }
+  ],
+  "meaning": "logic checks, not model accuracy or timing measurements"
+}

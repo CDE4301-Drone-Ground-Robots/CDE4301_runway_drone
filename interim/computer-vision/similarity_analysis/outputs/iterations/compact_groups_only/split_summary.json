@@ -1,0 +1,16 @@
+{
+  "seed": 4301,
+  "images": {
+    "train": 23699,
+    "val": 5045,
+    "test": 5049
+  },
+  "groups": {
+    "train": 19306,
+    "val": 1820,
+    "test": 1818
+  },
+  "status": "PROVISIONAL: candidate groups and unresolved cross-split matches require review",
+  "original_split_overlap": null,
+  "source_video_independence": false
+}

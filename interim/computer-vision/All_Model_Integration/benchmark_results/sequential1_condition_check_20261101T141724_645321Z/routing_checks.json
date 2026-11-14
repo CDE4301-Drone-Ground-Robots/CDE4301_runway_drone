@@ -1,0 +1,220 @@
+[
+  {
+    "anomaly": true,
+    "fod": true,
+    "crack": true,
+    "status": "passed",
+    "routing": {
+      "crop_count": 1,
+      "stages": [
+        "patchcore",
+        "fod",
+        "crack",
+        "simulated_coordinate_extraction"
+      ],
+      "crop_resize_host_ms": 21.658599999682338,
+      "output_merge_host_ms": 0.0010000003385357559,
+      "coordinate_extraction_ms": 0.04379999973025406,
+      "coordinate_count": 1,
+      "message_preparation_ms": 0.5959000000075321,
+      "fod_calls": 1,
+      "crack_calls": 1,
+      "fod_positive_crops": 1,
+      "crack_positive_crops": 1,
+      "neither_detected_crops": 0,
+      "no_crack_base_crops": 0,
+      "message_count": 2,
+      "ugv_message_count": 1,
+      "base_message_count": 1
+    }
+  },
+  {
+    "anomaly": true,
+    "fod": true,
+    "crack": false,
+    "status": "passed",
+    "routing": {
+      "crop_count": 1,
+      "stages": [
+        "patchcore",
+        "fod",
+        "crack",
+        "simulated_coordinate_extraction"
+      ],
+      "crop_resize_host_ms": 1.2769999993906822,
+      "output_merge_host_ms": 0.0012000000424450263,
+      "coordinate_extraction_ms": 0.026199999410891905,
+      "coordinate_count": 1,
+      "message_preparation_ms": 0.0639000008959556,
+      "fod_calls": 1,
+      "crack_calls": 1,
+      "fod_positive_crops": 1,
+      "crack_positive_crops": 0,
+      "neither_detected_crops": 0,
+      "no_crack_base_crops": 0,
+      "message_count": 1,
+      "ugv_message_count": 1,
+      "base_message_count": 0
+    }
+  },
+  {
+    "anomaly": true,
+    "fod": false,
+    "crack": true,
+    "status": "passed",
+    "routing": {
+      "crop_count": 1,
+      "stages": [
+        "patchcore",
+        "fod",
+        "crack"
+      ],
+      "crop_resize_host_ms": 1.1651999993773643,
+      "output_merge_host_ms": 0.0012000000424450263,
+      "coordinate_extraction_ms": 0.0,
+      "coordinate_count": 0,
+      "message_preparation_ms": 0.05740000051446259,
+      "fod_calls": 1,
+      "crack_calls": 1,
+      "fod_positive_crops": 0,
+      "crack_positive_crops": 1,
+      "neither_detected_crops": 0,
+      "no_crack_base_crops": 0,
+      "message_count": 1,
+      "ugv_message_count": 0,
+      "base_message_count": 1
+    }
+  },
+  {
+    "anomaly": true,
+    "fod": false,
+    "crack": false,
+    "status": "passed",
+    "routing": {
+      "crop_count": 1,
+      "stages": [
+        "patchcore",
+        "fod",
+        "crack"
+      ],
+      "crop_resize_host_ms": 0.948699999753444,
+      "output_merge_host_ms": 0.0009000004865811206,
+      "coordinate_extraction_ms": 0.0,
+      "coordinate_count": 0,
+      "message_preparation_ms": 0.05089999922347488,
+      "fod_calls": 1,
+      "crack_calls": 1,
+      "fod_positive_crops": 0,
+      "crack_positive_crops": 0,
+      "neither_detected_crops": 1,
+      "no_crack_base_crops": 1,
+      "message_count": 1,
+      "ugv_message_count": 0,
+      "base_message_count": 1
+    }
+  },
+  {
+    "anomaly": false,
+    "fod": true,
+    "crack": true,
+    "status": "passed",
+    "routing": {
+      "crop_count": 0,
+      "stages": [
+        "patchcore"
+      ],
+      "crop_resize_host_ms": 0.0,
+      "output_merge_host_ms": 0.0,
+      "coordinate_extraction_ms": 0.0,
+      "coordinate_count": 0,
+      "message_preparation_ms": 0.0,
+      "fod_calls": 0,
+      "crack_calls": 0,
+      "fod_positive_crops": 0,
+      "crack_positive_crops": 0,
+      "neither_detected_crops": 0,
+      "no_crack_base_crops": 0,
+      "message_count": 0,
+      "ugv_message_count": 0,
+      "base_message_count": 0
+    }
+  },
+  {
+    "anomaly": false,
+    "fod": true,
+    "crack": false,
+    "status": "passed",
+    "routing": {
+      "crop_count": 0,
+      "stages": [
+        "patchcore"
+      ],
+      "crop_resize_host_ms": 0.0,
+      "output_merge_host_ms": 0.0,
+      "coordinate_extraction_ms": 0.0,
+      "coordinate_count": 0,
+      "message_preparation_ms": 0.0,
+      "fod_calls": 0,
+      "crack_calls": 0,
+      "fod_positive_crops": 0,
+      "crack_positive_crops": 0,
+      "neither_detected_crops": 0,
+      "no_crack_base_crops": 0,
+      "message_count": 0,
+      "ugv_message_count": 0,
+      "base_message_count": 0
+    }
+  },
+  {
+    "anomaly": false,
+    "fod": false,
+    "crack": true,
+    "status": "passed",
+    "routing": {
+      "crop_count": 0,
+      "stages": [
+        "patchcore"
+      ],
+      "crop_resize_host_ms": 0.0,
+      "output_merge_host_ms": 0.0,
+      "coordinate_extraction_ms": 0.0,
+      "coordinate_count": 0,
+      "message_preparation_ms": 0.0,
+      "fod_calls": 0,
+      "crack_calls": 0,
+      "fod_positive_crops": 0,
+      "crack_positive_crops": 0,
+      "neither_detected_crops": 0,
+      "no_crack_base_crops": 0,
+      "message_count": 0,
+      "ugv_message_count": 0,
+      "base_message_count": 0
+    }
+  },
+  {
+    "anomaly": false,
+    "fod": false,
+    "crack": false,
+    "status": "passed",
+    "routing": {
+      "crop_count": 0,
+      "stages": [
+        "patchcore"
+      ],
+      "crop_resize_host_ms": 0.0,
+      "output_merge_host_ms": 0.0,
+      "coordinate_extraction_ms": 0.0,
+      "coordinate_count": 0,
+      "message_preparation_ms": 0.0,
+      "fod_calls": 0,
+      "crack_calls": 0,
+      "fod_positive_crops": 0,
+      "crack_positive_crops": 0,
+      "neither_detected_crops": 0,
+      "no_crack_base_crops": 0,
+      "message_count": 0,
+      "ugv_message_count": 0,
+      "base_message_count": 0
+    }
+  }
+]

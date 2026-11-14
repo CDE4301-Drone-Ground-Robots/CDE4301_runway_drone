@@ -1,0 +1,64 @@
+{
+  "label": "Laptop benchmarking",
+  "config": "report",
+  "repeats": 1,
+  "warmups": 5,
+  "device": "cuda:0",
+  "start_utc": "20261031T070835_121881Z",
+  "completed": 0,
+  "failures": [],
+  "status": "completed",
+  "cli": [
+    "C:\\Users\\Chara\\OneDrive\\Documents\\YR4_SEM1\\CDE4301\\All_Model_Integration\\benchmark_suite\\core.py",
+    "--config",
+    "report",
+    "--repeats",
+    "1"
+  ],
+  "benchmark_source_sha256": "0dc4e733f9924732ca0a1d1e718007c9eda62ad0744790de5da01eba89bb055a",
+  "helper_hashes": {
+    "add_sequential2.py": "736b51eff6524790d81b4854968a89fcbf403dd9023953a07c4266c430917e36",
+    "coordinates.py": "6009a9c5064079cf8bc8ce6b464774140583fd2b83c65de5e180396c0a6cf866",
+    "core.py": "0dc4e733f9924732ca0a1d1e718007c9eda62ad0744790de5da01eba89bb055a",
+    "finalize.py": "7782e92fa7d258cd06968e8aa8367d0b8ac077db1f73f97b0f5bc5e5302f9931",
+    "METHODOLOGY.md": "c674237d99eba865d188df30f529ce6082165ddf1b74d7df36a3958b86180998",
+    "README.md": "67b5a0d159e7dc95c97f32635fa7c28cd9461376118519abca389a2ed7a8d815",
+    "routing_checks.py": "c32417612937b344dcf163bde1d568687f1399434207e85fc1780e5d9fa8cf13",
+    "run_all.py": "cfb4d4332b1eca931d5d8872f287b89234db38a1b293a448e96661c88a4abb8d",
+    "run_sequential2.py": "4f10b9afafa7e9cefcd42d59ff3e1f0fa6c823c936c9713e73d71b653e0fa652",
+    "sequential2_notes.md": "3c642a88b9a2a378f9ff64877403fa9bb1642b9c156ddc99fff0e3e9d076b827",
+    "sequential2_patches.json": "91917d2c42fc3d129feb2de036aa602444b824ab49c49b23893ec34761b62900",
+    "simulation.json": "e2d674f16975bac6641acbd6ab33f486c17f40e9f9622305f6c96e922e367e67"
+  },
+  "simulation": {
+    "label": "SIMULATION ONLY - not camera calibration or navigation measurements",
+    "uav_world_m": [
+      3,
+      4
+    ],
+    "ground_coverage_m": [
+      2,
+      2
+    ],
+    "nominal_height_agl_m": 5,
+    "assumptions": "flat ground, nadir view, no rotation; world +X=image right, +Y=image down; scales use actual source frame width/height",
+    "transport": "local JSON message preparation only; no transmission, GPS, sockets or delays"
+  },
+  "memory_before": {
+    "rss_bytes": 533688320,
+    "available_ram_bytes": 4865671168,
+    "cuda_allocated_bytes": 0,
+    "cuda_reserved_bytes": 0,
+    "cuda_peak_allocated_bytes": 0,
+    "cuda_peak_reserved_bytes": 0
+  },
+  "memory_after": {
+    "rss_bytes": 535429120,
+    "available_ram_bytes": 4863803392,
+    "cuda_allocated_bytes": 0,
+    "cuda_reserved_bytes": 0,
+    "cuda_peak_allocated_bytes": 0,
+    "cuda_peak_reserved_bytes": 0
+  },
+  "unprocessed_observations": 0
+}

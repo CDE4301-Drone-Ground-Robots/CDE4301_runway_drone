@@ -1,0 +1,986 @@
+[
+  {
+    "repeat": 1,
+    "input": "Benchmark_inputs\\RGB\\000153_fog.jpg",
+    "messages": [
+      {
+        "type": "FOD",
+        "destination": "UGV",
+        "body": {
+          "name": "MetalPart",
+          "confidence": 0.6546807885169983,
+          "coordinates": {
+            "simulated": true,
+            "bbox_original_px": [
+              35,
+              147,
+              63,
+              229
+            ],
+            "center_px": [
+              49.0,
+              188.0
+            ],
+            "offset_px": [
+              -101.0,
+              38.0
+            ],
+            "ground_offset_m": [
+              -0.6733333333333333,
+              0.25333333333333335
+            ],
+            "world_xy_m": [
+              2.3266666666666667,
+              4.253333333333333
+            ]
+          }
+        },
+        "simulated_transport": true,
+        "payload": "{\"type\":\"FOD\",\"destination\":\"UGV\",\"body\":{\"name\":\"MetalPart\",\"confidence\":0.6546807885169983,\"coordinates\":{\"simulated\":true,\"bbox_original_px\":[35,147,63,229],\"center_px\":[49.0,188.0],\"offset_px\":[-101.0,38.0],\"ground_offset_m\":[-0.6733333333333333,0.25333333333333335],\"world_xy_m\":[2.3266666666666667,4.253333333333333]}},\"simulated\":true}"
+      },
+      {
+        "type": "UNCLASSIFIED_ANOMALY",
+        "destination": "BASE",
+        "body": {
+          "roi": [
+            163,
+            148,
+            220,
+            206
+          ]
+        },
+        "simulated_transport": true,
+        "payload": "{\"type\":\"UNCLASSIFIED_ANOMALY\",\"destination\":\"BASE\",\"body\":{\"roi\":[163,148,220,206]},\"simulated\":true}"
+      }
+    ]
+  },
+  {
+    "repeat": 1,
+    "input": "Benchmark_inputs\\RGB\\000428.jpg",
+    "messages": [
+      {
+        "type": "UNCLASSIFIED_ANOMALY",
+        "destination": "BASE",
+        "body": {
+          "roi": [
+            19,
+            47,
+            120,
+            183
+          ]
+        },
+        "simulated_transport": true,
+        "payload": "{\"type\":\"UNCLASSIFIED_ANOMALY\",\"destination\":\"BASE\",\"body\":{\"roi\":[19,47,120,183]},\"simulated\":true}"
+      }
+    ]
+  },
+  {
+    "repeat": 1,
+    "input": "Benchmark_inputs\\RGB\\002594.jpg",
+    "messages": [
+      {
+        "type": "FOD",
+        "destination": "UGV",
+        "body": {
+          "name": "ClampPart",
+          "confidence": 0.7816036343574524,
+          "coordinates": {
+            "simulated": true,
+            "bbox_original_px": [
+              60,
+              2,
+              131,
+              122
+            ],
+            "center_px": [
+              95.5,
+              62.0
+            ],
+            "offset_px": [
+              -54.5,
+              -88.0
+            ],
+            "ground_offset_m": [
+              -0.36333333333333334,
+              -0.5866666666666667
+            ],
+            "world_xy_m": [
+              2.6366666666666667,
+              3.413333333333333
+            ]
+          }
+        },
+        "simulated_transport": true,
+        "payload": "{\"type\":\"FOD\",\"destination\":\"UGV\",\"body\":{\"name\":\"ClampPart\",\"confidence\":0.7816036343574524,\"coordinates\":{\"simulated\":true,\"bbox_original_px\":[60,2,131,122],\"center_px\":[95.5,62.0],\"offset_px\":[-54.5,-88.0],\"ground_offset_m\":[-0.36333333333333334,-0.5866666666666667],\"world_xy_m\":[2.6366666666666667,3.413333333333333]}},\"simulated\":true}"
+      }
+    ]
+  },
+  {
+    "repeat": 1,
+    "input": "Benchmark_inputs\\RGB\\004624.jpg",
+    "messages": [
+      {
+        "type": "FOD",
+        "destination": "UGV",
+        "body": {
+          "name": "PlasticPart",
+          "confidence": 0.9163452386856079,
+          "coordinates": {
+            "simulated": true,
+            "bbox_original_px": [
+              98,
+              185,
+              206,
+              235
+            ],
+            "center_px": [
+              152.0,
+              210.0
+            ],
+            "offset_px": [
+              2.0,
+              60.0
+            ],
+            "ground_offset_m": [
+              0.013333333333333334,
+              0.4
+            ],
+            "world_xy_m": [
+              3.013333333333333,
+              4.4
+            ]
+          }
+        },
+        "simulated_transport": true,
+        "payload": "{\"type\":\"FOD\",\"destination\":\"UGV\",\"body\":{\"name\":\"PlasticPart\",\"confidence\":0.9163452386856079,\"coordinates\":{\"simulated\":true,\"bbox_original_px\":[98,185,206,235],\"center_px\":[152.0,210.0],\"offset_px\":[2.0,60.0],\"ground_offset_m\":[0.013333333333333334,0.4],\"world_xy_m\":[3.013333333333333,4.4]}},\"simulated\":true}"
+      }
+    ]
+  },
+  {
+    "repeat": 1,
+    "input": "Benchmark_inputs\\RGB\\004624_fog.jpg",
+    "messages": [
+      {
+        "type": "FOD",
+        "destination": "UGV",
+        "body": {
+          "name": "PaintChip",
+          "confidence": 0.854390025138855,
+          "coordinates": {
+            "simulated": true,
+            "bbox_original_px": [
+              97,
+              185,
+              206,
+              236
+            ],
+            "center_px": [
+              151.5,
+              210.5
+            ],
+            "offset_px": [
+              1.5,
+              60.5
+            ],
+            "ground_offset_m": [
+              0.01,
+              0.4033333333333333
+            ],
+            "world_xy_m": [
+              3.01,
+              4.403333333333333
+            ]
+          }
+        },
+        "simulated_transport": true,
+        "payload": "{\"type\":\"FOD\",\"destination\":\"UGV\",\"body\":{\"name\":\"PaintChip\",\"confidence\":0.854390025138855,\"coordinates\":{\"simulated\":true,\"bbox_original_px\":[97,185,206,236],\"center_px\":[151.5,210.5],\"offset_px\":[1.5,60.5],\"ground_offset_m\":[0.01,0.4033333333333333],\"world_xy_m\":[3.01,4.403333333333333]}},\"simulated\":true}"
+      }
+    ]
+  },
+  {
+    "repeat": 1,
+    "input": "Benchmark_inputs\\RGB\\019465.jpg",
+    "messages": [
+      {
+        "type": "FOD",
+        "destination": "UGV",
+        "body": {
+          "name": "Hammer",
+          "confidence": 0.9064396619796753,
+          "coordinates": {
+            "simulated": true,
+            "bbox_original_px": [
+              98,
+              29,
+              219,
+              247
+            ],
+            "center_px": [
+              158.5,
+              138.0
+            ],
+            "offset_px": [
+              8.5,
+              -12.0
+            ],
+            "ground_offset_m": [
+              0.056666666666666664,
+              -0.08
+            ],
+            "world_xy_m": [
+              3.0566666666666666,
+              3.92
+            ]
+          }
+        },
+        "simulated_transport": true,
+        "payload": "{\"type\":\"FOD\",\"destination\":\"UGV\",\"body\":{\"name\":\"Hammer\",\"confidence\":0.9064396619796753,\"coordinates\":{\"simulated\":true,\"bbox_original_px\":[98,29,219,247],\"center_px\":[158.5,138.0],\"offset_px\":[8.5,-12.0],\"ground_offset_m\":[0.056666666666666664,-0.08],\"world_xy_m\":[3.0566666666666666,3.92]}},\"simulated\":true}"
+      }
+    ]
+  },
+  {
+    "repeat": 1,
+    "input": "Benchmark_inputs\\RGB\\020003_rain.jpg",
+    "messages": [
+      {
+        "type": "FOD",
+        "destination": "UGV",
+        "body": {
+          "name": "Label",
+          "confidence": 0.8748384714126587,
+          "coordinates": {
+            "simulated": true,
+            "bbox_original_px": [
+              116,
+              157,
+              178,
+              211
+            ],
+            "center_px": [
+              147.0,
+              184.0
+            ],
+            "offset_px": [
+              -3.0,
+              34.0
+            ],
+            "ground_offset_m": [
+              -0.02,
+              0.22666666666666666
+            ],
+            "world_xy_m": [
+              2.98,
+              4.226666666666667
+            ]
+          }
+        },
+        "simulated_transport": true,
+        "payload": "{\"type\":\"FOD\",\"destination\":\"UGV\",\"body\":{\"name\":\"Label\",\"confidence\":0.8748384714126587,\"coordinates\":{\"simulated\":true,\"bbox_original_px\":[116,157,178,211],\"center_px\":[147.0,184.0],\"offset_px\":[-3.0,34.0],\"ground_offset_m\":[-0.02,0.22666666666666666],\"world_xy_m\":[2.98,4.226666666666667]}},\"simulated\":true}"
+      }
+    ]
+  },
+  {
+    "repeat": 1,
+    "input": "Benchmark_inputs\\RGB\\020586.jpg",
+    "messages": [
+      {
+        "type": "FOD",
+        "destination": "UGV",
+        "body": {
+          "name": "LuggageTag",
+          "confidence": 0.6394032835960388,
+          "coordinates": {
+            "simulated": true,
+            "bbox_original_px": [
+              155,
+              126,
+              172,
+              201
+            ],
+            "center_px": [
+              163.5,
+              163.5
+            ],
+            "offset_px": [
+              13.5,
+              13.5
+            ],
+            "ground_offset_m": [
+              0.09,
+              0.09
+            ],
+            "world_xy_m": [
+              3.09,
+              4.09
+            ]
+          }
+        },
+        "simulated_transport": true,
+        "payload": "{\"type\":\"FOD\",\"destination\":\"UGV\",\"body\":{\"name\":\"LuggageTag\",\"confidence\":0.6394032835960388,\"coordinates\":{\"simulated\":true,\"bbox_original_px\":[155,126,172,201],\"center_px\":[163.5,163.5],\"offset_px\":[13.5,13.5],\"ground_offset_m\":[0.09,0.09],\"world_xy_m\":[3.09,4.09]}},\"simulated\":true}"
+      }
+    ]
+  },
+  {
+    "repeat": 1,
+    "input": "Benchmark_inputs\\RGB\\020751.jpg",
+    "messages": [
+      {
+        "type": "FOD",
+        "destination": "UGV",
+        "body": {
+          "name": "LuggagePart",
+          "confidence": 0.8572152256965637,
+          "coordinates": {
+            "simulated": true,
+            "bbox_original_px": [
+              88,
+              112,
+              179,
+              170
+            ],
+            "center_px": [
+              133.5,
+              141.0
+            ],
+            "offset_px": [
+              -16.5,
+              -9.0
+            ],
+            "ground_offset_m": [
+              -0.11,
+              -0.06
+            ],
+            "world_xy_m": [
+              2.89,
+              3.94
+            ]
+          }
+        },
+        "simulated_transport": true,
+        "payload": "{\"type\":\"FOD\",\"destination\":\"UGV\",\"body\":{\"name\":\"LuggagePart\",\"confidence\":0.8572152256965637,\"coordinates\":{\"simulated\":true,\"bbox_original_px\":[88,112,179,170],\"center_px\":[133.5,141.0],\"offset_px\":[-16.5,-9.0],\"ground_offset_m\":[-0.11,-0.06],\"world_xy_m\":[2.89,3.94]}},\"simulated\":true}"
+      }
+    ]
+  },
+  {
+    "repeat": 1,
+    "input": "Benchmark_inputs\\RGB\\024648_rain.jpg",
+    "messages": [
+      {
+        "type": "FOD",
+        "destination": "UGV",
+        "body": {
+          "name": "PaintChip",
+          "confidence": 0.8946530818939209,
+          "coordinates": {
+            "simulated": true,
+            "bbox_original_px": [
+              94,
+              130,
+              174,
+              200
+            ],
+            "center_px": [
+              134.0,
+              165.0
+            ],
+            "offset_px": [
+              -16.0,
+              15.0
+            ],
+            "ground_offset_m": [
+              -0.10666666666666667,
+              0.1
+            ],
+            "world_xy_m": [
+              2.8933333333333335,
+              4.1
+            ]
+          }
+        },
+        "simulated_transport": true,
+        "payload": "{\"type\":\"FOD\",\"destination\":\"UGV\",\"body\":{\"name\":\"PaintChip\",\"confidence\":0.8946530818939209,\"coordinates\":{\"simulated\":true,\"bbox_original_px\":[94,130,174,200],\"center_px\":[134.0,165.0],\"offset_px\":[-16.0,15.0],\"ground_offset_m\":[-0.10666666666666667,0.1],\"world_xy_m\":[2.8933333333333335,4.1]}},\"simulated\":true}"
+      }
+    ]
+  },
+  {
+    "repeat": 1,
+    "input": "Benchmark_inputs\\RGB\\DSC01481_t_1_1.jpg",
+    "messages": [
+      {
+        "type": "CRACK",
+        "destination": "BASE",
+        "body": {
+          "bbox_original_px": [
+            278,
+            14,
+            380,
+            232
+          ],
+          "roi": [
+            260,
+            14,
+            380,
+            253
+          ]
+        },
+        "simulated_transport": true,
+        "payload": "{\"type\":\"CRACK\",\"destination\":\"BASE\",\"body\":{\"bbox_original_px\":[278,14,380,232],\"roi\":[260,14,380,253]},\"simulated\":true}"
+      },
+      {
+        "type": "CRACK",
+        "destination": "BASE",
+        "body": {
+          "bbox_original_px": [
+            135,
+            232,
+            170,
+            310
+          ],
+          "roi": [
+            97,
+            210,
+            193,
+            310
+          ]
+        },
+        "simulated_transport": true,
+        "payload": "{\"type\":\"CRACK\",\"destination\":\"BASE\",\"body\":{\"bbox_original_px\":[135,232,170,310],\"roi\":[97,210,193,310]},\"simulated\":true}"
+      },
+      {
+        "type": "FOD",
+        "destination": "UGV",
+        "body": {
+          "name": "Wire",
+          "confidence": 0.4368754029273987,
+          "coordinates": {
+            "simulated": true,
+            "bbox_original_px": [
+              126,
+              303,
+              183,
+              432
+            ],
+            "center_px": [
+              154.5,
+              367.5
+            ],
+            "offset_px": [
+              -101.5,
+              111.5
+            ],
+            "ground_offset_m": [
+              -0.396484375,
+              0.435546875
+            ],
+            "world_xy_m": [
+              2.603515625,
+              4.435546875
+            ]
+          }
+        },
+        "simulated_transport": true,
+        "payload": "{\"type\":\"FOD\",\"destination\":\"UGV\",\"body\":{\"name\":\"Wire\",\"confidence\":0.4368754029273987,\"coordinates\":{\"simulated\":true,\"bbox_original_px\":[126,303,183,432],\"center_px\":[154.5,367.5],\"offset_px\":[-101.5,111.5],\"ground_offset_m\":[-0.396484375,0.435546875],\"world_xy_m\":[2.603515625,4.435546875]}},\"simulated\":true}"
+      }
+    ]
+  },
+  {
+    "repeat": 1,
+    "input": "Benchmark_inputs\\RGB\\DSC01481_t_6_5.jpg",
+    "messages": []
+  },
+  {
+    "repeat": 1,
+    "input": "Benchmark_inputs\\RGB\\DSC01518_t_1_4.jpg",
+    "messages": []
+  },
+  {
+    "repeat": 1,
+    "input": "Benchmark_inputs\\RGB\\DSC01729_t_0_17.jpg",
+    "messages": [
+      {
+        "type": "CRACK",
+        "destination": "BASE",
+        "body": {
+          "bbox_original_px": [
+            150,
+            26,
+            231,
+            180
+          ],
+          "roi": [
+            146,
+            14,
+            250,
+            214
+          ]
+        },
+        "simulated_transport": true,
+        "payload": "{\"type\":\"CRACK\",\"destination\":\"BASE\",\"body\":{\"bbox_original_px\":[150,26,231,180],\"roi\":[146,14,250,214]},\"simulated\":true}"
+      },
+      {
+        "type": "CRACK",
+        "destination": "BASE",
+        "body": {
+          "bbox_original_px": [
+            448,
+            244,
+            510,
+            340
+          ],
+          "roi": [
+            447,
+            220,
+            512,
+            340
+          ]
+        },
+        "simulated_transport": true,
+        "payload": "{\"type\":\"CRACK\",\"destination\":\"BASE\",\"body\":{\"bbox_original_px\":[448,244,510,340],\"roi\":[447,220,512,340]},\"simulated\":true}"
+      },
+      {
+        "type": "FOD",
+        "destination": "UGV",
+        "body": {
+          "name": "PlasticPart",
+          "confidence": 0.3175121247768402,
+          "coordinates": {
+            "simulated": true,
+            "bbox_original_px": [
+              170,
+              249,
+              219,
+              330
+            ],
+            "center_px": [
+              194.5,
+              289.5
+            ],
+            "offset_px": [
+              -61.5,
+              33.5
+            ],
+            "ground_offset_m": [
+              -0.240234375,
+              0.130859375
+            ],
+            "world_xy_m": [
+              2.759765625,
+              4.130859375
+            ]
+          }
+        },
+        "simulated_transport": true,
+        "payload": "{\"type\":\"FOD\",\"destination\":\"UGV\",\"body\":{\"name\":\"PlasticPart\",\"confidence\":0.3175121247768402,\"coordinates\":{\"simulated\":true,\"bbox_original_px\":[170,249,219,330],\"center_px\":[194.5,289.5],\"offset_px\":[-61.5,33.5],\"ground_offset_m\":[-0.240234375,0.130859375],\"world_xy_m\":[2.759765625,4.130859375]}},\"simulated\":true}"
+      },
+      {
+        "type": "CRACK",
+        "destination": "BASE",
+        "body": {
+          "bbox_original_px": [
+            146,
+            382,
+            245,
+            482
+          ],
+          "roi": [
+            140,
+            327,
+            246,
+            485
+          ]
+        },
+        "simulated_transport": true,
+        "payload": "{\"type\":\"CRACK\",\"destination\":\"BASE\",\"body\":{\"bbox_original_px\":[146,382,245,482],\"roi\":[140,327,246,485]},\"simulated\":true}"
+      }
+    ]
+  },
+  {
+    "repeat": 1,
+    "input": "Benchmark_inputs\\RGB\\DSC01729_t_1_17.jpg",
+    "messages": [
+      {
+        "type": "FOD",
+        "destination": "UGV",
+        "body": {
+          "name": "Battery",
+          "confidence": 0.8290170431137085,
+          "coordinates": {
+            "simulated": true,
+            "bbox_original_px": [
+              118,
+              7,
+              208,
+              428
+            ],
+            "center_px": [
+              163.0,
+              217.5
+            ],
+            "offset_px": [
+              -93.0,
+              -38.5
+            ],
+            "ground_offset_m": [
+              -0.36328125,
+              -0.150390625
+            ],
+            "world_xy_m": [
+              2.63671875,
+              3.849609375
+            ]
+          }
+        },
+        "simulated_transport": true,
+        "payload": "{\"type\":\"FOD\",\"destination\":\"UGV\",\"body\":{\"name\":\"Battery\",\"confidence\":0.8290170431137085,\"coordinates\":{\"simulated\":true,\"bbox_original_px\":[118,7,208,428],\"center_px\":[163.0,217.5],\"offset_px\":[-93.0,-38.5],\"ground_offset_m\":[-0.36328125,-0.150390625],\"world_xy_m\":[2.63671875,3.849609375]}},\"simulated\":true}"
+      },
+      {
+        "type": "FOD",
+        "destination": "UGV",
+        "body": {
+          "name": "PlasticPart",
+          "confidence": 0.35256385803222656,
+          "coordinates": {
+            "simulated": true,
+            "bbox_original_px": [
+              433,
+              400,
+              484,
+              463
+            ],
+            "center_px": [
+              458.5,
+              431.5
+            ],
+            "offset_px": [
+              202.5,
+              175.5
+            ],
+            "ground_offset_m": [
+              0.791015625,
+              0.685546875
+            ],
+            "world_xy_m": [
+              3.791015625,
+              4.685546875
+            ]
+          }
+        },
+        "simulated_transport": true,
+        "payload": "{\"type\":\"FOD\",\"destination\":\"UGV\",\"body\":{\"name\":\"PlasticPart\",\"confidence\":0.35256385803222656,\"coordinates\":{\"simulated\":true,\"bbox_original_px\":[433,400,484,463],\"center_px\":[458.5,431.5],\"offset_px\":[202.5,175.5],\"ground_offset_m\":[0.791015625,0.685546875],\"world_xy_m\":[3.791015625,4.685546875]}},\"simulated\":true}"
+      }
+    ]
+  },
+  {
+    "repeat": 1,
+    "input": "Benchmark_inputs\\RGB\\DSC01729_t_1_3.jpg",
+    "messages": [
+      {
+        "type": "FOD",
+        "destination": "UGV",
+        "body": {
+          "name": "Battery",
+          "confidence": 0.36515796184539795,
+          "coordinates": {
+            "simulated": true,
+            "bbox_original_px": [
+              367,
+              18,
+              490,
+              250
+            ],
+            "center_px": [
+              428.5,
+              134.0
+            ],
+            "offset_px": [
+              172.5,
+              -122.0
+            ],
+            "ground_offset_m": [
+              0.673828125,
+              -0.4765625
+            ],
+            "world_xy_m": [
+              3.673828125,
+              3.5234375
+            ]
+          }
+        },
+        "simulated_transport": true,
+        "payload": "{\"type\":\"FOD\",\"destination\":\"UGV\",\"body\":{\"name\":\"Battery\",\"confidence\":0.36515796184539795,\"coordinates\":{\"simulated\":true,\"bbox_original_px\":[367,18,490,250],\"center_px\":[428.5,134.0],\"offset_px\":[172.5,-122.0],\"ground_offset_m\":[0.673828125,-0.4765625],\"world_xy_m\":[3.673828125,3.5234375]}},\"simulated\":true}"
+      },
+      {
+        "type": "FOD",
+        "destination": "UGV",
+        "body": {
+          "name": "Battery",
+          "confidence": 0.7684550285339355,
+          "coordinates": {
+            "simulated": true,
+            "bbox_original_px": [
+              351,
+              333,
+              455,
+              506
+            ],
+            "center_px": [
+              403.0,
+              419.5
+            ],
+            "offset_px": [
+              147.0,
+              163.5
+            ],
+            "ground_offset_m": [
+              0.57421875,
+              0.638671875
+            ],
+            "world_xy_m": [
+              3.57421875,
+              4.638671875
+            ]
+          }
+        },
+        "simulated_transport": true,
+        "payload": "{\"type\":\"FOD\",\"destination\":\"UGV\",\"body\":{\"name\":\"Battery\",\"confidence\":0.7684550285339355,\"coordinates\":{\"simulated\":true,\"bbox_original_px\":[351,333,455,506],\"center_px\":[403.0,419.5],\"offset_px\":[147.0,163.5],\"ground_offset_m\":[0.57421875,0.638671875],\"world_xy_m\":[3.57421875,4.638671875]}},\"simulated\":true}"
+      }
+    ]
+  },
+  {
+    "repeat": 1,
+    "input": "Benchmark_inputs\\RGB\\DSC01729_t_2_17.jpg",
+    "messages": []
+  },
+  {
+    "repeat": 1,
+    "input": "Benchmark_inputs\\RGB\\DSC01729_t_3_17.jpg",
+    "messages": [
+      {
+        "type": "FOD",
+        "destination": "UGV",
+        "body": {
+          "name": "Battery",
+          "confidence": 0.3593312203884125,
+          "coordinates": {
+            "simulated": true,
+            "bbox_original_px": [
+              105,
+              25,
+              212,
+              227
+            ],
+            "center_px": [
+              158.5,
+              126.0
+            ],
+            "offset_px": [
+              -97.5,
+              -130.0
+            ],
+            "ground_offset_m": [
+              -0.380859375,
+              -0.5078125
+            ],
+            "world_xy_m": [
+              2.619140625,
+              3.4921875
+            ]
+          }
+        },
+        "simulated_transport": true,
+        "payload": "{\"type\":\"FOD\",\"destination\":\"UGV\",\"body\":{\"name\":\"Battery\",\"confidence\":0.3593312203884125,\"coordinates\":{\"simulated\":true,\"bbox_original_px\":[105,25,212,227],\"center_px\":[158.5,126.0],\"offset_px\":[-97.5,-130.0],\"ground_offset_m\":[-0.380859375,-0.5078125],\"world_xy_m\":[2.619140625,3.4921875]}},\"simulated\":true}"
+      },
+      {
+        "type": "CRACK",
+        "destination": "BASE",
+        "body": {
+          "bbox_original_px": [
+            415,
+            38,
+            471,
+            81
+          ],
+          "roi": [
+            413,
+            27,
+            482,
+            97
+          ]
+        },
+        "simulated_transport": true,
+        "payload": "{\"type\":\"CRACK\",\"destination\":\"BASE\",\"body\":{\"bbox_original_px\":[415,38,471,81],\"roi\":[413,27,482,97]},\"simulated\":true}"
+      },
+      {
+        "type": "CRACK",
+        "destination": "BASE",
+        "body": {
+          "bbox_original_px": [
+            90,
+            368,
+            196,
+            497
+          ],
+          "roi": [
+            87,
+            366,
+            196,
+            508
+          ]
+        },
+        "simulated_transport": true,
+        "payload": "{\"type\":\"CRACK\",\"destination\":\"BASE\",\"body\":{\"bbox_original_px\":[90,368,196,497],\"roi\":[87,366,196,508]},\"simulated\":true}"
+      }
+    ]
+  },
+  {
+    "repeat": 1,
+    "input": "Benchmark_inputs\\RGB\\DSC01729_t_4_3.jpg",
+    "messages": [
+      {
+        "type": "FOD",
+        "destination": "UGV",
+        "body": {
+          "name": "Battery",
+          "confidence": 0.5936122536659241,
+          "coordinates": {
+            "simulated": true,
+            "bbox_original_px": [
+              360,
+              18,
+              452,
+              207
+            ],
+            "center_px": [
+              406.0,
+              112.5
+            ],
+            "offset_px": [
+              150.0,
+              -143.5
+            ],
+            "ground_offset_m": [
+              0.5859375,
+              -0.560546875
+            ],
+            "world_xy_m": [
+              3.5859375,
+              3.439453125
+            ]
+          }
+        },
+        "simulated_transport": true,
+        "payload": "{\"type\":\"FOD\",\"destination\":\"UGV\",\"body\":{\"name\":\"Battery\",\"confidence\":0.5936122536659241,\"coordinates\":{\"simulated\":true,\"bbox_original_px\":[360,18,452,207],\"center_px\":[406.0,112.5],\"offset_px\":[150.0,-143.5],\"ground_offset_m\":[0.5859375,-0.560546875],\"world_xy_m\":[3.5859375,3.439453125]}},\"simulated\":true}"
+      },
+      {
+        "type": "FOD",
+        "destination": "UGV",
+        "body": {
+          "name": "Battery",
+          "confidence": 0.5529961585998535,
+          "coordinates": {
+            "simulated": true,
+            "bbox_original_px": [
+              314,
+              257,
+              400,
+              413
+            ],
+            "center_px": [
+              357.0,
+              335.0
+            ],
+            "offset_px": [
+              101.0,
+              79.0
+            ],
+            "ground_offset_m": [
+              0.39453125,
+              0.30859375
+            ],
+            "world_xy_m": [
+              3.39453125,
+              4.30859375
+            ]
+          }
+        },
+        "simulated_transport": true,
+        "payload": "{\"type\":\"FOD\",\"destination\":\"UGV\",\"body\":{\"name\":\"Battery\",\"confidence\":0.5529961585998535,\"coordinates\":{\"simulated\":true,\"bbox_original_px\":[314,257,400,413],\"center_px\":[357.0,335.0],\"offset_px\":[101.0,79.0],\"ground_offset_m\":[0.39453125,0.30859375],\"world_xy_m\":[3.39453125,4.30859375]}},\"simulated\":true}"
+      },
+      {
+        "type": "CRACK",
+        "destination": "BASE",
+        "body": {
+          "bbox_original_px": [
+            358,
+            467,
+            406,
+            472
+          ],
+          "roi": [
+            333,
+            408,
+            419,
+            503
+          ]
+        },
+        "simulated_transport": true,
+        "payload": "{\"type\":\"CRACK\",\"destination\":\"BASE\",\"body\":{\"bbox_original_px\":[358,467,406,472],\"roi\":[333,408,419,503]},\"simulated\":true}"
+      }
+    ]
+  },
+  {
+    "repeat": 1,
+    "input": "Benchmark_inputs\\RGB\\DSC01729_t_5_3.jpg",
+    "messages": []
+  },
+  {
+    "repeat": 1,
+    "input": "Benchmark_inputs\\RGB\\IMG_3804.HEIC",
+    "messages": []
+  },
+  {
+    "repeat": 1,
+    "input": "Benchmark_inputs\\RGB\\IMG_3805.HEIC",
+    "messages": []
+  },
+  {
+    "repeat": 1,
+    "input": "Benchmark_inputs\\RGB\\IMG_3806.HEIC",
+    "messages": []
+  },
+  {
+    "repeat": 1,
+    "input": "Benchmark_inputs\\RGB\\IMG_3807.HEIC",
+    "messages": []
+  },
+  {
+    "repeat": 1,
+    "input": "Benchmark_inputs\\RGB\\IMG_3844.HEIC",
+    "messages": []
+  },
+  {
+    "repeat": 1,
+    "input": "Benchmark_inputs\\RGB\\IMG_3845.HEIC",
+    "messages": []
+  },
+  {
+    "repeat": 1,
+    "input": "Benchmark_inputs\\RGB\\IMG_3846.HEIC",
+    "messages": []
+  },
+  {
+    "repeat": 1,
+    "input": "Benchmark_inputs\\RGB\\IMG_3847.HEIC",
+    "messages": []
+  },
+  {
+    "repeat": 1,
+    "input": "Benchmark_inputs\\RGB\\IMG_3848.HEIC",
+    "messages": []
+  },
+  {
+    "repeat": 1,
+    "input": "Benchmark_inputs\\RGB\\IMG_3851.HEIC",
+    "messages": []
+  }
+]

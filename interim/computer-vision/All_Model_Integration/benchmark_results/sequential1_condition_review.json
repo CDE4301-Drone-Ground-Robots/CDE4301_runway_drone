@@ -1,0 +1,66 @@
+{
+  "label": "Laptop benchmarking only",
+  "runs": [
+    "sequential1_condition_check_20261101T141724_645321Z",
+    "sequential1_condition_check_20261101T142135_859795Z"
+  ],
+  "configurations": {
+    "previous": {
+      "unique_inputs": 30,
+      "measured_observations": 180,
+      "mean_ms": 96.88140388888718,
+      "median_ms": 78.5763499998211,
+      "p95_ms": 224.0874299997812,
+      "max_ms": 312.7751000001808,
+      "processing_frames_per_s": 10.32189831958768,
+      "failures": 0,
+      "unprocessed": 0,
+      "peak_cuda_allocated_bytes": 444253696,
+      "max_rss_bytes": 2618826752,
+      "message_preparation_mean_ms": 0.0894177777505926,
+      "crop_count": 168,
+      "fod_calls": 168,
+      "crack_calls": 168,
+      "coordinate_count": 108,
+      "base_message_count": 168,
+      "ugv_message_count": 108
+    },
+    "revised": {
+      "unique_inputs": 30,
+      "measured_observations": 180,
+      "mean_ms": 94.8439472221657,
+      "median_ms": 78.25639999964551,
+      "p95_ms": 220.95108499988768,
+      "max_ms": 305.6293999998161,
+      "processing_frames_per_s": 10.543635406248601,
+      "failures": 0,
+      "unprocessed": 0,
+      "peak_cuda_allocated_bytes": 444253696,
+      "max_rss_bytes": 2618900480,
+      "message_preparation_mean_ms": 0.08484888891568214,
+      "crop_count": 168,
+      "fod_calls": 168,
+      "crack_calls": 168,
+      "coordinate_count": 108,
+      "base_message_count": 144,
+      "ugv_message_count": 108
+    }
+  },
+  "mean_change_percent": -2.1030420544465134,
+  "p95_change_percent": -1.3996077334175183,
+  "paired_image_group_bootstrap_95_percent_interval": [
+    -3.141878647221659,
+    -0.9328382742679865
+  ],
+  "declared_practical_margin_percent": 5,
+  "decision": "negligible_within_declared_5_percent_margin",
+  "recommendation": "Retain the historical Sequential 1 comparison values (99.185 ms, 10.082 frames/s) as results of the original test, with a note that a paired laptop rerun found the reporting-condition revision within a declared 5% practical margin. The historical numbers are not exact measurements of the revised code.",
+  "original_files_verified": 84,
+  "original_files_changed": [],
+  "limitations": [
+    "No actual radio/network transport",
+    "No camera sampling or capture-to-output latency",
+    "No Jetson, localisation or accuracy claim",
+    "Same finite 30-image workload repeated; clocks and background activity uncontrolled"
+  ]
+}

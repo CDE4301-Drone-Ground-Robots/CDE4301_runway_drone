@@ -1,0 +1,21 @@
+{
+  "fingerprint": {
+    "manifest": "65063fb01eaf59e7e643bd65e0c8ad0184d21d761324931d958e7b0b18a96946",
+    "object_index": "97a3cda6dfb14b6acf06e3dfce4ee3d440d9e8573832aa97d2c2408a206ee07e",
+    "model": {
+      "repository": "facebookresearch/dinov2",
+      "revision": "7764ea0f912e53c92e82eb78a2a1631e92725fc8",
+      "model": "dinov2_vits14"
+    },
+    "method": "DINOv2 patch-token pooling over expanded boxes; one batched GPU-to-CPU transfer",
+    "crop_context": 1.6,
+    "minimum_crop_pixels": 64,
+    "dimension": 384,
+    "device": "cuda"
+  },
+  "completed": 34472,
+  "total": 34472,
+  "completed_images": 33793,
+  "total_images": 33793,
+  "needed_images": 23745
+}

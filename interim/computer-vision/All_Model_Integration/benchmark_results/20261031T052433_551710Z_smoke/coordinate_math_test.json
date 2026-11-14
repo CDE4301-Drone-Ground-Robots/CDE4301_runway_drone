@@ -1,0 +1,30 @@
+{
+  "status": "passed",
+  "checks": 4,
+  "example": {
+    "simulated": true,
+    "bbox_original_px": [
+      500,
+      280,
+      560,
+      400
+    ],
+    "center_px": [
+      530.0,
+      340.0
+    ],
+    "offset_px": [
+      -110.0,
+      -20.0
+    ],
+    "ground_offset_m": [
+      -0.171875,
+      -0.05555555555555555
+    ],
+    "world_xy_m": [
+      2.828125,
+      3.9444444444444446
+    ]
+  },
+  "meaning": "math test only; not measured localisation accuracy"
+}

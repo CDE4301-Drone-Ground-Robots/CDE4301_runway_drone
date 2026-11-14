@@ -1,0 +1,380 @@
+[
+  {
+    "id": "Benchmark_inputs\\RGB\\000153_fog.jpg#0#det0",
+    "filename": "Benchmark_inputs\\RGB\\000153_fog.jpg",
+    "bbox": [
+      385,
+      143,
+      747,
+      584
+    ],
+    "roi": [
+      6,
+      120,
+      103,
+      254
+    ],
+    "frame_size": [
+      300,
+      300
+    ],
+    "name": "MetalPart"
+  },
+  {
+    "id": "Benchmark_inputs\\RGB\\002594.jpg#0#det0",
+    "filename": "Benchmark_inputs\\RGB\\002594.jpg",
+    "bbox": [
+      0,
+      11,
+      875,
+      720
+    ],
+    "roi": [
+      60,
+      0,
+      164,
+      122
+    ],
+    "frame_size": [
+      300,
+      300
+    ],
+    "name": "ClampPart"
+  },
+  {
+    "id": "Benchmark_inputs\\RGB\\004624.jpg#0#det0",
+    "filename": "Benchmark_inputs\\RGB\\004624.jpg",
+    "bbox": [
+      143,
+      155,
+      1067,
+      539
+    ],
+    "roi": [
+      81,
+      165,
+      231,
+      259
+    ],
+    "frame_size": [
+      300,
+      300
+    ],
+    "name": "PlasticPart"
+  },
+  {
+    "id": "Benchmark_inputs\\RGB\\004624_fog.jpg#0#det0",
+    "filename": "Benchmark_inputs\\RGB\\004624_fog.jpg",
+    "bbox": [
+      147,
+      157,
+      1122,
+      547
+    ],
+    "roi": [
+      81,
+      165,
+      224,
+      258
+    ],
+    "frame_size": [
+      300,
+      300
+    ],
+    "name": "PaintChip"
+  },
+  {
+    "id": "Benchmark_inputs\\RGB\\019465.jpg#0#det0",
+    "filename": "Benchmark_inputs\\RGB\\019465.jpg",
+    "bbox": [
+      61,
+      13,
+      1258,
+      720
+    ],
+    "roi": [
+      92,
+      25,
+      221,
+      247
+    ],
+    "frame_size": [
+      300,
+      300
+    ],
+    "name": "Hammer"
+  },
+  {
+    "id": "Benchmark_inputs\\RGB\\020003_rain.jpg#0#det0",
+    "filename": "Benchmark_inputs\\RGB\\020003_rain.jpg",
+    "bbox": [
+      262,
+      184,
+      917,
+      519
+    ],
+    "roi": [
+      91,
+      128,
+      213,
+      243
+    ],
+    "frame_size": [
+      300,
+      300
+    ],
+    "name": "Label"
+  },
+  {
+    "id": "Benchmark_inputs\\RGB\\020586.jpg#0#det0",
+    "filename": "Benchmark_inputs\\RGB\\020586.jpg",
+    "bbox": [
+      491,
+      134,
+      716,
+      544
+    ],
+    "roi": [
+      116,
+      101,
+      217,
+      234
+    ],
+    "frame_size": [
+      300,
+      300
+    ],
+    "name": "LuggageTag"
+  },
+  {
+    "id": "Benchmark_inputs\\RGB\\020751.jpg#0#det0",
+    "filename": "Benchmark_inputs\\RGB\\020751.jpg",
+    "bbox": [
+      194,
+      158,
+      991,
+      522
+    ],
+    "roi": [
+      66,
+      87,
+      212,
+      202
+    ],
+    "frame_size": [
+      300,
+      300
+    ],
+    "name": "LuggagePart"
+  },
+  {
+    "id": "Benchmark_inputs\\RGB\\024648_rain.jpg#0#det0",
+    "filename": "Benchmark_inputs\\RGB\\024648_rain.jpg",
+    "bbox": [
+      3,
+      128,
+      956,
+      547
+    ],
+    "roi": [
+      94,
+      109,
+      201,
+      229
+    ],
+    "frame_size": [
+      300,
+      300
+    ],
+    "name": "PaintChip"
+  },
+  {
+    "id": "Benchmark_inputs\\RGB\\DSC01481_t_1_1.jpg#2#det0",
+    "filename": "Benchmark_inputs\\RGB\\DSC01481_t_1_1.jpg",
+    "bbox": [
+      0,
+      6,
+      956,
+      718
+    ],
+    "roi": [
+      126,
+      302,
+      202,
+      432
+    ],
+    "frame_size": [
+      512,
+      512
+    ],
+    "name": "Wire"
+  },
+  {
+    "id": "Benchmark_inputs\\RGB\\DSC01729_t_0_17.jpg#2#det0",
+    "filename": "Benchmark_inputs\\RGB\\DSC01729_t_0_17.jpg",
+    "bbox": [
+      0,
+      0,
+      1138,
+      720
+    ],
+    "roi": [
+      170,
+      249,
+      225,
+      330
+    ],
+    "frame_size": [
+      512,
+      512
+    ],
+    "name": "PlasticPart"
+  },
+  {
+    "id": "Benchmark_inputs\\RGB\\DSC01729_t_1_17.jpg#0#det0",
+    "filename": "Benchmark_inputs\\RGB\\DSC01729_t_1_17.jpg",
+    "bbox": [
+      0,
+      2,
+      1138,
+      720
+    ],
+    "roi": [
+      118,
+      6,
+      219,
+      428
+    ],
+    "frame_size": [
+      512,
+      512
+    ],
+    "name": "Battery"
+  },
+  {
+    "id": "Benchmark_inputs\\RGB\\DSC01729_t_1_17.jpg#1#det0",
+    "filename": "Benchmark_inputs\\RGB\\DSC01729_t_1_17.jpg",
+    "bbox": [
+      60,
+      0,
+      1258,
+      720
+    ],
+    "roi": [
+      430,
+      400,
+      485,
+      463
+    ],
+    "frame_size": [
+      512,
+      512
+    ],
+    "name": "PlasticPart"
+  },
+  {
+    "id": "Benchmark_inputs\\RGB\\DSC01729_t_1_3.jpg#0#det0",
+    "filename": "Benchmark_inputs\\RGB\\DSC01729_t_1_3.jpg",
+    "bbox": [
+      60,
+      1,
+      1259,
+      720
+    ],
+    "roi": [
+      357,
+      18,
+      491,
+      250
+    ],
+    "frame_size": [
+      512,
+      512
+    ],
+    "name": "Battery"
+  },
+  {
+    "id": "Benchmark_inputs\\RGB\\DSC01729_t_1_3.jpg#1#det0",
+    "filename": "Benchmark_inputs\\RGB\\DSC01729_t_1_3.jpg",
+    "bbox": [
+      60,
+      0,
+      1259,
+      720
+    ],
+    "roi": [
+      346,
+      333,
+      457,
+      506
+    ],
+    "frame_size": [
+      512,
+      512
+    ],
+    "name": "Battery"
+  },
+  {
+    "id": "Benchmark_inputs\\RGB\\DSC01729_t_3_17.jpg#0#det0",
+    "filename": "Benchmark_inputs\\RGB\\DSC01729_t_3_17.jpg",
+    "bbox": [
+      60,
+      0,
+      1259,
+      720
+    ],
+    "roi": [
+      100,
+      25,
+      214,
+      227
+    ],
+    "frame_size": [
+      512,
+      512
+    ],
+    "name": "Battery"
+  },
+  {
+    "id": "Benchmark_inputs\\RGB\\DSC01729_t_4_3.jpg#0#det0",
+    "filename": "Benchmark_inputs\\RGB\\DSC01729_t_4_3.jpg",
+    "bbox": [
+      0,
+      0,
+      1139,
+      719
+    ],
+    "roi": [
+      360,
+      18,
+      463,
+      207
+    ],
+    "frame_size": [
+      512,
+      512
+    ],
+    "name": "Battery"
+  },
+  {
+    "id": "Benchmark_inputs\\RGB\\DSC01729_t_4_3.jpg#1#det0",
+    "filename": "Benchmark_inputs\\RGB\\DSC01729_t_4_3.jpg",
+    "bbox": [
+      20,
+      0,
+      1219,
+      720
+    ],
+    "roi": [
+      313,
+      257,
+      404,
+      413
+    ],
+    "frame_size": [
+      512,
+      512
+    ],
+    "name": "Battery"
+  }
+]

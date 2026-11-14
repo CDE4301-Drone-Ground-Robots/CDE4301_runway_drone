@@ -1,0 +1,16 @@
+{
+  "remaining_cross_split_candidate_pairs": 137401,
+  "dino_ge_098_cross_pairs": 14402,
+  "strong_joint_cross_pairs": 0,
+  "classes_missing_from_splits": [],
+  "minimum_allocation_blocks_per_class": 26,
+  "random_pair_cosine_quantiles": {
+    "0": -0.05740644410252571,
+    "0.25": 0.3006429970264435,
+    "0.5": 0.40602919459342957,
+    "0.75": 0.5143662691116333,
+    "0.95": 0.687436580657959,
+    "0.99": 0.8804983496665955,
+    "1": 0.9964073896408081
+  }
+}

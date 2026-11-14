@@ -1,0 +1,83 @@
+﻿def allocation_blocks(out,records):
+    # Co-location constraints, NOT scene/video identity groups. No weak edges.
+    parent=list(range(len(records)))
+    def find(x):
+        while parent[x]!=x:
+            parent[x]=parent[parent[x]]; x=parent[x]
+        return x
+    def join(a,b):
+        a,b=find(a),find(b)
+        if a!=b: parent[max(a,b)]=min(a,b)
+    for g in read_json(out/"groups.json"):
+        for i in g["members"][1:]: join(g["members"][0],i)
+    for p in read_pairs(out):
+        if p["decision"]!="reject" and (int(p["exact"]) or int(p["provisional_strong"]) or p["decision"]=="accept"):
+            join(int(p["a"]),int(p["b"]))
+    components=defaultdict(list)
+    for i in range(len(records)): components[find(i)].append(i)
+    return [dict(block_id=f"b{min(v):06d}",members=v,size=len(v))
+            for v in sorted(components.values(),key=min)]
+
+def propose(cfg,out):
+    import numpy as np
+    records=load_manifest(out); compact=read_json(out/"groups.json")
+    names=read_json(out/"class_mapping.json"); blocks=allocation_blocks(out,records)
+    save_json(out/"allocation_blocks.json",blocks)
+    group_lookup={i:g["group_id"] for g in compact for i in g["members"]}
+    c=len(names); n=len(records); vectors=[]
+    for block in blocks:
+        v=np.zeros(c)
+        for i in block["members"]:
+            for o in records[i]["objects"]: v[names[o["class"]]]+=1
+        vectors.append(v)
+    vectors=np.asarray(vectors); totals=vectors.sum(0)
+    fractions=np.array(cfg["split_fractions"]); target_n=fractions*n; target_c=fractions[:,None]*totals[None,:]
+    best=None
+    for attempt in range(cfg["split_restarts"]):
+        rng=random.Random(cfg["seed"]+attempt); jitter=[rng.random() for _ in blocks]
+        order=sorted(range(len(blocks)),key=lambda j:(-blocks[j]["size"],-float((vectors[j]/np.maximum(totals,1)).max()),jitter[j]))
+        counts=np.zeros(3); class_counts=np.zeros((3,c)); assignment={}
+        for j in order:
+            costs=[]
+            for s in range(3):
+                a=counts.copy(); b=class_counts.copy(); a[s]+=blocks[j]["size"]; b[s]+=vectors[j]
+                cost=float(np.square((a-target_n)/np.maximum(target_n,1)).mean()
+                    +np.square((b-target_c)/np.maximum(target_c,1)).mean())
+                costs.append(cost)
+            s=min(range(3),key=lambda z:costs[z]); assignment[j]=s
+            counts[s]+=blocks[j]["size"]; class_counts[s]+=vectors[j]
+        score=float(np.square((counts-target_n)/target_n).mean()+np.square((class_counts-target_c)/np.maximum(target_c,1)).mean())
+        if best is None or score<best[0]: best=(score,assignment,counts,class_counts)
+    _,assignment,counts,class_counts=best
+    split_names=["train","val","test"]; rows=[]
+    for j,block in enumerate(blocks):
+        for i in block["members"]:
+            rows.append(dict(index=i,image_id=records[i]["id"],group_id=group_lookup[i],
+                allocation_block=block["block_id"],split=split_names[assignment[j]]))
+    rows.sort(key=lambda r:r["index"])
+    write_csv(out/"proposed_split.csv",rows,["index","image_id","group_id","allocation_block","split"])
+    class_rows=[]
+    for name,k in names.items():
+        image_counts=Counter()
+        for row in rows:
+            if any(o["class"]==name for o in records[row["index"]]["objects"]): image_counts[row["split"]]+=1
+        class_rows.append(dict(class_id=k,name=name,total=int(totals[k]),
+            allocation_blocks_with_class=int((vectors[:,k]>0).sum()),
+            **{s:int(class_counts[j,k]) for j,s in enumerate(split_names)},
+            **{s+"_images":image_counts[s] for s in split_names}))
+    write_csv(out/"class_distribution.csv",class_rows,
+        ["class_id","name","total","allocation_blocks_with_class","train","val","test","train_images","val_images","test_images"])
+    split_by_index={r["index"]:r["split"] for r in rows}
+    save_json(out/"split_summary.json",dict(seed=cfg["seed"],images={s:int(counts[i]) for i,s in enumerate(split_names)},
+        groups={s:sum(split_by_index[g["members"][0]]==s for g in compact) for s in split_names},
+        allocation_blocks={s:sum(assignment[j]==i for j in assignment) for i,s in enumerate(split_names)},
+        total_allocation_blocks=len(blocks),largest_allocation_block=max(b["size"] for b in blocks),
+        allocation_policy="Compact groups remain distinct. Strong/accepted pair components are only split co-location constraints; not inferred videos.",
+        status="PROVISIONAL: inspect candidate groups, thresholds and remaining weaker cross-split matches",
+        original_split_overlap=None,source_video_independence=False))
+    baseline=np.random.default_rng(cfg["seed"]).permutation(np.repeat(np.arange(3),
+        [round(n*.70),round(n*.15),n-round(n*.70)-round(n*.15)]))
+    np.save(out/"illustrative_random_baseline.npy",baseline)
+    print(json.dumps(read_json(out/"split_summary.json"),indent=2),flush=True)
+
+

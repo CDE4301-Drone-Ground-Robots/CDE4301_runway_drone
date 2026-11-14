@@ -1,0 +1,52 @@
+﻿def export(cfg,out,reviewed,provisional=False):
+    if not reviewed and not provisional: raise ValueError("Use --provisional for a review copy, or --reviewed after review")
+    records=load_manifest(out); names=read_json(out/"class_mapping.json")
+    with open(out/"proposed_split.csv",newline="",encoding="utf-8") as f: rows=list(csv.DictReader(f))
+    if len(rows)!=len(records) or [int(r["index"]) for r in rows]!=list(range(len(records))):
+        raise ValueError("Split does not contain every index exactly once")
+    gs=read_json(out/"groups.json"); split_by_index={int(r["index"]):r["split"] for r in rows}
+    if any(len({split_by_index[i] for i in g["members"]})!=1 for g in gs):
+        raise ValueError("Group crosses splits")
+    target=confined(ROOT/cfg["corrected_destination"])
+    if target.exists(): raise FileExistsError("Refusing to overwrite corrected destination")
+    target.mkdir()
+    for s in ("train","val","test"):
+        (target/"images"/s).mkdir(parents=True); (target/"labels"/s).mkdir(parents=True)
+    def export_one(row):
+        i=int(row["index"]); r=records[i]; s=row["split"]
+        image=confined(ROOT/r["image"]); ann=confined(ROOT/r["annotation"])
+        if digest(image)!=r["image_sha256"] or digest(ann)!=r["annotation_sha256"]:
+            raise ValueError(f"Source changed: {r['id']}")
+        shutil.copyfile(image,target/"images"/s/(r["id"]+".jpg"))
+        labels=[]
+        for o in r["objects"]:
+            a,b,c,d=o["xyxy"]; w,h=r["width"],r["height"]
+            labels.append(f'{names[o["class"]]} {(a+c)/(2*w):.10f} {(b+d)/(2*h):.10f} {(c-a)/w:.10f} {(d-b)/h:.10f}')
+        (target/"labels"/s/(r["id"]+".txt")).write_text("\n".join(labels)+"\n",encoding="utf-8")
+        return 1
+    with ThreadPoolExecutor(max_workers=cfg["io_workers"]) as pool:
+        for completed,_ in enumerate(pool.map(export_one,rows),1):
+            if completed%1000==0: print(f"Exported {completed}/{len(rows)}",flush=True)
+    import yaml
+    config=dict(path=str(target).replace("\\","/"),train="images/train",val="images/val",test="images/test",
+                names={v:k for k,v in names.items()})
+    (target/"dataset.yaml").write_text(yaml.safe_dump(config,sort_keys=False),encoding="utf-8")
+    shutil.copyfile(out/"proposed_split.csv",target/"split_manifest.csv")
+    save_json(target/"provenance.json",dict(manifest=digest(out/"manifest.jsonl"),
+        split=digest(out/"proposed_split.csv"),config=cfg,reviewed=reviewed,provisional=not reviewed,video_independent=False))
+    print(f"Exported {len(rows)} images to {target}",flush=True)
+
+def main():
+    p=argparse.ArgumentParser(description=__doc__)
+    p.add_argument("stage",choices=["inventory","embeddings","neighbours","groups","propose","report","export","all"])
+    p.add_argument("--config",default=str(HERE/"config.json"))
+    p.add_argument("--reviewed",action="store_true")
+    p.add_argument("--provisional",action="store_true")
+    args=p.parse_args(); cfg=read_json(confined(args.config)); out=confined(ROOT/cfg["output"]); out.mkdir(parents=True,exist_ok=True)
+    stages=["inventory","embeddings","neighbours","groups","propose","report"] if args.stage=="all" else [args.stage]
+    for stage in stages:
+        print(f"=== {stage} ===",flush=True)
+        if stage=="export": export(cfg,out,args.reviewed,args.provisional)
+        else: globals()[stage](cfg,out)
+if __name__=="__main__": main()
+

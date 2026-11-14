@@ -1,0 +1,3 @@
+condition,unique_inputs,measured_observations,mean_ms,median_ms,p95_ms,max_ms,processing_frames_per_s,failures,unprocessed,peak_cuda_allocated_bytes,max_rss_bytes,message_preparation_mean_ms,crop_count,fod_calls,crack_calls,coordinate_count,base_message_count,ugv_message_count
+previous,30,180,96.88140388888718,78.5763499998211,224.0874299997812,312.7751000001808,10.32189831958768,0,0,444253696,2618826752,0.0894177777505926,168,168,168,108,168,108
+revised,30,180,94.8439472221657,78.25639999964551,220.95108499988768,305.6293999998161,10.543635406248601,0,0,444253696,2618900480,0.08484888891568214,168,168,168,108,144,108

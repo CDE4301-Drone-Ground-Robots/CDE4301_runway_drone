@@ -1,0 +1,24 @@
+{
+  "status": "passed",
+  "images": {
+    "train": 20716,
+    "test": 4451,
+    "val": 4496
+  },
+  "boxes": {
+    "train": 21211,
+    "test": 4535,
+    "val": 4596
+  },
+  "strong_pairs_crossing": 0,
+  "copied_images_sha256_verified": true,
+  "yolo_labels_verified": true,
+  "source_images": 33793,
+  "retained_images": 29663,
+  "removed_images_covered_by_verified_representative": 4130,
+  "protected_images_retained": true,
+  "all_classes_present_in_every_split": true,
+  "object_embeddings_sha256": "75d4423858eb26c9e8ba6f4ffaee14ba34454b40a1f7f638cade7ccd6eff7261",
+  "selection_sha256": "72ecb3a9006bd00f28217c8700b0537798e8956312ccdcf7a6c347f7775d0153",
+  "split_sha256": "c1575d93b5b653d42e4ada58f819c5988bb7f454075d20ab2e2853c31f692265"
+}

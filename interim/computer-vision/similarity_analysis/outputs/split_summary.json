@@ -1,0 +1,24 @@
+{
+  "seed": 4301,
+  "images": {
+    "train": 23682,
+    "val": 5055,
+    "test": 5056
+  },
+  "groups": {
+    "train": 18409,
+    "val": 2284,
+    "test": 2251
+  },
+  "allocation_blocks": {
+    "train": 15847,
+    "val": 914,
+    "test": 910
+  },
+  "total_allocation_blocks": 17671,
+  "largest_allocation_block": 260,
+  "allocation_policy": "Compact groups remain distinct. Strong/accepted pair components are only split co-location constraints; not inferred videos.",
+  "status": "PROVISIONAL: inspect candidate groups, thresholds and remaining weaker cross-split matches",
+  "original_split_overlap": null,
+  "source_video_independence": false
+}

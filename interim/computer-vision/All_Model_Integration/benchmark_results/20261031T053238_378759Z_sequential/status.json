@@ -1,0 +1,62 @@
+{
+  "label": "Laptop benchmarking",
+  "config": "sequential",
+  "repeats": 1,
+  "warmups": 5,
+  "device": "cuda:0",
+  "start_utc": "20261031T053238_378759Z",
+  "completed": 30,
+  "failures": [],
+  "status": "completed",
+  "cli": [
+    "C:\\Users\\Chara\\OneDrive\\Documents\\YR4_SEM1\\CDE4301\\All_Model_Integration\\benchmark_suite\\core.py",
+    "--config",
+    "sequential",
+    "--repeats",
+    "1"
+  ],
+  "benchmark_source_sha256": "53bef7be4d9d751d639fe82ecdc0b2343d92bbc6768d3ec626b019a61d39f202",
+  "helper_hashes": {
+    "coordinates.py": "6009a9c5064079cf8bc8ce6b464774140583fd2b83c65de5e180396c0a6cf866",
+    "core.py": "53bef7be4d9d751d639fe82ecdc0b2343d92bbc6768d3ec626b019a61d39f202",
+    "finalize.py": "f3c02c8d3b4e3a4677b24089c52d3915ac8560db151533af44a912f4b2388e0e",
+    "METHODOLOGY.md": "4317fefc5cd1d13f7cda54611500cc1201841d6ab60ab6305cbeaec5cced9665",
+    "README.md": "a81c414a2768904ab1ca5ea6bfaecaacc8022fdab0f07ebe40e2c3535c5354fb",
+    "routing_checks.py": "e3302f392fbe96589e12191229582e543757c4a22b9ea40f2ca23d8f64358359",
+    "run_all.py": "ef1bd2852557f391a413756ff30c75761ce27b9688632f7e2d8a6883d179866e",
+    "simulation.json": "e2d674f16975bac6641acbd6ab33f486c17f40e9f9622305f6c96e922e367e67"
+  },
+  "simulation": {
+    "label": "SIMULATION ONLY - not camera calibration or navigation measurements",
+    "uav_world_m": [
+      3,
+      4
+    ],
+    "ground_coverage_m": [
+      2,
+      2
+    ],
+    "nominal_height_agl_m": 5,
+    "assumptions": "flat ground, nadir view, no rotation; world +X=image right, +Y=image down; scales use actual source frame width/height",
+    "transport": "local JSON message preparation only; no transmission, GPS, sockets or delays"
+  },
+  "memory_before": {
+    "rss_bytes": 533770240,
+    "available_ram_bytes": 3001257984,
+    "cuda_allocated_bytes": 0,
+    "cuda_reserved_bytes": 0,
+    "cuda_peak_allocated_bytes": 0,
+    "cuda_peak_reserved_bytes": 0
+  },
+  "selected_inputs": 30,
+  "unique_source_frames": 30,
+  "memory_after": {
+    "rss_bytes": 2636611584,
+    "available_ram_bytes": 764743680,
+    "cuda_allocated_bytes": 307395072,
+    "cuda_reserved_bytes": 442499072,
+    "cuda_peak_allocated_bytes": 410679808,
+    "cuda_peak_reserved_bytes": 442499072
+  },
+  "unprocessed_observations": 0
+}

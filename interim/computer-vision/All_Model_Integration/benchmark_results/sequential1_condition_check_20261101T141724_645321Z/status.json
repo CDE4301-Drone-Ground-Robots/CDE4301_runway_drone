@@ -1,0 +1,8 @@
+{
+  "status": "completed",
+  "completed": 180,
+  "expected_observations": 180,
+  "label": "Laptop benchmarking: Sequential 1 paired reporting-condition comparison",
+  "start_utc": "20261101T141724_645321Z",
+  "decision": "inconclusive_due_to_timing_variation"
+}

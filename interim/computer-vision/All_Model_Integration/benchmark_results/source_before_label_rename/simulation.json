@@ -1,0 +1,14 @@
+﻿{
+  "label": "SIMULATION ONLY - not camera calibration or navigation measurements",
+  "uav_world_m": [
+    3,
+    4
+  ],
+  "ground_coverage_m": [
+    2,
+    2
+  ],
+  "nominal_height_agl_m": 5,
+  "assumptions": "flat ground, nadir view, no rotation; world +X=image right, +Y=image down; scales use actual source frame width/height",
+  "transport": "local JSON message preparation only; no transmission, GPS, sockets or delays"
+}

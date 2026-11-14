@@ -1,0 +1,43 @@
+Loading patchcore
+W1031 13:30:55.828000 106032 site-packages\torch\utils\flop_counter.py:29] triton not found; flop counting will not work for triton kernels
+C:\Users\Chara\miniconda3\envs\fod_synthetic\lib\site-packages\timm\models\layers\__init__.py:49: FutureWarning: Importing from timm.models.layers is deprecated, please import via timm.layers
+  warnings.warn(f"Importing from {__name__} is deprecated, please import via timm.layers", FutureWarning)
+C:\Users\Chara\miniconda3\envs\fod_synthetic\lib\site-packages\anomalib\models\image\dinomaly\components\layers.py:22: FutureWarning: The anomalib.models.components.dinov2 package is deprecated and will be removed in a future release. Please use the timm-based feature extractor instead: anomalib.models.components.feature_extractors.TimmFeatureExtractor
+  from anomalib.models.components.dinov2.layers import Attention, DropPath, LayerScale, MemEffAttention
+C:\Users\Chara\miniconda3\envs\fod_synthetic\lib\site-packages\lightning\fabric\utilities\cloud_io.py:73: Environment variable TORCH_FORCE_NO_WEIGHTS_ONLY_LOAD detected, since the`weights_only` argument was not explicitly passed to `torch.load`, forcing weights_only=False.
+Warmup 1
+Warmup 2
+Warmup 3
+Warmup 4
+Warmup 5
+patchcore 1 1 / 30 20.51 ms
+patchcore 1 2 / 30 29.83 ms
+patchcore 1 3 / 30 29.68 ms
+patchcore 1 4 / 30 26.11 ms
+patchcore 1 5 / 30 30.73 ms
+patchcore 1 6 / 30 26.81 ms
+patchcore 1 7 / 30 28.97 ms
+patchcore 1 8 / 30 30.51 ms
+patchcore 1 9 / 30 20.69 ms
+patchcore 1 10 / 30 20.67 ms
+patchcore 1 11 / 30 24.99 ms
+patchcore 1 12 / 30 19.96 ms
+patchcore 1 13 / 30 19.64 ms
+patchcore 1 14 / 30 24.51 ms
+patchcore 1 15 / 30 23.87 ms
+patchcore 1 16 / 30 24.02 ms
+patchcore 1 17 / 30 20.47 ms
+patchcore 1 18 / 30 23.38 ms
+patchcore 1 19 / 30 24.43 ms
+patchcore 1 20 / 30 19.6 ms
+patchcore 1 21 / 30 35.93 ms
+patchcore 1 22 / 30 44.94 ms
+patchcore 1 23 / 30 42.72 ms
+patchcore 1 24 / 30 50.89 ms
+patchcore 1 25 / 30 48.89 ms
+patchcore 1 26 / 30 45.61 ms
+patchcore 1 27 / 30 41.12 ms
+patchcore 1 28 / 30 41.3 ms
+patchcore 1 29 / 30 41.85 ms
+patchcore 1 30 / 30 40.48 ms
+Saved C:\Users\Chara\OneDrive\Documents\YR4_SEM1\CDE4301\All_Model_Integration\benchmark_results\20261031T053035_562394Z_patchcore status completed
