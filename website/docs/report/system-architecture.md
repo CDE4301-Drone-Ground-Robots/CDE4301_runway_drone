@@ -10,7 +10,7 @@ The project is organised into five subsystems, described in the chapters below. 
 
 ## Subsystem Responsibilities
 
-<p class="report-table-caption" id="table-3"><strong>Table 3.</strong> Subsystem Responsibilities</p>
+<p class="report-table-caption" id="table-4"><strong>Table 4.</strong> Subsystem Responsibilities</p>
 
 | Subsystem | Lead |
 | --- | --- |

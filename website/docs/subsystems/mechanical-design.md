@@ -33,12 +33,12 @@ Initial requirements were established to guide the mechanical design of the UAV.
 
 ### 1.1.2 Mechanical Design Requirements and Considerations {#mechanical-design-requirements-considerations}
 
-<p class="report-table-caption" id="table-4"><strong>Table 4.</strong> Mechanical Design Requirements and Considerations</p>
+<p class="report-table-caption" id="table-5"><strong>Table 5.</strong> Mechanical Design Requirements and Considerations</p>
 
 | Design Requirements | Description |
 | --- | --- |
 | Component integration | Accommodate all required components with secure mounting and sufficient space for wiring and connections. |
-| Low overall mass | Minimise the UAV's total mass to reduce the thrust and propulsion power required, allowing for smaller motor and propeller combinations while improving flight endurance and not compromising the UAV's structural integrity or essential functionalities. CAAS regulations were also considered, with a target takeoff mass below 7 kg to facilitate future flight testing [\[11\]](../references#md-ref-1). |
+| Low overall mass | Minimise the UAV's total mass to reduce the thrust and propulsion power required, allowing for smaller motor and propeller combinations while improving flight endurance and not compromising the UAV's structural integrity or essential functionalities. CAAS regulations were also considered, with a target takeoff mass below 7 kg to facilitate future flight testing [\[14\]](../references#md-ref-1). |
 | Structural strength and stiffness | Withstand thrust, component loads and landing forces without failure or excessive deformation. |
 | Balanced mass distribution | Position components to keep the centre of gravity close to the centre of the motors. |
 | Unobstructed sensors and camera fields of view | Ensure the airframe and landing gear do not obstruct the cameras and ranging sensors. |
@@ -53,7 +53,7 @@ Initial requirements were established to guide the mechanical design of the UAV.
 
 ### 1.2.1 Initial Concept Sketch {#initial-concept-sketch}
 
-<MechanicalFigure number="3" n="1" src="/report-assets/mechanical-design/initial-concept-sketch.png" :width="1150" :height="863" caption="Initial Concept Sketch" />
+<MechanicalFigure number="8" n="1" src="/report-assets/mechanical-design/initial-concept-sketch.png" :width="1150" :height="863" caption="Initial Concept Sketch" />
 
 The initial concept sketch established a layered component layout, guiding subsequent iterations without fixing detailed geometry. A quadcopter balanced lifting capability, structural simplicity and a target takeoff mass below 7 kg. Four motors reduced propulsion components and mounting structures compared with six- or eight-rotor configurations; subsequent motor and propeller selection targeted the required thrust and control margin.
 
@@ -61,9 +61,9 @@ The initial concept sketch established a layered component layout, guiding subse
 
 #### 1.2.2.1 Plus vs X vs H Configuration {#plus-vs-x-vs-h-propeller-configuration}
 
-<MechanicalFigure number="4" n="2" src="/report-assets/mechanical-design/propeller-configurations.png" :width="750" :height="279" caption="Different Propeller Configurations" />
+<MechanicalFigure number="9" n="2" src="/report-assets/mechanical-design/propeller-configurations.png" :width="750" :height="279" caption="Different Propeller Configurations" />
 
-The X configuration was selected over plus for greater attitude control authority and reduced pitch/roll–yaw coupling. A comparative study [\[12\]](../references#md-ref-2) found similar hover power requirements and autonomous stability, but up to √2 greater pitch and roll control authority for X because all four rotors contribute to attitude moments, supporting wind disturbance rejection during runway inspection.
+The X configuration was selected over plus for greater attitude control authority and reduced pitch/roll–yaw coupling. A comparative study [\[15\]](../references#md-ref-2) found similar hover power requirements and autonomous stability, but up to √2 greater pitch and roll control authority for X because all four rotors contribute to attitude moments, supporting wind disturbance rejection during runway inspection.
 
 Diagonal arms also increase longitudinal and lateral motor spacing to accommodate larger propellers. An H frame would require additional longitudinal extension to prevent propeller overlap, favouring X.
 
@@ -71,13 +71,13 @@ Diagonal arms also increase longitudinal and lateral motor spacing to accommodat
 
 <div class="cv-figure-grid">
 
-<MechanicalFigure number="5" n="3" src="/report-assets/mechanical-design/pusher-configuration.png" :width="350" :height="302" caption="Pusher Configuration" />
+<MechanicalFigure number="10" n="3" src="/report-assets/mechanical-design/pusher-configuration.png" :width="350" :height="302" caption="Pusher Configuration" />
 
-<MechanicalFigure number="6" n="4" src="/report-assets/mechanical-design/puller-configuration.png" :width="658" :height="493" caption="Puller Configuration" />
+<MechanicalFigure number="11" n="4" src="/report-assets/mechanical-design/puller-configuration.png" :width="658" :height="493" caption="Puller Configuration" />
 
 </div>
 
-The selected puller configuration positions propellers above the motors and arms. A comparative CFD study reported higher thrust under the investigated conditions [\[13\]](../references#md-ref-3). It also increases propeller ground clearance and reduces interference with the forward-facing thermal camera's field of view beneath the body.
+The selected puller configuration positions propellers above the motors and arms. A comparative CFD study reported higher thrust under the investigated conditions [\[16\]](../references#md-ref-3). It also increases propeller ground clearance and reduces interference with the forward-facing thermal camera's field of view beneath the body.
 
 ### 1.2.3 Mechanical Design Iterations {#design-iterations}
 
@@ -85,37 +85,37 @@ Two preliminary iterations refined the component layout and structure before the
 
 #### 1.2.3.1 First Design Iteration {#first-iteration}
 
-<MechanicalFigure number="7" n="5" src="/report-assets/mechanical-design/first-iteration-structural-body.png" :width="1380" :height="688" caption="Structural body design for the first iteration" />
+<MechanicalFigure number="12" n="5" src="/report-assets/mechanical-design/first-iteration-structural-body.png" :width="1380" :height="688" caption="Structural body design for the first iteration" />
 
-<MechanicalFigure number="8" n="6" src="/report-assets/mechanical-design/first-iteration-layered-section.png" :width="1381" :height="699" caption="Layered design approach from concept sketch (Sectioned View)" />
+<MechanicalFigure number="13" n="6" src="/report-assets/mechanical-design/first-iteration-layered-section.png" :width="1381" :height="699" caption="Layered design approach from concept sketch (Sectioned View)" />
 
 <div class="cv-figure-grid">
 
-<MechanicalFigure number="9" n="7" src="/report-assets/mechanical-design/first-iteration-bottom-layer.png" :width="609" :height="434" caption="Bottom Layer" />
+<MechanicalFigure number="14" n="7" src="/report-assets/mechanical-design/first-iteration-bottom-layer.png" :width="609" :height="434" caption="Bottom Layer" />
 
-<MechanicalFigure number="10" n="8" src="/report-assets/mechanical-design/first-iteration-top-layer.png" :width="631" :height="428" caption="Top Layer" />
+<MechanicalFigure number="15" n="8" src="/report-assets/mechanical-design/first-iteration-top-layer.png" :width="631" :height="428" caption="Top Layer" />
 
 </div>
 
-<MechanicalFigure number="11" n="9" src="/report-assets/mechanical-design/propeller-arm.png" :width="633" :height="527" caption="Propeller Arm" />
+<MechanicalFigure number="16" n="9" src="/report-assets/mechanical-design/propeller-arm.png" :width="633" :height="527" caption="Propeller Arm" />
 
 The first iteration developed the two central layers of the concept sketch; the RTK-GNSS antenna layer above and camera layer below were not yet incorporated. The top layer provided mounting holes for an acrylic electronics plate, while the bottom layer was intended to accommodate the battery, Jetson computer and other electronics. Propeller arms were designed to withstand motor-thrust and component-weight bending moments while minimising mass.
 
 ##### 1.2.3.1.1 Limitations {#limitations}
 
-The first iteration prioritised layout and geometry over materials and manufacturing. Its complex top-layer and arm geometry suited 3D printing. Subsequent research favoured carbon-fibre-reinforced polymer (CFRP) for its stiffness and strength relative to mass [\[14\]](../references#md-ref-4) [\[15\]](../references#md-ref-5) [\[16\]](../references#md-ref-8). Adapting the geometry required custom moulding or redesign for standard sheets and tubes.
+The first iteration prioritised layout and geometry over materials and manufacturing. Its complex top-layer and arm geometry suited 3D printing. Subsequent research favoured carbon-fibre-reinforced polymer (CFRP) for its stiffness and strength relative to mass [\[17\]](../references#md-ref-4) [\[18\]](../references#md-ref-5) [\[19\]](../references#md-ref-8). Adapting the geometry required custom moulding or redesign for standard sheets and tubes.
 
 #### 1.2.3.2 CFRP Sheets & Tubes vs 3D-Printed Parts {#cfrp-sheets-tubes-vs-3d-printed-parts}
 
 CFRP's higher strength-to-weight ratio than conventional 3D-printed polymers supports the estimated 4–6 kg takeoff mass and motor-thrust loads while limiting structural mass.
 
-An experiment found lower vibration amplitudes in a CFRP motor frame than an aluminium-alloy frame [\[17\]](../references#md-ref-7). This suggests potential benefits for FOD camera clarity and reduced interference with flight-controller inertial measurements.
+An experiment found lower vibration amplitudes in a CFRP motor frame than an aluminium-alloy frame [\[20\]](../references#md-ref-7). This suggests potential benefits for FOD camera clarity and reduced interference with flight-controller inertial measurements.
 
 #### 1.2.3.3 Second Design Iteration {#second-iteration}
 
-<MechanicalFigure number="12" n="10" src="/report-assets/mechanical-design/second-iteration-structural-body.png" :width="1073" :height="751" caption="Structural body design for the second iteration" />
+<MechanicalFigure number="17" n="10" src="/report-assets/mechanical-design/second-iteration-structural-body.png" :width="1073" :height="751" caption="Structural body design for the second iteration" />
 
-<MechanicalFigure number="13" n="11" src="/report-assets/mechanical-design/second-iteration-layered-section.png" :width="1066" :height="790" caption="Layered design approach from concept sketch (Sectioned View)" />
+<MechanicalFigure number="18" n="11" src="/report-assets/mechanical-design/second-iteration-layered-section.png" :width="1066" :height="790" caption="Layered design approach from concept sketch (Sectioned View)" />
 
 The second iteration retained the layered layout but replaced 3D-printed arms with carbon-fibre tubes and simplified the top and bottom structures for CFRP fabrication. These changes targeted stiffness, strength and vibration management at low mass. Custom 3D-printed clamps secured the arms and landing legs to the bottom layer.
 
@@ -135,15 +135,15 @@ Preliminary top and bottom plate layouts used the dimensions and placement requi
 
 <div class="cv-figure-grid">
 
-<MechanicalFigure number="14" n="24" src="/report-assets/mechanical-design/preliminary-top-component-layout.png" :width="607" :height="538" caption="Preliminary component placement on the top base plate." />
+<MechanicalFigure number="19" n="24" src="/report-assets/mechanical-design/preliminary-top-component-layout.png" :width="607" :height="538" caption="Preliminary component placement on the top base plate." />
 
-<MechanicalFigure number="15" n="25" src="/report-assets/mechanical-design/preliminary-bottom-component-layout.png" :width="650" :height="428" caption="Preliminary component placement on the bottom base plate." />
+<MechanicalFigure number="20" n="25" src="/report-assets/mechanical-design/preliminary-bottom-component-layout.png" :width="650" :height="428" caption="Preliminary component placement on the bottom base plate." />
 
 </div>
 
 Structural masses, including CFRP plates, arms and 3D-printed parts, came from SolidWorks mass properties; selected electronics and sensor masses came from manufacturer specifications. Pending battery selection, the highest identified battery mass was adopted conservatively.
 
-<p class="report-table-caption" id="table-5"><strong>Table 5.</strong> Preliminary Mass Estimation</p>
+<p class="report-table-caption" id="table-6"><strong>Table 6.</strong> Preliminary Mass Estimation</p>
 
 | Component | Estimated mass (g) |
 | --- | ---: |
@@ -164,7 +164,7 @@ Identified components totalled approximately 3.6 kg. Allowing for planned compon
 
 Preliminary thrust calculations supported motor and propeller sizing across flight conditions using the assumptions tabulated below.
 
-<p class="report-table-caption" id="table-6"><strong>Table 6.</strong> Preliminary Thrust Calculations</p>
+<p class="report-table-caption" id="table-7"><strong>Table 7.</strong> Preliminary Thrust Calculations</p>
 
 | Parameter | Symbol | Assumption / value |
 | --- | --- | --- |
@@ -211,7 +211,7 @@ Thrust is calculated in newtons. For comparison with motor thrust data, results 
 
 In this scenario, the UAV is assumed to hover steadily in still air, with no horizontal movement or acceleration. Therefore, the total upward thrust generated by the four motors must be equal to the UAV's weight to maintain a constant altitude.
 
-<MechanicalFigure number="16" n="26" src="/report-assets/mechanical-design/hover-free-body-diagram.png" :width="715" :height="537" caption="Free-body diagram for basic hover in still air. The upward arrows represent the combined rotor contribution." />
+<MechanicalFigure number="21" n="26" src="/report-assets/mechanical-design/hover-free-body-diagram.png" :width="715" :height="537" caption="Free-body diagram for basic hover in still air. The upward arrows represent the combined rotor contribution." />
 
 Using [Equation (7)](#equation-md-7), [Equation (8)](#equation-md-8) and [Equation (9)](#equation-md-9):
 
@@ -230,11 +230,11 @@ Each motor must generate approximately 1.25 kgf of thrust to maintain a steady h
 <details class="mechanical-flight-case" id="5-2-2-case-2-15-km-h-cruise-against-a-2-m-s-headwind">
 <summary>1.2.4.2.2 Case 2: 15 km/h Cruise Against a 2 m/s Headwind</summary>
 
-For this scenario, the UAV is assumed to cruise at a constant speed of 15 km/h against a headwind of 2 m/s. The headwind velocity was selected based on an article published by The Straits Times, which reported Singapore's average annual wind speed to be approximately 2 m/s [\[18\]](../references#md-ref-14). In addition, the UAV's projected frontal area was approximated as 0.062038 m² based on the overall body geometry obtained from the front view of the preliminary SolidWorks model.
+For this scenario, the UAV is assumed to cruise at a constant speed of 15 km/h against a headwind of 2 m/s. The headwind velocity was selected based on an article published by The Straits Times, which reported Singapore's average annual wind speed to be approximately 2 m/s [\[21\]](../references#md-ref-14). In addition, the UAV's projected frontal area was approximated as 0.062038 m² based on the overall body geometry obtained from the front view of the preliminary SolidWorks model.
 
-<MechanicalFigure number="17" n="27" src="/report-assets/mechanical-design/preliminary-projected-frontal-area.png" :width="515" :height="223" caption="Projected frontal area estimated from the preliminary SolidWorks geometry: 0.062038 m²." />
+<MechanicalFigure number="22" n="27" src="/report-assets/mechanical-design/preliminary-projected-frontal-area.png" :width="515" :height="223" caption="Projected frontal area estimated from the preliminary SolidWorks geometry: 0.062038 m²." />
 
-<MechanicalFigure number="18" n="28" src="/report-assets/mechanical-design/cruise-free-body-diagram.png" :width="811" :height="608" caption="Free-body diagram for steady cruise against a headwind, reproduced from the source report. The thrust annotation differs slightly from the recalculated value below." />
+<MechanicalFigure number="23" n="28" src="/report-assets/mechanical-design/cruise-free-body-diagram.png" :width="811" :height="608" caption="Free-body diagram for steady cruise against a headwind, reproduced from the source report. The thrust annotation differs slightly from the recalculated value below." />
 
 For directly opposing wind, relative airspeed and aerodynamic drag are:
 
@@ -274,7 +274,7 @@ Therefore, each motor must generate approximately 1.251 kgf of thrust to maintai
 
 The UAV accelerates forward while maintaining altitude, so horizontal thrust must overcome drag and produce the required acceleration. The thrust calculation below evaluates the condition at the target cruise speed, where drag is approximately 1.850 N. During acceleration from rest, drag varies with relative airspeed according to [Equations (10)](#equation-md-10) and [(11)](#equation-md-11).
 
-<MechanicalFigure number="19" n="29" src="/report-assets/mechanical-design/acceleration-free-body-diagram.png" :width="1156" :height="436" caption="Free-body diagram for forward acceleration, evaluated at the target ground speed. The acceleration arrow indicates motion response rather than an additional force." />
+<MechanicalFigure number="24" n="29" src="/report-assets/mechanical-design/acceleration-free-body-diagram.png" :width="1156" :height="436" caption="Free-body diagram for forward acceleration, evaluated at the target ground speed. The acceleration arrow indicates motion response rather than an additional force." />
 
 The required horizontal thrust is:
 
@@ -319,7 +319,7 @@ Therefore, the UAV requires approximately 1.262 kgf of thrust per motor when acc
 
 ##### 1.2.4.2.2 Results across Different Flight Scenarios {#_5-2-4-results-across-different-flight-scenarios}
 
-<p class="report-table-caption" id="table-7"><strong>Table 7.</strong> Results across Different Flight Scenarios</p>
+<p class="report-table-caption" id="table-8"><strong>Table 8.</strong> Results across Different Flight Scenarios</p>
 
 | Flight scenario | Relative velocity (m/s) | $F_D$ (N) | $\theta$ (°) | Thrust / motor (kgf) |
 | --- | ---: | ---: | ---: | ---: |
@@ -333,13 +333,13 @@ Therefore, the UAV requires approximately 1.262 kgf of thrust per motor when acc
 | **15 km/h, 12 m/s headwind** | **16.17** | **12.712** | **14.53** | **1.291** |
 | **15 km/h, 12 m/s wind, $a=1\ \mathrm{m/s^2}$** | **16.17** | **12.712** | **19.85** | **1.329** |
 
-The results show increasing pitch and thrust requirements with headwind speed and acceleration. The 12 m/s case assesses additional demand near Beaufort “Strong Breeze” conditions [\[19\]](../references#md-ref-15). These scenarios informed propulsion sizing and thrust reserve.
+The results show increasing pitch and thrust requirements with headwind speed and acceleration. The 12 m/s case assesses additional demand near Beaufort “Strong Breeze” conditions [\[22\]](../references#md-ref-15). These scenarios informed propulsion sizing and thrust reserve.
 
 #### 1.2.4.3 Conservative Thrust Estimation {#_5-3-setting-conservative-thrust-estimate}
 
-Longitudinal cruise and acceleration calculations consider pitch, while lateral disturbances and manoeuvres also require roll. Preliminary sizing therefore adopted a conservative maximum combined tilt of 45°. The industrial-grade DJI Matrice 350 RTK, of comparable weight class, provided a 30° maximum-pitch reference [\[20\]](../references#md-ref-16).
+Longitudinal cruise and acceleration calculations consider pitch, while lateral disturbances and manoeuvres also require roll. Preliminary sizing therefore adopted a conservative maximum combined tilt of 45°. The industrial-grade DJI Matrice 350 RTK, of comparable weight class, provided a 30° maximum-pitch reference [\[23\]](../references#md-ref-16).
 
-<MechanicalFigure number="20" n="30" src="/report-assets/mechanical-design/dji-matrice-350-rtk-tilt-reference.png" :width="547" :height="412" caption="DJI Matrice 350 RTK. Maximum pitch angle reference reproduced from the supplied report [16]." />
+<MechanicalFigure number="25" n="30" src="/report-assets/mechanical-design/dji-matrice-350-rtk-tilt-reference.png" :width="547" :height="412" caption="DJI Matrice 350 RTK. Maximum pitch angle reference reproduced from the supplied report [16]." />
 
 The combined tilt angle, $\beta$, accounts for both pitch ($\theta$) and roll ($\phi$) of the UAV:
 
@@ -406,20 +406,20 @@ A 2:1 thrust-to-weight target provided reserve for wind disturbance rejection, m
 
 <div class="cv-figure-grid">
 
-<MechanicalFigure number="21" n="31" src="/report-assets/mechanical-design/t-motor-mn501-s-kv360.png" :width="415" :height="386" caption="T-Motor MN501-S KV360." />
+<MechanicalFigure number="26" n="31" src="/report-assets/mechanical-design/t-motor-mn501-s-kv360.png" :width="415" :height="386" caption="T-Motor MN501-S KV360." />
 
-<MechanicalFigure number="22" n="32" src="/report-assets/mechanical-design/mad-5005-ipe-kv440.png" :width="441" :height="393" caption="MAD 5005 IPE KV440 motor." />
+<MechanicalFigure number="27" n="32" src="/report-assets/mechanical-design/mad-5005-ipe-kv440.png" :width="441" :height="393" caption="MAD 5005 IPE KV440 motor." />
 
 </div>
 
 <details class="mechanical-flight-case" id="t-motor-mn501-s-kv360-with-17-inch-propellers">
 <summary>1.2.4.4.1 T-Motor MN501-S KV360 with 17-inch Propellers</summary>
 
-The T-Motor MN501-S KV360 paired with 17-inch propellers was evaluated based on its thrust capability and power consumption. Using the manufacturer's performance data [\[21\]](../references#md-ref-17), linear interpolation was performed to estimate the motor's operating characteristics at the required thrust of 1.251 kgf per motor under the expected cruising condition of 15 km/h with a 2 m/s headwind.
+The T-Motor MN501-S KV360 paired with 17-inch propellers was evaluated based on its thrust capability and power consumption. Using the manufacturer's performance data [\[24\]](../references#md-ref-17), linear interpolation was performed to estimate the motor's operating characteristics at the required thrust of 1.251 kgf per motor under the expected cruising condition of 15 km/h with a 2 m/s headwind.
 
-The manufacturer's performance data for the MN501-S KV360 with P17×5.8-inch propellers gives the following values at the two nearest thrust points [\[21\]](../references#md-ref-17).
+The manufacturer's performance data for the MN501-S KV360 with P17×5.8-inch propellers gives the following values at the two nearest thrust points [\[24\]](../references#md-ref-17).
 
-<p class="report-table-caption" id="table-8"><strong>Table 8.</strong> T-Motor MN501-S KV360 with 17-inch Propellers</p>
+<p class="report-table-caption" id="table-9"><strong>Table 9.</strong> T-Motor MN501-S KV360 with 17-inch Propellers</p>
 
 | Parameter | 48% throttle | 50% throttle |
 | --- | ---: | ---: |
@@ -464,11 +464,11 @@ $$
 <details class="mechanical-flight-case" id="mad-5005-ipe-kv440-with-14-inch-propellers">
 <summary>1.2.4.4.2 MAD 5005 IPE KV440 with 14-inch Propellers</summary>
 
-The MAD 5005 IPE KV440 paired with 14-inch propellers was similarly evaluated based on its thrust capability and power consumption. Using the manufacturer's performance data, linear interpolation was performed to estimate the motor's operating characteristics at similar operating conditions [\[22\]](../references#md-ref-18).
+The MAD 5005 IPE KV440 paired with 14-inch propellers was similarly evaluated based on its thrust capability and power consumption. Using the manufacturer's performance data, linear interpolation was performed to estimate the motor's operating characteristics at similar operating conditions [\[25\]](../references#md-ref-18).
 
 The manufacturer's performance table provides the following values:
 
-<p class="report-table-caption" id="table-9"><strong>Table 9.</strong> MAD 5005 IPE KV440 with 14-inch Propellers</p>
+<p class="report-table-caption" id="table-10"><strong>Table 10.</strong> MAD 5005 IPE KV440 with 14-inch Propellers</p>
 
 | Parameter | 65% throttle | 70% throttle |
 | --- | ---: | ---: |
@@ -510,7 +510,7 @@ The MAD 5005 IPE KV440 was selected despite the T-Motor's slightly lower cruise 
 
 <div class="mechanical-motor-comparison">
 
-<p class="report-table-caption" id="table-10"><strong>Table 10.</strong> Motors Comparison</p>
+<p class="report-table-caption" id="table-11"><strong>Table 11.</strong> Motors Comparison</p>
 
 | Parameter | T-Motor MN501-S KV360 | MAD 5005 IPE KV440 — Selected |
 | --- | --- | --- |
@@ -535,12 +535,12 @@ Assumptions:
 - All motor thrust axes are assumed to be parallel and perpendicular to the motor mounting plane.
 - Total thrust is evaluated at the specified flight condition; transient variations are neglected.
 
-<MechanicalFigure number="23" n="33" src="/report-assets/mechanical-design/differential-motor-thrust-fbd.png" :width="1226" :height="541" caption="FBD of UAV with Differential Motor Thrust." />
+<MechanicalFigure number="28" n="33" src="/report-assets/mechanical-design/differential-motor-thrust-fbd.png" :width="1226" :height="541" caption="FBD of UAV with Differential Motor Thrust." />
 
 <details class="mechanical-flight-case" id="thrust-distribution-during-constant-speed-cruise">
 <summary>1.2.4.5.1 Thrust Distribution During Constant-Speed Cruise</summary>
 
-<p class="report-table-caption" id="table-11"><strong>Table 11.</strong> Constant-Speed Cruise Parameters</p>
+<p class="report-table-caption" id="table-12"><strong>Table 12.</strong> Constant-Speed Cruise Parameters</p>
 
 | Parameter | Symbol | Value |
 | --- | --- | ---: |
@@ -608,7 +608,7 @@ $$
 
 The calculated thrust requirements for constant-speed cruise are summarised below.
 
-<p class="report-table-caption" id="table-12"><strong>Table 12.</strong> Motor Thrust Distribution During Constant-Speed Cruise</p>
+<p class="report-table-caption" id="table-13"><strong>Table 13.</strong> Motor Thrust Distribution During Constant-Speed Cruise</p>
 
 | Motor position | Thrust per motor (N) | Thrust per motor (kgf) |
 | --- | ---: | ---: |
@@ -622,7 +622,7 @@ The results indicate that the rear motors require slightly greater thrust than t
 <details class="mechanical-flight-case" id="thrust-distribution-during-forward-acceleration">
 <summary>1.2.4.5.2 Thrust Distribution During Forward Acceleration at 1 m/s²</summary>
 
-<p class="report-table-caption" id="table-13"><strong>Table 13.</strong> Forward-Acceleration Parameters</p>
+<p class="report-table-caption" id="table-14"><strong>Table 14.</strong> Forward-Acceleration Parameters</p>
 
 | Parameter | Symbol | Value |
 | --- | --- | ---: |
@@ -701,7 +701,7 @@ $$
 
 The calculated thrust requirements during the nose-down angular acceleration phase are summarised below.
 
-<p class="report-table-caption" id="table-14"><strong>Table 14.</strong> Motor Thrust Distribution During Forward Acceleration</p>
+<p class="report-table-caption" id="table-15"><strong>Table 15.</strong> Motor Thrust Distribution During Forward Acceleration</p>
 
 | Motor position | Thrust per motor (N) | Thrust per motor (kgf) |
 | --- | ---: | ---: |
@@ -723,7 +723,7 @@ CFRP arm diameter and wall thickness were selected by comparing strength, stiffn
 
 A simplified beam model represents the prototype's arm clamping arrangement, determining clamp reactions and the maximum bending moment from motor thrust.
 
-<MechanicalFigure number="24" n="34" src="/report-assets/mechanical-design/propeller-arm-loading-fbd.png" :width="1354" :height="672" caption="FBD of Propeller Arm Loading." />
+<MechanicalFigure number="29" n="34" src="/report-assets/mechanical-design/propeller-arm-loading-fbd.png" :width="1354" :height="672" caption="FBD of Propeller Arm Loading." />
 
 Assumptions:
 
@@ -780,7 +780,7 @@ $$
 |M_{\max}|=Fa \tag{25}
 $$
 
-<MechanicalFigure number="25" n="35" src="/report-assets/mechanical-design/hollow-cfrp-tube-cross-section.png" :width="680" :height="556" caption="Cross-sectional area of a hollow circular carbon-fibre tube." />
+<MechanicalFigure number="30" n="35" src="/report-assets/mechanical-design/hollow-cfrp-tube-cross-section.png" :width="680" :height="556" caption="Cross-sectional area of a hollow circular carbon-fibre tube." />
 
 Maximum bending stress follows from the flexure formula:
 
@@ -806,9 +806,9 @@ $$
 
 #### 1.2.5.2 Beam Deflection Calculation {#beam-deflection-calculation}
 
-The motor-end bending deflection was calculated using Euler–Bernoulli beam theory. A Young's modulus of 123 GPa, obtained from the manufacturer's Toray T300 carbon fibre datasheet, was adopted for the preliminary calculation [\[23\]](../references#md-ref-19).
+The motor-end bending deflection was calculated using Euler–Bernoulli beam theory. A Young's modulus of 123 GPa, obtained from the manufacturer's Toray T300 carbon fibre datasheet, was adopted for the preliminary calculation [\[26\]](../references#md-ref-19).
 
-<MechanicalFigure number="26" n="36" src="/report-assets/mechanical-design/propeller-arm-bending-deflection.png" :width="1381" :height="415" caption="Diagram illustrating deflection for a propeller arm." />
+<MechanicalFigure number="31" n="36" src="/report-assets/mechanical-design/propeller-arm-bending-deflection.png" :width="1381" :height="415" caption="Diagram illustrating deflection for a propeller arm." />
 
 The motor-end deflection is calculated using:
 
@@ -816,7 +816,7 @@ $$
 \delta_{\mathrm{motor}}=\frac{Fa^2(a+s)}{3EI} \tag{28}
 $$
 
-<p class="report-table-caption" id="table-15"><strong>Table 15.</strong> Beam Deflection Calculation</p>
+<p class="report-table-caption" id="table-16"><strong>Table 16.</strong> Beam Deflection Calculation</p>
 
 | Parameter | Symbol | Value / definition |
 | --- | --- | --- |
@@ -828,9 +828,9 @@ $$
 
 #### 1.2.5.3 Natural Bending Frequency Calculation {#natural-bending-frequency-calculation}
 
-<MechanicalFigure number="27" n="37" src="/report-assets/mechanical-design/cantilever-bending-modes.png" :width="546" :height="366" caption="Figure showing the different bending modes, reproduced from the supplied report; the original illustration source was not provided." />
+<MechanicalFigure number="32" n="37" src="/report-assets/mechanical-design/cantilever-bending-modes.png" :width="546" :height="366" caption="Figure showing the different bending modes, reproduced from the supplied report; the original illustration source was not provided." />
 
-Natural bending frequencies were evaluated to limit resonance affecting onboard sensors. ArduPilot identifies motor rotational frequency as a common multirotor vibration source [\[24\]](../references#md-ref-20).
+Natural bending frequencies were evaluated to limit resonance affecting onboard sensors. ArduPilot identifies motor rotational frequency as a common multirotor vibration source [\[27\]](../references#md-ref-20).
 
 Manufacturer data provided motor rotational and blade passing frequency ranges from hover to maximum thrust for arm comparison. Preliminary calculations considered only the first bending mode.
 
@@ -852,7 +852,7 @@ $$
 f_{\mathrm{BPF}}=2f_{\mathrm{motor}} \tag{30}
 $$
 
-<p class="report-table-caption" id="table-16"><strong>Table 16.</strong> Motor Excitation Frequencies</p>
+<p class="report-table-caption" id="table-17"><strong>Table 17.</strong> Motor Excitation Frequencies</p>
 
 | Frequency | Hover | Maximum thrust |
 | --- | ---: | ---: |
@@ -869,7 +869,7 @@ $$
 
 Parameters:
 
-<p class="report-table-caption" id="table-17"><strong>Table 17.</strong> Natural Bending Frequency Parameters</p>
+<p class="report-table-caption" id="table-18"><strong>Table 18.</strong> Natural Bending Frequency Parameters</p>
 
 | Parameter | Symbol | Value |
 | --- | --- | --- |
@@ -913,7 +913,7 @@ The selected 20 mm outer diameter, 1.5 mm wall thickness CFRP tube satisfies bot
 
 <div class="mechanical-arm-comparison">
 <table>
-<caption class="report-table-caption"><strong>Table 18.</strong> Evaluation of Different Tube Configurations</caption>
+<caption class="report-table-caption"><strong>Table 19.</strong> Evaluation of Different Tube Configurations</caption>
 <thead><tr><th scope="col">Outer Diameter (mm)</th><th scope="col">Wall Thickness (mm)</th><th scope="col">SolidWorks Mass (g)</th><th scope="col">Stress (MPa)</th><th scope="col">Deflection (mm)</th><th scope="col">First Bending Natural Frequency (Hz)</th><th scope="col">Selection</th></tr></thead>
 <tbody>
 <tr class="arm-rejected"><td>16</td><td>1.5</td><td>42.36</td><td>24.32</td><td>0.494</td><td>109.7</td><td>Rejected</td></tr>
@@ -932,11 +932,11 @@ Red marks configurations within the motor rotational frequency range (16 × 1.5 
 
 ### 1.2.6 Third Design Iteration (Final Prototype Design) {#final-prototype-design}
 
-<MechanicalFigure number="28" n="12" src="/report-assets/mechanical-design/final-prototype-cad-assembly.png" :width="1378" :height="665" caption="CAD Assembly of Final Prototype Design" />
+<MechanicalFigure number="33" n="12" src="/report-assets/mechanical-design/final-prototype-cad-assembly.png" :width="1378" :height="665" caption="CAD Assembly of Final Prototype Design" />
 
-<MechanicalFigure number="29" n="13" src="/report-assets/mechanical-design/final-prototype-layers.png" :width="734" :height="342" caption="Different Layers of the Prototype Design" />
+<MechanicalFigure number="34" n="13" src="/report-assets/mechanical-design/final-prototype-layers.png" :width="734" :height="342" caption="Different Layers of the Prototype Design" />
 
-<p class="report-table-caption" id="table-19"><strong>Table 19.</strong> Third Design Iteration (Final Prototype Design)</p>
+<p class="report-table-caption" id="table-20"><strong>Table 20.</strong> Third Design Iteration (Final Prototype Design)</p>
 
 | Layer / Assembly | Allocated Components |
 | --- | --- |
@@ -945,7 +945,7 @@ Red marks configurations within the motor rotational frequency range (16 × 1.5 
 | Camera & Sensor Assembly | RGB Camera, Thermal Camera and Single-Point LiDAR |
 | Propeller Assembly | Motors and Propellers |
 
-The final design addresses the second iteration's fabrication limitations by combining CFRP base plates, motor mounting plates and propeller arms with 3D-printed components. CFRP suits these relatively simple structural geometries. More complex, customisable enclosures and tube clamps would use PETG CF for its improved mechanical properties over conventional PETG and PLA [\[25\]](../references#md-ref-9).
+The final design addresses the second iteration's fabrication limitations by combining CFRP base plates, motor mounting plates and propeller arms with 3D-printed components. CFRP suits these relatively simple structural geometries. More complex, customisable enclosures and tube clamps would use PETG CF for its improved mechanical properties over conventional PETG and PLA [\[28\]](../references#md-ref-9).
 
 ### 1.2.7 Placement of Key Onboard Components {#placement-of-key-onboard-components}
 
@@ -955,9 +955,9 @@ Component placement considered mass distribution, accessibility, vibration isola
 
 The RGB camera detects and locates FOD within images; GNSS supplies the UAV's geographical position. Their central X–Y alignment along a common vertical axis simplifies geolocation while retaining vertical separation.
 
-<MechanicalFigure number="30" n="17" src="/report-assets/mechanical-design/gnss-rgb-vertical-alignment.png" :width="702" :height="306" caption="Side view showing the vertical separation of the GNSS antenna and RGB camera (project CAD)." />
+<MechanicalFigure number="35" n="17" src="/report-assets/mechanical-design/gnss-rgb-vertical-alignment.png" :width="702" :height="306" caption="Side view showing the vertical separation of the GNSS antenna and RGB camera (project CAD)." />
 
-The primarily vertical displacement simplifies sensor-to-sensor transformation. From the cited direct georeferencing principles [\[26\]](../references#md-ref-11):
+The primarily vertical displacement simplifies sensor-to-sensor transformation. From the cited direct georeferencing principles [\[29\]](../references#md-ref-11):
 
 $$
 \mathbf{p}_C^N=\mathbf{p}_G^N+\mathbf{R}_B^N\mathbf{t}_{GC} \tag{2}
@@ -976,25 +976,25 @@ The signed $\Delta z$ runs from GNSS antenna to RGB camera along body Z. Central
 
 #### 1.2.7.2 Placement of the Pixhawk Flight Controller near Centre of Gravity {#placement-of-the-pixhawk-flight-controller-near-centre-of-gravity}
 
-PX4 and ArduPilot recommend positioning the flight controller as close as possible to the CG [\[27\]](../references#md-ref-12) [\[28\]](../references#md-ref-13).
+PX4 and ArduPilot recommend positioning the flight controller as close as possible to the CG [\[30\]](../references#md-ref-12) [\[31\]](../references#md-ref-13).
 
-<MechanicalFigure number="31" n="18" src="/report-assets/mechanical-design/px4-flight-controller-mounting.png" :width="1040" :height="611" caption="Ideal flight controller placement. External PX4 documentation illustration reproduced in the supplied report [12]; the original source URL was not supplied." />
+<MechanicalFigure number="36" n="18" src="/report-assets/mechanical-design/px4-flight-controller-mounting.png" :width="1040" :height="611" caption="Ideal flight controller placement. External PX4 documentation illustration reproduced in the supplied report [12]; the original source URL was not supplied." />
 
 The assembly places the Pixhawk near the CG within available space, as shown below.
 
-<MechanicalFigure number="32" n="19" src="/report-assets/mechanical-design/pixhawk-isometric-view.png" :width="872" :height="617" caption="Isometric view of the Pixhawk placement (project CAD)." />
+<MechanicalFigure number="37" n="19" src="/report-assets/mechanical-design/pixhawk-isometric-view.png" :width="872" :height="617" caption="Isometric view of the Pixhawk placement (project CAD)." />
 
 <div class="cv-figure-grid">
 
-<MechanicalFigure number="33" n="20" src="/report-assets/mechanical-design/pixhawk-top-view.png" :width="656" :height="619" caption="Top view of the Pixhawk placement (project CAD)." />
+<MechanicalFigure number="38" n="20" src="/report-assets/mechanical-design/pixhawk-top-view.png" :width="656" :height="619" caption="Top view of the Pixhawk placement (project CAD)." />
 
-<MechanicalFigure number="34" n="21" src="/report-assets/mechanical-design/pixhawk-side-view.png" :width="807" :height="391" caption="Side view of the Pixhawk placement (project CAD)." />
+<MechanicalFigure number="39" n="21" src="/report-assets/mechanical-design/pixhawk-side-view.png" :width="807" :height="391" caption="Side view of the Pixhawk placement (project CAD)." />
 
 </div>
 
 The completed assembly gave the following approximate Pixhawk offsets from the overall CG.
 
-<p class="report-table-caption" id="table-20"><strong>Table 20.</strong> Placement of the Pixhawk Flight Controller near Centre of Gravity</p>
+<p class="report-table-caption" id="table-21"><strong>Table 21.</strong> Placement of the Pixhawk Flight Controller near Centre of Gravity</p>
 
 | Axis | Approximate distance from CG (mm) |
 | --- | ---: |
@@ -1012,19 +1012,19 @@ d&=\sqrt{(\Delta x)^2+(\Delta y)^2+(\Delta z)^2}\\
 \end{aligned} \tag{4}
 $$
 
-The approximately 45 mm displacement remains within ArduPilot's recommendation of a few centimetres. PX4 and ArduPilot offer offset-compensation parameters, but close placement remains preferable: larger offsets increase IMU accelerations during rotation and may affect measurements and control [\[28\]](../references#md-ref-13).
+The approximately 45 mm displacement remains within ArduPilot's recommendation of a few centimetres. PX4 and ArduPilot offer offset-compensation parameters, but close placement remains preferable: larger offsets increase IMU accelerations during rotation and may affect measurements and control [\[31\]](../references#md-ref-13).
 
 #### 1.2.7.3 Placement of the 360° LiDAR {#placement-of-the-360-lidar}
 
 The 360° LiDAR moved from the top plate's centre to the front because GNSS–RGB alignment took priority. This position aims to minimise surrounding-component obstruction while preserving propeller and structural clearance. Its obstacle-detection role is discussed in the [Computer Vision section](./computer-vision#thermal-safety).
 
-<MechanicalFigure number="35" n="22" src="/report-assets/mechanical-design/lidar-front-isometric-view.png" :width="916" :height="586" caption="Front placement of the 360° LiDAR in the isometric view (project CAD)." />
+<MechanicalFigure number="40" n="22" src="/report-assets/mechanical-design/lidar-front-isometric-view.png" :width="916" :height="586" caption="Front placement of the 360° LiDAR in the isometric view (project CAD)." />
 
 #### 1.2.7.4 45° Placement of the Thermal Camera {#45-degree-placement-of-the-thermal-camera}
 
 The thermal camera is mounted at approximately 45° on a rigid, custom-designed mount that will be 3D-printed, complementing the 360° LiDAR for obstacle detection. Planned integration is discussed in the [Computer Vision section](./computer-vision#thermal-safety).
 
-<MechanicalFigure number="36" n="23" src="/report-assets/mechanical-design/thermal-camera-side-view.png" :width="928" :height="392" caption="Placement of the thermal camera in the side view (project CAD)." />
+<MechanicalFigure number="41" n="23" src="/report-assets/mechanical-design/thermal-camera-side-view.png" :width="928" :height="392" caption="Placement of the thermal camera in the side view (project CAD)." />
 
 #### 1.2.7.5 Placement of Batteries and Other Electrical Components in the Bottom Layer {#placement-of-batteries-and-other-electrical-components-in-the-bottom-layer}
 
@@ -1042,9 +1042,9 @@ Raspberry Pi integration may require external ESC relocation if bottom-layer spa
 
 <div class="cv-figure-grid">
 
-<MechanicalFigure number="37" n="38" src="/report-assets/mechanical-design/structural-prototype-isometric.jpeg" :width="491" :height="655" caption="Initial structural prototype with acrylic base plates and carbon-fibre tube arms." />
+<MechanicalFigure number="42" n="38" src="/report-assets/mechanical-design/structural-prototype-isometric.jpeg" :width="491" :height="655" caption="Initial structural prototype with acrylic base plates and carbon-fibre tube arms." />
 
-<MechanicalFigure number="38" n="39" src="/report-assets/mechanical-design/structural-prototype-side.jpeg" :width="476" :height="634" caption="Assembled structural prototype showing the base plates, propeller arms and landing legs." />
+<MechanicalFigure number="43" n="39" src="/report-assets/mechanical-design/structural-prototype-side.jpeg" :width="476" :height="634" caption="Assembled structural prototype showing the base plates, propeller arms and landing legs." />
 
 </div>
 
@@ -1060,13 +1060,13 @@ The base plates, propeller arms and landing legs were assembled using 3D-printed
 
 <div class="cv-figure-grid">
 
-<MechanicalFigure number="39" n="40" src="/report-assets/mechanical-design/tube-clamp-heat-set-threaded-inserts.png" :width="566" :height="384" caption="Installation of heat-set threaded inserts into the 3D-printed carbon-fibre tube clamps." />
+<MechanicalFigure number="44" n="40" src="/report-assets/mechanical-design/tube-clamp-heat-set-threaded-inserts.png" :width="566" :height="384" caption="Installation of heat-set threaded inserts into the 3D-printed carbon-fibre tube clamps." />
 
-<MechanicalFigure number="40" n="41" src="/report-assets/mechanical-design/fabricated-carbon-fibre-tube-clamps.png" :width="960" :height="1280" caption="Fabricated PETG tube clamp components, including installed threaded inserts." />
+<MechanicalFigure number="45" n="41" src="/report-assets/mechanical-design/fabricated-carbon-fibre-tube-clamps.png" :width="960" :height="1280" caption="Fabricated PETG tube clamp components, including installed threaded inserts." />
 
 </div>
 
-The carbon-fibre tube clamps were fabricated using PETG (polyethylene terephthalate glycol) through 3D printing, primarily due to its toughness and impact resistance [\[29\]](../references#md-ref-21).
+The carbon-fibre tube clamps were fabricated using PETG (polyethylene terephthalate glycol) through 3D printing, primarily due to its toughness and impact resistance [\[32\]](../references#md-ref-21).
 
 The clamps were fabricated to evaluate the functionality of the clamping mechanism in securing the carbon-fibre tubes and base plates. In addition, heat-set threaded inserts were installed into the 3D-printed clamps to provide secure fastening points for assembly and disassembly. The prototyping was done to assess the fitment of the components and the practicality of the clamping mechanism before finalising the design. The findings from the preliminary clamp evaluation and the subsequent proposed design modifications are discussed in [Section 1.5.2 - 3D-Printed Carbon Fibre Tube Clamp Analysis After Testing](#tube-clamp-analysis-after-testing).
 
@@ -1074,9 +1074,9 @@ The clamps were fabricated to evaluate the functionality of the clamping mechani
 
 <div class="cv-figure-grid">
 
-<MechanicalFigure number="41" n="42" src="/report-assets/mechanical-design/fabricated-drone-leg-mounts.png" :width="868" :height="1280" caption="Fabricated PETG landing leg mounts with slotted clamping features." />
+<MechanicalFigure number="46" n="42" src="/report-assets/mechanical-design/fabricated-drone-leg-mounts.png" :width="868" :height="1280" caption="Fabricated PETG landing leg mounts with slotted clamping features." />
 
-<MechanicalFigure number="42" n="43" src="/report-assets/mechanical-design/drone-leg-mount-slot-clamping-mechanism.png" :width="444" :height="449" caption="CAD detail of the slotted clamping mechanism around a carbon-fibre landing leg." />
+<MechanicalFigure number="47" n="43" src="/report-assets/mechanical-design/drone-leg-mount-slot-clamping-mechanism.png" :width="444" :height="449" caption="CAD detail of the slotted clamping mechanism around a carbon-fibre landing leg." />
 
 </div>
 
@@ -1102,7 +1102,7 @@ The motor output functions were then assigned to the first four output channels 
 
 Individual motor tests were subsequently conducted using the `motortest` command, with a commanded throttle percentage of 40% and a test duration of 5 seconds. These tests were intended to verify the response of each motor to commands issued through the flight controller and identify potential integration or output assignment issues.
 
-<MechanicalFigure number="43" n="44" src="/report-assets/mechanical-design/mavproxy-individual-motor-testing.png" :width="756" :height="430" caption="MAVProxy verification of the quadcopter X-frame configuration, motor output assignments and individual motor test commands at 40% commanded throttle for 5 seconds." />
+<MechanicalFigure number="48" n="44" src="/report-assets/mechanical-design/mavproxy-individual-motor-testing.png" :width="756" :height="430" caption="MAVProxy verification of the quadcopter X-frame configuration, motor output assignments and individual motor test commands at 40% commanded throttle for 5 seconds." />
 
 <MechanicalVideo src="/report-assets/mechanical-design/individual-motor-testing-1.mov" poster="/report-assets/mechanical-design/individual-motor-testing-1-poster.jpg" caption="Individual motor testing, recording 1." />
 
@@ -1116,7 +1116,7 @@ The Motor Test interface was configured for a quadcopter with an X-frame configu
 
 The simultaneous motor test was intended to assess the response of all four motors when commanded together and further verify the integration of the Pixhawk flight controller, ESCs and motors within the assembled FOD Argus prototype.
 
-<MechanicalFigure number="44" n="45" src="/report-assets/mechanical-design/mission-planner-simultaneous-motor-testing.png" :width="800" :height="726" caption="Mission Planner Motor Test interface showing the Quad/X configuration, motor assignments, 40% commanded throttle, 5-second duration and test controls." />
+<MechanicalFigure number="49" n="45" src="/report-assets/mechanical-design/mission-planner-simultaneous-motor-testing.png" :width="800" :height="726" caption="Mission Planner Motor Test interface showing the Quad/X configuration, motor assignments, 40% commanded throttle, 5-second duration and test controls." />
 
 <MechanicalVideo src="/report-assets/mechanical-design/simultaneous-motor-testing.mov" poster="/report-assets/mechanical-design/simultaneous-motor-testing-poster.jpg" caption="Simultaneous motor testing." />
 
@@ -1128,7 +1128,7 @@ The simultaneous motor test was intended to assess the response of all four moto
 
 The centre of gravity (CG) of the completed UAV prototype assembly was determined in SolidWorks from the mass distribution of its individual components. The coordinates below are relative to the assembly coordinate origin; the vertical coordinate is distinct from the distance below the propeller plane.
 
-<p class="report-table-caption" id="table-21"><strong>Table 21.</strong> Centre of Gravity (CG) Analysis</p>
+<p class="report-table-caption" id="table-22"><strong>Table 22.</strong> Centre of Gravity (CG) Analysis</p>
 
 | Axis | CG coordinate (mm) |
 | --- | ---: |
@@ -1138,9 +1138,9 @@ The centre of gravity (CG) of the completed UAV prototype assembly was determine
 
 <div class="cv-figure-grid">
 
-<MechanicalFigure number="45" n="14" src="/report-assets/mechanical-design/cg-top-view.png" :width="600" :height="572" caption="CG point in the top view of the SolidWorks assembly (project CAD)." />
+<MechanicalFigure number="50" n="14" src="/report-assets/mechanical-design/cg-top-view.png" :width="600" :height="572" caption="CG point in the top view of the SolidWorks assembly (project CAD)." />
 
-<MechanicalFigure number="46" n="15" src="/report-assets/mechanical-design/cg-front-view.png" :width="1101" :height="502" caption="CG point in the front view of the SolidWorks assembly (project CAD)." />
+<MechanicalFigure number="51" n="15" src="/report-assets/mechanical-design/cg-front-view.png" :width="1101" :height="502" caption="CG point in the front view of the SolidWorks assembly (project CAD)." />
 
 </div>
 
@@ -1158,21 +1158,21 @@ The calculated horizontal offset is approximately 5.88 mm. This relatively small
 
 The SolidWorks assembly places the UAV's CG approximately 40 mm below the propeller plane.
 
-The thesis cited in the source report [\[30\]](../references#md-ref-10) describes how positioning the CG below the propellers can contribute to stability during forward flight and wind disturbances. Aerodynamic drag acting above the CG can generate a stabilising moment opposing an attitude disturbance, as illustrated below.
+The thesis cited in the source report [\[33\]](../references#md-ref-10) describes how positioning the CG below the propellers can contribute to stability during forward flight and wind disturbances. Aerodynamic drag acting above the CG can generate a stabilising moment opposing an attitude disturbance, as illustrated below.
 
-<MechanicalFigure number="47" n="16" src="/report-assets/mechanical-design/vertical-cg-stability-reference.png" :width="1040" :height="378" caption="Influence of vertical CG positioning on multicopter stability. External thesis illustration reproduced in the supplied report [10]; bibliographic details were not supplied." />
+<MechanicalFigure number="52" n="16" src="/report-assets/mechanical-design/vertical-cg-stability-reference.png" :width="1040" :height="378" caption="Influence of vertical CG positioning on multicopter stability. External thesis illustration reproduced in the supplied report [10]; bibliographic details were not supplied." />
 
 FOD ARGUS incorporates a lower CG through the arrangement of its onboard components, particularly the battery. This configuration may contribute to a stabilising aerodynamic response if the resultant aerodynamic forces act above the CG. Overall stability remains dependent on the flight control system, and flight testing is required to evaluate the effectiveness of this arrangement.
 
 ### 1.5.2 3D-Printed Carbon Fibre Tube Clamp Analysis After Testing {#tube-clamp-analysis-after-testing}
 
-<MechanicalFigure number="48" n="46" src="/report-assets/mechanical-design/tube-clamp-potential-slippage.png" :width="590" :height="402" caption="Potential axial and rotational slippage in the original tube clamping mechanism." />
+<MechanicalFigure number="53" n="46" src="/report-assets/mechanical-design/tube-clamp-potential-slippage.png" :width="590" :height="402" caption="Potential axial and rotational slippage in the original tube clamping mechanism." />
 
 During preliminary testing, the 3D-printed clamps were found to provide a tight fit around the carbon-fibre tubes. However, the team identified a potential limitation of the clamping mechanism, where the tubes could experience axial slippage or rotational movement within the clamps, particularly when subjected to loads during flight.
 
 One possible solution was to apply epoxy adhesive between the clamps and carbon-fibre tubes to prevent relative movement. However, this would create a largely permanent connection, making subsequent clamp modifications or replacements difficult during prototyping.
 
-<MechanicalFigure number="49" n="47" src="/report-assets/mechanical-design/proposed-keyed-tube-clamp-cad.png" :width="874" :height="236" caption="Proposed keyed clamping mechanism: modified clamp with a corresponding slot (left) and keyed insert (right)." />
+<MechanicalFigure number="54" n="47" src="/report-assets/mechanical-design/proposed-keyed-tube-clamp-cad.png" :width="874" :height="236" caption="Proposed keyed clamping mechanism: modified clamp with a corresponding slot (left) and keyed insert (right)." />
 
 To address this limitation while maintaining the modularity of the design, a keyed connection was proposed. This involves bonding a keyed insert to the end of each carbon-fibre tube using epoxy adhesive and incorporating a corresponding slot into the 3D-printed clamp. The resulting mechanical interlock is intended to restrict both axial and rotational movement without permanently bonding the clamp to the tube. This approach would allow the team to modify or replace the 3D-printed clamps during subsequent design iterations, provided that the corresponding slot geometry is maintained.
 
@@ -1180,9 +1180,9 @@ To address this limitation while maintaining the modularity of the design, a key
 
 <div class="cv-figure-grid">
 
-<MechanicalFigure number="50" n="48" src="/report-assets/mechanical-design/assembled-prototype-landing-leg-mount.jpeg" :width="355" :height="473" caption="Assembled 3D-printed landing leg mount on the structural prototype." />
+<MechanicalFigure number="55" n="48" src="/report-assets/mechanical-design/assembled-prototype-landing-leg-mount.jpeg" :width="355" :height="473" caption="Assembled 3D-printed landing leg mount on the structural prototype." />
 
-<MechanicalFigure number="51" n="49" src="/report-assets/mechanical-design/landing-leg-clamp-fastening-detail.png" :width="960" :height="1280" caption="Close-up of the original slotted landing leg clamp and bolt-and-nut fastening mechanism." />
+<MechanicalFigure number="56" n="49" src="/report-assets/mechanical-design/landing-leg-clamp-fastening-detail.png" :width="960" :height="1280" caption="Close-up of the original slotted landing leg clamp and bolt-and-nut fastening mechanism." />
 
 </div>
 
@@ -1192,7 +1192,7 @@ The mounts required bolts and nuts for fastening, which made the assembly and di
 
 To address these limitations, a commercially available aluminium landing leg mount with a 20° inclination was identified on Taobao. The mount was found to be geometrically compatible with the UAV design while maintaining the intended outward inclination of the landing legs. Compared to the 3D-printed PETG mounts, the aluminium material is expected to provide greater structural strength and rigidity, offering higher confidence in the reliability of the landing leg connections. The threaded holes in the aluminium mount are also expected to simplify assembly.
 
-<MechanicalFigure number="52" n="50" src="/report-assets/mechanical-design/proposed-aluminium-landing-leg-mount.png" :width="485" :height="609" caption="Proposed commercially available aluminium landing leg mount from Taobao, with supplier dimensions shown; this alternative has not been installed or validated by the team." />
+<MechanicalFigure number="57" n="50" src="/report-assets/mechanical-design/proposed-aluminium-landing-leg-mount.png" :width="485" :height="609" caption="Proposed commercially available aluminium landing leg mount from Taobao, with supplier dimensions shown; this alternative has not been installed or validated by the team." />
 
 ## 1.6 Discussion of Future Works {#a6-problems-project-plan}
 

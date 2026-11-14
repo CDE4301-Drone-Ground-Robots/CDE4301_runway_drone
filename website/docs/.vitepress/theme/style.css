@@ -454,3 +454,6 @@ html:has(.report-image-viewer[open]){overflow:hidden}
 .ieee-reference p{margin:0;font-size:15px;line-height:1.75;overflow-wrap:anywhere}
 .ieee-reference .reference-note{margin-top:6px;color:var(--vp-c-text-2);font-size:13px}
 @media(max-width:600px){.ieee-reference{grid-template-columns:36px minmax(0,1fr);gap:6px}}
+
+.vp-doc .research-detection-table .report-inline-figure{margin:0}
+.vp-doc .research-detection-table .report-inline-figure figcaption{font-size:11px;line-height:1.5;margin-top:8px;text-align:center;color:var(--vp-c-text-2)}

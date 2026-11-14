@@ -42,7 +42,7 @@ The operational range must be up to 5 km, as that’s the runway length. The 917
 
 ### 5.2.1 UAV Communication Architecture {#communication-architecture}
 
-<CommunicationFigure number="113" src="/report-assets/communication-system/interim-communication-architecture.svg" :width="1200" :height="680" caption="ARGUS sender queue and message delivery over the interim link. The queue is demonstrated in Stage 2. Live receipt acknowledgements and handshake-based recovery will be implemented and tested after the interim assessment." />
+<CommunicationFigure number="118" src="/report-assets/communication-system/interim-communication-architecture.svg" :width="1200" :height="680" caption="ARGUS sender queue and message delivery over the interim link. The queue is demonstrated in Stage 2. Live receipt acknowledgements and handshake-based recovery will be implemented and tested after the interim assessment." />
 
 This architecture enables communication between the two systems without requiring the Python scripts to establish direct network socket connections manually.
 
@@ -52,7 +52,7 @@ The communication system uses structured command and control (C2) alert messages
 
 The message format is as follows:
 
-<p class="report-table-caption" id="table-59"><strong>Table 59.</strong> C2 Alert Message Structure</p>
+<p class="report-table-caption" id="table-60"><strong>Table 60.</strong> C2 Alert Message Structure</p>
 
 | Field | Description |
 | --- | --- |
@@ -77,7 +77,7 @@ The KEEP_LAST history policy with a depth of 1 holds the most recent alert. Thes
 
 Two radio communication methods were explored for the final setup:
 
-<p class="report-table-caption" id="table-60"><strong>Table 60.</strong> Long-Range Communication Hardware</p>
+<p class="report-table-caption" id="table-61"><strong>Table 61.</strong> Long-Range Communication Hardware</p>
 
 | Parameter | Serial RF: Microhard P900 V2 | Broadband IP: Microhard pMDDL2450 |
 | --- | --- | --- |
@@ -90,21 +90,21 @@ Two radio communication methods were explored for the final setup:
 | Range for this project | 5 km requirement, not verified | 5 km requirement, not verified at the permitted power |
 | Selection | Not preferred because it cannot support the required live feed | Preferred candidate, final selection pending validation |
 
-Specifications: [\[67\]](../references#com-h02) and [\[68\]](../references#com-h01). The listed RF output capabilities are hardware specifications, not permitted operating powers.
+Specifications: [\[70\]](../references#com-h02) and [\[71\]](../references#com-h01). The listed RF output capabilities are hardware specifications, not permitted operating powers.
 
 The **pMDDL2450 is the preferred candidate** because its broadband IP radio link supports FOD alerts, crack images and the thermal live feed. The final device will be confirmed after checking its permitted power configuration and testing the required range and video performance. The P900 V2 is suitable for small serial messages but does not provide the bandwidth needed for the live feed.
 
-For the proposed **2.4 GHz UAV link**, IMDA specifies a maximum of **100 mW EIRP (20 dBm)**. The setup must be configured to operate below 100 mW EIRP, including antenna gain and cable losses. The radio's full 1 W setting will not be used under these licence-exempt conditions. Configuration and a reliable 5 km link still need testing at the permitted power ([\[69\]](../references#com-r02)). The 100 mW limit should not be assumed to apply to every frequency band.
+For the proposed **2.4 GHz UAV link**, IMDA specifies a maximum of **100 mW EIRP (20 dBm)**. The setup must be configured to operate below 100 mW EIRP, including antenna gain and cable losses. The radio's full 1 W setting will not be used under these licence-exempt conditions. Configuration and a reliable 5 km link still need testing at the permitted power ([\[72\]](../references#com-r02)). The 100 mW limit should not be assumed to apply to every frequency band.
 
 ### 5.2.5 Interference in Shared Frequency Bands {#shared-frequency-interference}
 
-The proposed 2.4 GHz link uses a shared band, not a frequency reserved for ARGUS. Nearby Wi-Fi, Bluetooth and other devices can interfere when transmissions overlap. This can cause lost or delayed FOD alerts and reduce live-feed quality ([\[70\]](../references#com-t01)). IMDA states that short-range devices operate on a non-interference and non-protection basis, so an interference-free link cannot be assumed ([\[71\]](../references#com-r03)).
+The proposed 2.4 GHz link uses a shared band, not a frequency reserved for ARGUS. Nearby Wi-Fi, Bluetooth and other devices can interfere when transmissions overlap. This can cause lost or delayed FOD alerts and reduce live-feed quality ([\[73\]](../references#com-t01)). IMDA states that short-range devices operate on a non-interference and non-protection basis, so an interference-free link cannot be assumed ([\[74\]](../references#com-r03)).
 
 Before operation, the plan is to check channel use and select a less busy channel within the permitted settings. Alerts and video will be tested together under quiet and busy conditions. Receipt acknowledgements and retries are planned to handle missing alerts, but they do not remove radio interference. These tests are still pending.
 
 ### 5.2.6 Proposed Communication Security {#communication-security}
 
-Encryption is planned to protect FOD messages from being read during transmission. ROS 2 DDS Security also supports certificate-based authentication, message-integrity checks and permissions that limit which nodes can publish or subscribe to each topic ([\[72\]](../references#com-s01)). These features need to be configured and enforced. They are not enabled in the current prototype.
+Encryption is planned to protect FOD messages from being read during transmission. ROS 2 DDS Security also supports certificate-based authentication, message-integrity checks and permissions that limit which nodes can publish or subscribe to each topic ([\[75\]](../references#com-s01)). These features need to be configured and enforced. They are not enabled in the current prototype.
 
 The plan also includes checks for old or repeated alerts and protection of private keys. These measures reduce the risk of unauthorised access and message tampering. They do not prevent radio interference or jamming. Implementation and testing are listed in [Section 5.6.1.5](#message-security-plan).
 
@@ -112,7 +112,7 @@ The plan also includes checks for old or repeated alerts and protection of priva
 
 In the proposed workflow, vision uses navigation data to calculate the precise FOD coordinates. The ARGUS queue stores FOD coordinates in the order they are detected and sends one alert at a time. Each alert stays queued until HUNTER confirms receipt with the same threat ID. If communication is lost, ARGUS keeps the alert and resends it when the link returns. After the matching receipt acknowledgement, ARGUS sends the next queued coordinate without waiting for collection to finish. Live acknowledgements and retransmission will be implemented and tested after the interim assessment.
 
-<CommunicationFigure number="114" src="/report-assets/communication-system/vision-communication-workflow.svg" :width="1200" :height="900" caption="Proposed vision-to-comms workflow with the queue on ARGUS. Unacknowledged alerts are retained for retry. Stage 2 is simulated. Live integration will be implemented and tested after the interim assessment." />
+<CommunicationFigure number="119" src="/report-assets/communication-system/vision-communication-workflow.svg" :width="1200" :height="900" caption="Proposed vision-to-comms workflow with the queue on ARGUS. Unacknowledged alerts are retained for retry. Stage 2 is simulated. Live integration will be implemented and tested after the interim assessment." />
 
 ## 5.3 Communication Prototype Implementation {#a3-prototype-development}
 
@@ -120,13 +120,13 @@ In the proposed workflow, vision uses navigation data to calculate the precise F
 
 For interim communication, I implemented ROS 2 Jazzy to establish communication between ARGUS and HUNTER. ROS 2 provides a publisher-subscriber communication architecture that sends information between systems. I implemented communication using Python 3 and the ROS 2 Python client library.
 
-<CommunicationFigure number="115" src="/report-assets/communication-system/software-tools.png" :width="1503" :height="733" caption="Software used for the interim communication system." />
+<CommunicationFigure number="120" src="/report-assets/communication-system/software-tools.png" :width="1503" :height="733" caption="Software used for the interim communication system." />
 
 ### 5.3.2 Multiple FOD Transmission {#multiple-fod-transmission}
 
 The application queue runs on ARGUS and stores pending FOD alerts in the order they are detected. The planned process is to send one alert and retain it until HUNTER confirms receipt with the same threat ID. ARGUS then sends the next coordinate without waiting for FOD collection to finish. Live receipt acknowledgements will be added during integration. The threat ID would be as follows:
 
-<p class="report-table-caption" id="table-61"><strong>Table 61.</strong> Multiple FOD Transmission</p>
+<p class="report-table-caption" id="table-62"><strong>Table 62.</strong> Multiple FOD Transmission</p>
 
 | Object | Threat ID |
 | --- | --- |
@@ -178,9 +178,9 @@ The C2 alert transmission test is shown below. A Python script (DemoComs_C2.py) 
 
 On the Raspberry Pi 5, the receiver successfully receives and decodes the messages. It then displays the FOD classification, confidence score and the target coordinates in the terminal. In the background, it converts the received coordinates into a ROS 2 PoseStamped navigation goal and publishes it to the `/goal_pose` topic.
 
-<CommunicationFigure number="116" src="/report-assets/communication-system/argus-publisher-test.png" :width="1252" :height="223" caption="Original ARGUS publisher screenshot from the laptop test." />
+<CommunicationFigure number="121" src="/report-assets/communication-system/argus-publisher-test.png" :width="1252" :height="223" caption="Original ARGUS publisher screenshot from the laptop test." />
 
-<CommunicationFigure number="117" src="/report-assets/communication-system/hunter-receiver-test.png" :width="909" :height="204" caption="Original HUNTER receiver screenshot from Raspberry Pi 5. The log reports Nav2 unavailable, so this shows message reception and goal publication, not completed navigation." />
+<CommunicationFigure number="122" src="/report-assets/communication-system/hunter-receiver-test.png" :width="909" :height="204" caption="Original HUNTER receiver screenshot from Raspberry Pi 5. The log reports Nav2 unavailable, so this shows message reception and goal publication, not completed navigation." />
 
 These tests were successful (shown in the figure above), proving that the ARGUS and HUNTER can exchange structured data over a local wireless network. This served as the baseline foundation for integrating the real-time FOD detection from the vision system with the HUNTER’s autonomous navigation system.
 
@@ -188,7 +188,7 @@ These tests were successful (shown in the figure above), proving that the ARGUS 
 
 ### 5.5.1 Communication Performance Evaluation {#performance-evaluation}
 
-<p class="report-table-caption" id="table-62"><strong>Table 62.</strong> Communication Performance Evaluation</p>
+<p class="report-table-caption" id="table-63"><strong>Table 63.</strong> Communication Performance Evaluation</p>
 
 | Performance parameter | Result |
 | --- | ---: |
@@ -242,7 +242,7 @@ The 100-message benchmark used ROS 2 Jazzy with the publisher and subscriber on 
 
 ::: details 5.6.1.5 Message Security
 
-- **Enable DDS Security:** Use SROS2 to configure encryption, certificate-based authentication and message-integrity protection. Require secure connections instead of falling back to unsecured operation ([\[72\]](../references#com-s01)).
+- **Enable DDS Security:** Use SROS2 to configure encryption, certificate-based authentication and message-integrity protection. Require secure connections instead of falling back to unsecured operation ([\[75\]](../references#com-s01)).
 - **Limit topic access:** Allow only approved nodes to publish FOD targets, receipt acknowledgements and control messages. Restrict subscriptions to authorised recipients.
 - **Check old and repeated alerts:** Use mission IDs, threat IDs and timestamps to reject stale alerts and avoid adding the same target twice. Still acknowledge valid retransmissions so the sender can release the next alert.
 - **Protect private keys:** Keep private keys out of the shared code repository and restrict access on each device.
@@ -268,7 +268,7 @@ The simulator below shows the proposed interface. It uses example records saved 
 
 The final communication device is still to be confirmed. Range, interference and radio video tests need candidate hardware. Queue, ACK, storage and security tests can start using the existing Wi-Fi setup, then be repeated on the final link. The tests below are planned. Undecided performance targets will be set before validation.
 
-<p class="report-table-caption" id="table-63"><strong>Table 63.</strong> Communication Validation Plan</p>
+<p class="report-table-caption" id="table-64"><strong>Table 64.</strong> Communication Validation Plan</p>
 
 | Test | Planned method | Check or target | Hardware needed |
 | --- | --- | --- | --- |
@@ -276,7 +276,7 @@ The final communication device is still to be confirmed. Range, interference and
 | Communication-loss recovery | Disconnect HUNTER, add FOD alerts and restore the link. Also test missing ACKs. | Retain coordinates, preserve queue order and avoid duplicate targets. Check the link every second and notify the base station after 10 seconds without a handshake response, if reachable. Verify that a missing FOD ACK alone does not trigger a link-loss notification. | Start on Wi-Fi. |
 | Record storage and queue capacity | Restart ARGUS with pending alerts and test the storage limit. | Pending records survive restart. Set queue capacity and define what happens when storage is full. | ARGUS storage and application. |
 | Coordinate agreement | Send known coordinates with agreed units, map frame, mission ID and threat ID. | HUNTER receives the same target values and interprets the agreed frame correctly. | Start on Wi-Fi. |
-| Radio power configuration | Check applicable IMDA TS SRD conditions, radio settings, antenna gain and cable losses [\[73\]](../references#com-r01). | The proposed 2.4 GHz UAV setup stays below 100 mW EIRP. | Candidate radio and antenna setup. |
+| Radio power configuration | Check applicable IMDA TS SRD conditions, radio settings, antenna gain and cable losses [\[76\]](../references#com-r01). | The proposed 2.4 GHz UAV setup stays below 100 mW EIRP. | Candidate radio and antenna setup. |
 | Wireless range | Increase separation towards 5 km and record delivery, delays and dropouts. | Meet the 5 km requirement and the agreed delivery and delay targets. | Candidate radio at the permitted power. |
 | Live feed and interference | Run alerts and video together under quiet and busy channel conditions. | Check support for at least 1080p (1920 × 1080). Set the frame rate and acceptable delay, measure bandwidth and check the effect on alert delivery. | Start on Wi-Fi, validate on the radio. |
 | Security | Test unauthorised nodes, topic permissions, stale alerts and valid retransmissions. | Block unauthorised access and stale targets. Acknowledge valid retries without creating duplicate targets. | Start on Wi-Fi with DDS Security enabled. |
