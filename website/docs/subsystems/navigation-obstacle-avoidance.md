@@ -97,7 +97,7 @@ The **lane pitch** is the sideways distance between the centre lines of two neig
 
 <ElectricalFigure n="3" src="/report-assets/navigation-obstacle-avoidance/survey-sectors-lane.png" :width="980" :height="202" caption="Coverage of one lane seen from behind (to scale). Green is RGB and cyan is thermal only in the simulation overlay." />
 
-<details>
+<details class="custom-block details">
 <summary>Sources for the survey criteria</summary>
 
 Sources: runway dimensions follow FAA AC 150/5300-13B [\[44\]](../references#nav-ref-3) and ICAO Annex 14 Vol. I [\[45\]](../references#nav-ref-13). The RGB footprint is calculated from the e-CAM56_CUONX sensor and M12 lens, and the thermal footprint from the BNW2T256T04010ASSWC datasheet [\[41\]](../references#nav-ref-17).
@@ -131,7 +131,7 @@ The camera footprint was the largest change to the plan between the first and se
 | Area surveyed per flight | 3,600 m² | 1,800 m² |
 | Sorties needed for a 2.5 km runway | 42 | 84 |
 
-<details>
+<details class="custom-block details">
 <summary>How the previous footprint was derived</summary>
 
 The previous camera was a placeholder using the SDFormat default horizontal field of view of 1.047 rad (60°) [\[46\]](../references#nav-ref-12). The footprint is $2h\tan(\mathrm{HFOV}/2)$ with $h = 5\ \text{m}$, giving 5.77 m across and 4.33 m along for a general 640 × 480 image (resolution generalised as the SDFormat default is 320 × 240).
@@ -142,14 +142,14 @@ The same relationship can be explored for other cameras with the planner below. 
 
 <SectorPlanner />
 
-<details>
+<details class="custom-block details">
 <summary>Planner source and calibration</summary>
 
 Source: the planner is calibrated on the offline kinematic simulation (2 m RGB footprint, turbulence 25%, worst of 3 seeds for wind). The worst case is a 15 m/s crosswind, and the sortie must fit between the 95% launch level and the 25% return level of the battery. The relation between endurance and sector size is explained in [Endurance vs. Mission Time](#endurance-vs-mission-time).
 
 </details>
 
-<details>
+<details class="custom-block details">
 <summary>Potential scalability: fleet and power</summary>
 
 The smaller sector raises the number of sorties needed for a full runway. Three measures could recover this without changing the navigation:
@@ -182,7 +182,7 @@ Lanes along the runway have been flown in Gazebo and PX4. Lanes across the runwa
 | Lanes along, rounded turns | 581 s, 48.0% | 672 s, 56.5% | 732 s, 61.6% | 1.2 to 1.4 m | Slower, because the turn arcs are flown at 1.3 m/s, and the turns need tuning |
 | Lanes across, sharp turns | 403 s, 33.2% | 455 s, 37.9% | 428 s, 35.7% | 0.6 to 0.7 m | The fastest candidate, which needs further testing |
 
-<details>
+<details class="custom-block details">
 <summary>Source for Table 37</summary>
 
 Source: offline kinematic simulation, 30 × 60 m sector, 2 m RGB footprint, turbulence 25%. The wind results show the worst of 3 seeds, and the calm results use 1 seed. Coverage patterns: Choset (2001) [\[47\]](../references#nav-ref-1); Galceran & Carreras (2013) [\[48\]](../references#nav-ref-2).
@@ -223,7 +223,7 @@ A static obstacle that has been mapped for 1.0 s moves the machine from SURVEY t
 
 The sequence of events when an obstacle stays on the lane is as follows. The obstacle is first detected, and after 1.0 s of continuous detection it is mapped as static and a bypass is inserted into the route. If the lane is still blocked for a further 1.0 s, the machine enters HOLD. If the lane has still not cleared after 10 s in total, the strip is skipped and is flown again later in a revisit pass.
 
-<details>
+<details class="custom-block details">
 <summary>Rerouting details: transits, obstacle map and methods</summary>
 
 Take-off, return and revisit transits are flown as straight lines between known coordinates, and the revisits are ordered nearest-first. The same bypass is applied around any mapped obstacle. The obstacle map is an occupancy grid with 0.4 m cells, and a cell becomes static after 1.0 s. The methods follow: Hart, Nilsson & Raphael (1968) [\[49\]](../references#nav-ref-4); LaValle, *Planning Algorithms* [\[50\]](../references#nav-ref-5).
@@ -236,7 +236,7 @@ The lane is only 1.76 m wide, so the drone must hold its path closely while wind
 
 <ElectricalFigure n="9" src="/report-assets/navigation-obstacle-avoidance/path-loop.png" :width="1510" :height="216" caption="Path-following feedback loop: lane, error, pull, PX4, drone and EKF2." />
 
-<details>
+<details class="custom-block details">
 <summary>Path-following controller: equation and gains</summary>
 
 $$
@@ -253,7 +253,7 @@ The cross-track error decays exponentially, so a 3 m detour is recovered in abou
 
 <ElectricalFigure n="10" src="/report-assets/navigation-obstacle-avoidance/path-detour.png" :width="509" :height="332" :cardWidth="640" caption="Return to the lane after a 3 m detour (about 7 s)." />
 
-<details>
+<details class="custom-block details">
 <summary>Why this controller</summary>
 
 Pure pursuit [\[51\]](../references#nav-ref-6) was considered first, but at cruise it looks about 4 m ahead, and the lane pitch is only 1.76 m, so it would be expected to cut the lane ends. A cross-track term corrects onto the line itself [\[52\]](../references#nav-ref-7), which suits a narrow lane. Because PX4 already handles attitude and rate [\[53\]](../references#nav-ref-8), the outer loop can be a simple first-order pull.
@@ -303,7 +303,7 @@ The navigator streams velocity $(v_x, v_y, v_z)$ and yaw setpoints in the runway
 
 The speed allowed into lane ends and corners is limited by braking distance. The calculation is given below.
 
-<details>
+<details class="custom-block details">
 <summary>Speed limit calculation</summary>
 
 Braking into lane ends and corners limits the allowed speed:
@@ -343,7 +343,7 @@ The failsafes are the red arrows of the state machine (Figure NAV-12), and the t
 | Battery for return | About 25% (a 20% reserve plus 3% for the return flight) | The drone returns home | This is a safety net. With a 95% launch the pack never reaches 25% during a normal sortie |
 | Battery critical or emergency | 12% or 6% remaining | The drone lands beside the runway edge at 12%, and straight down at 6% | An edge landing takes 10.8 s (about 1% of the pack), and a 5 m descent takes 6 s (about 0.5%) |
 
-<details>
+<details class="custom-block details">
 <summary>Sources for Table 41</summary>
 
 Sources: wind force $F = \tfrac{1}{2}\rho\,C_dA\,v^{2}$ with $C_dA = 0.0794\ \text{m}^2$ and $m = 4.7\ \text{kg}$; gust time constant $\tau = 37\ \text{m}/v$ (Dryden, MIL-HDBK-1797 [\[56\]](../references#nav-ref-11)); PX4 User Guide, Safety configuration (battery failsafes staged as warning, return, land, emergency land) [\[53\]](../references#nav-ref-8); Unicore UM980 datasheet [\[40\]](../references#nav-ref-16); simulation stress tests (10 seeds per wind case, 8 per bird case); battery from the offline sim, lanes along, 266 Wh pack, worst of 3 seeds.
@@ -356,7 +356,7 @@ Sources: wind force $F = \tfrac{1}{2}\rho\,C_dA\,v^{2}$ with $C_dA = 0.0794\ \te
 
 **Approach:** The wind loads on the airframe were taken from the Mechanical Design Calculations ([Section 1.2.4.2](../subsystems/mechanical-design.md#_5-2-preliminary-thrust-calculations)). The wind force on the airframe follows the standard drag law on the CAD frontal area, the drone leans until the horizontal component of thrust balances that force, and the thrust per motor then follows from the lean angle. The simulation reuses the same drag area, so the wind loads seen by the navigator are the loads that the airframe was sized for. Only the values that had to differ for a simulation are changed, and each change is justified below.
 
-<details>
+<details class="custom-block details">
 <summary>Values taken from the Mechanical calculations</summary>
 
 <p class="report-table-caption" id="table-42"><strong>Table 42.</strong> Wind Model Parameters</p>
@@ -372,7 +372,7 @@ Sources: wind force $F = \tfrac{1}{2}\rho\,C_dA\,v^{2}$ with $C_dA = 0.0794\ \te
 
 </details>
 
-<details>
+<details class="custom-block details">
 <summary>Values changed for the simulation, and why</summary>
 
 <p class="report-table-caption" id="table-43"><strong>Table 43.</strong> Mechanical and Simulation Wind Assumptions</p>
@@ -388,7 +388,7 @@ The comparison with the Mechanical sizing is direct. At 15 m/s the wind force is
 
 </details>
 
-<details>
+<details class="custom-block details">
 <summary>Turbulence model: Dryden-like gusts</summary>
 
 Steady wind alone would only test whether the drone can lean far enough. The real difficulty on a survey is that wind changes while the drone is flying a 1.76 m wide lane, so the simulation adds gusts on top of the mean wind. The gust model follows the Dryden turbulence form of MIL-HDBK-1797 [\[56\]](../references#nav-ref-11), which describes turbulence as a random velocity with two parameters: an intensity $\sigma$ and a length scale $L$.
@@ -474,7 +474,7 @@ The typical duration of each state for a 30 m sector in calm air is given in Fig
 
 The total is 476 s (7.9 min) in calm air and 533 s (8.9 min) at 10 m/s wind. The climb takes about 3 s at 1.3× hover thrust (944 W), which is about 0.3% of the pack, so it is never the limiting term. A supervisor applies the geofence, the 5 m ± 0.5 m altitude band and a speed clamp to every command.
 
-<details>
+<details class="custom-block details">
 <summary>Source for Table 44</summary>
 
 Source: offline kinematic simulation, lanes along the runway, 30 m sector. The calm result uses seed 1, and the 10 m/s result is the mean of 3 seeds. Climb energy from the Power Calculations in the [Electrical Design](../subsystems/electrical-design#power-calculations) report (climb 1.3× hover, 236 W per motor).
@@ -621,7 +621,7 @@ The longest flight time we expect (15 m/s crosswind) takes 13.2 min, inside the 
 
 Each result is the worst of 3 seeds, with lanes along the runway and turbulence of 25%.
 
-<details>
+<details class="custom-block details">
 <summary>Why 15 min? Endurance calculation</summary>
 
 The pack holds 266 Wh and the drone draws about 805 W, so a full drain lasts 19.8 min, or 15.9 min when use is limited to 80% of the pack. A sortie spends only the window from the 95% launch to the 25% return, which is 70% of the pack or 13.9 min. The worst case flown, a 15 m/s crosswind over a 30 m sector, takes 13.2 min and 69% of the pack, so it fits. At 15 m/s the longest sector that fits is 30 m (35 m needs 73%, 40 m needs 83% and 60 m needs 103%).
@@ -643,7 +643,7 @@ The pack holds 266 Wh and the drone draws about 805 W, so a full drain lasts 19.
 
 **Safe flying conditions.** The airframe holds 15 m/s (steady lean about 13°, peak 35° in gusts) and stays within 2.1 m of the lane, inside the 3 m lane failsafe limit.
 
-<details>
+<details class="custom-block details">
 <summary>Additional wind test results (independent of camera and coverage pattern)</summary>
 
 The following results do not change with the camera or the coverage pattern:
@@ -653,7 +653,7 @@ The following results do not change with the camera or the coverage pattern:
 
 </details>
 
-<details>
+<details class="custom-block details">
 <summary>Source for Table 46</summary>
 
 Source: offline kinematic simulation, lanes along the runway, with the wind blowing across (90°) or along (0°) the runway, seeds 1 to 3 and 25% turbulence. The Gazebo demonstrations use a 60 m sector.
@@ -681,7 +681,7 @@ The simulation also exposed concerns that were not foreseen in the design stage.
 
 #### 3.6.1.1 Further Concerns and Solutions {#further-concerns-and-solutions}
 
-<details>
+<details class="custom-block details">
 <summary>Further concerns found in simulation, with evidence and proposed mitigations (Table 48)</summary>
 
 <p class="report-table-caption" id="table-48"><strong>Table 48.</strong> Further Concerns and Solutions</p>
@@ -703,7 +703,7 @@ Semester 2 moves the navigation logic from simulation to the real drone. The dro
 
 #### 3.6.2.1 Build and Bench-Test the Hardware {#build-and-bench-test-the-hardware}
 
-<details>
+<details class="custom-block details">
 <summary>Build and bench-test the hardware</summary>
 
 - Finish integrating the full hardware stack and troubleshoot it.
@@ -714,7 +714,7 @@ Semester 2 moves the navigation logic from simulation to the real drone. The dro
 
 #### 3.6.2.2 Update the Simulation and Predict {#update-the-simulation-and-predict}
 
-<details>
+<details class="custom-block details">
 <summary>Update the simulation and predict</summary>
 
 - Feed the measured values back into the simulation.
@@ -725,7 +725,7 @@ Semester 2 moves the navigation logic from simulation to the real drone. The dro
 
 #### 3.6.2.3 Live Test, Then Compare {#live-test-then-compare}
 
-<details>
+<details class="custom-block details">
 <summary>Live test cases and comparison with the simulation (Table 49)</summary>
 
 The drone cannot be flown over a full 30 m × 60 m sector straight away, so the live tests are built up from small cases. Each case is flown only after the simulation has predicted its result, and the next case is started only once the previous one has been verified.

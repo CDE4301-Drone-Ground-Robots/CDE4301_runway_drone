@@ -619,7 +619,7 @@ When I was running the Smart City Lab for CapitaLand, my understanding is that a
 
 *Interview date: 16 September 2026*
 
-**Speaker 1:** Yeah. Maybe I introduce myself first, before I can introduce yourself. So, my name is Asuka. I'm Josh's friend. I met him on exchange, actually. Also realized that he's an Air Force officer in the same batch that I was in OCS. So, I guess it must be the same batch at SIM, probably.
+**Speaker 1:** Yeah. Maybe I introduce myself first, before I can introduce yourself. So, my name is Asuka. I'm [name omitted]'s friend. I met him on exchange, actually. Also realized that he's an Air Force officer in the same batch that I was in OCS. So, I guess it must be the same batch at SIM, probably.
 
 **RSAF Air Traffic Controller, Tengah Air Base:** Yes, yes, you're right.
 
