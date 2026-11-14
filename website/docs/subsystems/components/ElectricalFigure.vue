@@ -1,11 +1,15 @@
 <script setup lang="ts">
+import { computed } from 'vue'
 import { withBase } from 'vitepress'
-const figure = defineProps<{ n: string; number?: string; src: string; width: number; height: number; caption: string; cropHeight?: number; cardWidth?: number }>()
+const figure = defineProps<{ n: string; number?: string; src: string; width: number; height: number; caption: string; cropHeight?: number; cardWidth?: number; label?: string }>()
+// Id prefix for the figure anchor. Defaults to the asset folder name (e.g. "electrical-design" or
+// "navigation-obstacle-avoidance") so ids stay unique when several chapters render on one page.
+const label = computed(() => (figure.label || figure.src.split('/')[2] || 'fig').toLowerCase().replace(/[^a-z0-9]+/g, '-'))
 </script>
 <template>
  <figure
   v-if="figure"
-  :id="'figure-ed-' + figure.n"
+  :id="'figure-' + label + '-' + figure.n"
   class="cv-figure"
   :style="{ maxWidth: figure.cardWidth ? figure.cardWidth + 'px' : '100%' }"
  >
