@@ -93,7 +93,6 @@ const plan = computed(() => {
      <div><span>Lane spacing</span><strong>{{ f(res.p, 2) }} m</strong></div>
      <div><span>Lanes</span><strong>{{ res.N }}</strong></div>
      <div><span>Flight time</span><strong>{{ f(res.T / 60) }} min</strong></div>
-     <div><span>Pack used</span><strong>{{ f(res.pack, 0) }}%</strong></div>
     </div>
 
     <div class="sp-field" ref="root">
@@ -145,7 +144,7 @@ const plan = computed(() => {
 .sp-hero span, .sp-stats span { font-size: 12px; font-weight: 600; color: var(--vp-c-text-2); }
 .sp-hero strong { font-size: 44px; line-height: 1.2; font-weight: 750; color: var(--sp-accent); font-variant-numeric: tabular-nums; }
 .sp-hero strong small { font-size: 16px; font-weight: 600; color: var(--vp-c-text-2); }
-.sp-stats { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+.sp-stats { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; }
 .sp-stats > div { display: flex; flex-direction: column; padding: 10px 12px; border: 1px solid var(--vp-c-divider); border-radius: 12px; background: var(--vp-c-bg); }
 .sp-stats strong { font-size: 17px; white-space: nowrap; font-weight: 750; font-variant-numeric: tabular-nums; }
 .sp-field { position: relative; }
