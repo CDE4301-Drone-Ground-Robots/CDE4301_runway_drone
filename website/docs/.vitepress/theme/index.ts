@@ -20,7 +20,7 @@ export default {
  Layout: () => h(DefaultTheme.Layout, null, {
   'layout-bottom': () => [h(CursorSpotlight), h(ReportScrollSync), h(ReportImageViewer)],
   'sidebar-nav-before': () => h('div', { class: 'report-sidebar-identity' }, [
-   h('span', 'FOD ARGUS'), h('small', 'ENGINEERING REPORT / AIS-407')
+   h('span', 'FOD ARGUS'), h('small', 'ENGINEERING REPORT / ASI-407')
   ]),
   'nav-bar-content-after': () => h(ThemeToggle),
   'nav-bar-title-before': () => h(HeaderIdentity)

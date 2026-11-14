@@ -13,7 +13,7 @@ import { reportChapters, reportAnchor } from '../.vitepress/report-chapters'
 </script>
 
 <div id="report-overview" class="report-cover">
-<p class="report-cover-kicker">NUS CDE4301 / AIS-407</p>
+<p class="report-cover-kicker">NUS CDE4301 / ASI-407</p>
 <h1>FOD ARGUS<span>Engineering Report</span></h1>
 <p class="report-cover-subtitle">Autonomous Runway Inspection UAV</p>
 <p class="report-cover-note">Innovation &amp; Design Programme<br>College of Design and Engineering<br>National University of Singapore</p>

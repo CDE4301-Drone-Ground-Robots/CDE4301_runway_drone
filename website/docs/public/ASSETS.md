@@ -2,7 +2,7 @@
 
 The NUS header logo is stored locally at docs/public/nus-logo.png. Source: https://github.com/theflyingwolves/NUS-Slides-Latex-Template/blob/master/nus-logo.png
 
-The university mark remains the property of the National University of Singapore. It is displayed alongside AIS-407 as requested. FOD ARGUS remains the drone name in the overview and page metadata.
+The university mark remains the property of the National University of Singapore. It is displayed alongside ASI-407 as requested. FOD ARGUS remains the drone name in the overview and page metadata.
 The runway-night.svg hero background is an original vector illustration of a runway at night, created for this website.
 
 

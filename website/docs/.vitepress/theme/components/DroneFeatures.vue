@@ -147,7 +147,7 @@ const features: Feature[] = [
      </details>
     </div>
    </section>
-   <footer class="features-footer"><span>AUTONOMOUS RUNWAY INSPECTION UAV</span><span>NUS / CDE4301 / AIS-407</span></footer>
+   <footer class="features-footer"><span>AUTONOMOUS RUNWAY INSPECTION UAV</span><span>NUS / CDE4301 / ASI-407</span></footer>
   </div>
  </section>
 </template>
