@@ -15,7 +15,9 @@ const reportSidebar = [
    { text: 'Secondary Research', link: '/research/#secondary-research', collapsed: false, items: [
     { text: 'Existing Detection Technologies', link: '/research/#existing-detection-technologies' },
     { text: 'Problem Statement and Scope', link: '/research/#problem-statement-and-scope' },
-    { text: 'Multi-Robot Approach', link: '/research/#multi-robot-approach' }
+    { text: 'Multi-Robot Approach', link: '/research/#multi-robot-approach' },
+    { text: 'User Journey and Demonstration', link: '/research/#user-journey-and-demonstration' },
+    { text: 'Value Proposition', link: '/research/#value-proposition' }
    ] }
   ] },
   { text: 'System architecture', link: '/report/system-architecture' }

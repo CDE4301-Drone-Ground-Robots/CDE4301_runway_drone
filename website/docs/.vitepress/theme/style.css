@@ -468,3 +468,50 @@ html:has(.report-image-viewer[open]){overflow:hidden}
 
 .vp-doc .research-detection-table .report-inline-figure{margin:0}
 .vp-doc .research-detection-table .report-inline-figure figcaption{font-size:11px;line-height:1.5;margin-top:8px;text-align:center;color:var(--vp-c-text-2)}
+/* Value proposition: selectable, horizontally scrollable report matrices. */
+.research-value-table{margin:24px 0;overflow-x:auto;border:1px solid var(--vp-c-divider);border-radius:14px;background:var(--vp-c-bg);isolation:isolate;box-shadow:0 8px 28px rgba(0,0,0,.12)}
+.research-value-table:focus-visible{outline:2px solid var(--vp-c-brand-1);outline-offset:4px}
+.vp-doc .research-value-table table{display:table;table-layout:fixed;width:100%;min-width:900px;margin:0;border-collapse:collapse;font-size:14px;line-height:1.65}
+.vp-doc .research-value-table caption{padding:20px 22px;text-align:left;caption-side:top;background:var(--vp-c-bg-soft);color:var(--vp-c-text-1);font-size:14px;font-weight:650}
+.vp-doc .research-value-table :is(th,td){padding:16px;vertical-align:top;border:1px solid var(--vp-c-divider);overflow-wrap:break-word}
+.vp-doc .research-value-table th{color:var(--vp-c-text-1);text-align:left;font-weight:600}
+.vp-doc .research-value-table thead th{background:var(--vp-c-bg-soft);font-size:13px;line-height:1.5}
+.vp-doc .research-value-table tbody tr{background:var(--vp-c-bg)}
+.vp-doc .research-value-table tbody tr:nth-child(even){background:var(--vp-c-bg-soft)}
+.vp-doc .research-value-table tbody tr:hover{background:var(--vp-c-bg-alt)}
+.vp-doc .research-needs-table tr>:nth-child(3){background:rgba(45,182,165,.07)}
+.vp-doc .research-needs-table tr>:nth-child(4){background:rgba(90,151,199,.07)}
+.vp-doc .research-needs-table thead th:nth-child(3){box-shadow:inset 0 3px #2db6a5}
+.vp-doc .research-needs-table thead th:nth-child(4){box-shadow:inset 0 3px #5a97c7}
+.vp-doc .research-qfd-table table{min-width:800px}
+.vp-doc .research-qfd-table tr>:not(:first-child){text-align:center;vertical-align:middle}
+.vp-doc .research-qfd-table td{font-size:25px;line-height:1.2}
+.research-qfd-table .qfd-strong{background:rgba(45,182,165,.09)}
+.research-qfd-table .qfd-supporting{background:rgba(90,151,199,.05)}
+.qfd-strong{color:#137e6f}.qfd-supporting{color:#416e9e}.qfd-none{color:var(--vp-c-text-2)}
+.dark .qfd-strong{color:#66d9bc}.dark .qfd-supporting{color:#8fb5df}
+.vp-doc .research-qfd-legend{display:flex;flex-wrap:wrap;gap:12px 24px;padding:0;margin:18px 0;list-style:none;font-size:13px;color:var(--vp-c-text-2)}
+.vp-doc .research-qfd-legend li{display:flex;align-items:center;gap:9px;margin:0}
+.research-qfd-legend span{font-size:22px}
+.vp-doc .research-qfd-note{padding-left:16px;border-left:2px solid var(--vp-c-divider);font-size:13px;color:var(--vp-c-text-2)}
+.vp-doc .research-value-table tbody th{background:transparent;color:var(--vp-c-text-1)}
+
+/* Differentiate the needs analysis from the technical relationship grid. */
+.research-needs-table{border-top:3px solid #2db6a5}
+.research-qfd-table{border-top:3px solid #5a97c7}
+.vp-doc .research-needs-table caption{background:linear-gradient(110deg,rgba(45,182,165,.13),transparent 75%),var(--vp-c-bg-soft)}
+.vp-doc .research-qfd-table caption{background:linear-gradient(110deg,rgba(90,151,199,.16),transparent 75%),var(--vp-c-bg-soft)}
+.vp-doc .research-needs-table tbody th{border-left:3px solid rgba(45,182,165,.5);background:rgba(45,182,165,.045);font-weight:650}
+.vp-doc .research-needs-table tr>:nth-child(3){background:rgba(45,182,165,.11)}
+.vp-doc .research-needs-table tr>:nth-child(4){background:rgba(90,151,199,.11)}
+.vp-doc .research-needs-table tbody td:last-child{font-weight:550}
+.vp-doc .research-needs-table thead th{padding-top:20px;padding-bottom:20px}
+.vp-doc .research-qfd-table tbody th{vertical-align:middle;background:rgba(90,151,199,.07);border-left:3px solid rgba(90,151,199,.5)}
+.vp-doc .research-qfd-table td{padding:13px 16px}
+.research-qfd-table td>span{display:inline-flex;align-items:center;justify-content:center;width:46px;height:46px;border-radius:10px;border:1px solid currentColor}
+.research-qfd-table .qfd-strong>span{background:rgba(45,182,165,.16);box-shadow:inset 0 0 0 3px rgba(45,182,165,.06)}
+.research-qfd-table .qfd-supporting>span{background:rgba(90,151,199,.08);border-color:rgba(90,151,199,.35)}
+.research-qfd-table .qfd-none>span{border-color:var(--vp-c-divider);background:var(--vp-c-bg-soft)}
+.vp-doc .research-qfd-legend{padding:16px 20px;border:1px solid var(--vp-c-divider);border-radius:12px;background:var(--vp-c-bg-soft);gap:14px 28px}
+.research-qfd-legend span{display:inline-flex;align-items:center;justify-content:center;width:32px;height:32px;border:1px solid var(--vp-c-divider);border-radius:8px;background:var(--vp-c-bg)}
+@media(max-width:600px){.vp-doc .research-value-table caption{padding:16px 18px}.vp-doc .research-qfd-legend{padding:14px 16px;gap:12px 20px}}
